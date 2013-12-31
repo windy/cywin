@@ -1,0 +1,16 @@
+h3 Home
+- @users.each do |user|
+  p
+    | User: #{link_to user.name, user}
+    | #{user.email}
+
+- if user_signed_in?
+  - if @weibo_user
+    h3 关注:
+    = @weibo_user['followers_count']
+    h3 粉丝:
+    = @weibo_user['friends_count'] 
+    h3 微薄:
+    = @weibo_user['statuses_count']
+    h3 收藏:
+    = @weibo_user['favourites_count']

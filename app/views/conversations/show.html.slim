@@ -1,0 +1,22 @@
+.row
+  .small-10.large-10.columns
+    h2 Conversation: #{conversation.subject}
+    - first_msg = conversation.receipts_for(current_user).first.message
+  .small-2.large-2.columns
+    = link_to 'Back', conversations_path, class: 'button', :style=>"float:right;"
+
+ul
+  = content_tag_for(:li, conversation.receipts_for(current_user)) do |receipt|
+    - message = receipt.message
+    - receiver = message.receipts.first.receiver
+
+    - if receiver == current_user
+      h5= message.sender.name + "[#{message.sender.email}]" + ": " + message.subject
+    - else
+      h5= "To: " + receiver.name + "[#{receiver.email}]: " + message.subject
+
+    .panel
+      = message.body
+
+  .li
+    = render 'messages/form', conversation: conversation

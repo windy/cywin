@@ -1,0 +1,36 @@
+.row
+  .small-9.large-9.columns
+    h1 Conversations
+  .small-3.large-3.columns
+    = link_to 'Start Conversation', :new_conversation, :class=>'button', :style=>"float:right;"
+
+.row
+  .small-9.large-9.columns
+    dl.sub-nav
+      dt Mailbox:
+      - css = session[:filter]=='inbox' ? 'active':''
+      - css = 'active' if session[:filter] == nil
+      dd class=css
+        = link_to 'Inbox', :action=>:filter, :id=>'inbox'
+      - css = session[:filter]=='sent' ? 'active':''
+      dd class=css
+        = link_to 'Sentbox', :action=>:filter, :id=>'sent'
+      - css = session[:filter]=='trash' ? 'active':''
+      dd class=css
+        = link_to 'Trash', :action=>:filter, :id=>'trash'
+
+    - case session[:filter]
+    - when 'sent' then
+      - if mailbox.sentbox.length == 0
+        p No content
+      = render(mailbox.sentbox)
+    - when 'trash' then
+      - if mailbox.trash.length == 0
+        p No content
+      = render(mailbox.trash)
+    //- when 'inbox' then
+    - else
+      - if mailbox.inbox.length == 0
+        p No content
+      = render(mailbox.inbox)
+  .small-3.large-3.columns

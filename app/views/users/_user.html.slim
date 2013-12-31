@@ -1,0 +1,10 @@
+.modal id="role-options-#{user.id}" style=("display: none;") 
+  = simple_form_for user, :url => user_path(user), :html => {:method => :put, :class => 'form-horizontal' } do |f|
+    .modal-header
+      a.close data-dismiss="modal"  ×
+      h3 Change Role
+    .modal-body
+      = f.input :role_ids, :collection => Role.all, :as => :radio_buttons, :label_method => lambda {|t| t.name.titleize}, :label => false, :item_wrapper_class => 'inline', checked: user.role_ids.first
+    .modal-footer
+      = f.submit "Change Role", :class => "btn"
+      a.btn data-dismiss="modal" href="#"  Close

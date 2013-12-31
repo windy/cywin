@@ -1,0 +1,12 @@
+= simple_form_for :conversation, url: :conversations, :html=>{'data-abide'=>''} do |f|
+  = f.error_notification
+  = f.input :recipients, :required => true, :input_html=>{'required'=>''}
+  small.error Recipients is null
+  = f.input :subject, :required => true, :input_html=>{'required'=>''}
+  small.error Subject is null
+  = f.input :body, :required => true, :input_html=>{'required'=>''}
+  small.error Message content is null
+
+  .form-actions
+    = f.button :submit, class: 'btn-primary'
+    = submit_tag 'Reset', type: :reset, class: 'button alert'

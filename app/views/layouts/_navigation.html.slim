@@ -1,0 +1,51 @@
+nav.top-bar(data-options="is_hover:false" data-topbar)
+  ul.title-area
+    li.name
+      h1 
+        a href='/' EachFund
+  div.top-bar-section
+    ul.right
+      li.has-form
+        form
+          div.row.collapse
+            div.small-8.columns
+              input type="text"
+            div.small-4.columns
+              a.button href="#" Search
+
+      li.divider
+      - if user_signed_in?
+        li.has-dropdown
+          - if current_user.mailbox.inbox.length > 0
+            = link_to "Messages: " + current_user.mailbox.inbox(:unread => true).count(:id, :distinct => true).to_s
+            /= link_to "Messages: " + current_user.mailbox.inbox.count.to_s
+          - else
+            = link_to "Messages"
+          ul.dropdown
+            li = link_to "View: " + current_user.mailbox.inbox.length.to_s, conversations_path
+            /current_user.mailbox.inbox.first
+            li = link_to "Send to...", :new_conversation
+        li.has-dropdown
+          - if current_user.name and current_user.authentications.length > 0
+            a =current_user.name + "[#{current_user.authentications.first.provider}]"
+          - else 
+            a =current_user.name.empty? ? current_user.email : current_user.name
+          ul.dropdown
+            li
+              = link_to 'Edit account', edit_user_registration_path
+            - if current_user.has_role? :admin
+              li
+                = link_to 'Admin', users_path
+            li
+              = link_to 'Logout', destroy_user_session_path, :method=>'delete'
+      - else
+        li.has-dropdown
+          a Login
+          ul.dropdown
+            li
+              = link_to 'Normal', new_user_session_path
+            li
+              = link_to 'Weibo', '/users/auth/weibo', class: 'weibo'
+        li
+          = link_to 'Sign up', new_user_registration_path
+

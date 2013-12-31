@@ -1,0 +1,15 @@
+common: &common
+  weibo:
+    api_key: "Your key"
+    api_secret: "Your secret"
+    redirect_uri: "http://127.0.0.1:3000/users/auth/weibo/callback"
+
+production:
+  <<: *common
+
+development:
+  <<: *common
+
+test:
+  <<: *common
+
