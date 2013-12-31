@@ -26,7 +26,7 @@ gem 'weibo2'
 gem 'oauth'
 gem 'oauth_china'
 # For user custom message
-#gem 'mailboxer'
+gem 'mailboxer'
 
 group :development do
   gem 'better_errors'
