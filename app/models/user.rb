@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :authentications
 
-  #acts_as_messageable
+  acts_as_messageable
 
   validates :name, presence: true
 end
