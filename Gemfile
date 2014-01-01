@@ -1,4 +1,9 @@
-source 'https://rubygems.org'
+if ENV['RUBYTAOBAO']
+  puts "use taobao source"
+  source 'http://ruby.taobao.org'
+else
+  source 'https://rubygems.org'
+end
 ruby '2.0.0'
 gem 'rails', '4.0.0'
 gem 'sqlite3'
@@ -26,6 +31,9 @@ gem 'oauth'
 gem 'oauth_china'
 # For user custom message
 gem 'mailboxer'
+
+# For deploy
+gem 'capistrano'
 
 group :development do
   gem 'better_errors'
