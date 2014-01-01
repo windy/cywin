@@ -3,16 +3,17 @@ html
   head
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1.0" 
-    title= content_for?(:title) ? yield(:title) : 'Eachfund'
-    meta name="description" content=("#{content_for?(:description) ? yield(:description) : 'Eachfund'}") 
-    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    title= content_for?(:title) ? yield(:title) : 'CYwin'
+    meta name="description" content=("#{content_for?(:description) ? yield(:description) : 'CYwin'}") 
+    = stylesheet_link_tag "application", media: "all"
     /  Modernizr is required for Zurb Foundation 4
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
   body
-    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag "application"
     header
       = render 'layouts/navigation'
     main role="main" 
       = render 'layouts/messages'
       = yield
+    = render 'layouts/foot'
