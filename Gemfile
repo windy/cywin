@@ -20,7 +20,7 @@ gem 'figaro'
 gem 'rolify'
 gem 'sendgrid'
 gem 'simple_form'
-gem 'slim'
+gem 'slim-rails'
 gem 'therubyracer', :platform=>:ruby
 gem 'foundation-rails'
 

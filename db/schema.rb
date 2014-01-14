@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131124081055) do
+ActiveRecord::Schema.define(version: 20140114150327) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -47,6 +47,17 @@ ActiveRecord::Schema.define(version: 20131124081055) do
   end
 
   add_index "notifications", ["conversation_id"], name: "index_notifications_on_conversation_id"
+
+  create_table "projects", force: true do |t|
+    t.string   "name"
+    t.string   "oneword"
+    t.text     "description"
+    t.string   "stage"
+    t.string   "where1"
+    t.string   "where2"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "receipts", force: true do |t|
     t.integer  "receiver_id"
