@@ -1,14 +1,92 @@
 h2
   | Edit #{resource_name.to_s.humanize}
+
+div data-magellan-expedition="fixed"
+  dl.sub-nav
+    dd.active data-magellan-arrival="pass"
+      a href="#pass" Account >>
+    dd data-magellan-arrival="social"
+      a href="#social" Social >>
+    dd data-magellan-arrival="intro"
+      a href="#intro" Introduction >>
+    dd data-magellan-arrival="invest"
+      a href="#invest" Investment >>
+    dd data-magellan-arrival="finish"
+      a href="#finish" Finish
+
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' }) do |f|
   = f.error_notification
   = display_base_errors resource
-  = f.input :name, :autofocus => true
-  = f.input :email, :required => true
-  = f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false
-  = f.input :password_confirmation, :required => false
-  = f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true
+
+  .row
+    .small-12.columns
+      a name="pass"
+      h3 data-magellan-destination="pass" Account
+      = f.input :name, :required => true
+      = f.input :email, :required => true
+      = f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false
+      = f.input :password_confirmation, :required => false
+      = f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true
+
+  hr
+  .row
+    .small-12.columns
+      a name="social"
+      h3 data-magellan-destination="social" Social
+      = f.input :qq
+      = f.input :douban
+      = f.input :renren
+      = f.input :sinaweibo
+
+  hr
+  .row
+    .small-12.columns
+      a name="intro"
+      h3 data-magellan-destination="intro" Personal
+      = f.input :introduction
+  .row
+    .small-12.columns
+      = f.input :work_experience
+  .row
+    .small-12.columns
+      = f.input :education_experience
+
+  hr
+  .row
+    .small-12.columns
+      a name="invest"
+      h3 data-magellan-destination="invest" Investment
+      = f.input :found_type
+      = f.input :min_invest
+      = f.input :max_invest
+
+  .row
+    .small-12.columns
+      = f.input :focus_industry do 
+        = check_box_tag "focus_industry[]", '#test1' 
+        = label_tag "Test1"
+        = check_box_tag "focus_industry[]", '#test2' 
+        = label_tag "Test2"
+  .row
+    .small-12.columns
+      = f.input :investment_philosophy do 
+        = check_box_tag "investment_philosophy[]", '#test1' 
+        = label_tag "Test1"
+        = check_box_tag "investment_philosophy[]", '#test2' 
+        = label_tag "Test2"
+  .row
+    .small-12.columns
+      = f.input :added_value do 
+        = check_box_tag "added_value[]", '#test1'
+        = label_tag "Test1"
+        = check_box_tag "added_value[]", '#test2'
+        = label_tag "Test2"
+
+  hr
+  a name="finish"
+  h3 data-magellan-destination="finish" Finish
   = f.button :submit, 'Update', :class => 'btn-primary'
+
 h3 Cancel my account
 p
   | Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete}.

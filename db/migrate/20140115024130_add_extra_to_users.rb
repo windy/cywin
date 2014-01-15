@@ -16,7 +16,7 @@ class AddExtraToUsers < ActiveRecord::Migration
     add_column :users, :education_experience, :text #教育经历
 
     ## 投资理念
-    add_column :users, :found_type, :string #资金类型 1.人民币 2.外币 3.人民币+外币
+    add_column :users, :fund_type, :string #资金类型 1.人民币 2.外币 3.人民币+外币
     add_column :users, :min_invest, :decimal #最小投资金额
     add_column :users, :max_invest, :decimal #最大投资金额
 
