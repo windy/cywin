@@ -1,1 +1,10 @@
-h1 hello
+div.row
+  div.large-4
+    = simple_form_for @project do |f|
+      = f.input :name
+      = f.input :oneword
+      = f.input :description
+      = f.input :stage
+      = f.input :where1
+      = f.input :where2
+      = f.button :submit

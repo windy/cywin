@@ -1,6 +1,5 @@
 Eachfund::Application.routes.draw do
-  get "test/test"
-  resources :projects, only: [:new, :show, :create, :delete]
+  resources :projects, only: [:new, :show, :create, :delete, :index]
   root :to => "home#index"
   #devise_for :users, :controllers => {:registrations => "registrations"}
   devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}

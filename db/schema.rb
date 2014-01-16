@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140114150327) do
+ActiveRecord::Schema.define(version: 20140115024130) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -109,6 +109,24 @@ ActiveRecord::Schema.define(version: 20140114150327) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.string   "qq"
+    t.string   "douban"
+    t.string   "renren"
+    t.string   "sinaweibo"
+    t.binary   "avatar"
+    t.integer  "invest_count"
+    t.decimal  "invest_total"
+    t.integer  "prestig"
+    t.integer  "honour"
+    t.text     "introduction"
+    t.text     "work_experience"
+    t.text     "education_experience"
+    t.string   "found_type"
+    t.decimal  "min_invest"
+    t.decimal  "max_invest"
+    t.text     "focus_industry"
+    t.text     "investment_philosophy"
+    t.text     "added_value"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
