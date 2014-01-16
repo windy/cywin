@@ -24,6 +24,6 @@ class ProjectsController < ApplicationController
   end
   private
   def project_params
-    params.require(:project).permit( :title, :price, :description, :stage, :where1, :where2 )
+    params.require(:project).permit(:name, :oneword, :description, :stage, :where1, :where2 )
   end
 end
