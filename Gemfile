@@ -44,6 +44,7 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'guard-rails'
+  gem 'guard-rspec', require: false
 end
 group :development, :test do
   gem 'factory_girl_rails'
