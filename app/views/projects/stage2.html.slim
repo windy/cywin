@@ -1,11 +1,11 @@
 div.row.project
   = render "header"
-  h1 基本信息
-  = simple_form_for @project do |f|
+  h1 招聘信息
+  = simple_form_for @project, url: stage2_project_url(@project.id), method: 'post' do |f|
     = f.input :name
     = f.input :oneword
     = f.input :description
     = f.input :stage
     = f.input :where1
     = f.input :where2
-    = f.button :submit, "Next"
+    = f.button :submit, "完成"

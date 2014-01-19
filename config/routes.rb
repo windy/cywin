@@ -1,5 +1,18 @@
 Eachfund::Application.routes.draw do
-  resources :projects, only: [:new, :show, :create, :delete, :index]
+  resources :projects do
+    member do
+      get :stage1
+      post :stage1
+      get :stage2
+      post :stage2
+    end
+    collection do
+      get :stage1
+      post :stage1
+      get :stage2
+      post :stage2
+    end
+  end
   root :to => "home#index"
   #devise_for :users, :controllers => {:registrations => "registrations"}
   devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}

@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20140115024130) do
     t.text     "introduction"
     t.text     "work_experience"
     t.text     "education_experience"
-    t.string   "found_type"
+    t.string   "fund_type"
     t.decimal  "min_invest"
     t.decimal  "max_invest"
     t.text     "focus_industry"
