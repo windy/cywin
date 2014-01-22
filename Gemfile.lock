@@ -282,6 +282,7 @@ DEPENDENCIES
   binding_of_caller
   cancan
   capistrano
+  carrierwave
   coffee-rails (~> 4.0.0)
   compass-rails
   database_cleaner

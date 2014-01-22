@@ -4,4 +4,8 @@ class Project < ActiveRecord::Base
   validates :stage, presence: true
   validates :where1, presence: true
   validates :where2, presence: true
+
+  validates :logo, presence: true
+
+  mount_uploader :logo, LogoUploader
 end

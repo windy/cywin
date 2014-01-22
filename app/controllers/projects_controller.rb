@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
-      render :stage1
+      redirect_to stage1_project_path(@project.id)
     else
       render :new
     end
@@ -60,12 +60,13 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @project = Project.find(params[:id])
   end
 
   private
   def project_params
     new_params = params
     new_params = params.require(:project) if params[:project]
-    new_params.permit(:name, :oneword, :description, :stage, :where1, :where2 )
+    new_params.permit(:logo, :name, :oneword, :description, :stage, :where1, :where2 )
   end
 end

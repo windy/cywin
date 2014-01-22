@@ -32,6 +32,9 @@ gem 'oauth_china'
 # For user custom message
 gem 'mailboxer'
 
+# For upload picture
+gem 'carrierwave'
+
 # For deploy
 gem 'capistrano'
 

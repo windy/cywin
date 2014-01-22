@@ -1,2 +1,9 @@
-h1 Projects#show
-p Find me in app/views/projects/show.html.haml
+div.container
+  div.row
+    div.large-2.columns Logo
+    = @project.logo.url
+    div.large-2.columns LogoPicture
+    = image_tag( @project.logo_url, size: "200x200" )
+  div.row
+    div.large-2.columns Name
+    = @project.name

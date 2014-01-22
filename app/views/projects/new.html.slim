@@ -2,6 +2,7 @@ div.row.project
   = render "header"
   h1 基本信息
   = simple_form_for @project do |f|
+    = f.input :logo
     = f.input :name
     = f.input :oneword
     = f.input :description

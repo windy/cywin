@@ -8,5 +8,6 @@ FactoryGirl.define do
     stage "开发中"
     where1 "where1"
     where2 "where2"
+    logo File.open( File.join(Rails.root, "spec/fixtures/logo.png") )
   end
 end
