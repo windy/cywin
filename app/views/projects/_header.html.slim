@@ -1,9 +1,8 @@
 div.centerred
   dl.sub-nav
-    dd.active
+    = content_tag("dd", class: active_for(stage, :stage0)) do
       = link_to "基本信息","#"
-    dd
+    = content_tag("dd", class: active_for(stage, :stage1)) do
       = link_to "团队信息","#"
-      a  href="#"
-    dd
+    = content_tag("dd", class: active_for(stage, :stage2)) do
       = link_to "招聘信息","#"

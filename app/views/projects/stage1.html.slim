@@ -1,5 +1,5 @@
 div.row.project
-  = render "header"
+  = render partial: "header", locals: { stage: :stage1 }
   h1 团队信息
   = simple_form_for @project, url: stage1_project_url(@project.id), method: 'post' do |f|
     = f.input :name

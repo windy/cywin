@@ -1,5 +1,5 @@
 div.row.project
-  = render "header"
+  = render partial: "header", locals: { stage: :stage0 }
   h1 基本信息
   = simple_form_for @project do |f|
     = f.input :logo
