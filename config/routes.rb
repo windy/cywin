@@ -1,5 +1,28 @@
 Eachfund::Application.routes.draw do
-  resources :projects, only: [:new, :show, :create, :delete, :index]
+  get "districts/index"
+  resources :about do
+    collection do
+      get :index
+      get :partner
+      get :service
+      get :law
+      get :job
+    end
+  end
+  resources :projects do
+    member do
+      get :stage1
+      post :stage1
+      get :stage2
+      post :stage2
+    end
+    collection do
+      get :stage1
+      post :stage1
+      get :stage2
+      post :stage2
+    end
+  end
   root :to => "home#index"
   #devise_for :users, :controllers => {:registrations => "registrations"}
   devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}
@@ -17,4 +40,6 @@ Eachfund::Application.routes.draw do
       delete 'destroy_multiple'
     end
   end
+
+  mount ChinaCity::Engine => '/china_city'
 end

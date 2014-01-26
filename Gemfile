@@ -34,6 +34,10 @@ gem 'mailboxer'
 # For upload attachment
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
+# For upload picture
+gem 'carrierwave'
+gem 'china_city'
+
 # For deploy
 gem 'capistrano'
 
@@ -46,8 +50,14 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'guard-rails'
+  gem 'guard-rspec', require: false
 end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'pry'
+end
+
+group :test do
+  gem 'database_cleaner'
 end

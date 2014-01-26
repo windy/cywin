@@ -78,3 +78,6 @@ pickle-email-*.html
 /config/application.yml
 /config/service.yml
 /config/database.yml
+
+# Upload files
+/public/uploads

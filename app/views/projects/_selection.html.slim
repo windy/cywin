@@ -1,0 +1,26 @@
+div.row.selection
+  div.large-12.columns
+    h4 项目类型
+    ul.side-nav
+      li.active
+        a href="#" 所有项目
+      li 
+        a href="#" 快速合投
+      li
+        a href="#" 完成融资
+hr
+div.row.industry
+  div.large-12.columns
+    h4 行业
+    ul.inline-list
+      - 10.times do |i|
+        li
+          a href="#" Link
+hr
+div.row.district
+  div.large-12.columns
+    h4 地区
+    ul.inline-list
+      - all_district(projects).each do |district|
+        li
+          a href="#" #{district}

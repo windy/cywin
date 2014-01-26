@@ -1,14 +1,14 @@
 div.footer
   div.row
     div.logo class="columns large-2"
-      h5 创业赢 CYwin
+      | 创业赢 CYwin
     div class="columns large-2"
-      a href="#" 关于我们
+      = link_to "关于我们", about_index_path
     div class="columns large-2"
-      a href="#" 合作伙伴
+      = link_to "合作伙伴", partner_about_index_path
     div class="columns large-2"
-      a href="#" 服务条款
+      = link_to "服务条款", service_about_index_path
     div class="columns large-2"
-      a href="#" 法律法规
+      = link_to "法律法规", law_about_index_path
     div class="columns large-2"
-      a href="#" 人才招聘
+      = link_to "人才招聘", job_about_index_path
