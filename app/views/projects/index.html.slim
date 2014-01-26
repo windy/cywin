@@ -1,7 +1,7 @@
 div.row.project
   div.large-4.columns.search_side
     = render "search"
-    = render "selection"
+    = render partial: "selection", locals: { projects: @projects }
     
   div.large-8.columns  
     - @projects.each do |project|

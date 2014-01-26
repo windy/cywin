@@ -2,6 +2,34 @@ require 'spec_helper'
 
 describe ProjectsController do
 
+  describe "index" do
+    before do
+      create(:project)
+      create(:shenzhen_project)
+      create(:shenzhen_project2)
+    end
+    it "all" do
+      get 'index'
+      assigns(:projects).size.should == 3
+    end
+
+    it "industry" do
+      pending
+    end
+
+    it "district" do
+      pending
+    end
+    
+    it "name" do
+      pending
+    end
+
+    it "type" do
+      pending
+    end
+  end
+
   describe "stage1" do
     it "get stage1" do
       project = build(:project)

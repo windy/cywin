@@ -1,15 +1,15 @@
 div.row.selection
   div.large-12.columns
     h4 项目类型
-    ul
-      li 
+    ul.side-nav
+      li.active
         a href="#" 所有项目
       li 
         a href="#" 快速合投
       li
         a href="#" 完成融资
 hr
-div.row
+div.row.industry
   div.large-12.columns
     h4 行业
     ul.inline-list
@@ -17,10 +17,10 @@ div.row
         li
           a href="#" Link
 hr
-div.row
+div.row.district
   div.large-12.columns
     h4 地区
     ul.inline-list
-      - 10.times do |i|
+      - all_district(projects).each do |district|
         li
-          a href="#" 地区#{i}
+          a href="#" #{district}

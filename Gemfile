@@ -34,6 +34,7 @@ gem 'mailboxer'
 
 # For upload picture
 gem 'carrierwave'
+gem 'china_city'
 
 # For deploy
 gem 'capistrano'

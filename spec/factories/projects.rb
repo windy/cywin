@@ -10,4 +10,24 @@ FactoryGirl.define do
     where2 "where2"
     logo File.open( File.join(Rails.root, "spec/fixtures/logo.png") )
   end
+
+  factory :shenzhen_project, class: :Project do
+    name "shenzhen"
+    oneword "shenzhen project test"
+    description "description"
+    stage "开发中"
+    where1 "广东"
+    where2 "深圳"
+    logo File.open( File.join(Rails.root, "spec/fixtures/logo.png") )
+  end
+
+  factory :shenzhen_project2, class: :Project do
+    name "shenzhen2"
+    oneword "shenzhen2 project test"
+    description "description"
+    stage "开发中"
+    where1 "广东"
+    where2 "深圳"
+    logo File.open( File.join(Rails.root, "spec/fixtures/logo.png") )
+  end
 end

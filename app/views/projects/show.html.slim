@@ -1,9 +1,24 @@
-div.container
+div.row.project
+  div.container
+    div.large-2.columns
+      = image_tag( @project.logo_url, size: "200x200" )
+    div.large-10.columns
+      h4.project_name = @project.name
+      div.row
+        div.large-7.columns
+          = @project.description
+      div.row
+        div.large-7.columns
+          p 
+            = @project.where1 + " * " + @project.where2
+  hr 
   div.row
-    div.large-2.columns Logo
-    = @project.logo.url
-    div.large-2.columns LogoPicture
-    = image_tag( @project.logo_url, size: "200x200" )
+    div.large-12.columns
+      = image_tag("project_example.png", width: "100%")
   div.row
-    div.large-2.columns Name
-    = @project.name
+    div.large-12.columns
+      ul
+        li 第一阶段
+        li 第二阶段
+        li 第三阶段
+  

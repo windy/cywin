@@ -1,4 +1,14 @@
 Eachfund::Application.routes.draw do
+  get "districts/index"
+  resources :about do
+    collection do
+      get :index
+      get :partner
+      get :service
+      get :law
+      get :job
+    end
+  end
   resources :projects do
     member do
       get :stage1
@@ -30,4 +40,6 @@ Eachfund::Application.routes.draw do
       delete 'destroy_multiple'
     end
   end
+
+  mount ChinaCity::Engine => '/china_city'
 end
