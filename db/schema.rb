@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115024130) do
+ActiveRecord::Schema.define(version: 20140118031145) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -113,7 +113,6 @@ ActiveRecord::Schema.define(version: 20140115024130) do
     t.string   "douban"
     t.string   "renren"
     t.string   "sinaweibo"
-    t.binary   "avatar"
     t.integer  "invest_count"
     t.decimal  "invest_total"
     t.integer  "prestig"
@@ -121,12 +120,16 @@ ActiveRecord::Schema.define(version: 20140115024130) do
     t.text     "introduction"
     t.text     "work_experience"
     t.text     "education_experience"
-    t.string   "found_type"
+    t.string   "fund_type"
     t.decimal  "min_invest"
     t.decimal  "max_invest"
     t.text     "focus_industry"
     t.text     "investment_philosophy"
     t.text     "added_value"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -14,7 +14,7 @@ div data-magellan-expedition="fixed"
     dd data-magellan-arrival="finish"
       a href="#finish" Finish
 
-= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' }) do |f|
+= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical', :multipart => true }) do |f|
   = f.error_notification
   = display_base_errors resource
 
@@ -56,7 +56,7 @@ div data-magellan-expedition="fixed"
     .small-12.columns
       a name="invest"
       h3 data-magellan-destination="invest" Investment
-      = f.input :found_type
+      = f.input :fund_type
       = f.input :min_invest
       = f.input :max_invest
 
@@ -81,6 +81,11 @@ div data-magellan-expedition="fixed"
         = label_tag "Test1"
         = check_box_tag "added_value[]", '#test2'
         = label_tag "Test2"
+
+  .row
+    .small-12.columns
+      = image_tag @user.avatar.url
+      = f.file_field :avatar
 
   hr
   a name="finish"
