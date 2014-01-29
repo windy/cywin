@@ -1,11 +1,18 @@
 div.row.project
   = render partial: "header", locals: { stage: :stage2 }
-  h1 招聘信息
+  h1 创业需求
   = simple_form_for @project, url: stage2_project_url(@project.id), method: 'post' do |f|
-    = f.input :name
-    = f.input :oneword
-    = f.input :description
-    = f.input :stage
-    = f.input :where1
-    = f.input :where2
+    h4 我要融资
+    = f.simple_fields_for :money_requires do |p|
+      = p.input :money
+      = p.input :share
+      = p.input :description
+    hr
+    h4 我要招人
+    = f.simple_fields_for :person_requires do |p|
+      = p.input :title
+      = p.input :pay
+      = p.input :stock
+      = p.input :option
+      = p.input :description
     = f.button :submit, "完成"

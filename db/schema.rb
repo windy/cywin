@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126032028) do
+ActiveRecord::Schema.define(version: 20140129082248) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -22,10 +22,47 @@ ActiveRecord::Schema.define(version: 20140126032028) do
     t.datetime "updated_at"
   end
 
+  create_table "contacts", force: true do |t|
+    t.string   "address"
+    t.string   "phone"
+    t.string   "qq"
+    t.string   "weixin"
+    t.string   "weibo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
+  end
+
   create_table "conversations", force: true do |t|
     t.string   "subject",    default: ""
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "members", force: true do |t|
+    t.string   "avatar"
+    t.string   "name"
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "owner",       default: false
+  end
+
+  create_table "members_projects", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "money_requires", force: true do |t|
+    t.string   "money"
+    t.string   "share"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
   end
 
   create_table "notifications", force: true do |t|
@@ -47,6 +84,17 @@ ActiveRecord::Schema.define(version: 20140126032028) do
   end
 
   add_index "notifications", ["conversation_id"], name: "index_notifications_on_conversation_id"
+
+  create_table "person_requires", force: true do |t|
+    t.string   "title"
+    t.string   "pay"
+    t.string   "stock"
+    t.string   "option"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
+  end
 
   create_table "projects", force: true do |t|
     t.string   "name"

@@ -9,6 +9,7 @@ FactoryGirl.define do
     where1 "where1"
     where2 "where2"
     logo File.open( File.join(Rails.root, "spec/fixtures/logo.png") )
+    contact
   end
 
   factory :shenzhen_project, class: :Project do
@@ -30,4 +31,9 @@ FactoryGirl.define do
     where2 "深圳"
     logo File.open( File.join(Rails.root, "spec/fixtures/logo.png") )
   end
+
+  factory :project_with_member, parent: :project do
+    members { create(:member) }
+  end
 end
+

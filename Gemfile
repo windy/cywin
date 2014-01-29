@@ -39,8 +39,11 @@ gem 'china_city'
 # For deploy
 gem 'capistrano'
 
+# Ajax Upload
+gem 'remotipart'
+
 group :development do
-  gem 'better_errors'
+  #gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
   gem 'haml-rails'
   gem 'haml2slim'
@@ -49,11 +52,12 @@ group :development do
   gem 'rails_layout'
   gem 'guard-rails'
   gem 'guard-rspec', require: false
+  gem 'guard-bundler', require: false
 end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
-  gem 'pry'
+  gem 'pry-rails'
 end
 
 group :test do

@@ -12,4 +12,6 @@ div.row.project
         = f.select :where1, ChinaCity.list, {}, { class: 'city-select large-4 columns' }
         = f.select :where2, ['--城市--'], {}, class: 'city-select large-4 columns'
         = f.select :where3, ['--地区--'], {}, class: 'city-select large-4 columns'
+    hr
+    = render partial: "contact", locals: { f: f }
     = f.button :submit, "Next"

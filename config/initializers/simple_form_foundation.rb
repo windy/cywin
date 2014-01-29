@@ -32,3 +32,4 @@ SimpleForm.setup do |config|
   config.default_wrapper = :foundation
 end
 
+SimpleForm.browser_validations = false

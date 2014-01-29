@@ -28,9 +28,6 @@ GEM
     arel (4.0.1)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
-    better_errors (1.1.0)
-      coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.1.4)
@@ -101,6 +98,9 @@ GEM
       lumberjack (~> 1.0)
       pry (>= 0.9.12)
       thor (>= 0.18.1)
+    guard-bundler (2.0.0)
+      bundler (~> 1.0)
+      guard (~> 2.2)
     guard-rails (0.4.7)
       guard (>= 0.2.2)
     guard-rspec (4.2.0)
@@ -177,6 +177,8 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pry-rails (0.3.2)
+      pry (>= 0.9.10)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -201,6 +203,7 @@ GEM
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
     ref (1.0.5)
+    remotipart (1.2.1)
     rolify (3.2.0)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -281,7 +284,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  better_errors
   binding_of_caller
   cancan
   capistrano
@@ -295,6 +297,7 @@ DEPENDENCIES
   factory_girl_rails
   figaro
   foundation-rails
+  guard-bundler
   guard-rails
   guard-rspec
   haml-rails
@@ -306,10 +309,11 @@ DEPENDENCIES
   oauth
   oauth_china
   omniauth-weibo-oauth2
-  pry
+  pry-rails
   quiet_assets
   rails (= 4.0.0)
   rails_layout
+  remotipart
   rolify
   rspec-rails
   sass-rails (~> 4.0.0)
