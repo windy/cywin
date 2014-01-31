@@ -20,7 +20,7 @@ zh-cn:
         description: '描述'
         stage: '阶段'
         where1: '地点'
-        contacts:
+        contact:
           address: '联系地址'
           phone: '电话'
           qq: 'QQ'

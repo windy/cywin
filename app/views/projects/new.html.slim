@@ -9,7 +9,7 @@ div.row.project
     = f.input :stage
     = f.input :where1 do
       .city-group
-        = f.select :where1, ChinaCity.list, {}, { class: 'city-select large-4 columns' }
+        = f.select :where1, ['--省份--'] + ChinaCity.list, {}, { class: 'city-select large-4 columns' }
         = f.select :where2, ['--城市--'], {}, class: 'city-select large-4 columns'
         = f.select :where3, ['--地区--'], {}, class: 'city-select large-4 columns'
     hr
