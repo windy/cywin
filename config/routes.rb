@@ -1,5 +1,5 @@
 Eachfund::Application.routes.draw do
-  get "districts/index"
+  get "projects_searcher/index"
   resources :about do
     collection do
       get :index

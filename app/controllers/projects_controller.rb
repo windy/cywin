@@ -2,19 +2,6 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
-    if search_params[:search_name]
-      @projects = @projects.where("name like %?%", search_params[:search_params])
-    end
-    if search_params[:type]
-      #TODO
-    end
-    if search_params[:industry]
-      @projects = @projects.find_by(industry: search_params[:industry])
-    end
-    # 城市相关, where1: 省, where2: 城市, where3: 地区
-    if search_params[:district]
-      @projects = @projects.find_by(where2: search_params[:district])
-    end
   end
 
   def new
@@ -59,7 +46,7 @@ class ProjectsController < ApplicationController
     if request.post?
       # add money_require
       money_require_params = params.require(:project).require(:money_requires).permit(:money, :share, :description)
-      @project.money_require.build(money_require_params)
+      @project.build_money_require(money_require_params)
       #TODO 多人招聘的支持
       person_requires_params = params.require(:project).require(:person_requires).permit(:title, :pay, :stock, :option, :description)
       @project.person_requires.build(person_requires_params)
@@ -91,11 +78,4 @@ class ProjectsController < ApplicationController
     new_params.permit(:id, :logo, :name, :oneword, :description, :stage, :where1, :where2, :where3, contact_attributes: [ :address, :phone, :qq, :weixin, :weibo ])
   end
 
-  def stage1_params
-    new_params = params
-  end
-
-  def search_params
-    params.permit(:search_name, :type, :industry, :distinct)
-  end
 end

@@ -6,9 +6,9 @@ module ProjectsHelper
   def all_district(projects)
     projects.collect do |p|
       if p.where2 == '110100'
-        '北京市'
+        [ p.where2, '北京市' ]
       else
-        ChinaCity.get(p.where2)
+        [ p.where2, ChinaCity.get(p.where2) ]
       end
     end.uniq
   end

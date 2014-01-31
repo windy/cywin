@@ -21,5 +21,9 @@ module Eachfund
     config.i18n.default_locale = 'zh-cn'
     config.i18n.enforce_available_locales = false
     config.action_controller.action_on_unpermitted_parameters = :raise
+    
+    # generators
+    config.generators.assets = false
+    config.generators.helper = false
   end
 end

@@ -3,7 +3,7 @@ div.row.project
     = render "search"
     = render partial: "selection", locals: { projects: @projects }
     
-  div.large-8.columns  
+  div.large-8.columns.projects_search  
     - @projects.each do |project|
       div.row.project_show
         div.large-2.columns

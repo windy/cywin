@@ -13,6 +13,8 @@ div.row.industry
   div.large-12.columns
     h4 行业
     ul.inline-list
+      li.active
+        a href="#" ALL
       - 10.times do |i|
         li
           a href="#" Link
@@ -21,6 +23,8 @@ div.row.district
   div.large-12.columns
     h4 地区
     ul.inline-list
-      - all_district(projects).each do |district|
+      li.active
+        a href="#" 所有城市
+      - all_district(projects).each do |id, district|
         li
-          a href="#" #{district}
+          = link_to district, "#", { "data-id" => id }

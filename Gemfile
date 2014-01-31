@@ -31,6 +31,8 @@ gem 'oauth'
 gem 'oauth_china'
 # For user custom message
 gem 'mailboxer'
+# For upload attachment
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 # For upload picture
 gem 'carrierwave'
@@ -45,9 +47,6 @@ gem 'remotipart'
 group :development do
   #gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
-  gem 'haml-rails'
-  gem 'haml2slim'
-  gem 'html2haml'
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'guard-rails'
@@ -58,6 +57,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'pry-rails'
+  gem 'pry-nav'
 end
 
 group :test do

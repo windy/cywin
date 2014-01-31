@@ -4,7 +4,6 @@ class AddExtraToUsers < ActiveRecord::Migration
     add_column :users, :douban, :string
     add_column :users, :renren, :string
     add_column :users, :sinaweibo, :string
-    add_column :users, :avatar, :binary #头像照片
 
     add_column :users, :invest_count, :integer #投资项目数
     add_column :users, :invest_total, :decimal #投资总额

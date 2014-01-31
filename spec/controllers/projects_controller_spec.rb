@@ -40,9 +40,8 @@ describe ProjectsController do
     it "post stage1" do
       project = build(:project)
       Project.should_receive(:find).with("1").and_return(project)
-      post 'stage1', id: 1, name: 'xxxx'
+      post 'stage1', ActionController::Parameters.new({ id: 1, project: { members: attributes_for(:member) } })
       response.should redirect_to( stage2_project_path(1) )
-      assigns(:project).name.should == 'xxxx'
     end
   end
 
@@ -57,7 +56,7 @@ describe ProjectsController do
     it "post stage2" do
       project = build(:project)
       Project.should_receive(:find).with("1").and_return(project)
-      post 'stage2', { id: 1 }, { name: 'xxx' }
+      post 'stage2', ActionController::Parameters.new({ project: { money_requires: attributes_for(:money_require), person_requires: attributes_for(:person_require) }, id: 1})
       response.should redirect_to('/')
     end
   end
