@@ -45,4 +45,13 @@ zh-cn:
       defaults:
         username: 'User name to sign in.'
         password: 'No special characters, please.'
-
+      project:
+        logo: '使用 200x200 的图标'
+        name: '输入一个亲切的名称, 如百度'
+        oneword: '快速介绍你的产品, 如为广大网民提供搜索入口'
+        description: '介绍产品的特色, 差异化, 为用户提供的价值'
+        members:
+          avatar: '上传头像'
+          name: '姓名'
+          title: '职位'
+          description: '个人简介'

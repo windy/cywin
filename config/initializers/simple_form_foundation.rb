@@ -10,14 +10,14 @@ SimpleForm.setup do |config|
     b.wrapper :label_input, class: 'row' do |ba|
       ba.use :label, wrap_with: { class: 'large-3 columns' }
       ba.use :input, wrap_with: { class: 'large-6 columns left' }
+      ba.use :hint,  wrap_with: { class: 'large-3 columns' }
       ba.wrapper class: 'large-3 columns' do |bba|
-        bba.use :error
+        bba.use :error, wrap_with: { tag: 'small', class: 'error' }
       end
     end
 
     # Uncomment the following line to enable hints. The line is commented out by default since Foundation
     # does't provide styles for hints. You will need to provide your own CSS styles for hints.
-    # b.use :hint,  wrap_with: { tag: :span, class: :hint }
   end
 
   # CSS class for buttons
