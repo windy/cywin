@@ -1,4 +1,3 @@
-puts ENV['RAILS_ENV']
 if ENV['RUBYTAOBAO']
   puts "use taobao source"
   source 'http://ruby.taobao.org'

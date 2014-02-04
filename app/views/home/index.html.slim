@@ -10,22 +10,22 @@ div.container
     ul.sub-nav
       li.active style=" width: 100% "
         div.large-12
-          img src="/assets/project_example.png" width="100%"
+          = image_tag("project_example.png", width: '100%')
       /!
         li
           div.large-12
-            img src="/assets/project_example.png"
+          = image_tag("project_example.png", width: '100%')
         li
           div.large-12
-            img src="/assets/project_example.png"
+          = image_tag("project_example.png", width: '100%')
     /! 投资项目列前三甲
     div.row
       div.large-4 class="columns"
-        img src="/assets/project_list_1.png"
+        = image_tag("project_list_1.png")
       div.large-4 class="columns"
-        img src="/assets/project_list_3.png"
+        = image_tag("project_list_3.png")
       div.large-4 class="columns"
-        img src="/assets/project_list_2.png"
+        = image_tag("project_list_2.png")
     /! 查看所有投资项目
     div.row
       a href="#"
@@ -42,11 +42,11 @@ div.container
     /! 创业项目招人
     div.row
       div.large-4 class="columns"
-        img src="/assets/job1.png"
+        = image_tag("job1.png")
       div.large-4 class="columns"
-        img src="/assets/job2.png"
+        = image_tag("job2.png")
       div.large-4 class="columns"
-        img src="/assets/job3.png"
+        = image_tag("job3.png")
     /! 查看所有职位
     div.row
       a href="#"
@@ -64,20 +64,20 @@ div.container
     /! 列出最专业的投资人三个
     div.row
       div.large-4 class="columns"
-        img src="/assets/investor1.png"
+        = image_tag("investor1.png")
       div.large-4 class="columns"
-        img src="/assets/investor2.png"
+        = image_tag("investor2.png")
       div.large-4 class="columns"
-        img src="/assets/investor3.png"
+        = image_tag("investor3.png")
     /! 正在领投
     h3 他正在领投
     div.row
       div.large-4 class="columns"
-        img src="/assets/project_list_1.png"
+        = image_tag("project_list_1.png")
       div.large-4 class="columns"
-        img src="/assets/project_list_3.png"
+        = image_tag("project_list_3.png")
       div.large-4 class="columns"
-        img src="/assets/project_list_2.png"
+        = image_tag("project_list_2.png")
     /! 查看所有领投人
     div.row
       a href="#"
@@ -95,13 +95,13 @@ div.container
     /! 列出四个最好的基金
     div.row
       div.large-3 class="columns"
-        img src="/assets/fund1.png"
+        = image_tag("fund1.png")
       div.large-3 class="columns"
-        img src="/assets/fund1.png"
+        = image_tag("fund1.png")
       div.large-3 class="columns"
-        img src="/assets/fund1.png"
+        = image_tag("fund1.png")
       div.large-3 class="columns"
-        img src="/assets/fund1.png"
+        = image_tag("fund1.png")
     /! 查看所有基金
     div.row
       a href="#"
@@ -118,22 +118,9 @@ div.container
       h4.text-right 让大家提前认识你吧
     /! 列出八个上线项目
     ul.large-block-grid-4
-      li
-        img src="/assets/project_example.png"
-      li
-        img src="/assets/project_example.png"
-      li
-        img src="/assets/project_example.png"
-      li
-        img src="/assets/project_example.png"
-      li
-        img src="/assets/project_example.png"
-      li
-        img src="/assets/project_example.png"
-      li
-        img src="/assets/project_example.png"
-      li
-        img src="/assets/project_example.png"
+      - 8.times do
+        li
+          = image_tag("project_example.png")
     /! 查看所有上线项目
     div.row
       a href="#"
