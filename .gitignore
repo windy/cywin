@@ -81,3 +81,6 @@ pickle-email-*.html
 
 # Upload files
 /public/uploads
+
+# .lock
+*.lock

@@ -10,7 +10,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, 'cywin.yafeilee.me'
+set :domain, 'yafeilee.me'
 set :deploy_to, '/home/cywin/app'
 set :repository, 'git@github.com:windy/cywin.git'
 set :branch, 'master'

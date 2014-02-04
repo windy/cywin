@@ -1,3 +1,4 @@
+puts ENV['RAILS_ENV']
 if ENV['RUBYTAOBAO']
   puts "use taobao source"
   source 'http://ruby.taobao.org'
@@ -6,7 +7,6 @@ else
 end
 ruby '2.0.0'
 gem 'rails', '4.0.0'
-gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -50,11 +50,17 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'guard-bundler', require: false
 end
+
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'pry-rails'
   gem 'pry-nav'
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
 end
 
 group :test do
