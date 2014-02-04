@@ -30,6 +30,18 @@ describe ProjectsController do
     end
   end
 
+  describe "create" do
+    it "get new" do
+      post :new
+      response.should be_success
+    end
+
+    it "create new" do
+      post :create, ActionController::Parameters.new(project: attributes_for(:project).merge(contact_attributes: attributes_for(:contact)) )
+      response.should redirect_to( stage1_project_path(1) )
+    end
+  end
+
   describe "stage1" do
     it "get stage1" do
       project = build(:project)
