@@ -3,7 +3,7 @@ app_path = "/home/cywin/app/current"
 worker_processes   2
 preload_app        true
 timeout            180
-listen             '/tmp/unicorn.sock'
+listen             '/tmp/unicorn_cywin.sock'
 user               'cywin', 'cywin'
 working_directory  app_path
 pid                "#{app_path}/tmp/pids/unicorn.pid"
