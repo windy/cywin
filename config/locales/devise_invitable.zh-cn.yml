@@ -1,0 +1,17 @@
+zh-cn:
+  devise:
+    invitations:
+      send_instructions: '已经向此邮件地址发送 %{email}.'
+      invitation_token_invalid: '提供的链接不正确!'
+      updated: '密码重置成功, 你已经登录'
+      no_invitations_remaining: "没有剩余的邀请名额"
+      invitation_removed: '你的邀请已经失效.'
+      new:
+        header: "发送邀请"
+        submit_button: "发送一个邀请"
+      edit:
+        header: "重置你的密码"
+        submit_button: "重置密码"
+    mailer:
+      invitation_instructions:
+        subject: '邀请指令'
