@@ -2,7 +2,7 @@ require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
-require 'mina/rvm'    # for rvm support. (http://rvm.io)
+# require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -13,7 +13,9 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 set :domain, 'yafeilee.me'
 set :deploy_to, '/home/cywin/app'
 set :repository, 'git@github.com:windy/cywin.git'
-set :branch, 'master'
+set :branch, 'staging'
+
+#set :rvm_path, '/usr/local/rvm/script/rvm'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
@@ -30,8 +32,10 @@ task :environment do
   # Be sure to commit your .rbenv-version to your repository.
   # invoke :'rbenv:load'
 
+  queue! %[source /usr/local/rvm/scripts/rvm]
   # For those using RVM, use this to load an RVM version@gemset.
-  # invoke :'rvm:use[ruby-1.9.3-p125@default]'
+  queue! %[rvm use 2.0.0]
+  #invoke :'rvm:use[ruby-2.0.0-p247@default]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
