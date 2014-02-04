@@ -24,8 +24,8 @@ class ProjectsController < ApplicationController
     if request.post?
       #TODO add other members
       owner_params = params.require(:project).require(:members).permit(:avatar, :name, :title, :description)
-      owner = Member.new( owner_params )
-      @project.add_owner(owner)
+      @owner = Member.new( owner_params )
+      @project.add_owner( @owner )
       if @project.save
         redirect_to stage2_project_path(params[:id])
         return
@@ -35,6 +35,7 @@ class ProjectsController < ApplicationController
       end
     # get
     else
+      @owner = @project.owner
       render :stage1
       return
     end

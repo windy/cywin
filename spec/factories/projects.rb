@@ -6,9 +6,10 @@ FactoryGirl.define do
     oneword "hello world"
     description "description"
     stage "开发中"
-    where1 "where1"
-    where2 "where2"
-    logo File.open( File.join(Rails.root, "spec/fixtures/logo.png") )
+    where1 "110000"
+    where2 "110100"
+    where3 "110101"
+    logo { fixture_file_upload( File.join(Rails.root, "spec/fixtures/logo.png"), "image/png" ) }
     contact
   end
 
@@ -17,9 +18,11 @@ FactoryGirl.define do
     oneword "shenzhen project test"
     description "description"
     stage "开发中"
-    where1 "广东"
-    where2 "深圳"
-    logo File.open( File.join(Rails.root, "spec/fixtures/logo.png") )
+    where1 "440000"
+    where2 "440300"
+    where3 "440303"
+    logo { fixture_file_upload( File.join(Rails.root, "spec/fixtures/logo.png"), "image/png" ) }
+    contact
   end
 
   factory :shenzhen_project2, class: :Project do
@@ -27,9 +30,11 @@ FactoryGirl.define do
     oneword "shenzhen2 project test"
     description "description"
     stage "开发中"
-    where1 "广东"
-    where2 "深圳"
-    logo File.open( File.join(Rails.root, "spec/fixtures/logo.png") )
+    where1 "440000"
+    where2 "440300"
+    where3 "440303"
+    logo { fixture_file_upload( File.join(Rails.root, "spec/fixtures/logo.png"), "image/png" ) }
+    contact
   end
 
   factory :project_with_member, parent: :project do

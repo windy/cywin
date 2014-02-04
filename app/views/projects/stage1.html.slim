@@ -3,11 +3,11 @@ div.row.project
   h1 团队信息
   = simple_form_for @project, url: stage1_project_path(@project.id), method: 'post',html:{ class: 'stage1' } do |f|
     div.owner
-      = f.simple_fields_for :members do |p|
+      = f.simple_fields_for :members, @owner do |p|
         = p.input :avatar, as: :file
         = p.input :name
         = p.input :title
-        = p.input :description, as: :text
+        = p.input :description
     hr
     h4 添加团队成员
     div.member
