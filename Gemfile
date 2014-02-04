@@ -38,9 +38,6 @@ gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'carrierwave'
 gem 'china_city'
 
-# For deploy
-gem 'capistrano'
-
 # Ajax Upload
 gem 'remotipart'
 

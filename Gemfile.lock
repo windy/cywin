@@ -42,10 +42,6 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.1.4)
     cancan (1.6.10)
-    capistrano (3.0.1)
-      i18n
-      rake (>= 10.0.0)
-      sshkit (>= 0.0.23)
     carrierwave (0.9.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -148,9 +144,6 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.4)
     multipart-post (1.2.0)
-    net-scp (1.1.2)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.7.0)
     oauth (0.4.7)
     oauth2 (0.5.2)
       faraday (~> 0.7)
@@ -245,13 +238,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.8)
-    sshkit (1.3.0)
-      net-scp (>= 1.1.2)
-      net-ssh
-      term-ansicolor
     temple (0.6.7)
-    term-ansicolor (1.2.2)
-      tins (~> 0.8)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
@@ -260,7 +247,6 @@ GEM
       atomic
     tilt (1.4.1)
     timers (1.1.0)
-    tins (0.13.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -279,7 +265,6 @@ PLATFORMS
 DEPENDENCIES
   binding_of_caller
   cancan
-  capistrano
   carrierwave
   china_city
   coffee-rails (~> 4.0.0)
