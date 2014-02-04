@@ -14,6 +14,7 @@ set :domain, 'yafeilee.me'
 set :deploy_to, '/home/cywin/app'
 set :repository, 'git@github.com:windy/cywin.git'
 set :branch, 'staging'
+set :app_path, "#{deploy_to}/#{current_path}"
 
 #set :rvm_path, '/usr/local/rvm/script/rvm'
 
@@ -73,7 +74,7 @@ namespace :unicorn do
   set :unicorn_pid, "#{app_path}/tmp/pids/unicorn.pid"
   set :start_unicorn, %{
     cd #{app_path}
-    bundle exec unicorn -c #{app_path}/config/unicorn/#{rails_env}.rb -E #{rails_env} -D
+    unicorn -c #{app_path}/config/unicorn/#{rails_env}.rb -E #{rails_env} -D
   }
 
 #                                                                    Start task
