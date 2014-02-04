@@ -164,7 +164,6 @@ ActiveRecord::Schema.define(version: 20140202074024) do
     t.string   "douban"
     t.string   "renren"
     t.string   "sinaweibo"
-    t.binary   "avatar"
     t.integer  "invest_count"
     t.decimal  "invest_total"
     t.integer  "prestig"
