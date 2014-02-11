@@ -31,6 +31,7 @@ describe ProjectsController do
   end
 
   describe "create" do
+    login_user
     it "get new" do
       post :new
       response.should be_success
@@ -43,6 +44,7 @@ describe ProjectsController do
   end
 
   describe "stage1" do
+    login_user
     it "get stage1" do
       project = build(:project)
       Project.should_receive(:find).with("1").and_return(project)
@@ -58,6 +60,7 @@ describe ProjectsController do
   end
 
   describe "stage2" do
+    login_user
     it "get stage2" do
       project = build(:project)
       Project.should_receive(:find).with("1").and_return(project)

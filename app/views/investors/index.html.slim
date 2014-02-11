@@ -1,0 +1,17 @@
+h1 Listing investors
+
+table
+  tr
+    th
+    th
+    th
+
+  - @investors.each do |investor|
+    tr
+      td = link_to 'Show', investor
+      td = link_to 'Edit', edit_investor_path(investor)
+      td = link_to 'Destroy', investor, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Investor', new_investor_path

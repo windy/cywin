@@ -41,6 +41,17 @@ zh-cn:
           stock: '股权'
           option: '期权'
           description: '补充说明'
+      investor:
+        name: '姓名'
+        phone: '联系电话'
+        type: '身份类型'
+        company: '所在公司'
+        title: '职位'
+        description: '个人简介'
+        investment:
+          name: '项目名称'
+          address: '项目地址'
+          description: '简介'
     hints:
       defaults:
         username: 'User name to sign in.'

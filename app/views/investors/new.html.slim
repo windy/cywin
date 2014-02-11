@@ -1,0 +1,17 @@
+div.row.project
+  = render partial: "header", locals: { stage: :stage0 }
+  h1 基本信息
+  = simple_form_for @investor do |f|
+    = f.input :name
+    = f.input :phone
+    = f.input :type, as: :radio_buttons, collection: Investor::TYPE
+    = f.input :company
+    = f.input :title
+    = f.input :description
+    hr
+    h2 过往投资案例
+    = f.simple_fields_for :investment, @investor.investment[0] do |p|
+      = p.input :name
+      = p.input :address
+      = p.input :description
+    = f.button :submit, 'Next'

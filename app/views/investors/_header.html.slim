@@ -1,0 +1,8 @@
+div.centerred
+  dl.sub-nav
+    = content_tag("dd", class: active_for(stage, :stage0)) do
+      = link_to "基本信息","#"
+    = content_tag("dd", class: active_for(stage, :stage1)) do
+      = link_to "投资理念","#"
+    = content_tag("dd", class: active_for(stage, :stage2)) do
+      = link_to "身份验证","#"
