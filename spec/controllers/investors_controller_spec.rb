@@ -1,10 +1,17 @@
 require 'spec_helper'
 describe InvestorsController do
 
+  login_user
   describe "GET new" do
     it "assigns a new investor as @investor" do
-      get :new, {}, valid_session
+      get :new
       assigns(:investor).should be_a_new(Investor)
+    end
+
+    it "GET new without login" do
+      sign_out :user
+      get :new
+      response.should be_redirect
     end
   end
 

@@ -29,7 +29,7 @@ class InvestorsController < ApplicationController
     #TODO 支持多个项目
     @investor.investment.build( investment_params )
     if @investor.save
-      redirect_to :stage1
+      redirect_to stage1_investor_path(@investor.id)
     else
       render :new
     end
