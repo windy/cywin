@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :investidea do
-    type ""
+    coin_type Investidea::COIN_TYPE[0]
     min 1
-    max 1
+    max 100
     industry "MyString"
     idea "MyString"
     give "MyString"

@@ -23,13 +23,6 @@ describe InvestorsController do
         }.to change(Investor, :count).by(1)
       end
 
-      it "assigns a newly created investor as @investor" do
-        pending
-      end
-
-      it "redirects to the created investor" do
-        pending
-      end
     end
 
     describe "with invalid params" do
@@ -40,6 +33,15 @@ describe InvestorsController do
       it "re-renders the 'new' template" do
         pending
       end
+    end
+  end
+
+  describe "stage1" do
+    it "get" do
+      investor = create(:investor)
+      Investor.stub(:find).and_return(investor)
+      get :stage1, id: 1
+      response.should render_template(:stage1)
     end
   end
 

@@ -52,6 +52,13 @@ zh-cn:
           name: '项目名称'
           address: '项目地址'
           description: '简介'
+        investidea:
+          coin_type: 货币类型
+          min: 最小投资额
+          max: 最大投资额
+          industry: 关注行业
+          idea: 投资理念
+          give: 可为项目提供
     hints:
       defaults:
         username: 'User name to sign in.'

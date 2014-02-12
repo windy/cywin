@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :investor do
     user_id 1
-    type ""
+    investor_type Investor::INVESTOR_TYPE[0]
     name "MyString"
     phone "MyString"
     company "MyString"
