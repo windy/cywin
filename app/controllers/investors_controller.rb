@@ -17,9 +17,30 @@ class InvestorsController < ApplicationController
   def stage1
     @investor.build_investidea
     if request.post?
-
+      @investor.investidea = Investidea.new(investidea_params)
+      if @investor.save
+        redirect_to stage2_investor_path(@investor.id)
+      else
+        render :stage1
+        return
+      end
     else
       render :stage1
+      return
+    end
+  end
+
+  def stage2
+    if request.post?
+      if @investor.update( card_params )
+        flash[:notice] = "创建申请成功"
+        redirect_to root_path
+      else
+        render :stage2
+        return
+      end
+    else
+      render :stage2
       return
     end
   end
@@ -56,5 +77,12 @@ class InvestorsController < ApplicationController
 
     def investment_params
       params.require(:investor).require(:investment).permit(:name, :address, :description)
+    end
+
+    def investidea_params
+      params.require(:investor).require(:investidea).permit(:coin_type, :min, :max, :industry, :give, :idea)
+    end
+    def card_params
+      params.require(:investor).permit(:card)
     end
 end

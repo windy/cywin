@@ -5,4 +5,6 @@ class Investor < ActiveRecord::Base
   has_one :investidea
 
   validates :user_id, presence: true
+
+  mount_uploader :card, CardUploader
 end

@@ -1,17 +1,8 @@
-h1 Listing investors
-
-table
-  tr
-    th
-    th
-    th
-
-  - @investors.each do |investor|
-    tr
-      td = link_to 'Show', investor
-      td = link_to 'Edit', edit_investor_path(investor)
-      td = link_to 'Destroy', investor, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Investor', new_investor_path
+div.row.project
+    p
+      = link_to "申请认证投资人", new_investor_path
+    h1 认证投资人列表
+    - @investors.each do |investor|
+      div.columns.project_show
+        = investor.name
+      hr

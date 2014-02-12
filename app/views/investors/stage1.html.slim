@@ -1,7 +1,7 @@
 div.row.project
   = render partial: "header", locals: { stage: :stage1 }
   h1 投资理念
-  = simple_form_for @investor do |f|
+  = simple_form_for @investor, url: stage1_investor_path(@investor.id), method: 'post',html:{ class: 'stage1' } do |f|
     = f.simple_fields_for :investidea, @investor.investidea do |p|
       = p.input :coin_type, as: :radio_buttons, collection: Investidea::COIN_TYPE
       = p.input :min

@@ -59,6 +59,7 @@ zh-cn:
           industry: 关注行业
           idea: 投资理念
           give: 可为项目提供
+        card: '上传你的身份证明信息:'
     hints:
       defaults:
         username: 'User name to sign in.'
