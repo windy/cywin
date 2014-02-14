@@ -28,8 +28,9 @@ div.container
         = image_tag("project_list_2.png")
     /! 查看所有投资项目
     div.row
-      = link_to(projects_path) do
-        p.text-center 查看所有投资项目
+      p
+        = link_to(projects_path) do
+          p.text-center 查看所有投资项目
   div.row
     hr
   /! 关于投资项目结束
@@ -49,8 +50,9 @@ div.container
         = image_tag("job3.png")
     /! 查看所有职位
     div.row
-      a href="#"
-        p.text-center 查看所有职位
+      p
+        = link_to jobs_path do
+          p.text-center 查看所有职位
   div.row
     hr
   /! 关于创业参与者结束
@@ -80,8 +82,9 @@ div.container
         = image_tag("project_list_2.png")
     /! 查看所有领投人
     div.row
-      a href="#"
-        p.text-center 查看所有领投人
+      p
+        = link_to investors_path do
+          p.text-center 查看所有领投人
   div.row
     hr
   /! 关于投资参与者结束
@@ -104,8 +107,9 @@ div.container
         = image_tag("fund1.png")
     /! 查看所有基金
     div.row
-      a href="#"
-        p.text-center 查看所有正在发起的基金
+      p
+        = link_to funds_path do
+          p.text-center 查看所有正在发起的基金
   div.row
     hr
   /! 关于基金结束
@@ -123,7 +127,7 @@ div.container
           = image_tag("project_example.png")
     /! 查看所有上线项目
     div.row
-      a href="#"
+      = link_to projects_path do
         p.text-center 查看所有正在预热的项目
   div.row
     hr

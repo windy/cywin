@@ -84,3 +84,5 @@ pickle-email-*.html
 
 # .lock
 *.lock
+# db journal file
+**.sqlite3-journal

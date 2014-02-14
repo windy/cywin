@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140212035216) do
+ActiveRecord::Schema.define(version: 20140213122619) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 20140212035216) do
     t.string   "logo"
     t.string   "where3"
     t.string   "industry"
+    t.integer  "user_id"
   end
 
   create_table "receipts", force: true do |t|

@@ -995,3 +995,11 @@
 input.button {
   left: 40%;
 }
+
+.divtar {
+  height: rem-calc(1px);
+  padding: rem-calc(3px) 0;
+  overflow: hidden;
+  border-bottom: rem-calc(1px) solid #221122;
+  background-color: #333333;
+}

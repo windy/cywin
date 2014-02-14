@@ -6,6 +6,7 @@ class Project < ActiveRecord::Base
   validates :where1, :where2, :where3, presence: true, format: /\d/, length: 6..6
 
   validates :logo, presence: true
+  validates :user_id, presence: true
 
   mount_uploader :logo, LogoUploader
 

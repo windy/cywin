@@ -2,19 +2,19 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
   ul.title-area
     li.name
       h1 
-        a href='/' 创业赢 CYwin
+        = link_to '创业赢 CYwin', root_path
   div.top-bar-section
     ul.left
       li
-        = link_to "发起项目", new_project_path
+        = link_to "浏览项目", projects_path
       li
-        = link_to "联合投资", investors_path
+        = link_to "联合投资", projects_path
       li
-        = link_to "参与创业", projects_path
+        = link_to "参与创业", jobs_path
       li
-        a href="#" 动态
+        = link_to "动态", activity_path
       li
-        a href="#" 赢基金
+        = link_to "赢基金", funds_path
     ul.right
       li.has-form
         form
@@ -28,10 +28,10 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
       - if user_signed_in?
         li.has-dropdown
           - if current_user.mailbox.inbox.length > 0
-            = link_to "Messages: " + current_user.mailbox.inbox(:unread => true).count(:id, :distinct => true).to_s
+            = link_to "Messages: " + current_user.mailbox.inbox(:unread => true).count(:id, :distinct => true).to_s, "#"
             /= link_to "Messages: " + current_user.mailbox.inbox.count.to_s
           - else
-            = link_to "Messages"
+            = link_to "Messages", "#"
           ul.dropdown
             li = link_to "View: " + current_user.mailbox.inbox.length.to_s, conversations_path
             /current_user.mailbox.inbox.first
@@ -43,12 +43,21 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
             a =current_user.name.empty? ? current_user.email : current_user.name
           ul.dropdown
             li
+              = link_to '创建新项目', new_project_path
+            - current_user.projects.each do |project|
+              li
+                = link_to project.name, edit_project_path(project)
+            li
+              div.divtar
+            li
               = link_to 'Edit account', edit_user_registration_path
             - if current_user.has_role? :admin
               li
-                = link_to 'Admin', users_path
+                = link_to '后台管理', users_path
             li
-              = link_to 'Logout', destroy_user_session_path, :method=>'delete'
+              div.divtar
+            li
+              = link_to '退出', destroy_user_session_path, :method=>'delete'
       - else
         li.has-dropdown
           a Login

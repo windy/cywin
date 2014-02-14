@@ -13,12 +13,9 @@
  *= require_tree .
  */
 
-div.project {
-  background: white;
-}
-
 div.container {
-  padding-top: 2rem;
+  margin-top: 2rem;
+  background: white;
 }
 
 div.footer {
@@ -29,3 +26,4 @@ div.footer {
 .logo {
   font-size: 1.1rem;
 }
+

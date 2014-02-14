@@ -1,24 +1,22 @@
-div.row.project
-  div.container
-    div.large-2.columns
-      = image_tag( @project.logo_url, size: "200x200" )
-    div.large-10.columns
-      h4.project_name = @project.name
-      div.row
-        div.large-7.columns
-          = @project.description
-      div.row
-        div.large-7.columns
-          p 
-            = project_address(@project)
-  hr 
+div.large-2.columns
+  = image_tag( @project.logo_url, size: "200x200" )
+div.large-10.columns
+  h4.project_name = @project.name
   div.row
-    div.large-12.columns
-      = image_tag("project_example.png", width: "100%")
+    div.large-7.columns
+      = @project.description
   div.row
-    div.large-12.columns
-      ul
-        li 第一阶段
-        li 第二阶段
-        li 第三阶段
-  
+    div.large-7.columns
+      p 
+        = project_address(@project)
+hr 
+div.row
+  div.large-12.columns
+    = image_tag("project_example.png", width: "100%")
+div.row
+  div.large-12.columns
+    ul
+      li 第一阶段
+      li 第二阶段
+      li 第三阶段
+

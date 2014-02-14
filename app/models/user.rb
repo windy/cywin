@@ -16,4 +16,5 @@ class User < ActiveRecord::Base
   # validates_attachment :avatar, :presence => true, :content_type => { :content_type => ["image/jpg", "image/gif", "image/png"] }
   # 投资角色
   has_one :investor
+  has_many :projects
 end

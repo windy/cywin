@@ -22,3 +22,6 @@ $(document).ready ->
   $('#search_name').keyup (e)->
     if e.keyCode == 13
       $('#search_button').click()
+
+  # 触发一次 ChinaCity
+  $('.city-select').trigger('change')

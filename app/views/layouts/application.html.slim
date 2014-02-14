@@ -6,7 +6,7 @@ html
     title= content_for?(:title) ? yield(:title) : 'CYwin'
     meta name="description" content=("#{content_for?(:description) ? yield(:description) : 'CYwin'}") 
     = stylesheet_link_tag "application", media: "all"
-    /  Modernizr is required for Zurb Foundation 4
+    /  Modernizr is required for Zurb Foundation 5
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
   body
@@ -15,5 +15,7 @@ html
       = render 'layouts/navigation'
     main role="main" 
       = render 'layouts/messages'
-      = yield
+      div.row.container
+        div.large-12.columns
+          = yield
     = render 'layouts/foot'
