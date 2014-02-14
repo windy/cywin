@@ -1,5 +1,4 @@
 Eachfund::Application.routes.draw do
-  get "syndicates/index"
   get "activities/show"
   get "projects_searcher/index"
   resource :activity, only: [:show]
@@ -12,6 +11,7 @@ Eachfund::Application.routes.draw do
       get :job
     end
   end
+  resources :syndicates
   resources :funds
   resources :jobs, only: [:index]
   resources :projects do
