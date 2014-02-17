@@ -15,7 +15,10 @@ html
       = render 'layouts/navigation'
     main role="main" 
       = render 'layouts/messages'
-      div.row.container
-        div.large-12.columns
-          = yield
+      - if content_for?(:container)
+        = yield(:container)
+      - else
+        div.row.container
+          div.large-12.columns
+            = yield
     = render 'layouts/foot'

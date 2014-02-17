@@ -1,0 +1,11 @@
+div.row
+  div.large-12.columns
+    h4 搜索
+div.row
+  div.large-12.columns
+    ul.inline-list
+      li
+        = text_field_tag(:search_name, '', placeholder: "项目名称")
+      li
+        = button_tag("搜索", class: 'small', id: 'search_button')
+hr

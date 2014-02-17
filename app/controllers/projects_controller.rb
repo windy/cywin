@@ -10,6 +10,10 @@ class ProjectsController < ApplicationController
     @project.build_contact
   end
 
+  def edit
+    @project = Project.find(params[:id])
+  end
+
   # 创建第一步
   def create
     @project = Project.new(project_params)

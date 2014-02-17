@@ -1,22 +1,105 @@
-div.large-2.columns
-  = image_tag( @project.logo_url, size: "200x200" )
-div.large-10.columns
-  h4.project_name = @project.name
+div.row.project_container
+  div.large-2.columns
+    = image_tag( @project.logo_url, size: "200x200" )
+  div.large-10.columns
+    h4.project_name = @project.name
+    div.row
+      div.large-7.columns
+        = @project.description
+    ul.sub-nav.right
+      li
+        button.button 关注
+      li
+        button.button 约谈 
+    div.row
+      div.large-7.columns
+        ul.sub-nav
+          li
+            p.address 
+              = project_address(@project)
+          li
+            p.industry
+              | 电子商务
+  hr 
   div.row
-    div.large-7.columns
-      = @project.description
+    div.large-12.columns
+      = image_tag("project_example.png", width: "100%")
+  hr
   div.row
-    div.large-7.columns
-      p 
-        = project_address(@project)
-hr 
-div.row
+    div.large-12.columns
+      p.columns
+        | 这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.
+      p.columns
+        | 这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.
+  hr 
+div.row.team
   div.large-12.columns
-    = image_tag("project_example.png", width: "100%")
-div.row
-  div.large-12.columns
-    ul
-      li 第一阶段
-      li 第二阶段
-      li 第三阶段
+    div.row.member
+      div.large-2.columns.logo
+        = image_tag("121.jpg", width: "200x200")
+      div.large-10.columns
+        h3.name 
+          = link_to "李亚飞", user_path(1) 
+        p.title CTO
+        p.description 这是一个CTO的个人介绍.
+    hr
 
+div.row.invest
+  div.large-12.columns
+    div.row.investors
+      div.large-4.columns
+        div.row.investor
+          div.large-4.columns
+            = image_tag("121.jpg", width: "200x200")
+          div.large-8.columns
+            h3.name
+              = link_to "李投资", user_path(1)
+            p.title Partner at Innovation Works( IW).
+            p.description 另一个投资人的介绍.
+
+      div.large-4.columns
+        div.row.investor
+          div.large-4.columns
+            = image_tag("121.jpg", width: "200x200")
+          div.large-8.columns
+            h3.name
+              = link_to "李投资", user_path(1)
+            p.title Partner at Innovation Works( IW).
+            p.description 另一个投资人的介绍.
+          
+      div.large-4.columns
+        div.row.investor
+          div.large-4.columns
+            = image_tag("121.jpg", width: "200x200")
+          div.large-8.columns
+            h3.name
+              = link_to "李投资", user_path(1)
+            p.title Partner at Innovation Works( IW).
+            p.description 另一个投资人的介绍.
+      hr
+
+    div.row.invest
+      div.large-12.columns
+        div.invest_stats
+          p 融资进度: 50% / $100,000,000 ( $50,000,000 ) / 30天 ( 剩余 15 天 )
+        div.progress
+          span.meter style="width: 50%"
+        div.large-2.columns.large-centered
+          a.button 投资
+      hr
+
+    div.row.jobs
+      div.large-12.columns
+        div.job 
+          h3 工作招聘
+        div.large-2.columns.large-centered
+          a.button 我感兴趣
+
+    hr
+
+    div.row.discussion
+      div.large-12.columns
+        h3 讨论区
+        = text_area_tag("d")
+          
+          
