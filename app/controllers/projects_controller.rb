@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     if request.post?
       #TODO add other members
-      owner_params = params.require(:project).require(:members).permit(:avatar, :name, :title, :description)
+      owner_params = params.require(:project).require(:members).permit(:avatar, :avatar_cache, :name, :title, :description)
       @owner = Member.new( owner_params )
       @project.add_owner( @owner )
       if @project.save
@@ -43,6 +43,7 @@ class ProjectsController < ApplicationController
     # get
     else
       @owner = @project.owner
+      @owner ||= Member.new
       render :stage1
       return
     end
@@ -83,7 +84,7 @@ class ProjectsController < ApplicationController
   def project_params
     new_params = params
     new_params = params.require(:project) if params[:project]
-    new_params.permit(:id, :logo, :name, :oneword, :description, :stage, :where1, :where2, :where3, contact_attributes: [ :address, :phone, :qq, :weixin, :weibo ])
+    new_params.permit(:id, :logo, :logo_cache, :name, :oneword, :description, :stage, :where1, :where2, :where3, contact_attributes: [ :address, :phone, :qq, :weixin, :weibo ])
   end
 
 end

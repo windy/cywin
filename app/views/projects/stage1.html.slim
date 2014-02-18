@@ -2,8 +2,16 @@
 h1 团队信息
 = simple_form_for @project, url: stage1_project_path(@project.id), method: 'post',html:{ class: 'stage1' } do |f|
   div.owner
+    / TODO 重构之
     = f.simple_fields_for :members, @owner do |p|
-      = p.input :avatar, as: :file
+      = p.input :avatar do
+        div.row#logo_image_field
+          - if @owner.avatar?
+            div.large-2.columns
+              = image_tag(@owner.avatar_url, size: "50x50")
+          div.large-10.columns
+            = p.file_field :avatar
+      = p.hidden_field :avatar_cache 
       = p.input :name
       = p.input :title
       = p.input :description
