@@ -12,8 +12,7 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
-  # validates_attachment :avatar, :presence => true, :content_type => { :content_type => ["image/jpg", "image/gif", "image/png"] }
+  mount_uploader :avatar, AvatarUploader
   # 投资角色
   has_one :investor
   has_many :projects

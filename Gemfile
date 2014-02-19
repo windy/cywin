@@ -30,8 +30,6 @@ gem 'oauth'
 gem 'oauth_china'
 # For user custom message
 gem 'mailboxer'
-# For upload attachment
-gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 # For upload picture
 gem 'carrierwave'
