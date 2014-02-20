@@ -6,27 +6,33 @@ class Project < ActiveRecord::Base
   validates :where1, :where2, :where3, presence: true, format: /\d/, length: 6..6
 
   validates :logo, presence: true
-  validates :user_id, presence: true
 
   mount_uploader :logo, LogoUploader
 
   has_one :contact
-  has_and_belongs_to_many :members, autosave: true
+  has_and_belongs_to_many :users, join_table: :members
+  has_many :members, autosave: true
   accepts_nested_attributes_for :contact
   validates :contact, presence: true
-  before_create { build_contact }
   
   # 创业需求
   has_one :money_require
   has_many :person_requires
 
   def add_owner( owner )
-    #TODO 检查只能有一个 owner
-    owner.owner = true
-    self.members << owner
+    member = Member.new
+    member.user_id = owner.id
+    member.priv = 'owner'
+    member.role = '创始人'
+    self.members << member
   end
   
+  # user 
   def owner
-    self.members.where(owner: true).first
+    self.users.where('members.priv' => 'owner').first
+  end
+
+  def member( user )
+    self.members.where(user_id: user.id).first
   end
 end

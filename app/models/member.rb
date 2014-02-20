@@ -1,5 +1,6 @@
 class Member < ActiveRecord::Base
-  has_and_belongs_to_many :projects
-  mount_uploader :avatar, AvatarUploader
-  validates :avatar, :name, :title, presence: true
+  ROLES = [ "创始人", "团队成员", "合作者" ]
+  PRIVS = [ "owner", "editor", "viewer" ]
+  validates :role, presence: true, inclusion: ROLES
+  validates :priv, presence: true, inclusion: PRIVS
 end

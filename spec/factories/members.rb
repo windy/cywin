@@ -2,9 +2,9 @@
 include ActionDispatch::TestProcess
 FactoryGirl.define do
   factory :member do
-    avatar { fixture_file_upload( File.join(Rails.root, "spec/fixtures/avatar.jpg"), "image/jpg" ) }
-    name "Liyafei"
-    title "SET"
+    title "CTO"
+    role "创始人"
+    priv "owner"
     description "description"
   end
 end

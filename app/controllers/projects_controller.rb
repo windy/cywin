@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
   # 创建第一步
   def create
     @project = Project.new(project_params)
-    @project.user_id = current_user.id
+    @project.add_owner( current_user )
     if @project.save
       redirect_to stage1_project_path(@project.id)
     else
@@ -28,22 +28,25 @@ class ProjectsController < ApplicationController
   # 创建第二步
   def stage1
     @project = Project.find(params[:id])
+    @owner = @project.owner
+    @member = @project.member( @owner )
     if request.post?
-      #TODO add other members
-      owner_params = params.require(:project).require(:members).permit(:avatar, :avatar_cache, :name, :title, :description)
-      @owner = Member.new( owner_params )
-      @project.add_owner( @owner )
-      if @project.save
-        redirect_to stage2_project_path(params[:id])
-        return
-      else
+      avatar_params = params.require(:project).require(:owner).permit(:avatar, :avatar_cache)
+      if avatar_params
+        unless @owner.update(avatar_params)
+          render :stage1
+          return
+        end
+      end
+      member_params = params.require(:project).require(:member).permit(:title, :description)
+      unless @member.update(member_params)
         render :stage1
         return
       end
+      redirect_to stage2_project_path(params[:id])
+      return
     # get
     else
-      @owner = @project.owner
-      @owner ||= Member.new
       render :stage1
       return
     end
@@ -60,7 +63,8 @@ class ProjectsController < ApplicationController
       person_requires_params = params.require(:project).require(:person_requires).permit(:title, :pay, :stock, :option, :description)
       @project.person_requires.build(person_requires_params)
       if @project.save
-        redirect_to '/'
+        flash[:notice] = "项目创建成功"
+        redirect_to edit_project_path(@project.id)
         return
       else
         render :stage2

@@ -40,39 +40,82 @@ describe ProjectsController do
     it "create new" do
       post :create, ActionController::Parameters.new(project: attributes_for(:project).merge(contact_attributes: attributes_for(:contact)) )
       response.should redirect_to( stage1_project_path(1) )
+      assigns(:project).owner.should eq(@user)
     end
   end
 
   describe "stage1" do
     login_user
+    before do
+      @project = build(:project)
+      @project.add_owner(@user)
+      @project.save
+    end
+
     it "get stage1" do
-      project = build(:project)
-      Project.should_receive(:find).with("1").and_return(project)
+      Project.should_receive(:find).with("1").and_return(@project)
       get 'stage1', id: 1
       response.should render_template(:stage1)
     end
-    it "post stage1" do
-      project = build(:project)
-      Project.should_receive(:find).with("1").and_return(project)
-      post 'stage1', ActionController::Parameters.new({ id: 1, project: { members: attributes_for(:member) } })
-      response.should redirect_to( stage2_project_path(1) )
+
+    describe "post stage1" do
+      it "正确的参数" do
+        Project.should_receive(:find).with("1").and_return(@project)
+        post 'stage1', ActionController::Parameters.new({ id: 1, project: { owner: {avatar: nil}, member: attributes_for(:member) } })
+        response.should redirect_to( stage2_project_path(1) )
+        project = assigns(:project)
+        expect(project.member( @user ).title).to eq( attributes_for(:member)[:title] )
+      end
+
+      it "正确的参数, 附带头像" do
+        Project.should_receive(:find).with("1").and_return(@project)
+        post 'stage1', ActionController::Parameters.new({ 
+          id: 1,
+          project: {
+            owner: {
+              avatar: fixture_file_upload( File.join(Rails.root, "spec/fixtures/logo.png"), 'image/png' )
+            },
+            member: attributes_for(:member)
+          } 
+        })
+        response.should redirect_to( stage2_project_path(1) )
+        project = assigns(:project)
+        expect(project.member( @user ).title).to eq( attributes_for(:member)[:title] )
+        expect(@user.reload.avatar_url).not_to be_nil
+
+      end
+
+      it "带邀请链接" do
+        pending
+      end
+
+      it "post stage1 错误的上传头像" do
+        pending
+      end
+
+      it " post stage1 没有上传头像" do
+        pending
+      end
     end
   end
 
   describe "stage2" do
     login_user
+    before do
+      @project = build(:project)
+      @project.add_owner(@user)
+      @project.save
+    end
     it "get stage2" do
-      project = build(:project)
-      Project.should_receive(:find).with("1").and_return(project)
+      Project.should_receive(:find).with("1").and_return(@project)
       get 'stage2', id: 1
       response.should render_template(:stage2)
     end
 
     it "post stage2" do
-      project = build(:project)
-      Project.should_receive(:find).with("1").and_return(project)
+      Project.should_receive(:find).with("1").and_return(@project)
       post 'stage2', ActionController::Parameters.new({ project: { money_requires: attributes_for(:money_require), person_requires: attributes_for(:person_require) }, id: 1})
-      response.should redirect_to('/')
+      response.should redirect_to( edit_project_path(@project.id) )
     end
   end
 

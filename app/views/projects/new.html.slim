@@ -1,14 +1,7 @@
 = render partial: "header", locals: { stage: :stage0 }
 h1 基本信息
 = simple_form_for @project do |f|
-  = f.input :logo do
-    div.row#logo_image_field
-      - if @project.logo?
-        div.large-2.columns
-          = image_tag(@project.logo_url, size: "50x50")
-      div.large-10.columns
-        = f.file_field :logo
-  = f.hidden_field :logo_cache
+  = render(partial: 'common/input_preview', locals: { f: f, model: @project, column_name: :logo})
   = f.input :name
   = f.input :oneword
   = f.input :description

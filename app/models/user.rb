@@ -15,5 +15,5 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   # 投资角色
   has_one :investor
-  has_many :projects
+  has_and_belongs_to_many :projects, join_table: :members
 end

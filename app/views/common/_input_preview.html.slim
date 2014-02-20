@@ -1,0 +1,9 @@
+/ locals: { model, column_name, simple_form }
+= f.input column_name do
+  div.row#logo_image_field
+    - if model.send("#{column_name}?")
+      div.large-2.columns
+        = image_tag(model.send("#{column_name}_url"), size: "50x50")
+    div.large-10.columns
+      = f.file_field column_name
+= f.hidden_field "#{column_name}_cache"

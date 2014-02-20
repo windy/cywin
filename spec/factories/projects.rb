@@ -10,8 +10,7 @@ FactoryGirl.define do
     where2 "110100"
     where3 "110101"
     logo { fixture_file_upload( File.join(Rails.root, "spec/fixtures/logo.png"), "image/png" ) }
-    contact
-    user_id 1
+    contact { build(:contact) }
   end
 
   factory :shenzhen_project, class: :Project do
@@ -23,8 +22,7 @@ FactoryGirl.define do
     where2 "440300"
     where3 "440303"
     logo { fixture_file_upload( File.join(Rails.root, "spec/fixtures/logo.png"), "image/png" ) }
-    contact
-    user_id 1
+    contact { build(:contact) }
   end
 
   factory :shenzhen_project2, class: :Project do
@@ -36,8 +34,7 @@ FactoryGirl.define do
     where2 "440300"
     where3 "440303"
     logo { fixture_file_upload( File.join(Rails.root, "spec/fixtures/logo.png"), "image/png" ) }
-    contact
-    user_id 1
+    contact { build(:contact) }
   end
 
   factory :project_with_member, parent: :project do
