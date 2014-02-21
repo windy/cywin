@@ -58,7 +58,7 @@ class ProjectsController < ApplicationController
     if request.post?
       # add money_require
       money_require_params = params.require(:project).require(:money_requires).permit(:money, :share, :description)
-      @project.build_money_require(money_require_params)
+      @project.money_requires.build(money_require_params)
       #TODO 多人招聘的支持
       person_requires_params = params.require(:project).require(:person_requires).permit(:title, :pay, :stock, :option, :description)
       @project.person_requires.build(person_requires_params)

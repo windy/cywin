@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
   validates :contact, presence: true
   
   # 创业需求
-  has_one :money_require
+  has_many :money_requires
   has_many :person_requires
 
   def add_owner( owner )
