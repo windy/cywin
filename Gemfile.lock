@@ -38,6 +38,9 @@ GEM
       json (>= 1.7)
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    celluloid-io (0.15.0)
+      celluloid (>= 0.15.0)
+      nio4r (>= 0.5.0)
     china_city (0.0.4)
       jquery-rails
       rails (>= 3.1.0)
@@ -88,7 +91,7 @@ GEM
       railties (>= 3.1.0)
       sass (>= 3.2.0)
     fssm (0.2.10)
-    guard (2.3.0)
+    guard (2.4.0)
       formatador (>= 0.2.4)
       listen (~> 2.1)
       lumberjack (~> 1.0)
@@ -113,8 +116,9 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     libv8 (3.16.14.3)
-    listen (2.4.0)
+    listen (2.5.0)
       celluloid (>= 0.15.2)
+      celluloid-io (>= 0.15.0)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     lumberjack (1.0.4)
@@ -130,6 +134,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.4)
     multipart-post (2.0.0)
+    nio4r (1.0.0)
     oauth (0.4.7)
     oauth2 (0.5.2)
       faraday (~> 0.7)
@@ -263,7 +268,7 @@ DEPENDENCIES
   devise_invitable
   factory_girl_rails
   figaro
-  foundation-rails
+  foundation-rails (~> 5.0.3.1)
   guard-bundler
   guard-rails
   guard-rspec

@@ -21,7 +21,7 @@ gem 'sendgrid'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'therubyracer', :platform=>:ruby
-gem 'foundation-rails'
+gem "foundation-rails", "~> 5.0.3.1"
 
 # For sns login
 gem 'omniauth-weibo-oauth2'

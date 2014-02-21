@@ -5,15 +5,15 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
         = link_to '创业赢 CYwin', root_path
   div.top-bar-section
     ul.left
-      li
+      li class="#{cal_navbar_active(params[:controller], :projects)}"
         = link_to "浏览项目", projects_path
-      li
+      li class="#{cal_navbar_active(params[:controller], :syndicates)}"
         = link_to "联合投资", syndicates_path
-      li
+      li class="#{cal_navbar_active(params[:controller], :jobs)}"
         = link_to "参与创业", jobs_path
-      li
+      li class="#{cal_navbar_active(params[:controller], :activities)}"
         = link_to "动态", activity_path
-      li
+      li class="#{cal_navbar_active(params[:controller], :funds)}"
         = link_to "赢基金", funds_path
     ul.right
       li.has-form

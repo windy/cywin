@@ -12,4 +12,8 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def cal_navbar_active(controller_name, navbar_name)
+    controller_name.to_sym == navbar_name ? "active" : ""
+  end
+
 end
