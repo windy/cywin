@@ -119,4 +119,36 @@ describe ProjectsController do
     end
   end
 
+  describe "项目的权限控制测试" do
+    describe "投资人, 领投人对项目的权限" do
+      it "投资人对一般项目都有权限查看" do
+        pending
+      end
+
+      it "投资人对要求领投人才能查到细节的权限无法查阅" do
+        pending
+      end
+      
+      it "领投人对有权限要求的项目可查阅" do
+        pending
+      end
+    end
+
+    describe "项目编辑与邀请成员的功能" do
+      describe "编辑" do
+        it "owner 可编辑项目所有功能" do
+          pending
+        end
+
+        it "editor 可编辑项目所有功能" do
+          pending
+        end
+
+        it "viewer 只能查阅项目" do
+          pending
+        end
+      end
+    end
+  end
+
 end

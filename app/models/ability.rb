@@ -6,6 +6,20 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     end
+
+    if user.has_role? :leader
+      can :read, Project
+    end
+
+    if user.has_role? :investor
+      can :read, Project do
+        #TODO 项目的公开程度字段判定
+      end
+    end
+
+    can :manage, Project do |project|
+      project.owner == user || project.members.where(priv: 'editor')
+    end
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
