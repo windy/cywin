@@ -4,6 +4,8 @@ class CreateMoneyRequires < ActiveRecord::Migration
       t.string :money
       t.string :share
       t.string :description
+      
+      t.integer :project_id
 
       t.timestamps
     end

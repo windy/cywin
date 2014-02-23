@@ -6,6 +6,7 @@ class CreateContacts < ActiveRecord::Migration
       t.string :qq
       t.string :weixin
       t.string :weibo
+      t.integer :project_id
 
       t.timestamps
     end

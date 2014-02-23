@@ -4,6 +4,7 @@ class CreateInvestments < ActiveRecord::Migration
       t.string :name
       t.string :address
       t.text :description
+
       t.integer :investor_id
 
       t.timestamps
