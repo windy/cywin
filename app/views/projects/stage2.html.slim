@@ -2,13 +2,13 @@
 h1 创业需求
 = simple_form_for @project, url: stage2_project_url(@project.id), method: 'post' do |f|
   h4 我要融资
-  = f.simple_fields_for :money_requires do |p|
+  = f.simple_fields_for :money_requires, @money_require do |p|
     = p.input :money
     = p.input :share
     = p.input :description
   hr
   h4 我要招人
-  = f.simple_fields_for :person_requires do |p|
+  = f.simple_fields_for :person_requires, @person_require do |p|
     = p.input :title
     = p.input :pay
     = p.input :stock

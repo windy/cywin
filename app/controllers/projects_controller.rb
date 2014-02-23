@@ -58,15 +58,19 @@ class ProjectsController < ApplicationController
     if request.post?
       # add money_require
       money_require_params = params.require(:project).require(:money_requires).permit(:money, :share, :description)
-      @project.money_requires.build(money_require_params)
+      @money_require = MoneyRequire.new(money_require_params)
+      @project.money_requires << @money_require
       #TODO 多人招聘的支持
       person_requires_params = params.require(:project).require(:person_requires).permit(:title, :pay, :stock, :option, :description)
-      @project.person_requires.build(person_requires_params)
+      @person_reuqire = PersonRequire.new(person_requires_params)
+      @project.person_requires << @person_require
       if @project.save
         flash[:notice] = "项目创建成功"
         redirect_to edit_project_path(@project.id)
         return
       else
+        @money_require = @project.money_requires.build
+        @person_require = PersonRequire.new
         render :stage2
         return
       end
