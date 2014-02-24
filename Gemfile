@@ -43,6 +43,7 @@ group :development do
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
   gem 'quiet_assets'
   gem 'rails_layout'
+  gem 'guard'
   gem 'guard-rails'
   gem 'guard-rspec', require: false
   gem 'guard-bundler', require: false
