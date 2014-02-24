@@ -7,6 +7,8 @@ class CreatePersonRequires < ActiveRecord::Migration
       t.string :option
       t.text :description
 
+      t.integer :project_id
+
       t.timestamps
     end
   end

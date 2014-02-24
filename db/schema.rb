@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20140221025121) do
     t.string   "qq"
     t.string   "weixin"
     t.string   "weibo"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "project_id"
   end
 
   create_table "conversations", force: true do |t|
@@ -45,15 +45,15 @@ ActiveRecord::Schema.define(version: 20140221025121) do
   end
 
   create_table "investideas", force: true do |t|
+    t.string   "coin_type"
     t.integer  "min"
     t.integer  "max"
     t.string   "industry"
     t.string   "idea"
     t.string   "give"
+    t.integer  "investor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "coin_type"
-    t.integer  "investor_id"
   end
 
   create_table "investments", force: true do |t|
@@ -66,36 +66,36 @@ ActiveRecord::Schema.define(version: 20140221025121) do
   end
 
   create_table "investors", force: true do |t|
-    t.integer  "user_id"
     t.string   "name"
     t.string   "phone"
     t.string   "company"
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "investor_type"
     t.string   "card"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "members", force: true do |t|
     t.string   "title"
-    t.text     "description", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text     "description"
+    t.string   "priv"
+    t.string   "role"
     t.integer  "user_id"
     t.integer  "project_id"
-    t.string   "role"
-    t.string   "priv"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "money_requires", force: true do |t|
     t.string   "money"
     t.string   "share"
     t.string   "description"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "project_id"
   end
 
   create_table "notifications", force: true do |t|
@@ -124,23 +124,23 @@ ActiveRecord::Schema.define(version: 20140221025121) do
     t.string   "stock"
     t.string   "option"
     t.text     "description"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "project_id"
   end
 
   create_table "projects", force: true do |t|
+    t.string   "logo"
     t.string   "name"
     t.string   "oneword"
     t.text     "description"
     t.string   "stage"
     t.string   "where1"
     t.string   "where2"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "logo"
     t.string   "where3"
     t.string   "industry"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "receipts", force: true do |t|
@@ -177,6 +177,7 @@ ActiveRecord::Schema.define(version: 20140221025121) do
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
+    t.string   "name"
     t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -188,7 +189,6 @@ ActiveRecord::Schema.define(version: 20140221025121) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -200,23 +200,6 @@ ActiveRecord::Schema.define(version: 20140221025121) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
-    t.string   "qq"
-    t.string   "douban"
-    t.string   "renren"
-    t.string   "sinaweibo"
-    t.integer  "invest_count"
-    t.decimal  "invest_total"
-    t.integer  "prestig"
-    t.integer  "honour"
-    t.text     "introduction"
-    t.text     "work_experience"
-    t.text     "education_experience"
-    t.string   "fund_type"
-    t.decimal  "min_invest"
-    t.decimal  "max_invest"
-    t.text     "focus_industry"
-    t.text     "investment_philosophy"
-    t.text     "added_value"
     t.string   "avatar"
   end
 

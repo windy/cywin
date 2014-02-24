@@ -1,13 +1,15 @@
 class CreateInvestors < ActiveRecord::Migration
   def change
     create_table :investors do |t|
+      t.string   :name
+      t.string   :phone
+      t.string   :company
+      t.string   :title
+      t.text     :description
+      t.string   :investor_type
+      t.string   :card
+
       t.integer :user_id
-      t.string :type
-      t.string :name
-      t.string :phone
-      t.string :company
-      t.string :title
-      t.text :description
 
       t.timestamps
     end
