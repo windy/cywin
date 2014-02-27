@@ -27,6 +27,8 @@ Eachfund::Application.routes.draw do
       get :stage2
       post :stage2
     end
+
+    resources :members
   end
   resources :investors do
     member do

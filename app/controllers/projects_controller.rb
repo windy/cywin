@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
   def stage1
     @project = Project.find(params[:id])
     @owner = @project.owner
-    @member = @project.member( @owner )
+    @member = @project.member(@owner)
     if request.post?
       avatar_params = params.require(:project).require(:owner).permit(:avatar, :avatar_cache)
       if avatar_params

@@ -10,7 +10,13 @@ hr
       = p.input :title
       = p.input :description
   hr
-  h4 添加团队成员
-  div.member
-    h5 TODO
+  h4 团队其他成员
+  div.members data-uri=project_members_path(@project.id)
+    ul.small-block-grid-3
+      = render partial: 'members/member', collection: @project.members_but(current_user)
+      
+  hr
+  h5
+    = link_to "添加一个成员", new_project_member_path(@project), class: 'add_member'
+  div.add_member_section
   = f.button :submit, "Next"

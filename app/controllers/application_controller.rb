@@ -7,4 +7,18 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
+  def render_success(msg = nil, data = {})
+    render :json => {
+      success: true,
+      message: msg.to_s
+    }.merge(data)
+  end
+
+  def render_fail(msg = nil, data = {})
+    render :json => {
+      success: false,
+      message: msg.to_s
+    }.merge(data)
+  end
+
 end

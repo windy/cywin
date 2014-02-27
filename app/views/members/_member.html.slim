@@ -1,0 +1,9 @@
+li
+  div.row
+    div.large-6.columns
+      = image_tag(member.user.avatar_url, size: "200x200")
+    div.large-6.columns
+      h2 #{member.user.name}
+      p #{member.role}
+      p #{member.title}
+      p #{member.description}

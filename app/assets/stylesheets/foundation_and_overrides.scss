@@ -1199,6 +1199,17 @@ input.button {
   left: 40%;
 }
 
+.button.cancel {
+  background-color: white;
+  color: #333;
+  border: solid 1px #ccc;
+  &:hover {
+    background-color: #ebebeb;
+    border-color: #adadad;
+  }
+}
+
+
 .divtar {
   height: rem-calc(1px);
   padding: rem-calc(3px) 0;

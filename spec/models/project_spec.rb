@@ -22,6 +22,7 @@ describe Project do
       expect(project.save).to be_true
       expect(project.owner).to eq(owner)
       expect(project.member(owner).user_id).to eq(owner.id)
+      expect(project.member(owner).priv).to eq('owner')
     end
     
     it "users.size, project.size" do

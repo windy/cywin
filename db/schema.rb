@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221025121) do
+ActiveRecord::Schema.define(version: 20140224032546) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(version: 20140221025121) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "members", ["user_id", "project_id"], name: "index_members_on_user_id_and_project_id", unique: true
 
   create_table "money_requires", force: true do |t|
     t.string   "money"

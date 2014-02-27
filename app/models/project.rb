@@ -20,11 +20,7 @@ class Project < ActiveRecord::Base
   has_many :person_requires
 
   def add_owner( owner )
-    member = Member.new
-    member.user_id = owner.id
-    member.priv = 'owner'
-    member.role = '创始人'
-    self.members << member
+    add_user(owner, role: '创始人', priv: 'owner')
   end
   
   # user 
@@ -34,5 +30,18 @@ class Project < ActiveRecord::Base
 
   def member( user )
     self.members.where(user_id: user.id).first
+  end
+
+  def add_user( user, option={} )
+    member = Member.new
+    member.user_id = user.id
+    #TODO 处理权限的控制
+    member.priv = option[:priv] || 'viewer'
+    member.role = option[:role]
+    self.members << member
+  end
+
+  def members_but(user)
+    self.members.where.not(user_id: user.id)
   end
 end
