@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140224032546) do
+ActiveRecord::Schema.define(version: 20140227080115) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20140224032546) do
   create_table "money_requires", force: true do |t|
     t.string   "money"
     t.string   "share"
-    t.string   "description"
+    t.text     "description"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
