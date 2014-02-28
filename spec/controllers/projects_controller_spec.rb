@@ -114,8 +114,10 @@ describe ProjectsController do
 
     it "post stage2" do
       Project.should_receive(:find).with("1").and_return(@project)
-      post 'stage2', ActionController::Parameters.new({ project: { money_requires: attributes_for(:money_require), person_requires: attributes_for(:person_require) }, id: 1})
+      post 'stage2', ActionController::Parameters.new({ project: { money_requires: attributes_for(:money_require), person_requires: attributes_for(:person_require) }, id: 1, money_require: true })
       response.should redirect_to( edit_project_path(@project.id) )
+      assigns(:project).money_requires.size.should == 1
+      assigns(:project).person_requires.size.should == 0
     end
   end
 
