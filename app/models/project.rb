@@ -44,4 +44,8 @@ class Project < ActiveRecord::Base
   def members_but(user)
     self.members.where.not(user_id: user.id)
   end
+
+  def complete_degree
+    0.8
+  end
 end
