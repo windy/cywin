@@ -6,7 +6,7 @@ timeout            180
 listen             '/tmp/unicorn_cywin.sock'
 user               'cywin', 'cywin'
 working_directory  app_path
-pid                "#{app_path}/tmp/pids/unicorn.pid"
+pid                "#{app_path}/tmp/pids/unicorn_cywin.pid"
 stderr_path        "log/unicorn.log"
 stdout_path        "log/unicorn.log"
 

@@ -71,10 +71,9 @@ task :deploy => :environment do
 end
 
 namespace :unicorn do
-  set :unicorn_pid, "#{app_path}/tmp/pids/unicorn.pid"
+  set :unicorn_pid, "#{app_path}/tmp/pids/unicorn_cywin.pid"
   set :start_unicorn, %{
-    cd #{app_path}
-    unicorn -c #{app_path}/config/unicorn/#{rails_env}.rb -E #{rails_env} -D
+    cd #{app_path} && unicorn -c config/unicorn/#{rails_env}.rb -E #{rails_env} -D
   }
 
 #                                                                    Start task
@@ -92,7 +91,7 @@ namespace :unicorn do
     queue 'echo "-----> Stop Unicorn"'
     queue! %{
       mkdir -p "#{app_path}/tmp/pids"
-      test -s "#{unicorn_pid}" && kill -QUIT `cat "#{unicorn_pid}"` && echo "Stop Ok" && exit 0
+      test -s "#{unicorn_pid}" && kill -QUIT `cat "#{unicorn_pid}"` && rm -rf "#{unicorn_pid}" && echo "Stop Ok" && exit 0
       echo >&2 "Not running"
     }
   end
