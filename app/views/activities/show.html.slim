@@ -1,16 +1,55 @@
 - content_for(:container) do
   div.row
     div.large-7.columns
-      div.container.activity_main
-        div.activity
-          h3 xx 关注了我
-          h3 xx 项目更新了 xx 内容
-          h3 xx 项目获得了 xx 的投资
+      div.row.container.activity_main
+        div.large-12.columns
+          h4 xx 关注了我
+          h4 xx 项目更新了 xx 内容
+          h4 xx 项目获得了 xx 的投资
     div.large-4.columns.large-offset-1
-      div.container.activity_side
-        h3 我关注的人
-        hr
-        h3 我关注的项目
-        hr
-        h3 关注我的人
-        hr
+      div.activity_side
+        / 我关注的
+        div.row
+          div.large-12.columns.container
+            div.row.title
+              div.large-12.columns
+                h4.title 我关注的人
+            div.row
+              div.large-12.columns
+                ul.small-block-grid-3
+                  li
+                    h5 投资人
+                  li
+                    h5 投资人
+                  li
+                    h5 投资人
+        / 关注的项目
+        div.row
+          div.large-12.columns.container
+            div.row.title
+              div.large-12.columns
+                h4.title 关注的项目
+            div.row
+              div.large-12.columns
+                ul.small-block-grid-3
+                  li
+                    h5 关注的项目
+                  li
+                    h5 关注的项目
+                  li
+                    h5 关注的项目
+        / 关注我的人
+        div.row
+          div.large-12.columns.container
+            div.row.title
+              div.large-12.columns
+                h4.title 关注我的人
+            div.row
+              div.large-12.columns
+                ul.small-block-grid-3
+                  li
+                    h5 关注我的人
+                  li
+                    h5 关注我的人
+                  li
+                    h5 关注我的人
