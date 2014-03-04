@@ -3,7 +3,9 @@
     div.large-8.columns
       div.row
         div.large-12.columns.container
-          h3 基本资料
+          div.row.title
+            div.large-12.columns
+              h3.title 基本资料
           div.row.basic
             div.large-3.columns
               = image_tag(@project.logo.url, size: "200x200")
@@ -33,17 +35,25 @@
     div.large-3.columns.large-offset-1
       div.row
         div.large-12.columns.container
-          h3 完整度
+          div.row.title
+            div.large-12.columns
+              h3.title 完整度
           div.progress
             span.meter style="width: 50%" 
           hr
           button 发布
       div.row
         div.large-12.columns.container
-          h3 投资需求
+          div.row.title
+            div.large-12.columns
+              h3.title 投资需求
       div.row
         div.large-12.columns.container
-          h3 招人需求
+          div.row.title
+            div.large-12.columns
+              h3.title 招人需求
       div.row
         div.large-12.columns.container
-          h3 关注人员
+          div.row.title
+            div.large-12.columns
+              h3.title 关注人员

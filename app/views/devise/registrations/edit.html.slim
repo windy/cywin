@@ -1,6 +1,6 @@
-h2
-  | 更新用户资料
-hr
+div.row.title
+  div.large-12.columns
+    h2.title 更新用户资料
 
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical', :multipart => true }) do |f|
   = f.error_notification
