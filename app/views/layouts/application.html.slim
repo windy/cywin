@@ -8,9 +8,9 @@ html
     = stylesheet_link_tag "application", media: "all"
     /  Modernizr is required for Zurb Foundation 5
     = javascript_include_tag "vendor/modernizr"
+    = javascript_include_tag "application"
     = csrf_meta_tags
   body
-    = javascript_include_tag "application"
     header
       = render 'layouts/navigation'
     main role="main" 
