@@ -28,6 +28,8 @@ $(document).ready ->
     url = $(this).attr('href')
     $.get url, (data)->
       $('.add_member_section').html(data)
+      # 自动完成
+      $('#member_user_name').autocomplete({ source: [ "aaaa", "abc", "c" ] })
 
   $(this).on 'click', '.add_member_button', (e)->
     e.preventDefault()
