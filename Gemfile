@@ -23,6 +23,9 @@ gem 'slim-rails'
 gem 'therubyracer', :platform=>:ruby
 gem "foundation-rails", "~> 5.0.3.1"
 
+# for observers
+gem 'rails-observers'
+
 # For sns login
 gem 'omniauth-weibo-oauth2'
 gem 'weibo2'
