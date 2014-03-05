@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [ :index ]
 
   def index
-    @projects = Project.all
+    @projects = Project.published
   end
 
   def new
@@ -84,6 +84,15 @@ class ProjectsController < ApplicationController
       @person_require = PersonRequire.new
       render :stage2
       return
+    end
+  end
+
+  def publish
+    @project = Project.find(params[:id])
+    if @project.publish
+      render_success
+    else
+      render_fail("发布失败")
     end
   end
 

@@ -19,6 +19,8 @@ class Project < ActiveRecord::Base
   has_many :money_requires
   has_many :person_requires
 
+  scope :published, -> { where(published: true) }
+
   def add_owner( owner )
     add_user(owner, role: '创始人', priv: 'owner')
   end
@@ -47,5 +49,15 @@ class Project < ActiveRecord::Base
 
   def complete_degree
     0.8
+  end
+
+  def publish
+    #TODO 检查完成度
+    self.published = true
+    self.save
+  end
+
+  def published?
+    self.published
   end
 end
