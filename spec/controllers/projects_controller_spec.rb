@@ -112,7 +112,15 @@ describe ProjectsController do
       response.should render_template(:stage2)
     end
 
-    it "post stage2" do
+    it "post stage2 ok" do
+      Project.should_receive(:find).with("1").and_return(@project)
+      post 'stage2', ActionController::Parameters.new({ project: { money_requires: attributes_for(:money_require), person_requires: attributes_for(:person_require) }, id: 1, money_require: true, person_require: true })
+      response.should redirect_to( edit_project_path(@project.id) )
+      assigns(:project).money_requires.size.should == 1
+      assigns(:project).person_requires.size.should == 1
+    end
+
+    it "post stage2 with flag" do
       Project.should_receive(:find).with("1").and_return(@project)
       post 'stage2', ActionController::Parameters.new({ project: { money_requires: attributes_for(:money_require), person_requires: attributes_for(:person_require) }, id: 1, money_require: true })
       response.should redirect_to( edit_project_path(@project.id) )

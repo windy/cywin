@@ -76,11 +76,37 @@
           div.row.title
             div.large-12.columns
               h3.title 投资需求
+          div.row
+            div.large-12.columns
+              a.expand.button data-reveal-id="invest-modal" data-uri=invest_project_path(@project.id) 发起融资
+          div.reveal-modal.medium#invest-modal data-reveal="" 
+            h4 发起新的融资
+            hr
+            = simple_form_for(MoneyRequire.new, url: invest_project_path(@project.id)) do |f|
+              = f.input :money
+              = f.input :share
+              = f.input :description
+              = f.button :submit, "提交"
+            a.close-reveal-modal &#215;
       div.row
         div.large-12.columns.container
           div.row.title
             div.large-12.columns
               h3.title 招人需求
+          div.row
+            div.large-12.columns
+              a.expand.button data-reveal-id="invite-modal" data-uri=invest_project_path(@project.id) 发起招聘
+          div.reveal-modal.medium#invite-modal data-reveal="" 
+            h4 发起新的招聘
+            hr
+            = simple_form_for(PersonRequire.new, url: invite_project_path(@project.id)) do |f|
+              = f.input :title
+              = f.input :pay
+              = f.input :stock
+              = f.input :option
+              = f.input :description
+              = f.button :submit, "提交"
+            a.close-reveal-modal &#215;
       div.row
         div.large-12.columns.container
           div.row.title

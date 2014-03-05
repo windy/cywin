@@ -13,6 +13,16 @@ zh-cn:
     # Labels and hints examples
     labels:
       defaults:
+      money_require:
+        money: '融资金额'
+        share: '拟让股份'
+        description: '融资计划简述'
+      person_require:
+        title: '招聘职位'
+        pay: '薪资'
+        stock: '股权'
+        option: '期权'
+        description: '补充说明'
       project:
         logo: '项目 Logo'
         name: '名称'

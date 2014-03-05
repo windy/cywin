@@ -59,3 +59,22 @@ $(document).ready ->
         else
           alert(data.message)
     
+  $('#new_money_require').submit (e)->
+    e.preventDefault()
+    $.post $(this).attr('action'), $(this).serialize(), (data)->
+      if data.success
+        $('#invest-modal').foundation('reveal', 'close')
+        #TODO 局部刷新即可
+        window.location.reload()
+      else
+        alert(data.message)
+
+  $('#new_person_require').submit (e)->
+    e.preventDefault()
+    $.post $(this).attr('action'), $(this).serialize(), (data)->
+      if data.success
+        $('#invite-modal').foundation('reveal', 'close')
+        #TODO 局部刷新即可
+        window.location.reload()
+      else
+        alert(data.message)
