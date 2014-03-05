@@ -78,3 +78,13 @@ $(document).ready ->
         window.location.reload()
       else
         alert(data.message)
+
+  $('#new_investment').submit (e)->
+    e.preventDefault()
+    $.post $(this).attr('action'), $(this).serialize(), (data)->
+      if data.success
+        $('#add-investment-modal').foundation('reveal', 'close')
+        #TODO 局部刷新即可
+        window.location.reload()
+      else
+        alert(data.message)

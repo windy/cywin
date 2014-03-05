@@ -23,6 +23,11 @@ zh-cn:
         stock: '股权'
         option: '期权'
         description: '补充说明'
+      investment:
+        name: '项目名称'
+        address: '项目地址'
+        description: '简介'
+        money: '投资金额'
       project:
         logo: '项目 Logo'
         name: '名称'
