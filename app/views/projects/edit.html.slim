@@ -12,17 +12,42 @@
             div.large-9.columns
               h4 #{@project.name}
               p.description #{@project.oneword}
-          hr
+              p.address #{project_address(@project)}
+      div.row
+        div.large-12.columns.container
+          div.row.title
+            div.large-12.columns
+              h3.title 详细信息
+          h4 产品描述
           div.row.production
             div.large-12.columns
               h4 xxx
               h4 xxx
           hr
+          h4 视频及图片
+          div.row.video_image
+            div.large-12.columns
+              h4 xxx
+              h4 xxx
+      div.row
+        div.large-12.columns.container
+          div.row.title
+            div.large-12.columns
+              h3.title 核心优势
+      div.row
+        div.large-12.columns.container
+          div.row.title
+            div.large-12.columns
+              h3.title 成员
           div.row.members
             div.large-12.columns
               ul.small-block-grid-3
                 = render partial: "members/member", collection: @project.members
-          hr
+      div.row
+        div.large-12.columns.container
+          div.row.title
+            div.large-12.columns
+              h3.title 投资信息
           div.row.investors
             div.large-12.columns
               ul.small-block-grid-3
