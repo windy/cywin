@@ -64,10 +64,10 @@ class ProjectsController < ApplicationController
         @project.money_requires << @money_require
       end
       #TODO 多人招聘的支持
-      person_require_flag = params.permit(:person_reuqire)[:person_reuqire]
+      person_require_flag = params.permit(:person_require)[:person_require]
       if person_require_flag
         person_requires_params = params.require(:project).require(:person_requires).permit(:title, :pay, :stock, :option, :description)
-        @person_reuqire = PersonRequire.new(person_requires_params)
+        @person_require = PersonRequire.new(person_requires_params)
         @project.person_requires << @person_require
       end
       if @project.save
@@ -93,6 +93,32 @@ class ProjectsController < ApplicationController
       render_success
     else
       render_fail("发布失败")
+    end
+  end
+
+  # 发起一个新的融资
+  def invest
+    @project = Project.find(params[:id])
+    money_require_params = params.require(:money_require).permit(:money, :share, :description)
+    @money_require = MoneyRequire.new(money_require_params)
+    @project.money_requires << @money_require
+    if @project.save
+      render_success
+    else
+      render_fail(@project.errors)
+    end
+  end
+
+  # 发起一个新的招聘
+  def invite
+    @project = Project.find(params[:id])
+    person_requires_params = params.require(:person_require).permit(:title, :pay, :stock, :option, :description)
+    @person_require = PersonRequire.new(person_requires_params)
+    @project.person_requires << @person_require
+    if @project.save
+      render_success
+    else
+      render_fail(@project.errors)
     end
   end
 
