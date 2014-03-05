@@ -25,5 +25,6 @@ module Eachfund
     # generators
     config.generators.assets = false
     config.generators.helper = false
+    config.active_record.observers = :project_observer
   end
 end
