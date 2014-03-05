@@ -20,14 +20,8 @@ Eachfund::Application.routes.draw do
       post :stage1
       get :stage2
       post :stage2
+      post :publish
     end
-    collection do
-      get :stage1
-      post :stage1
-      get :stage2
-      post :stage2
-    end
-
     resources :members
   end
   resources :investors do

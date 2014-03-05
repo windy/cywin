@@ -49,4 +49,13 @@ $(document).ready ->
   $(this).on 'click', '#cancel_member', (e)->
     e.preventDefault()
     $('.add_member_section').empty()
+
+  $('#publish').click (e)->
+      e.preventDefault()
+      $.post $(this).data('uri'), (data)->
+        if data.success
+          alert('ok')
+          window.location.reload()
+        else
+          alert(data.message)
     

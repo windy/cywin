@@ -5,6 +5,11 @@ describe Project do
     expect { create(:project) }.not_to raise_error
   end
 
+  it "published default is false" do
+    project = create(:project)
+    expect(project.published).to be_false
+  end
+
   it "logo_cache" do
     project = build(:project)
     project.where3 = ""

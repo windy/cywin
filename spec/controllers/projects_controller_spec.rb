@@ -4,13 +4,13 @@ describe ProjectsController do
 
   describe "index" do
     before do
-      create(:project)
-      create(:shenzhen_project)
+      create(:project).publish
+      create(:shenzhen_project).publish
       create(:shenzhen_project2)
     end
     it "all" do
       get 'index'
-      assigns(:projects).size.should == 3
+      assigns(:projects).size.should == 2
     end
 
     it "industry" do
@@ -118,6 +118,24 @@ describe ProjectsController do
       response.should redirect_to( edit_project_path(@project.id) )
       assigns(:project).money_requires.size.should == 1
       assigns(:project).person_requires.size.should == 0
+    end
+  end
+
+  describe "publish" do
+    login_user
+    before do
+      @project = build(:project)
+      @project.add_owner(@user)
+      @project.save
+    end
+
+    it "publish ok" do
+      post :publish, id: @project.id
+      JSON.parse(response.body)['success'].should == true
+    end
+
+    it "publish fail" do
+      pending "完成度不足的情况"
     end
   end
 
