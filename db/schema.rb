@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20140306094519) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
+    t.string   "status",                  default: "ready"
     t.datetime "deadline"
   end
 
