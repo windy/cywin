@@ -37,7 +37,11 @@ Eachfund::Application.routes.draw do
   root :to => "home#index"
   #devise_for :users, :controllers => {:registrations => "registrations"}
   devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}
-  resources :users
+  resources :users do
+    collection do
+      get :autocomplete
+    end
+  end
   resources :messages
   resources :conversations, only: [:index, :show, :new, :create] do
     member do

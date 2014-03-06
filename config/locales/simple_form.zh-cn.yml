@@ -13,17 +13,29 @@ zh-cn:
     # Labels and hints examples
     labels:
       defaults:
-      money_require:
+      contact:
+        address: '联系地址'
+        phone: '电话'
+        qq: 'QQ'
+        weixin: '微信'
+        weibo: '微博'
+      money_require: &money_require
         money: '融资金额'
         share: '拟让股份'
         description: '融资计划简述'
-      person_require:
+      person_require: &person_require
         title: '招聘职位'
         pay: '薪资'
         stock: '股权'
         option: '期权'
         description: '补充说明'
-      investment:
+      member:
+        avatar: '上传头像'
+        name: '姓名'
+        title: '职位'
+        description: '个人简介'
+        role: '角色'
+      investment: &investment
         name: '项目名称'
         address: '项目地址'
         description: '简介'
@@ -35,27 +47,10 @@ zh-cn:
         description: '描述'
         stage: '阶段'
         where3: '地点'
-        contact:
-          address: '联系地址'
-          phone: '电话'
-          qq: 'QQ'
-          weixin: '微信'
-          weibo: '微博'
-        members:
-          avatar: '上传头像'
-          name: '姓名'
-          title: '职位'
-          description: '个人简介'
         money_requires:
-          money: '融资金额'
-          share: '拟让股份'
-          description: '融资计划简述'
+          <<: *money_require
         person_requires:
-          title: '招聘职位'
-          pay: '薪资'
-          stock: '股权'
-          option: '期权'
-          description: '补充说明'
+          <<: *person_require
       investor:
         name: '姓名'
         phone: '联系电话'
@@ -64,9 +59,7 @@ zh-cn:
         title: '职位'
         description: '个人简介'
         investment:
-          name: '项目名称'
-          address: '项目地址'
-          description: '简介'
+          <<: *investment
         investidea:
           coin_type: 货币类型
           min: 最小投资额
@@ -77,8 +70,6 @@ zh-cn:
         card: '上传你的身份证明信息:'
     hints:
       defaults:
-        username: 'User name to sign in.'
-        password: 'No special characters, please.'
       project:
         logo: '使用 200x200 的图标'
         name: '输入一个亲切的名称, 如百度'

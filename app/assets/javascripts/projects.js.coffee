@@ -28,13 +28,56 @@ $(document).ready ->
     url = $(this).attr('href')
     $.get url, (data)->
       $('.add_member_section').html(data)
+      # 自动完成绑定
+      $('#member_user_name').autocomplete(
+        source: (request, response)->
+          console.log(request.term)
+          $.get "/users/autocomplete", search: request.term, (data)->
+            if data.success
+              response $.map(data['data'], (item)->
+                {
+                  user_id: item.id,
+                  value: item.name,
+                })
+            else
+              alert('fail')
+        ,
+        minLength: 1,
+        select: (event, ui)->
+          $('#member_user_id').val( ui.item.user_id )
+          $('#member_user_id').data('name', ui.item.value)
+        close: (event, ui)->
+          if $('#member_user_id').data('name') != $('#member_user_name').val()
+            $('.member_user_email').removeClass('hide')
+          else
+            $('.member_user_email').addClass('hide')
+          
+      )
+      $('#member_user_name').blur (e)->
+        return if $(this).val() == ''
+        if $('#member_user_id').data('name') != $('#member_user_name').val()
+          $('.member_user_email').removeClass('hide')
+          $('.member_user_email input').focus()
+        else
+          $('.member_user_email').addClass('hide')
+
 
   $(this).on 'click', '.add_member_button', (e)->
     e.preventDefault()
-    params = {
-      user_id: $('#member_user_name').val(),
-      role: $('#member_role').val()
-    }
+
+    # 处理选中时的情况
+    if $('#member_user_id').val() && $('#member_user_id').data('name') == $('#member_user_name').val()
+      params = {
+        user_id: $('#member_user_id').val(),
+        role: $('#member_role').val()
+      }
+    else
+      #未选中
+      params = {
+        name: $('#member_user_name').val(),
+        email: $('#member_user_email').val(),
+        role: $('#member_role').val(),
+      }
     url = $('.add_member_div').data('uri')
     $.post url, params, (data)->
       if data.success
@@ -49,6 +92,7 @@ $(document).ready ->
   $(this).on 'click', '#cancel_member', (e)->
     e.preventDefault()
     $('.add_member_section').empty()
+    
 
   $('#publish').click (e)->
       e.preventDefault()

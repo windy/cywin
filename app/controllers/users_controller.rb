@@ -6,6 +6,16 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def autocomplete
+    search = params.permit(:search)[:search]
+    if search.nil?
+      render_fail
+    else
+      searched = User.where("name like ?", "%#{search}%").select("id", "name")
+      render_success(nil, data: searched)
+    end
+  end
+
   def show
     @user = User.find(params[:id])
   end

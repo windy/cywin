@@ -36,7 +36,7 @@ class Project < ActiveRecord::Base
 
   def add_user( user, option={} )
     member = Member.new
-    member.user_id = user.id
+    member.user = user
     #TODO 处理权限的控制
     member.priv = option[:priv] || 'viewer'
     member.role = option[:role]

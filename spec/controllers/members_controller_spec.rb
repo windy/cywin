@@ -36,7 +36,25 @@ describe MembersController do
       end
 
       it "邀请的新用户" do
-        pending
+        project = create(:project)
+        project.add_owner(@user)
+        project.save!
+
+        post 'create', ActionController::Parameters.new(project_id: project.id, name: 'xxxx', email: 'xxxx@cywin.cn', role: '创始人')
+        JSON.parse(response.body)['success'].should be_true
+
+        project.members.size.should == 2
+        User.where(name: 'xxxx').first.invitation_token.should_not be_nil
+
+      end
+
+      it "邀请信息填写有误" do
+        project = create(:project)
+        project.add_owner(@user)
+        project.save!
+
+        post 'create', ActionController::Parameters.new(project_id: project.id, name: 'xxxx', email: 'wrongemail', role: '创始人')
+        JSON.parse(response.body)['success'].should be_false
       end
 
       it "权限限制" do
