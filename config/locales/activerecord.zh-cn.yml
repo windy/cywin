@@ -1,54 +1,8 @@
 'zh-cn':
   activerecord:
     models:
-      user: "用户"
-      product: '产品'
-      product_category: '产品类型'
-      product_categorization: '产品分类'
-      picture: '图片'
-      bento_box: '餐盒'
-      booking_discount_policy: '预订优惠'
 
     attributes:
-      booking_discount_policy:
-        id: '编号'
-        created_at: '创建时间'
-        updated_at: '更新时间'
-        name: '名称'
-        policy_type_cd: '类型'
-        value: '值'
-        lower_limit: '从（小时）'
-        upper_limit: '至（小时）'
-        discountable: '优惠对象'
-      product_category:
-        id: '编号'
-        created_at: '创建时间'
-        updated_at: '更新时间'
-        name: '名称'
-        parent: '上级类型'
-        ancestry: '上级类型'
-        position: '位置'
-        products: '产品'
-      product:
-        id: '编号'
-        created_at: '创建时间'
-        updated_at: '更新时间'
-        code: '代码'
-        name: '名称'
-        alias_name: '别名'
-        price: '价格'
-        unit: '单位'
-        taste_list: '口味'
-        material_list: '材料'
-        cookery_list: '烹饪方法'
-        description: '描述'
-        product_categories: '类型'
-        position: '位置'
-        pictures: '图片'
-        prices: '促销价'
-        booking_discount_policies: '预订优惠'
-      picture:
-        picture: '图片'
       user:
         email: "电子邮箱"
         name: "用户名"
@@ -66,12 +20,6 @@
         last_sign_in_ip: "上次登录IP地址"
         created_at: "创建时间"
         updated_at: "更新时间"
-      bento_box:
-        name: '名称'
-        specification: '规格'
-        position: '位置'
-        ancestry: '上级餐盒'
-        parent: '上级餐盒'
     errors:
       template: # ~ 2.3.5 backward compatible
         header:
@@ -104,3 +52,17 @@
         record_invalid: "校验失败: %{errors}"
         after: "必须在%{restriction}之后"
         position: '位置'
+      models:
+        money_require:
+          attributes:
+            status:
+              invalid_transition: "不能从状态 '%{value}' %{event}"
+    state_machines:
+      states:
+        ready: '准备'
+        open: '启动中'
+        close: '已结束'
+      events:
+        start: '启动'
+        close: '关闭'
+        restart: '重新启动'
