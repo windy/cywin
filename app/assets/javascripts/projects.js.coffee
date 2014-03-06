@@ -49,11 +49,18 @@ $(document).ready ->
         close: (event, ui)->
           if $('#member_user_id').data('name') != $('#member_user_name').val()
             $('.member_user_email').removeClass('hide')
-            $('.member_user_email input').focus()
           else
             $('.member_user_email').addClass('hide')
           
       )
+      $('#member_user_name').blur (e)->
+        return if $(this).val() == ''
+        if $('#member_user_id').data('name') != $('#member_user_name').val()
+          $('.member_user_email').removeClass('hide')
+          $('.member_user_email input').focus()
+        else
+          $('.member_user_email').addClass('hide')
+
 
   $(this).on 'click', '.add_member_button', (e)->
     e.preventDefault()

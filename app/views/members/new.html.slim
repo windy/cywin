@@ -2,7 +2,7 @@
   = f.hidden_field :user_id
   = f.simple_fields_for :user, User.new do |p|
     = p.input :name
-    = p.input :email, wrapper_html: { class: 'hide' }
+    = p.input :email, wrapper_html: { class: 'hide' }, required: true
   = f.input :role, collection: Member::ROLES
 
   div.large-3.large-offset-3.columns.add_member_div data-uri=project_members_path(@project)
