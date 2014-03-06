@@ -32,7 +32,20 @@ class MembersController < ApplicationController
         render_fail(@project.errors.full_messages.to_s)
       end
     else
-      #TODO 邀请制度的设计
+      #TODO 邀请制度的完善
+      user = User.invite!( user_params ) do |u|
+        u.skip_invitation = true
+      end
+      unless user.save
+        render_fail(user.errors.full_messages)
+        return
+      end
+      @project.add_user(user, role: role)
+      if @project.save
+        render_success
+      else
+        render_fail(@project.errors.full_messages.to_s)
+      end
     end
   end
 
@@ -42,5 +55,9 @@ class MembersController < ApplicationController
   private
   def member_params
     params.permit(:user_id, :name, :role)
+  end
+
+  def user_params
+    params.permit(:name, :email)
   end
 end

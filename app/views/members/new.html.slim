@@ -1,8 +1,9 @@
 = simple_form_for(@member, url: '#') do |f|
+  = f.hidden_field :user_id
   = f.simple_fields_for :user, User.new do |p|
     = p.input :name
+    = p.input :email, wrapper_html: { class: 'hide' }
   = f.input :role, collection: Member::ROLES
-  /*= f.input :email*/
 
   div.large-3.large-offset-3.columns.add_member_div data-uri=project_members_path(@project)
     = f.button :submit, '提交', class: 'tiny add_member_button'
