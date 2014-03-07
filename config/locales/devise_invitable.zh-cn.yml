@@ -1,4 +1,4 @@
-zh-cn:
+zh-CN:
   devise:
     invitations:
       send_instructions: '已经向此邮件地址发送 %{email}.'
