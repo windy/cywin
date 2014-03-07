@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :money_require do
-    money "MyString"
-    share "MyString"
-    description "MyString"
+    money 100
+    share 10
+    description "第一轮融资需求"
   end
 end
