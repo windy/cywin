@@ -39,4 +39,8 @@ describe Project do
       expect(project.users.size).to eq(1)
     end
   end
+
+  describe "#complete_degree" do
+    pending
+  end
 end

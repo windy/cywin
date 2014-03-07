@@ -7,4 +7,8 @@ FactoryGirl.define do
     description "MyText"
     investor_id 1
   end
+
+  factory :investment_for_money, class: Investment do
+    money 10
+  end
 end

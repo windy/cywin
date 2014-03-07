@@ -20,6 +20,7 @@ class Project < ActiveRecord::Base
   has_many :person_requires
 
   scope :published, -> { where(published: true) }
+  scope :opened_money_require, -> { money_requires.where(status: :open).first }
 
   def add_owner( owner )
     add_user(owner, role: '创始人', priv: 'owner')
