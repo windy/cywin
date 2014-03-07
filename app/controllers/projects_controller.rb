@@ -59,7 +59,7 @@ class ProjectsController < ApplicationController
       # add money_require
       money_require_flag = params.permit(:money_require)[:money_require]
       if money_require_flag
-        money_require_params = params.require(:project).require(:money_requires).permit(:money, :share, :description)
+        money_require_params = params.require(:project).require(:money_requires).permit(:money, :share, :deadline, :description)
         @money_require = MoneyRequire.new(money_require_params)
         @project.money_requires << @money_require
       end
