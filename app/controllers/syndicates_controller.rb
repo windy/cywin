@@ -15,7 +15,7 @@ class SyndicatesController < ApplicationController
     if @money_require.save
       render_success
     else
-      render_fail(@money_require.errors)
+      render_fail(investment.errors.full_messages)
     end
   end
 

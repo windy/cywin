@@ -20,7 +20,6 @@ class Project < ActiveRecord::Base
   has_many :person_requires
 
   scope :published, -> { where(published: true) }
-  scope :opened_money_require, -> { money_requires.where(status: :open).first }
 
   def add_owner( owner )
     add_user(owner, role: '创始人', priv: 'owner')
@@ -50,6 +49,10 @@ class Project < ActiveRecord::Base
 
   def complete_degree
     0.8
+  end
+
+  def opened_money_require
+    self.money_requires.where(status: :open).first
   end
 
   def publish

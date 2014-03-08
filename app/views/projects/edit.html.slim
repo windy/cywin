@@ -85,6 +85,7 @@
             = simple_form_for(MoneyRequire.new, url: invest_project_path(@project.id)) do |f|
               = f.input :money
               = f.input :share
+              /*= f.input :deadline*/
               = f.input :description
               = f.button :submit, "提交"
             a.close-reveal-modal &#215;

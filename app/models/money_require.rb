@@ -16,9 +16,9 @@ class MoneyRequire < ActiveRecord::Base
   #FIXME 效率可能存在问题
   validate do |m|
     if m.new_record?
-      found = MoneyRequire.where(project_id: m.project_id).where.not(status: :close).first
+      found = MoneyRequire.where(project_id: m.project_id).where(status: :open).first
     else
-      found = MoneyRequire.where(project_id: m.project_id).where.not(status: :close).where.not(id: m.id).first
+      found = MoneyRequire.where(project_id: m.project_id).where(status: :open).where.not(id: m.id).first
     end
     if found
       errors.add(:base, "不能在已经存在融资需求时再创建一个")
@@ -39,5 +39,9 @@ class MoneyRequire < ActiveRecord::Base
   # 返回百分比,如 10% -> 0.1
   def progress
     (self.investments.inject(0) { |s,m| s + m.money }).to_f / self.money
+  end
+  
+  def syndicate_money
+    (self.investments.inject(0) { |s,m| s + m.money })
   end
 end

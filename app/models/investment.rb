@@ -3,7 +3,7 @@ class Investment < ActiveRecord::Base
   belongs_to :money_require
 
   # 只有一份投资
-  validates :money_require_id, uniqueness: { scope: :investor_id }
+  validates :money_require_id, uniqueness: { scope: :investor_id, message: '不能重复投资' }
 
   validate do |m|
     if m.money_require_id.present? && m.money_require.status != 'open'

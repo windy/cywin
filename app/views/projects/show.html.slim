@@ -78,24 +78,24 @@ div.row.invest
             p.description 另一个投资人的介绍.
       hr
 
-    div.row.invest
-      div.large-12.columns
-        div.invest_stats
-          p 融资进度: 50% / $100,000,000 ( $50,000,000 ) / 30天 ( 剩余 15 天 )
-        div.progress
-          span.meter style="width: #{@project.complete_degree * 100}%"
-        div.large-2.columns.large-centered
-          a.button data-reveal-id="add-investment-modal" 投资
-        div.reveal-modal.medium#add-investment-modal data-reveal="" 
-          h4 项目投资
-          hr
-          = simple_form_for(Investment.new(money_require_id: 1), url: syndicates_path) do |f|
-            = f.hidden_field :money_require_id
-            = f.input :money
-            = f.button :submit, "提交"
-          a.close-reveal-modal &#215;
-
-      hr
+    - if money_require = @project.opened_money_require
+      div.row.invest
+        div.large-12.columns
+          div.invest_stats
+            p #{progress_p(money_require)}
+          div.progress
+            span.meter style="width: #{money_require.progress * 100}%"
+          div.large-2.columns.large-centered
+            a.button data-reveal-id="add-syndicate-modal" 投资
+          div.reveal-modal.medium#add-syndicate-modal data-reveal="" 
+            h4 项目投资
+            hr
+            = simple_form_for(Investment.new(money_require_id: money_require.id), url: syndicates_path, html: { id: 'new_syndicate' }) do |f|
+              = f.hidden_field :money_require_id
+              = f.input :money
+              = f.button :submit, "提交"
+            a.close-reveal-modal &#215;
+        hr
 
     div.row.jobs
       div.large-12.columns

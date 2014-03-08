@@ -100,12 +100,16 @@ class ProjectsController < ApplicationController
   def invest
     @project = Project.find(params[:id])
     money_require_params = params.require(:money_require).permit(:money, :share, :description)
+    money_require_params[:deadline] = 30.days.since(Time.now).to_datetime
     @money_require = MoneyRequire.new(money_require_params)
     @project.money_requires << @money_require
+    #binding.pry
     if @project.save
+      @money_require.start!
+      flash[:notice] = "发起融资成功"
       render_success
     else
-      render_fail(@project.errors)
+      render_fail(@money_require.errors.full_messages.to_s)
     end
   end
 
