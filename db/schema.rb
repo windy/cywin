@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140307074926) do
+ActiveRecord::Schema.define(version: 20140304085009) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -72,11 +72,11 @@ ActiveRecord::Schema.define(version: 20140307074926) do
     t.string   "name"
     t.string   "address"
     t.text     "description"
+    t.integer  "money"
+    t.integer  "money_require_id"
     t.integer  "investor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "money",            limit: 255
-    t.integer  "money_require_id"
   end
 
   create_table "investors", force: true do |t|
@@ -106,14 +106,14 @@ ActiveRecord::Schema.define(version: 20140307074926) do
   add_index "members", ["user_id", "project_id"], name: "index_members_on_user_id_and_project_id", unique: true
 
   create_table "money_requires", force: true do |t|
-    t.integer  "money",       limit: 255
-    t.integer  "share",       limit: 255
-    t.text     "description", limit: 255
+    t.integer  "money"
+    t.integer  "share"
+    t.text     "description"
+    t.string   "status",      default: "ready"
+    t.datetime "deadline"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",                  default: "ready"
-    t.datetime "deadline"
   end
 
   create_table "notifications", force: true do |t|
@@ -157,9 +157,9 @@ ActiveRecord::Schema.define(version: 20140307074926) do
     t.string   "where2"
     t.string   "where3"
     t.string   "industry"
+    t.boolean  "published",   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "published",   default: false
   end
 
   create_table "receipts", force: true do |t|

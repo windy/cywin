@@ -11,6 +11,8 @@ class CreateProjects < ActiveRecord::Migration
       t.string :where3
       t.string :industry
 
+      t.boolean :published, default: false
+
       t.timestamps
     end
   end
