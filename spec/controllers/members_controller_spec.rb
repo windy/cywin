@@ -22,7 +22,7 @@ describe MembersController do
         user = create(:zhang)
         
         post 'create', ActionController::Parameters.new(project_id: project.id, user_id: user.id, role: '创始人')
-        JSON.parse(response.body)['success'].should be_true
+        check_json(response.body, :success, true)
       end
 
       it "角色未选取" do
@@ -32,7 +32,7 @@ describe MembersController do
         user = create(:zhang)
         
         post 'create', ActionController::Parameters.new(project_id: project.id, user_id: user.id)
-        JSON.parse(response.body)['success'].should be_false
+        check_json(response.body, :success, false)
       end
 
       it "邀请的新用户" do
@@ -41,7 +41,7 @@ describe MembersController do
         project.save!
 
         post 'create', ActionController::Parameters.new(project_id: project.id, name: 'xxxx', email: 'xxxx@cywin.cn', role: '创始人')
-        JSON.parse(response.body)['success'].should be_true
+        check_json(response.body, :success, true)
 
         project.members.size.should == 2
         User.where(name: 'xxxx').first.invitation_token.should_not be_nil
@@ -54,7 +54,7 @@ describe MembersController do
         project.save!
 
         post 'create', ActionController::Parameters.new(project_id: project.id, name: 'xxxx', email: 'wrongemail', role: '创始人')
-        JSON.parse(response.body)['success'].should be_false
+        check_json(response.body, :success, false)
       end
 
       it "权限限制" do

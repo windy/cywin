@@ -139,7 +139,7 @@ describe ProjectsController do
 
     it "publish ok" do
       post :publish, id: @project.id
-      JSON.parse(response.body)['success'].should == true
+      check_json(response.body, :success, true)
     end
 
     it "publish fail" do

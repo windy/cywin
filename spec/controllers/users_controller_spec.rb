@@ -15,7 +15,7 @@ describe UsersController do
     it "search 值为空" do
       get 'autocomplete'
       response.should be_success
-      JSON.parse(response.body)['success'].should == false
+      check_json(response.body, :success, false)
     end
   end
 
