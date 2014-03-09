@@ -42,6 +42,9 @@ gem 'china_city'
 # Ajax Upload
 gem 'remotipart'
 
+# i18n
+gem 'rails-i18n', '~> 4.0.0'
+
 group :development do
   #gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
