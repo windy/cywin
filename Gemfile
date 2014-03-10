@@ -25,6 +25,7 @@ gem "foundation-rails", "~> 5.0.3.1"
 
 # for observers
 gem 'rails-observers'
+
 gem 'state_machine'
 
 # For sns login
