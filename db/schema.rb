@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140304085009) do
     t.string   "title"
     t.text     "data"
     t.integer  "project_id"
-    t.integer  "action"
+    t.string   "action"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
