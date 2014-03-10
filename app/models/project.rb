@@ -55,6 +55,10 @@ class Project < ActiveRecord::Base
     self.money_requires.where(status: :open).first
   end
 
+  def history_money_requires
+    self.money_requires.where.not(status: :open)
+  end
+
   def publish
     #TODO 检查完成度
     self.published = true

@@ -9,7 +9,8 @@
               h3.title 基本资料
           div.row.basic
             div.large-3.columns
-              = image_tag(@project.logo.url, size: "200x200")
+              = link_to project_path(@project.id) do
+                - image_tag(@project.logo.url, size: "200x200")
             div.large-9.columns
               h4 #{@project.name}
               p.description #{@project.oneword}
@@ -49,8 +50,36 @@
           div.row.title
             div.large-12.columns
               h3.title 投资信息
+          div.row
+            div.large-12.columns
+              h4 当前投资进度
+              - if money_require = @project.opened_money_require
+                  div.invest_stats
+                    p #{progress_p(money_require)}
+                  div.progress
+                    span.meter style="width: #{money_require.progress * 100}%"
+                  div.row
+                    div.large-4.columns.large-centered
+                      button#close_investment data-uri=close_investment_project_path(money_require.id) 关闭本次融资
+              - else
+                | No Content
+          hr
+          div.row
+            div.large-12.columns
+              h4 历史投资情况
+              - unless (money_requires = @project.history_money_requires).empty?
+                - money_requires.each do |money_require|
+                  div.invest_stats
+                    p #{progress_p(money_require)}
+                  div.progress
+                    span.meter style="width: #{money_require.progress * 100}%"
+                  hr
+              - else
+                | No Content
+          hr
           div.row.investors
             div.large-12.columns
+              h4 投资人情况
               ul.small-block-grid-3
                 li
                   h4 投资人
@@ -85,7 +114,7 @@
             = simple_form_for(MoneyRequire.new, url: invest_project_path(@project.id)) do |f|
               = f.input :money
               = f.input :share
-              /*= f.input :deadline*/
+              = f.input :deadline
               = f.input :description
               = f.button :submit, "提交"
             a.close-reveal-modal &#215;

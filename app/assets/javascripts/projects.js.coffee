@@ -132,3 +132,12 @@ $(document).ready ->
         window.location.reload()
       else
         alert(data.message)
+
+  $('#close_investment').click (e)->
+    e.preventDefault()
+    $.post $(this).data('uri'), (data)->
+      if data.success
+        alert('ok')
+        window.location.reload()
+      else
+        alert(data.message)

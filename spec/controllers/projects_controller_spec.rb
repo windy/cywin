@@ -134,7 +134,7 @@ describe ProjectsController do
     before do
       @project = build(:project)
       @project.add_owner(@user)
-      @project.save
+      @project.save!
     end
 
     it "publish ok" do
@@ -144,6 +144,28 @@ describe ProjectsController do
 
     it "publish fail" do
       pending "完成度不足的情况"
+    end
+  end
+
+  describe "invest" do
+    login_user
+    before do
+      @project = build(:project)
+      @project.add_owner(@user)
+      @project.save!
+    end
+
+    it "ok" do
+      post 'invest', ActionController::Parameters.new( id: @project.id, money_require: attributes_for(:money_require) )
+      response.should be_success
+      check_json(response.body, :success, true)
+    end
+
+    it "错误的deadline" do
+      money_require_attr = attributes_for(:money_require, deadline: 7.days.ago.to_datetime )
+      post 'invest', ActionController::Parameters.new( id: @project.id, money_require: money_require_attr )
+      response.should be_success
+      check_json(response.body, :success, false)
     end
   end
 
@@ -158,6 +180,16 @@ describe ProjectsController do
       end
       
       it "领投人对有权限要求的项目可查阅" do
+        pending
+      end
+    end
+
+    describe "融资相关功能" do
+      it "关闭融资时不是自己的项目权限不足" do
+        pending
+      end
+
+      it "关闭融资正确" do
         pending
       end
     end

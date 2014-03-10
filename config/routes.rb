@@ -23,6 +23,7 @@ Eachfund::Application.routes.draw do
       post :publish
       post :invest
       post :invite
+      post :close_investment
     end
     resources :members
   end
