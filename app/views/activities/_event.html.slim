@@ -5,4 +5,8 @@ h5
     = t('actions.' + event.action)
   span
     = link_to Project.find(event.project_id).name, project_path(event.project_id)
+  span.right.time #{t('ago')}
+  span.right.time.box
+    =  time_ago_in_words(event.created_at)
+  span.right.time.box #{t('since')}
 hr
