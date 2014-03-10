@@ -1,7 +1,27 @@
 'zh-CN':
+  # 所有事件的翻译
+  actions:
+    project_create: 创建了项目
+    project_update: 更新了项目
+    project_join: 加入了项目
+    project_invest: 投资了项目
+    project_talk: 约谈了项目
+    user_update: 更新了信息
+    uesr_fun: 关注了人员
+    apply_investor: 申请了投资人
+    apply_investor_fail: 申请投资人失败
+    apply_investor_success: 申请投资人成功
+    apply_leader: 申请了领投人
+    apply_leader_fail: 申请领投人失败
+    apply_leader_success: 申请领投人成功
+    apply_work: 申请了工作
+    apply_work_success: 申请工作成功
+    person_require_create: 添加了新的招人需求
+    person_require_close: 关闭了招人需求
+    interest_work: 感兴趣于工作
+    
   activerecord:
     models:
-
     attributes:
       user:
         email: "电子邮箱"

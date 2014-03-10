@@ -1,11 +1,15 @@
 - content_for(:container) do
   div.row
-    div.large-7.columns
-      div.row.container.activity_main
+    div.large-7.columns.container.activity_main
+      div.row.title
         div.large-12.columns
-          h4 xx 关注了我
-          h4 xx 项目更新了 xx 内容
-          h4 xx 项目获得了 xx 的投资
+              h4.title 动态
+      div.row
+        div.large-12.columns
+          - unless @events.empty?
+            = render partial: "event", collection: @events
+          - else
+            h4 No Content
     div.large-4.columns.large-offset-1
       div.activity_side
         / 我关注的
