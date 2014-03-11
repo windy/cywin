@@ -1,16 +1,25 @@
+//= require jquery.pnotify
 window.Alert =
   doit: (data, callback)->
     if data.success
-      $('#ajaxalert').removeClass('alert').addClass('success')
-      $('#ajaxalert-box').text(data.message || "操作成功")
-      $('#ajaxalert').show()
+      #$('#ajaxalert').removeClass('alert').addClass('success')
+      #$('#ajaxalert-box').text(data.message || "操作成功")
+      #$('#ajaxalert').show()
+      $.pnotify
+        title: '操作成功'
+        text: data.message
+        type: 'success'
       if callback
         callback(data)
       true
     else
-      $('#ajaxalert').removeClass('success').addClass('alert')
-      $('#ajaxalert-box').text(data.message || "操作失败")
-      $('#ajaxalert').show()
+      $.pnotify
+        title: '操作成功'
+        text: data.message
+        type: 'error'
+      #$('#ajaxalert').removeClass('success').addClass('alert')
+      #$('#ajaxalert-box').text(data.message || "操作失败")
+      #$('#ajaxalert').show()
       false
 
   fail: (data)->
