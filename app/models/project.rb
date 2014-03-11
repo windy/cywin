@@ -1,5 +1,17 @@
 class Project < ActiveRecord::Base
-  STAGES = [ '概念中', '开发中', '已上线', '已盈利']
+  #STAGES = [ '概念中', '开发中', '已上线', '已盈利']
+  STAGES = []
+  [
+    :IDEA,
+    :DEVELOPING,
+    :ONLINE,
+    :GAINED
+  ].each do |e|
+    real_name = e.to_s.underscore
+    STAGES << real_name
+    const_set(e, real_name)
+  end
+    
   validates :name, presence: true, uniqueness: true, length: { minimum: 1 }
   validates :oneword, presence: true, length: { minimum: 4 }
   validates :stage, presence: true, inclusion: STAGES
@@ -22,7 +34,7 @@ class Project < ActiveRecord::Base
   scope :published, -> { where(published: true) }
 
   def add_owner( owner )
-    add_user(owner, role: '创始人', priv: 'owner')
+    add_user(owner, role: Member::FOUNDER, priv: 'owner')
   end
   
   # user 

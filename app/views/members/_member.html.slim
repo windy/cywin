@@ -6,6 +6,6 @@ li
     div.large-6.columns
       = link_to user_path(member.user) do
         h4 #{member.user.name}
-      p #{member.role}
+      p #{t('member.roles.' + member.role)}
       p #{member.title}
       p #{member.description}

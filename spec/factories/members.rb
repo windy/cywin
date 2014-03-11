@@ -3,7 +3,7 @@ include ActionDispatch::TestProcess
 FactoryGirl.define do
   factory :member do
     title "CTO"
-    role "创始人"
+    role Member::FOUNDER
     priv "owner"
     description "description"
   end

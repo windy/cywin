@@ -1,3 +1,15 @@
 'zh-CN':
   ago: 前
   since: 来自
+  project:
+    stages:
+      idea: '概念中'
+      developing: '开发中'
+      online: '已上线'
+      gained: '已盈利'
+  member:
+    roles:
+      founder: '创始人'
+      member: '团队成员'
+      partner: '合作者'
+    
