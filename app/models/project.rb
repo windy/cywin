@@ -68,7 +68,7 @@ class Project < ActiveRecord::Base
   end
 
   def history_money_requires
-    self.money_requires.where.not(status: :open)
+    self.money_requires.where.not(status: :open).order(created_at: :desc)
   end
 
   def publish
