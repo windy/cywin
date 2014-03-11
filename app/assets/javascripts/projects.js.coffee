@@ -133,8 +133,10 @@ $(document).ready ->
       else
         alert(data.message)
 
-  $('#close_investment').click (e)->
+  $('#close_investment').unbind('click').click (e)->
     e.preventDefault()
+    if confirm_data = $(this).data('confirm')
+      return unless window.confirm( confirm_data )
     $.post $(this).data('uri'), (data)->
       if data.success
         alert('ok')

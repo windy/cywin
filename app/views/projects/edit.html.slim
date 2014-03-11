@@ -57,7 +57,7 @@
                   = render partial: "syndicates/syndicate_progress", locals: { money_require: money_require} 
                   div.row
                     div.large-4.columns.large-centered
-                      button#close_investment data-uri=close_investment_project_path(money_require.id) 关闭本次融资
+                      button.button#close_investment data-uri=close_investment_project_path(money_require.id) data-confirm="确认关闭融资? 关闭后无法再次打开" 关闭本次融资
               - else
                 | No Content
           hr
