@@ -30,4 +30,8 @@ window.Alert =
 
 $(document).ready ->
   Alert.enable_global_alert()
+
+  $('#ajaxalert-close').click (e)->
+    e.preventDefault()
+    $(this).parent().hide()
            
