@@ -40,7 +40,7 @@ $(document).ready ->
                   value: item.name,
                 })
             else
-              alert('fail')
+              Alert.fail(data.message)
         ,
         minLength: 1,
         select: (event, ui)->
@@ -80,13 +80,11 @@ $(document).ready ->
       }
     url = $('.add_member_div').data('uri')
     $.post url, params, (data)->
-      if data.success
+      Alert.doit data, ()->
         url = $('div.members').data('uri')
         $.get url, (data)->
           $('div.members').html(data)
         $('.add_member_section').empty()
-      else
-        alert(data.message)
 
   # 取消
   $(this).on 'click', '#cancel_member', (e)->
@@ -97,49 +95,38 @@ $(document).ready ->
   $('#publish').click (e)->
       e.preventDefault()
       $.post $(this).data('uri'), (data)->
-        if data.success
-          alert('ok')
+        Alert.doit data, ->
+          #TODO 局部刷新即可
           window.location.reload()
-        else
-          alert(data.message)
     
   $('#new_money_require').submit (e)->
     e.preventDefault()
     $.post $(this).attr('action'), $(this).serialize(), (data)->
-      if data.success
+      Alert.doit data, ->
         $('#invest-modal').foundation('reveal', 'close')
         #TODO 局部刷新即可
         window.location.reload()
-      else
-        alert(data.message)
 
   $('#new_person_require').submit (e)->
     e.preventDefault()
     $.post $(this).attr('action'), $(this).serialize(), (data)->
-      if data.success
+      Alert.doit data, ->
         $('#invite-modal').foundation('reveal', 'close')
         #TODO 局部刷新即可
         window.location.reload()
-      else
-        alert(data.message)
 
   $('#new_investment').submit (e)->
     e.preventDefault()
     $.post $(this).attr('action'), $(this).serialize(), (data)->
-      if data.success
+      ALert.doit data, ->
         $('#add-investment-modal').foundation('reveal', 'close')
         #TODO 局部刷新即可
         window.location.reload()
-      else
-        alert(data.message)
 
   $('#close_investment').unbind('click').click (e)->
     e.preventDefault()
     if confirm_data = $(this).data('confirm')
       return unless window.confirm( confirm_data )
     $.post $(this).data('uri'), (data)->
-      if data.success
-        alert('ok')
+      Alert.doit data, ->
         window.location.reload()
-      else
-        alert(data.message)

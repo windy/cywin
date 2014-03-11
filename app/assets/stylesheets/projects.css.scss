@@ -85,10 +85,16 @@ p.address, p.industry {
   width: auto;
 }
 
+// event show
 span.box {
   margin-right: 0.5rem;
 }
 
 span.time {
   color: #aaa;
+}
+
+// ajax alert
+#ajaxalert {
+  display: none;
 }
