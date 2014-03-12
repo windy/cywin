@@ -1,0 +1,17 @@
+/ need: money_require
+div.row.invest
+  div.large-12.columns
+    = render partial: 'syndicates/syndicate_progress', locals: { money_require: money_require }
+    div.large-3.columns.large-centered
+      - if current_user
+        - if current_user.investor
+          - if money_require.has_invested?(current_user)
+            a.button.disabled href="javascript:void(0)" 你已经投资过
+          - else
+            a.button data-reveal-id="add-syndicate-modal" 投资
+        / 未认证
+        - else
+          a.button.disabled href="javascript:void(0)" 只有认证投资人可投资
+        / 未登录
+      - else
+        a.button.disabled href="javascript:void(0)" 登录后可投资
