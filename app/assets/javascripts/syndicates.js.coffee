@@ -3,4 +3,7 @@ $(document).ready ->
     e.preventDefault()
     $.post $(this).attr('action'), $(this).serialize(), (data)->
       Alert.doit data, ->
-        window.location.reload()
+        $('#add-syndicate-modal').foundation('reveal', 'close')
+        $('#invest').fadeOut 'slow', ->
+          $(this).html(data)
+          $(this).fadeIn('slow')

@@ -158,7 +158,7 @@ describe ProjectsController do
     it "ok" do
       post 'invest', ActionController::Parameters.new( id: @project.id, money_require: attributes_for(:money_require) )
       response.should be_success
-      check_json(response.body, :success, true)
+      response.should render_template('syndicates/syndicate_info')
     end
 
     it "错误的deadline" do

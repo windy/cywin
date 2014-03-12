@@ -94,9 +94,10 @@ $(document).ready ->
 
   $('#publish').click (e)->
       e.preventDefault()
+      if confirm_data = $(this).data('confirm')
+        return unless window.confirm( confirm_data )
       $.post $(this).data('uri'), (data)->
         Alert.doit data, ->
-          #TODO 局部刷新即可
           window.location.reload()
     
   $('#new_money_require').submit (e)->
@@ -104,8 +105,9 @@ $(document).ready ->
     $.post $(this).attr('action'), $(this).serialize(), (data)->
       Alert.doit data, ->
         $('#invest-modal').foundation('reveal', 'close')
-        #TODO 局部刷新即可
-        window.location.reload()
+        $('.syndicate_info').fadeOut 'slow', ->
+          $(this).html(data)
+          $(this).fadeIn('slow')
 
   $('#new_person_require').submit (e)->
     e.preventDefault()
@@ -121,7 +123,9 @@ $(document).ready ->
       ALert.doit data, ->
         $('#add-investment-modal').foundation('reveal', 'close')
         #TODO 局部刷新即可
-        window.location.reload()
+        $('.syndicate_info').fadeOut 'slow', ->
+          $(this).html(data)
+          $(this).fadeIn('slow')
 
   $('#close_investment').unbind('click').click (e)->
     e.preventDefault()
@@ -129,4 +133,6 @@ $(document).ready ->
       return unless window.confirm( confirm_data )
     $.post $(this).data('uri'), (data)->
       Alert.doit data, ->
-        window.location.reload()
+        $('.syndicate_info').fadeOut 'slow', ->
+          $(this).html(data)
+          $(this).fadeIn('slow')

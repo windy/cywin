@@ -18,7 +18,7 @@ class SyndicatesController < ApplicationController
     investment.investor_id = current_user.investor.id
     @money_require.investments << investment
     if @money_require.save
-      render_success
+      render template: 'syndicates/invest', layout: false
     else
       render_fail(investment.errors.full_messages)
     end

@@ -90,7 +90,8 @@ class ProjectsController < ApplicationController
   def publish
     @project = Project.find(params[:id])
     if @project.publish
-      render_success
+      flash[:notice] = "发布成功"
+      render_success("发布项目成功")
     else
       render_fail("发布失败")
     end
@@ -105,7 +106,7 @@ class ProjectsController < ApplicationController
     if @project.save
       @money_require.start!
       flash[:notice] = "发起融资成功"
-      render_success
+      render template: 'syndicates/syndicate_info', layout: false
     else
       render_fail(@money_require.errors.full_messages.to_s)
     end

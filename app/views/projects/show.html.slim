@@ -79,32 +79,17 @@ div.row.invest
       hr
 
     - if money_require = @project.opened_money_require
-      div.row.invest
-        div.large-12.columns
-          = render partial: 'syndicates/syndicate_progress', locals: { money_require: money_require }
-          div.large-3.columns.large-centered
-            - if current_user
-              - if current_user.investor
-                - if money_require.has_invested?(current_user)
-                  a.button.disabled href="javascript:void(0)" 你已经投资过
-                - else
-                  a.button data-reveal-id="add-syndicate-modal" 投资
-              / 未认证
-              - else
-                a.button.disabled href="javascript:void(0)" 只有认证投资人可投资
-              / 未登录
-            - else
-              a.button.disabled href="javascript:void(0)" 登录后可投资
-
-          div.reveal-modal.medium#add-syndicate-modal data-reveal="" 
-            h4 项目投资
-            hr
-            = simple_form_for(Investment.new(money_require_id: money_require.id), url: syndicates_path, html: { id: 'new_syndicate' }) do |f|
-              = f.hidden_field :money_require_id
-              = f.input :money
-              = f.button :submit, "提交"
-            a.close-reveal-modal &#215;
+      div#invest
+        = render partial: "syndicates/invest", locals: { money_require: money_require }
+      div.reveal-modal.medium#add-syndicate-modal data-reveal="" 
+        h4 项目投资
         hr
+        = simple_form_for(Investment.new(money_require_id: money_require.id), url: syndicates_path, html: { id: 'new_syndicate' }) do |f|
+          = f.hidden_field :money_require_id
+          = f.input :money
+          = f.button :submit, "提交"
+        a.close-reveal-modal &#215;
+      hr
 
     div.row.jobs
       div.large-12.columns
