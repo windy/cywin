@@ -43,4 +43,31 @@ describe Project do
   describe "#complete_degree" do
     pending
   end
+
+  describe "#investor_users" do
+    before do
+      @project = build(:project)
+      @owner = create(:user)
+      @project.add_owner(@owner)
+      @project.save!
+      @owner.investor = build(:investor)
+      @owner.save!
+    end
+
+    it "成功" do
+      # 启动融资
+      money_require = build(:money_require)
+      @project.money_requires << money_require
+      @project.save!
+      money_require.start!
+
+      investment = build(:investment_for_money)
+      investment.investor_id = @owner.investor.id
+      investment.money_require_id = money_require.id
+      investment.save!
+
+      expect(@project.investor_users.first.id).to eq( @owner.id )
+    end
+
+  end
 end
