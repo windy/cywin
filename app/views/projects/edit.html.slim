@@ -75,12 +75,8 @@
             div.large-12.columns
               h4 投资人情况
               ul.small-block-grid-3
-                li
-                  h4 投资人
-                li
-                  h4 投资人
-                li
-                  h4 投资人
+                = render partial: 'investor', collection: @project.investor_users, as: :investor_user
+
     div.large-3.columns.large-offset-1
       div.row
         div.large-12.columns.container
