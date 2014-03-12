@@ -14,7 +14,7 @@ window.Alert =
       true
     else
       $.pnotify
-        title: '操作成功'
+        title: '操作失败'
         text: data.message
         type: 'error'
       #$('#ajaxalert').removeClass('success').addClass('alert')
