@@ -18,12 +18,25 @@ describe SyndicatesController do
       @money_require = project.money_requires.first
     end
     it "success" do
+      @user.investor = build(:investor)
+      @user.save!
       @money_require.start!
       expect(@money_require.reload.progress).to eq(0)
       post 'create', ActionController::Parameters.new(investment:{ money_require_id: @money_require.id, money: 10 })
       check_json(response.body, :success, true)
       expect(@money_require.reload.progress).not_to eq(0)
     end
+
+    it "没有申请投资人失败" do
+      @money_require.start!
+      expect(@money_require.reload.progress).to eq(0)
+      post 'create', ActionController::Parameters.new(investment:{ money_require_id: @money_require.id, money: 10 })
+      check_json(response.body, :success, false)
+    end
+  end
+
+  describe "权限控制" do
+    pending
   end
 
 end

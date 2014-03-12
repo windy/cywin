@@ -1,0 +1,11 @@
+/ need: investor_user
+li
+  div.row
+    div.large-6.columns
+      = link_to user_path(investor_user) do
+        - image_tag(investor_user.avatar_url, size: "200x200")
+    div.large-6.columns
+      = link_to user_path(investor_user) do
+        h4 #{investor_user.name}
+      p #{investor_user.investor.company}
+      p.description #{investor_user.investor.title}
