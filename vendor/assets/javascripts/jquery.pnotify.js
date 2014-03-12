@@ -861,7 +861,7 @@
 		// Whether to escape the content of the text. (Not allow HTML.)
 		text_escape: false,
 		// What styling classes to use. (Can be either jqueryui or bootstrap.)
-		styling: "bootstrap",
+		styling: "jqueryui",
 		// Additional classes to be added to the notice. (For custom styling.)
 		addclass: "",
 		// Class to be added to the notice for corner styling.
@@ -871,7 +871,7 @@
 		// The opacity of the notice (if it's non-blocking) when the mouse is over it.
 		nonblock_opacity: .2,
 		// Display a pull down menu to redisplay previous notices, and place the notice in the history.
-		history: true,
+		history: false,
 		// Width of the notice.
 		width: "300px",
 		// Minimum height of the notice. It will expand to fit content.
@@ -893,13 +893,13 @@
 		// Only show the closer button on hover.
 		closer_hover: true,
 		// Provide a button for the user to manually stick the notice.
-		sticker: true,
+		sticker: false,
 		// Only show the sticker button on hover.
 		sticker_hover: true,
 		// After a delay, remove the notice.
 		hide: true,
 		// Delay in milliseconds before the notice is removed.
-		delay: 8000,
+		delay: 5000,
 		// Reset the hide timer if the mouse moves over the notice.
 		mouse_reset: true,
 		// Remove the notice's elements from the DOM after it is removed.
