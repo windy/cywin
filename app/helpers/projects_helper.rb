@@ -22,4 +22,10 @@ module ProjectsHelper
   def progress_p(money_require)
     "融资进度: #{money_require.progress*100}% / ¥ #{money_require.syndicate_money * 10000} ( ¥ #{money_require.money * 10000} ) / #{(money_require.deadline.to_date - money_require.created_at.to_date).to_i}天 ( 剩余 #{(money_require.deadline.to_date - Time.now.to_date).to_i} 天 )"
   end
+
+  def progress_width(money_require)
+    width = (money_require.progress * 100).to_i
+    width = 100 if width > 100
+    "#{width}%"
+  end
 end

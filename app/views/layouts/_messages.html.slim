@@ -1,6 +1,9 @@
 / Rails flash messages styled for Zurb Foundation 5
+div#ajaxalert.alert-box
+  div#ajaxalert-box 
+  a.close#ajaxalert-close href="#" &times;
 - flash.each do |name, msg|
   - if msg.is_a?(String)
-    div class=("alert-box round #{name == :notice ? "success" : "alert"}") data-alert="" 
+    div class=("alert-box #{name == :notice ? "success" : "alert"}") data-alert="" 
       = content_tag :div, msg
       a.close href="#"  &times;

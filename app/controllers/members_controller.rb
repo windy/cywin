@@ -27,7 +27,7 @@ class MembersController < ApplicationController
       user = User.find(user_id)
       @project.add_user(user, role: role)
       if @project.save
-        render_success
+        render_success("添加成员成功")
       else
         render_fail(@project.errors.full_messages.to_s)
       end

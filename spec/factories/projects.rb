@@ -5,7 +5,7 @@ FactoryGirl.define do
     name "name"
     oneword "hello world"
     description "description"
-    stage "开发中"
+    stage 'idea'
     where1 "110000"
     where2 "110100"
     where3 "110101"
@@ -17,7 +17,7 @@ FactoryGirl.define do
     name "shenzhen"
     oneword "shenzhen project test"
     description "description"
-    stage "开发中"
+    stage 'idea'
     where1 "440000"
     where2 "440300"
     where3 "440303"
@@ -29,7 +29,7 @@ FactoryGirl.define do
     name "shenzhen2"
     oneword "shenzhen2 project test"
     description "description"
-    stage "开发中"
+    stage 'idea'
     where1 "440000"
     where2 "440300"
     where3 "440303"

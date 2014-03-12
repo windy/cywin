@@ -6,7 +6,7 @@ h1 基本信息
   = f.input :oneword
   = f.input :description
   = f.input :stage do
-    = f.select :stage, ['--请选择--'] + Project::STAGES
+    = f.select :stage, Project::STAGES.collect { |m| [ t('project.stages.' + m), m ] }, { include_blank: true }
   = f.input :where3 do
     .city-group
       = f.select :where1, ['--省份--'] + ChinaCity.list, {}, { class: 'city-select large-4 columns' }

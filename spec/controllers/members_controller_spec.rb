@@ -21,7 +21,7 @@ describe MembersController do
         project.save!
         user = create(:zhang)
         
-        post 'create', ActionController::Parameters.new(project_id: project.id, user_id: user.id, role: '创始人')
+        post 'create', ActionController::Parameters.new(project_id: project.id, user_id: user.id, role: Member::FOUNDER)
         check_json(response.body, :success, true)
       end
 
@@ -40,7 +40,7 @@ describe MembersController do
         project.add_owner(@user)
         project.save!
 
-        post 'create', ActionController::Parameters.new(project_id: project.id, name: 'xxxx', email: 'xxxx@cywin.cn', role: '创始人')
+        post 'create', ActionController::Parameters.new(project_id: project.id, name: 'xxxx', email: 'xxxx@cywin.cn', role: Member::FOUNDER)
         check_json(response.body, :success, true)
 
         project.members.size.should == 2
@@ -53,7 +53,7 @@ describe MembersController do
         project.add_owner(@user)
         project.save!
 
-        post 'create', ActionController::Parameters.new(project_id: project.id, name: 'xxxx', email: 'wrongemail', role: '创始人')
+        post 'create', ActionController::Parameters.new(project_id: project.id, name: 'xxxx', email: 'wrongemail', role: Member::FOUNDER)
         check_json(response.body, :success, false)
       end
 
@@ -69,7 +69,7 @@ describe MembersController do
         project.add_owner(@user)
         project.save!
         user = create(:zhang)
-        project.add_user( user, role: '创始人' )
+        project.add_user( user, role: Member::FOUNDER)
         project.save!
 
         get 'show', ActionController::Parameters.new(project_id: project.id, id: user.id)

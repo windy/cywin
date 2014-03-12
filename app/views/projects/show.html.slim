@@ -81,10 +81,7 @@ div.row.invest
     - if money_require = @project.opened_money_require
       div.row.invest
         div.large-12.columns
-          div.invest_stats
-            p #{progress_p(money_require)}
-          div.progress
-            span.meter style="width: #{money_require.progress * 100}%"
+          = render partial: 'syndicates/syndicate_progress', locals: { money_require: money_require }
           div.large-2.columns.large-centered
             a.button data-reveal-id="add-syndicate-modal" 投资
           div.reveal-modal.medium#add-syndicate-modal data-reveal="" 
