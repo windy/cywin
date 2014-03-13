@@ -44,4 +44,8 @@ class MoneyRequire < ActiveRecord::Base
   def syndicate_money
     (self.investments.inject(0) { |s,m| s + m.money })
   end
+
+  def has_invested?(user)
+    user && user.investor && self.investments.where(investor_id: user.investor.id).first
+  end
 end

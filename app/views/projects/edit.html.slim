@@ -50,37 +50,14 @@
           div.row.title
             div.large-12.columns
               h3.title 投资信息
-          div.row
-            div.large-12.columns
-              h4 当前投资进度
-              - if money_require = @project.opened_money_require
-                  = render partial: "syndicates/syndicate_progress", locals: { money_require: money_require} 
-                  div.row
-                    div.large-4.columns.large-centered
-                      button.button#close_investment data-uri=close_investment_project_path(money_require.id) data-confirm="确认关闭融资? 关闭后无法再次打开" 关闭本次融资
-              - else
-                | No Content
-          hr
-          div.row
-            div.large-12.columns
-              h4 历史投资情况
-              - unless (money_requires = @project.history_money_requires).empty?
-                - money_requires.each do |money_require|
-                  = render partial: "syndicates/syndicate_progress", locals: { money_require: money_require} 
-                  hr
-              - else
-                | No Content
-          hr
+          div.syndicate_info
+            = render partial: "syndicates/syndicate_info", locals: { project: @project }
           div.row.investors
             div.large-12.columns
               h4 投资人情况
               ul.small-block-grid-3
-                li
-                  h4 投资人
-                li
-                  h4 投资人
-                li
-                  h4 投资人
+                = render partial: 'investor', collection: @project.investor_users, as: :investor_user
+
     div.large-3.columns.large-offset-1
       div.row
         div.large-12.columns.container
@@ -91,7 +68,7 @@
             span.meter style="width: #{ @project.complete_degree * 100 }%" 
           hr
           - unless @project.published
-            button.expand#publish data-uri=publish_project_path(@project.id) 发布
+            button.expand#publish data-uri=publish_project_path(@project.id) data-confirm="发布后将无法修改, 请确认?" 发布
           - else
             button.expand.disabled#published 已发布
       div.row
@@ -136,3 +113,7 @@
           div.row.title
             div.large-12.columns
               h3.title 关注人员
+          div.row.star_users
+            div.large-12.columns
+              ul.small-block-grid-3
+                = render partial: "stars/star", collection: @project.star_users, as: :star_user

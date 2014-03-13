@@ -91,22 +91,26 @@ $(document).ready ->
     e.preventDefault()
     $('.add_member_section').empty()
     
-
+  # 发布项目
   $('#publish').click (e)->
       e.preventDefault()
+      if confirm_data = $(this).data('confirm')
+        return unless window.confirm( confirm_data )
       $.post $(this).data('uri'), (data)->
         Alert.doit data, ->
-          #TODO 局部刷新即可
           window.location.reload()
     
+  # 打开新的融资需求
   $('#new_money_require').submit (e)->
     e.preventDefault()
     $.post $(this).attr('action'), $(this).serialize(), (data)->
       Alert.doit data, ->
         $('#invest-modal').foundation('reveal', 'close')
-        #TODO 局部刷新即可
-        window.location.reload()
+        $('.syndicate_info').fadeOut 'slow', ->
+          $(this).html(data)
+          $(this).fadeIn('slow')
 
+  # 招人需求
   $('#new_person_require').submit (e)->
     e.preventDefault()
     $.post $(this).attr('action'), $(this).serialize(), (data)->
@@ -115,18 +119,23 @@ $(document).ready ->
         #TODO 局部刷新即可
         window.location.reload()
 
+  # 启动融资项目
   $('#new_investment').submit (e)->
     e.preventDefault()
     $.post $(this).attr('action'), $(this).serialize(), (data)->
       ALert.doit data, ->
         $('#add-investment-modal').foundation('reveal', 'close')
-        #TODO 局部刷新即可
-        window.location.reload()
+        $('.syndicate_info').fadeOut 'slow', ->
+          $(this).html(data)
+          $(this).fadeIn('slow')
 
-  $('#close_investment').unbind('click').click (e)->
+  # 关闭融资功能
+  $(this).on 'click', '#close_investment', (e)->
     e.preventDefault()
     if confirm_data = $(this).data('confirm')
       return unless window.confirm( confirm_data )
     $.post $(this).data('uri'), (data)->
       Alert.doit data, ->
-        window.location.reload()
+        $('.syndicate_info').fadeOut 'slow', ->
+          $(this).html(data)
+          $(this).fadeIn('slow')

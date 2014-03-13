@@ -31,6 +31,9 @@ class Project < ActiveRecord::Base
   has_many :money_requires
   has_many :person_requires
 
+  # 关注人员
+  has_many :stars
+
   scope :published, -> { where(published: true) }
 
   def add_owner( owner )
@@ -70,6 +73,14 @@ class Project < ActiveRecord::Base
   def history_money_requires
     self.money_requires.where.not(status: :open).order(created_at: :desc)
   end
+  
+  # 所有投资人
+  def investor_users
+    money_require_ids = self.money_requires.collect { |m| m.id }
+    investor_ids = Investment.where(money_require_id: money_require_ids).collect{ |m| m.investor_id }
+    user_ids = Investor.where(id: investor_ids).collect{ |m| m.user_id }
+    User.where(id: user_ids)
+  end
 
   def publish
     #TODO 检查完成度
@@ -79,5 +90,10 @@ class Project < ActiveRecord::Base
 
   def published?
     self.published
+  end
+
+  def star_users
+    user_ids = self.stars.collect { |m| m.user_id }
+    User.where(id: user_ids)
   end
 end
