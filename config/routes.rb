@@ -1,6 +1,7 @@
 Eachfund::Application.routes.draw do
   get "activities/show"
   get "projects_searcher/index"
+  resources :stars, only: [:create, :destroy]
   resource :activity, only: [:show]
   resources :about do
     collection do
