@@ -24,6 +24,7 @@ class SyndicatesController < ApplicationController
     end
   end
 
+  private
   def investment_params
     params.require(:investment).permit(:money)
   end
