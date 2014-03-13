@@ -31,6 +31,9 @@ class Project < ActiveRecord::Base
   has_many :money_requires
   has_many :person_requires
 
+  # 关注人员
+  has_many :stars
+
   scope :published, -> { where(published: true) }
 
   def add_owner( owner )
@@ -87,5 +90,10 @@ class Project < ActiveRecord::Base
 
   def published?
     self.published
+  end
+
+  def star_users
+    user_ids = self.stars.collect { |m| m.user_id }
+    User.where(id: user_ids)
   end
 end
