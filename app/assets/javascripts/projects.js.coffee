@@ -127,7 +127,7 @@ $(document).ready ->
           $(this).html(data)
           $(this).fadeIn('slow')
 
-  $('#close_investment').unbind('click').click (e)->
+  $(this).on 'click', '#close_investment', (e)->
     e.preventDefault()
     if confirm_data = $(this).data('confirm')
       return unless window.confirm( confirm_data )
