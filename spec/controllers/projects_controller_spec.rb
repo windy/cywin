@@ -208,21 +208,6 @@ describe ProjectsController do
       end
     end
 
-    describe "项目编辑与邀请成员的功能" do
-      describe "编辑" do
-        it "owner 可编辑项目所有功能" do
-          pending
-        end
-
-        it "editor 可编辑项目所有功能" do
-          pending
-        end
-
-        it "viewer 只能查阅项目" do
-          pending
-        end
-      end
-    end
   end
 
 end
