@@ -114,10 +114,12 @@ class ProjectsController < ApplicationController
 
   # 关闭一个打开中的融资
   def close_investment
-    money_require = MoneyRequire.find(params[:id])
+    @money_require = MoneyRequire.find(params[:id])
+    @project = @money_require.project
     begin
-      money_require.close!
-      render_success
+      @money_require.close!
+      flash[:notice] = "关闭融资成功"
+      render template: 'syndicates/syndicate_info', layout: false
     rescue =>e
       render_fail(e.message)
     end
