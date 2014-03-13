@@ -1,0 +1,6 @@
+/ need: locals: star_user
+li
+  div.row
+    div.large-12.columns
+      = link_to user_path(star_user) do
+        - image_tag(star_user.avatar_url, size: "200x200", title: star_user.name)

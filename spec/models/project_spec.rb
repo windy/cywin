@@ -70,4 +70,13 @@ describe Project do
     end
 
   end
+
+  describe "#star_users" do
+    it "success" do
+      @project = create(:project)
+      @user = create(:user)
+      @user.add_star(@project)
+      expect(@project.star_users.first.id).to eq(@user.id)
+    end
+  end
 end
