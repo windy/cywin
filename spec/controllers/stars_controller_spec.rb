@@ -14,7 +14,6 @@ describe StarsController do
 
     it "删除关注" do
       post 'create', id: @project.id
-
       expect { post 'destroy', id: @project.id }.to change{Star.all.size}.by(-1)
     end
   end
