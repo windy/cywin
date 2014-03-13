@@ -1,5 +1,11 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index ]
+  before_action :authenticate_user!, except: [ :index, :show ]
+
+  before_action( only: [:edit, :stage1, :stage2, :publish, :invest, :invite] ) do 
+    @project = Project.find(params[:id])
+  end
+
+  load_and_authorize_resource
 
   def index
     @projects = Project.published
@@ -27,7 +33,6 @@ class ProjectsController < ApplicationController
 
   # 创建第二步
   def stage1
-    @project = Project.find(params[:id])
     @owner = @project.owner
     @member = @project.member(@owner)
     if request.post?
@@ -54,7 +59,7 @@ class ProjectsController < ApplicationController
 
   # 创建第三步
   def stage2
-    @project = Project.find(params[:id])
+    authorize! :stage2, @project
     if request.post?
       # add money_require
       money_require_flag = params.permit(:money_require)[:money_require]
@@ -88,7 +93,6 @@ class ProjectsController < ApplicationController
   end
 
   def publish
-    @project = Project.find(params[:id])
     if @project.publish
       flash[:notice] = "发布成功"
       render_success("发布项目成功")
@@ -127,7 +131,6 @@ class ProjectsController < ApplicationController
 
   # 发起一个新的招聘
   def invite
-    @project = Project.find(params[:id])
     person_requires_params = params.require(:person_require).permit(:title, :pay, :stock, :option, :description)
     @person_require = PersonRequire.new(person_requires_params)
     @project.person_requires << @person_require

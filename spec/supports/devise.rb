@@ -10,4 +10,11 @@ module ControllerDevise
     @user = FactoryGirl.create(:user)
     sign_in @user
   end
+
+  def relogin_user2
+    sign_out @user
+    request.env["devise.mapping"] = Devise.mappings[:user]
+    @user2 = FactoryGirl.create(:zhang)
+    sign_in @user2
+  end
 end

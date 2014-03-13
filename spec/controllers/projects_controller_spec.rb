@@ -58,6 +58,13 @@ describe ProjectsController do
       response.should render_template(:stage1)
     end
 
+    it "get stage1 with other user will fail" do
+      Project.should_receive(:find).with("1").and_return(@project)
+      relogin_user2
+      get 'stage1', id: 1
+      expect(response.status).not_to eq(200)
+    end
+
     describe "post stage1" do
       it "正确的参数" do
         Project.should_receive(:find).with("1").and_return(@project)
@@ -83,6 +90,13 @@ describe ProjectsController do
         expect(project.member( @user ).title).to eq( attributes_for(:member)[:title] )
         expect(@user.reload.avatar_url).not_to be_nil
 
+      end
+
+      it "使用错误的用户访问被重定向" do
+        Project.should_receive(:find).with("1").and_return(@project)
+        relogin_user2
+        post 'stage1', id: 1
+        response.should redirect_to(root_path)
       end
 
       it "带邀请链接" do
@@ -194,21 +208,6 @@ describe ProjectsController do
       end
     end
 
-    describe "项目编辑与邀请成员的功能" do
-      describe "编辑" do
-        it "owner 可编辑项目所有功能" do
-          pending
-        end
-
-        it "editor 可编辑项目所有功能" do
-          pending
-        end
-
-        it "viewer 只能查阅项目" do
-          pending
-        end
-      end
-    end
   end
 
 end
