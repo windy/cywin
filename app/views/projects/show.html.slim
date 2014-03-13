@@ -8,7 +8,10 @@ div.row.project_container
         = @project.description
     ul.sub-nav.right
       li
-        button.button 关注
+        - if current_user.try(:star?, @project)
+          button#star_project.has_starred data-uri=stars_path data-id=@project.id 已关注
+        - else
+          button#star_project.unstarred data-uri=stars_path data-id=@project.id 关注
       li
         button.button 约谈 
     div.row

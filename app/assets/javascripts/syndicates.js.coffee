@@ -1,4 +1,5 @@
 $(document).ready ->
+  # 投资某个项目
   $('#new_syndicate').submit (e)->
     e.preventDefault()
     $.post $(this).attr('action'), $(this).serialize(), (data)->

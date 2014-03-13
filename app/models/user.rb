@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     self.stars.where(project_id: project.id).destroy_all
   end
 
+  def star?(project)
+    self.stars.where(project_id: project.id).first
+  end
+
   def add_fun(user)
     unless self.funs.where(interested_user_id: user.id).first
       fun = Fun.new(user: self, interested_user_id: user.id)
