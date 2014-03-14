@@ -1,4 +1,5 @@
 Eachfund::Application.routes.draw do
+  get "dashboard/index"
   get "activities/show"
   get "projects_searcher/index"
   resources :stars, only: [:create] do 
@@ -43,6 +44,8 @@ Eachfund::Application.routes.draw do
 
   namespace :admin do
     resources :users
+    resources :projects
+    root :to=> "dashboard#index"
   end
   root :to => "home#index"
   #devise_for :users, :controllers => {:registrations => "registrations"}
