@@ -45,6 +45,18 @@ Eachfund::Application.routes.draw do
   namespace :admin do
     resources :users
     resources :projects
+    resources :investors, only: :index do
+      collection do
+      post :accept
+      post :reject
+      end
+    end
+    resources :leaders, only: :index do
+      collection do
+      post :accept
+      post :reject
+      end
+    end
     root :to=> "dashboard#index"
   end
   root :to => "home#index"
