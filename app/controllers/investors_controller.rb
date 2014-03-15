@@ -1,13 +1,6 @@
 class InvestorsController < ApplicationController
-  before_action :set_investor, only: [:stage1, :stage2, :show, :edit, :update, :destroy]
+  before_action :set_investor, only: [:stage1, :stage2, :edit]
   before_action :authenticate_user!
-
-  def index
-    @investors = Investor.all
-  end
-
-  def show
-  end
 
   def new
     @investor = Investor.new
@@ -58,12 +51,6 @@ class InvestorsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def update
-  end
-
-  def destroy
   end
 
   private
