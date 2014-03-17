@@ -12,4 +12,7 @@
       founder: '创始人'
       member: '团队成员'
       partner: '合作者'
-    
+  investor:
+    investor_types:
+      person: '个人'
+      organization: '机构'

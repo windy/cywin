@@ -16,5 +16,14 @@ class Investor < ActiveRecord::Base
 
   validates :user_id, presence: true
 
+  # basic info validates
+
+  validates :name, presence: true
+  validates :phone, presence: true
+  validates :investor_type, presence: true, inclusion: INVESTOR_TYPE
+  validates :company, presence: true
+  validates :title, presence: true
+  validates :description, presence: true, length: { minimum: 3 }
+
   mount_uploader :card, CardUploader
 end

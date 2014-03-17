@@ -55,7 +55,7 @@ zh-CN:
       investor:
         name: '姓名'
         phone: '联系电话'
-        type: '身份类型'
+        investor_type: '身份类型'
         company: '所在公司'
         title: '职位'
         description: '个人简介'

@@ -4,7 +4,7 @@ div.row.project
   = simple_form_for @investor do |f|
     = f.input :name
     = f.input :phone
-    = f.input :investor_type, as: :radio_buttons, collection: Investor::INVESTOR_TYPE
+    = f.input :investor_type, as: :radio_buttons, collection: Investor::INVESTOR_TYPE.collect { |m| [ t('investor.investor_types.' + m), m ] }
     = f.input :company
     = f.input :title
     = f.input :description
