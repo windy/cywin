@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :investidea do
-    coin_type Investidea::COIN_TYPE[0]
+    coin_type Investidea::CNY
     min 1
     max 100
     industry "MyString"

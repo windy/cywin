@@ -1,14 +1,5 @@
 class Member < ActiveRecord::Base
-  ROLES = []
-  [
-    :FOUNDER,
-    :MEMBER,
-    :PARTNER
-  ].each do |e|
-    real_name = e.to_s.underscore
-    ROLES << real_name
-    const_set(e, real_name)
-  end
+  my_const_set( :ROLES, [:FOUNDER, :MEMBER, :PARTNER ] )
 
   PRIVS = [ "owner", "editor", "viewer" ]
   validates :role, presence: true, inclusion: ROLES
