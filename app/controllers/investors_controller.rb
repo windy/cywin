@@ -1,5 +1,5 @@
 class InvestorsController < ApplicationController
-  before_action :set_investor, only: [:stage1, :stage2, :edit, :update]
+  before_action :set_investor, only: [:stage1, :stage2, :update]
   before_action :authenticate_user!
 
   def new
@@ -8,10 +8,11 @@ class InvestorsController < ApplicationController
   end
 
   def stage1
-    @investor.build_investidea
+    #binding.pry
+    @investor.investidea || @investor.build_investidea
     if request.post?
-      @investor.investidea = Investidea.new(investidea_params)
-      if @investor.save
+      @investor.investidea.assign_attributes(investidea_params)
+      if @investor.investidea.save
         redirect_to stage2_investor_path(@investor.id)
       else
         render :stage1
@@ -36,9 +37,6 @@ class InvestorsController < ApplicationController
       render :stage2
       return
     end
-  end
-
-  def edit
   end
 
   def update
@@ -77,6 +75,7 @@ class InvestorsController < ApplicationController
     def investidea_params
       params.require(:investor).require(:investidea).permit(:coin_type, :min, :max, :industry, :give, :idea)
     end
+    
     def card_params
       params.require(:investor).permit(:card)
     end
