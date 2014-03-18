@@ -1,5 +1,5 @@
-/ locals: { model, column_name, simple_form }
-- options = {} unless defined?(options)
+/ locals: { model, column_name, simple_form, options = {} }
+- options = {} if options.blank?
 = f.input column_name, options do
   div.row#logo_image_field
     - if model.send("#{column_name}?")
