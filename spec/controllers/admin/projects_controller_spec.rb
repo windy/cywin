@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Admin::ProjectsController do
 
+  login_user
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Admin::InvestorsController do
 
+  login_user
   describe "GET 'accept'" do
     it "returns http success" do
       get 'accept'
