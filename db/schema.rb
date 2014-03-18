@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20140318080403) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
+    t.string   "status",        default: "drafted"
   end
 
   create_table "members", force: true do |t|

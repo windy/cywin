@@ -21,3 +21,11 @@
       cny: '人民币'
       usd: '外币'
       cny_and_usd: '人民币+外币'
+  errors:
+    messages:
+      #carrierwave 翻译信息
+      carrierwave_processing_error: "不能调整大小"
+      carrierwave_integrity_error: "不是一张图片"
+      carrierwave_download_error: "无法下载图片"
+      extension_white_list_error: "扩展格式不正确: %{extension},  只允许以下格式: %{allowed_types}"
+      extension_black_list_error: "不允许上传此格式: %{extension}, 禁止的格式如下: %{prohibited_types}"

@@ -32,4 +32,12 @@ class Investor < ActiveRecord::Base
   validates :description, presence: true, length: { minimum: 3 }
 
   mount_uploader :card, CardUploader
+
+  def validate_and_submit
+    if self.card.blank?
+      self.errors.add(:card, "身份证明信息不能为空") 
+      return false
+    end
+    submit
+  end
 end

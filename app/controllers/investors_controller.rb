@@ -8,7 +8,6 @@ class InvestorsController < ApplicationController
   end
 
   def stage1
-    #binding.pry
     @investor.investidea || @investor.build_investidea
     if request.post?
       @investor.investidea.assign_attributes(investidea_params)
@@ -26,7 +25,7 @@ class InvestorsController < ApplicationController
 
   def stage2
     if request.post?
-      if @investor.update( card_params )
+      if @investor.update( card_params ) &&  @investor.validate_and_submit
         flash[:notice] = "创建申请成功"
         redirect_to root_path
       else
@@ -77,6 +76,6 @@ class InvestorsController < ApplicationController
     end
     
     def card_params
-      params.require(:investor).permit(:card)
+      params.require(:investor).permit(:card) rescue {}
     end
 end
