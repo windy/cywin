@@ -42,6 +42,8 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
           ul.dropdown
             li
               = link_to '创建新项目', new_project_path
+            li
+              = link_to '申请认证投资人', new_investor_path
             - current_user.projects.each do |project|
               li
                 = link_to project.name, edit_project_path(project)
@@ -51,7 +53,7 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
               = link_to 'Edit account', edit_user_registration_path
             - if current_user.has_role? :admin
               li
-                = link_to '后台管理', users_path
+                = link_to '后台管理', admin_root_path
             li
               div.divtar
             li

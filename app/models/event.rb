@@ -8,7 +8,7 @@ class Event < ActiveRecord::Base
   # t.integer  "action"
   # t.integer  "user_id"
 
-  ACTIONS = []
+  my_const_set( 'ACTIONS', 
   # actions
   [
   :PROJECT_CREATE,
@@ -43,12 +43,7 @@ class Event < ActiveRecord::Base
   :PERSON_REQUIRE_CLOSE,
   # 对工作感兴趣
   :INTEREST_WORK,
-  ].each do |e|
-    real_name = e.to_s.underscore
-    ACTIONS << real_name
-    const_set(e, real_name)
-  end
-
+  ])
   validates :action, presence: true, inclusion: ACTIONS
   validates :user_id, presence: true
 end

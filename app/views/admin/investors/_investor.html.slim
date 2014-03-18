@@ -1,0 +1,13 @@
+/ need: locals => investor
+tr
+  td
+    link_to #{investor.user.name}, user_path(investor.user.id)
+  td 我是张三, 申请投资人
+  td 周一
+  td 无
+  td
+    ul.button-group
+      li
+        button.small.investor_passed 通过
+      li
+        button.small.investor_rejected.alert 拒绝

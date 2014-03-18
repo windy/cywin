@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0" 
+    title 后台
+    meta name="description" content=("#{content_for?(:description) ? yield(:description) : 'CYwin'}") 
+    = stylesheet_link_tag "application", media: "all"
+    /  Modernizr is required for Zurb Foundation 5
+    = javascript_include_tag "vendor/modernizr"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  body
+    header
+      = render 'layouts/admin/navigation'
+    main role="main" 
+      - if content_for?(:container)
+        = yield(:container)
+      - else
+        div.row.container
+          div.large-12.columns
+            = yield

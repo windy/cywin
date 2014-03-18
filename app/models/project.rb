@@ -1,16 +1,5 @@
 class Project < ActiveRecord::Base
-  #STAGES = [ '概念中', '开发中', '已上线', '已盈利']
-  STAGES = []
-  [
-    :IDEA,
-    :DEVELOPING,
-    :ONLINE,
-    :GAINED
-  ].each do |e|
-    real_name = e.to_s.underscore
-    STAGES << real_name
-    const_set(e, real_name)
-  end
+  my_const_set('STAGES', [ 'IDEA', 'DEVELOPING', 'ONLINE', 'GAINED' ])
     
   validates :name, presence: true, uniqueness: true, length: { minimum: 1 }
   validates :oneword, presence: true, length: { minimum: 4 }

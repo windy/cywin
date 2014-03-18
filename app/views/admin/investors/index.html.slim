@@ -1,0 +1,14 @@
+div.row.title
+  div.large-12.columns
+    h3.title 所有待申批投资人
+
+table
+  thead
+    tr
+      th 用户名
+      th 投资信息
+      th 时间
+      th 备注信息
+      th 操作
+  tbody
+    = render partial: 'investor', collection: @investors
