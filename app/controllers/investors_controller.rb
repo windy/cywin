@@ -59,7 +59,7 @@ class InvestorsController < ApplicationController
     end
 
     def investor_params
-      params.require(:investor).permit(:name, :phone, :type, :company, :title, :description )
+      params.require(:investor).permit(:name, :phone, :investor_type, :company, :title, :description )
     end
 
     def investment_params

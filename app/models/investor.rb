@@ -10,6 +10,21 @@ class Investor < ActiveRecord::Base
     const_set(e, real_name)
   end
 
+  # status 标志是否开始审核, 并同时创建审核单
+  state_machine :status, initial: :drafted do
+    event :submit do
+      transition [:drafted, :rejected] => :applied
+    end
+    
+    event :reject do
+      transition :applied => :rejected
+    end
+
+    event :pass do
+      transition :applied => :passed
+    end
+  end
+
   belongs_to :user
   has_many :investment
   has_one :investidea
