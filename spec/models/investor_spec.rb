@@ -6,22 +6,42 @@ describe Investor do
       expect { create(:investor) }.not_to raise_error
     end
 
-    it "草稿下提交通过" do
-      investor = create(:investor)
-      expect(investor.status).to eq('drafted')
-      investor.submit 
-      expect(investor.status).to eq('applied')
+    describe "正确的审核流程" do
+      it "草稿下提交通过" do
+        investor = create(:investor)
+        expect(investor.status).to eq('drafted')
+        investor.submit
+        expect(investor.status).to eq('applied')
+      end
+
+      it "审核通过" do
+        investor = create(:investor)
+        investor.submit
+        investor.pass
+        expect(investor.status).to eq('passed')
+      end
+
+      it "审核不通过" do
+        investor = create(:investor)
+        investor.submit
+        investor.reject
+        expect(investor.status).to eq('rejected')
+      end
+
+      it "审核不通过重新提交" do
+        investor = create(:investor)
+        investor.submit
+        investor.reject
+        investor.submit
+        expect(investor.status).to eq('applied')
+      end
     end
 
-    it "审核通过" do
-      investor = create(:investor)
-      investor.submit 
-    end
-
-    it "审核不通过" do
-    end
-
-    it "审核不通过重新提交" do
+    describe "不允许的审核流程" do
+      it "未提交的无法审核" do
+        investor = create(:investor)
+        expect(investor.pass).to be_false
+      end
     end
   end
 

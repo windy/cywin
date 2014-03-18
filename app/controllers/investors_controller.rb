@@ -1,10 +1,10 @@
 class InvestorsController < ApplicationController
-  before_action :set_investor, only: [:stage1, :stage2, :edit]
+  before_action :set_investor, only: [:stage1, :stage2, :edit, :update]
   before_action :authenticate_user!
 
   def new
-    @investor = Investor.new
-    @investor.investment.build
+    @investor = current_user.investor || Investor.new
+    @investor.investment || @investor.investment.build
   end
 
   def stage1
@@ -39,6 +39,14 @@ class InvestorsController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
+    if @investor.update( investor_params )
+      redirect_to stage1_investor_path(@investor.id)
+    else
+      render :new
+    end
   end
 
   def create
