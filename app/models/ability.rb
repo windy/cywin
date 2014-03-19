@@ -15,7 +15,7 @@ class Ability
       can :read, Project do
         #TODO 项目的公开程度字段判定
       end
-      can :create, Syndicate
+      can :create, Investment
     end
 
     can [:edit, :stage1, :stage2, :publish, :invest, :close_investment, :invite] , Project do |project|
