@@ -1,7 +1,7 @@
 / need: locals => investor
 tr
   td
-    link_to #{investor.user.name}, user_path(investor.user.id)
+    = link_to investor.user.name, user_path(investor.user.id)
   td 我是张三, 申请投资人
   td 周一
   td 无
