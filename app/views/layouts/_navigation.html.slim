@@ -43,7 +43,8 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
             li
               = link_to '创建新项目', new_project_path
             li
-              = link_to '申请认证投资人', new_investor_path
+              - unless current_user.has_role?(:investor)
+                = link_to '申请认证投资人', new_investor_path
             - current_user.projects.each do |project|
               li
                 = link_to project.name, edit_project_path(project)
