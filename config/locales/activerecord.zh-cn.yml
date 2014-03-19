@@ -73,10 +73,12 @@
         after: "必须在%{restriction}之后"
         position: '位置'
       models:
-        money_require:
+        money_require: &status
           attributes:
             status:
-              invalid_transition: "不能从状态 '%{value}' %{event}"
+              invalid_transition: "不能从状态 '%{value}' 转为 '%{event}'"
+        investor:
+          <<: *status
     state_machines:
       states:
         ready: '准备'
