@@ -10,6 +10,7 @@ describe Admin::InvestorsController do
         post 'accept', id: investor.id
         check_json(response.body, 'success', true)
         expect(investor.reload).to be_passed
+        expect(investor.user).to be_has_role(:investor)
       end
 
       it "提交被拒绝, 重新提交审批通过" do
@@ -27,6 +28,7 @@ describe Admin::InvestorsController do
         post 'accept', id: investor.id
         check_json(response.body, 'success', false)
         expect( assigns(:investor).errors[:status] ).not_to be_empty
+        expect(investor.user).not_to be_has_role(:investor)
       end
 
       it "草稿状态无法审批" do

@@ -46,7 +46,7 @@ Eachfund::Application.routes.draw do
     resources :users
     resources :projects
     resources :investors, only: :index do
-      collection do
+      member do
       post :accept
       post :reject
       end

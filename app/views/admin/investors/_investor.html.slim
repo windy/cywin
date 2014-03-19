@@ -2,12 +2,14 @@
 tr
   td
     = link_to investor.user.name, user_path(investor.user.id)
-  td 我是张三, 申请投资人
-  td 周一
+  td
+    = link_to investor.name, investor_path(investor.id)
+  td
+    = time_ago_in_words( investor.updated_at )
   td 无
   td
     ul.button-group
       li
-        button.small.investor_passed 通过
+        button.small.investor_passed data-uri=accept_admin_investor_path(investor.id) data-confirm="确认通过?" 通过
       li
-        button.small.investor_rejected.alert 拒绝
+        button.small.investor_rejected.alert data-uri=reject_admin_investor_path(investor.id) data-prompt="输入拒绝原因" 拒绝

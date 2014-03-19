@@ -2,7 +2,7 @@ class Admin::InvestorsController < Admin::ApplicationController
   before_action :set_investor, only: [ :accept, :reject ]
 
   def index
-    @investors = Investor.all
+    @investors = Investor.where(status: 'applied')
   end
 
   # POST: /admin/investor/1/accept
@@ -21,6 +21,7 @@ class Admin::InvestorsController < Admin::ApplicationController
 
     if investor_audit.save
       @investor.pass!
+      @investor.user.add_role(:investor)
       render_success("审批通过")
     else
       render_fail(investor_audit.errors.full_messages.to_s)
@@ -42,6 +43,7 @@ class Admin::InvestorsController < Admin::ApplicationController
 
     if investor_audit.save
       @investor.reject!
+      @investor.user.remove_role(:investor)
       render_success("审核已拒绝")
     else
       render_fail(investor_audit.errors.full_messages.to_s)
