@@ -43,6 +43,7 @@ class MoneyRequire < ActiveRecord::Base
 
     event :close do
       transition opened: :closed
+      transition leader_needed: :closed
     end
   end
 

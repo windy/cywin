@@ -27,9 +27,7 @@ Eachfund::Application.routes.draw do
       get :stage2
       post :stage2
       post :publish
-      post :invest
       post :invite
-      post :close_investment
     end
     resources :members
   end
@@ -39,6 +37,13 @@ Eachfund::Application.routes.draw do
       post :stage1
       get :stage2
       post :stage2
+    end
+  end
+
+  resources :money_requires, only: [ :new, :update, :create ] do
+    member do
+      post :add_leader
+      post :close
     end
   end
 
