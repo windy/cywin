@@ -56,11 +56,11 @@ class Project < ActiveRecord::Base
   end
 
   def opened_money_require
-    self.money_requires.where(status: :open).first
+    self.money_requires.where.not(status: :closed).first
   end
 
   def history_money_requires
-    self.money_requires.where.not(status: :open).order(created_at: :desc)
+    self.money_requires.where(status: :closed).order(created_at: :desc)
   end
   
   # 所有投资人

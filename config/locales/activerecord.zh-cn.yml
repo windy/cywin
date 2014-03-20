@@ -82,9 +82,11 @@
     state_machines:
       states:
         ready: '准备'
-        open: '启动中'
-        close: '已结束'
+        leader_needed: '寻找领投人中'
+        opened: '启动中'
+        closed: '已结束'
       events:
         start: '启动'
+        preheat: '预热'
         close: '关闭'
         restart: '重新启动'

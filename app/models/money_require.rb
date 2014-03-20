@@ -12,26 +12,37 @@ class MoneyRequire < ActiveRecord::Base
 
   has_many :investments
 
+  belongs_to :leader, class_name: Investor
+
   # 不能同时有两个融资需求打开
   #FIXME 效率可能存在问题
   validate do |m|
     if m.new_record?
-      found = MoneyRequire.where(project_id: m.project_id).where(status: :open).first
+      found = MoneyRequire.where(project_id: m.project_id).where.not(status: :closed).first
     else
-      found = MoneyRequire.where(project_id: m.project_id).where(status: :open).where.not(id: m.id).first
+      found = MoneyRequire.where(project_id: m.project_id).where.not(status: :closed).where.not(id: m.id).first
     end
     if found
       errors.add(:base, "不能在已经存在融资需求时再创建一个")
     end
   end
 
+  # ready -> leader_needed -> opened -> closed
   state_machine :status, initial: :ready do
-    event :start do
-      transition ready: :open
+    event :preheat do
+      transition ready: :leader_needed
+    end
+
+    event :turn_on do
+      transition leader_needed: :opened
+    end
+
+    state :opened do
+      validates_presence_of :leader_id
     end
 
     event :close do
-      transition open: :close
+      transition opened: :closed
     end
   end
 
@@ -48,4 +59,5 @@ class MoneyRequire < ActiveRecord::Base
   def has_invested?(user)
     user && user.investor && self.investments.where(investor_id: user.investor.id).first
   end
+
 end

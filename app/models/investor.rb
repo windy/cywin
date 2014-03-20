@@ -20,6 +20,9 @@ class Investor < ActiveRecord::Base
   has_many :investment
   has_one :investidea
 
+  # 领投人信息
+  has_many :money_require, through: :leader_id
+
   validates :user_id, presence: true
 
   # basic info validates

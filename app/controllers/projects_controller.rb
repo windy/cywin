@@ -108,7 +108,7 @@ class ProjectsController < ApplicationController
     @money_require = MoneyRequire.new(money_require_params)
     @project.money_requires << @money_require
     if @project.save
-      @money_require.start!
+      @money_require.preheat!
       flash[:notice] = "发起融资成功"
       render template: 'syndicates/syndicate_info', layout: false
     else

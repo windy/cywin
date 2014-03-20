@@ -20,7 +20,9 @@ describe SyndicatesController do
     it "success" do
       @user.investor = build(:investor)
       @user.save!
-      @money_require.start!
+      @money_require.preheat!
+      @money_require.leader_id = 1
+      @money_require.turn_on!
       expect(@money_require.reload.progress).to eq(0)
       post 'create', ActionController::Parameters.new(investment:{ money_require_id: @money_require.id, money: 10 })
       response.should render_template("syndicates/invest")
@@ -28,7 +30,16 @@ describe SyndicatesController do
     end
 
     it "没有申请投资人失败" do
-      @money_require.start!
+      @money_require.preheat!
+      @money_require.leader_id = 1
+      @money_require.turn_on!
+      expect(@money_require.reload.progress).to eq(0)
+      post 'create', ActionController::Parameters.new(investment:{ money_require_id: @money_require.id, money: 10 })
+      check_json(response.body, :success, false)
+    end
+    
+    it "没有领投时失败" do
+      @money_require.preheat!
       expect(@money_require.reload.progress).to eq(0)
       post 'create', ActionController::Parameters.new(investment:{ money_require_id: @money_require.id, money: 10 })
       check_json(response.body, :success, false)
