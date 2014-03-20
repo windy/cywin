@@ -59,9 +59,7 @@ describe Project do
       money_require = build(:money_require)
       @project.money_requires << money_require
       @project.save!
-      money_require.preheat!
-      money_require.leader_id = 1
-      money_require.turn_on!
+      money_require.quickly_turn_on!(1)
 
       investment = build(:investment_for_money)
       investment.investor_id = @owner.investor.id

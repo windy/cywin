@@ -1,4 +1,7 @@
 class MoneyRequiresController < ApplicationController
+  before_action :set_money_require, only: [ :add_leader, :leader_confirm, :close ]
+  before_action :authenticate_user!
+
   def new
   end
 
@@ -17,23 +20,45 @@ class MoneyRequiresController < ApplicationController
     end
   end
 
-  # 添加一个领投人
+  # 添加一个领投人, 并等待确认
   def add_leader
+    leader_id = params.permit(:leader_id)[:leader_id]
+    if @money_require.add_leader_and_wait_confirm(leader_id)
+      render_success("添加领投人成功")
+    else
+      render_fail(@money_require.errors.full_messages.to_s)
+    end
+  end
+
+  def leader_confirm
+    if @money_require.leader_id != current_user.id
+      render_fail("必须领投人本人确认")
+      return
+    end
+
+    if @money_require.leader_confirm
+      render_success("领投人确认成功")
+    else
+      render_fail(@money_require.errors.full_messages.to_s)
+    end
   end
 
   # 关闭打开中的融资
   def close
-    @money_require = MoneyRequire.find(params[:id])
     @project = @money_require.project
-    begin
-      @money_require.close!
+    if @money_require.close
       flash[:notice] = "关闭融资成功"
       render template: 'syndicates/syndicate_info', layout: false
-    rescue =>e
-      render_fail(e.message)
+    else
+      render_fail(@money_require.errors.full_messages.to_s)
     end
   end
 
   def update
+  end
+
+  private
+  def set_money_require
+    @money_require = MoneyRequire.find( params[:id] )
   end
 end

@@ -95,11 +95,9 @@ describe MoneyRequire do
       
       # 启动第一个投资
       first = @project.money_requires.first
-      first.preheat!
       first.leader_id = 1
+      first.status = 'closed'
       first.save!
-      first.turn_on!
-      first.close!
 
       second = MoneyRequire.new(params)
       second.project = @project
@@ -137,10 +135,14 @@ describe MoneyRequire do
           it "找到正确的领投人" do
             @money_require.preheat!
             # find an investor
-            @money_require.leader_id = 1
-            @money_require.save!
-            
-            expect(@money_require.turn_on).to be_true
+            expect( @money_require.add_leader_and_wait_confirm(1) ).to be_true
+          end
+
+          it "领投确认" do
+            @money_require.preheat!
+            @money_require.add_leader_and_wait_confirm(1)
+            expect(@money_require.leader_confirm).to be_true
+            expect(@money_require.status).to eq("opened")
           end
         end
 
@@ -157,11 +159,7 @@ describe MoneyRequire do
 
       describe "领投完成后的投资" do
         before do
-          @money_require.preheat!
-          # find an investor
-          @money_require.leader_id = 1
-          @money_require.save!
-          @money_require.turn_on!
+          @money_require.quickly_turn_on!(1)
         end
         it '单人投资' do
           investment = Investment.new(money: attributes_for(:investment_for_money)[:money])

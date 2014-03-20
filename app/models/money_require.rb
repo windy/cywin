@@ -33,11 +33,15 @@ class MoneyRequire < ActiveRecord::Base
       transition ready: :leader_needed
     end
 
-    event :turn_on do
-      transition leader_needed: :opened
+    event :add_leader do
+      transition leader_needed: :leader_need_confirmed
     end
 
-    state :opened do
+    event :leader_confirm do
+      transition leader_need_confirmed: :opened
+    end
+
+    state :leader_need_confirmed, :opened do
       validates_presence_of :leader_id
     end
 
@@ -59,6 +63,18 @@ class MoneyRequire < ActiveRecord::Base
 
   def has_invested?(user)
     user && user.investor && self.investments.where(investor_id: user.investor.id).first
+  end
+
+  def add_leader_and_wait_confirm(leader_id)
+    self.leader_id = leader_id
+    add_leader
+  end
+
+  # 仅仅用来测试
+  def quickly_turn_on!(leader_id)
+    self.leader_id = leader_id
+    self.status = 'opened'
+    self.save!
   end
 
 end

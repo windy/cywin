@@ -11,14 +11,14 @@ describe MoneyRequiresController do
     end
 
     it "成功创建" do
-      post 'create', ActionController::Parameters.new( project_id: @project.id, money_require: attributes_for(:money_require) )
+      post 'create', ActionController::Parameters.new( money_require: attributes_for(:money_require).merge(project_id: @project.id) )
       response.should be_success
       response.should render_template('syndicates/syndicate_info')
     end
 
     it "错误的deadline" do
       money_require_attr = attributes_for(:money_require, deadline: 7.days.ago.to_datetime )
-      post 'create', ActionController::Parameters.new( project_id: @project.id, money_require: money_require_attr )
+      post 'create', ActionController::Parameters.new( money_require: money_require_attr.merge(project_id: @project.id) )
       response.should be_success
       check_json(response.body, :success, false)
     end
