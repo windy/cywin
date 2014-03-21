@@ -2,6 +2,8 @@ class MoneyRequiresController < ApplicationController
   before_action :set_money_require, only: [ :add_leader, :leader_confirm, :close ]
   before_action :authenticate_user!
 
+  load_and_authorize_resource
+
   def new
   end
 
@@ -31,11 +33,6 @@ class MoneyRequiresController < ApplicationController
   end
 
   def leader_confirm
-    if @money_require.leader_id != current_user.id
-      render_fail("必须领投人本人确认")
-      return
-    end
-
     if @money_require.leader_confirm
       render_success("领投人确认成功")
     else
