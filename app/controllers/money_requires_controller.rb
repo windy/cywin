@@ -58,4 +58,8 @@ class MoneyRequiresController < ApplicationController
   def set_money_require
     @money_require = MoneyRequire.find( params[:id] )
   end
+
+  def money_require_params
+    money_require_params = params.require(:money_require).permit(:money, :share, :description, :deadline, :project_id)
+  end
 end

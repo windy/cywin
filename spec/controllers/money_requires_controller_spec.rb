@@ -11,7 +11,7 @@ describe MoneyRequiresController do
 
   describe "创建融资功能" do
     it "成功创建" do
-      post 'create', ActionController::Parameters.new( money_require: attributes_for(:money_require) )
+      post 'create', ActionController::Parameters.new( money_require: attributes_for(:money_require).merge(project_id: @project.id) )
       response.should be_success
       response.should render_template('syndicates/syndicate_info')
     end
