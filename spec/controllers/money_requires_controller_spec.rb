@@ -34,22 +34,22 @@ describe MoneyRequiresController do
 
     describe "正确添加" do
       it "成功" do
-        post 'add_leader', ActionController::Parameters.new( leader_id: 1, id: @money_require.id )
-        check_json(response.body, :success, true)
+        post 'add_leader', ActionController::Parameters.new( money_require: { leader_id: 1 }, id: @money_require.id )
+        expect(response).to render_template("syndicates/syndicate_info")
         expect( assigns(:money_require).status ).to eq('leader_need_confirmed')
       end
     end
 
     describe "错误添加" do
       it "leader_id 未传入" do
-        post 'add_leader', ActionController::Parameters.new( id: @money_require.id )
+        post 'add_leader', ActionController::Parameters.new( id: @money_require.id, money_require: { leader_id: nil} )
         check_json(response.body, :success, false)
         expect( assigns(:money_require).errors[:leader_id] ).not_to be_empty
       end
 
       it "money_require 状态不对" do
         @money_require.quickly_turn_on!(1)
-        post 'add_leader', ActionController::Parameters.new( id: @money_require.id )
+        post 'add_leader', ActionController::Parameters.new( id: @money_require.id, money_require: { leader_id: 1 })
         check_json(response.body, :success, false)
         expect( assigns(:money_require).errors[:status] ).not_to be_empty
       end

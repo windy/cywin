@@ -120,22 +120,30 @@ $(document).ready ->
         window.location.reload()
 
   # 启动融资项目
-  $('#new_investment').submit (e)->
+  $('#new_money_require').submit (e)->
     e.preventDefault()
     $.post $(this).attr('action'), $(this).serialize(), (data)->
-      ALert.doit data, ->
+      Alert.doit data, ->
         $('#add-investment-modal').foundation('reveal', 'close')
         $('.syndicate_info').fadeOut 'slow', ->
           $(this).html(data)
           $(this).fadeIn('slow')
 
   # 关闭融资功能
-  $(this).on 'click', '#close_investment', (e)->
+  $(this).on 'click', '#close_money_require', (e)->
     e.preventDefault()
     if confirm_data = $(this).data('confirm')
       return unless window.confirm( confirm_data )
     $.post $(this).data('uri'), (data)->
       Alert.doit data, ->
+        $('.syndicate_info').fadeOut 'slow', ->
+          $(this).html(data)
+          $(this).fadeIn('slow')
+  $(this).on 'submit', '#add_leader_form', (e)->
+    e.preventDefault()
+    $.post $(this).attr('action'), $(this).serialize(), (data)->
+      Alert.doit data, ->
+        $('#add_leader-modal').foundation('reveal', 'close')
         $('.syndicate_info').fadeOut 'slow', ->
           $(this).html(data)
           $(this).fadeIn('slow')

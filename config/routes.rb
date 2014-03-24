@@ -43,8 +43,11 @@ Eachfund::Application.routes.draw do
   resources :money_requires, only: [ :new, :update, :create ] do
     member do
       post :add_leader
+      patch :add_leader
       post :leader_confirm
+      patch :leader_confirm
       post :close
+      patch :close
     end
   end
 
