@@ -4,7 +4,7 @@ class MoneyRequire < ActiveRecord::Base
 
   validates :deadline, presence: true
   validate do |m|
-    errors.add(:base, "时间必须选在未来") unless m.deadline.future?
+    errors.add(:base, "时间必须选在未来") unless m.deadline.future? or m.status == 'closed'
   end
 
   belongs_to :project
@@ -35,6 +35,10 @@ class MoneyRequire < ActiveRecord::Base
 
     event :add_leader do
       transition leader_needed: :leader_need_confirmed
+    end
+
+    after_transition on: :add_leader do |money_require, transition|
+      money_require.owner.send_message( money_require.leader_user, 'iii', '领投人邀请确认' )
     end
 
     event :leader_confirm do
@@ -68,6 +72,14 @@ class MoneyRequire < ActiveRecord::Base
   def add_leader_and_wait_confirm(leader_id)
     self.leader_id = leader_id
     add_leader
+  end
+
+  def owner
+    self.project.owner
+  end
+
+  def leader_user
+    self.leader.user
   end
 
   # 仅仅用来测试
