@@ -1,3 +1,13 @@
 .row
-  .large-12.columns
-    p #{conversation.subject}
+  .large-12.columns.container.conversation
+    .row
+      .large-2.columns
+        = image_tag(conversation.last_sender.avatar_url, size: '50x50')
+      .large-7.columns
+        /*- conversation.messages.each do |message|*/
+          /*p #{message.subject}*/
+        p #{conversation.subject}
+        p.description #{time_ago_in_words(conversation.created_at)}
+      .large-3.columns
+        - if conversation.is_unread?(current_user)
+            button.tiny.hide.mark_as_read data-uri=mark_as_read_conversation_path(conversation) 标记为已读

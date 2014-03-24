@@ -4,7 +4,7 @@
       .row
         .large-12.columns
           h4 Inbox
-    .large-8.columns.large-offset-1.container
+    .large-8.columns.large-offset-1
       - if @conversations
         = render partial: 'conversation', collection: @conversations
       - else

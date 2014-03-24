@@ -77,16 +77,9 @@ Eachfund::Application.routes.draw do
     end
   end
   resources :messages
-  resources :conversations, only: [:index, :show, :new, :create] do
+  resources :conversations, only: [:index ] do
     member do
-      post :reply
-      post :trash
-      post :untrash
-      post :mark_as_deleted
-      get  :filter
-    end
-    collection do
-      delete 'destroy_multiple'
+      post :mark_as_read
     end
   end
 
