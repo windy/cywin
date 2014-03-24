@@ -26,7 +26,7 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
         li
           = link_to conversations_path do
             span.messagebox
-              = current_user.mailbox.inbox(:unread => true).count(:id, :distinct => true).to_s
+              = current_user.mailbox.inbox(:unread => true).distinct.count(:id)
         li.has-dropdown
           - if current_user.name and current_user.authentications.length > 0
             a =current_user.name + "[#{current_user.authentications.first.provider}]"
