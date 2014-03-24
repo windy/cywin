@@ -5,7 +5,9 @@
         .large-12.columns
           h4 Inbox
     .large-8.columns.large-offset-1
-      - if @conversations
+      - unless @conversations.empty?
         = render partial: 'conversation', collection: @conversations
       - else
-        p No Content
+        .row
+          .large-12.columns.container style='height: 3rem; padding-top: 0.5rem'
+            p No Content
