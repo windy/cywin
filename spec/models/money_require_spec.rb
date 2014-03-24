@@ -143,6 +143,7 @@ describe MoneyRequire do
             @money_require.add_leader_and_wait_confirm(1)
             expect(@money_require.leader_confirm).to be_true
             expect(@money_require.status).to eq("opened")
+            expect(user.mailbox.conversations.size).to eq(1)
           end
         end
 
