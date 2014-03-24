@@ -1,32 +1,3 @@
-/= content_tag_for(:li, conversation) do |conversation|
-  .panel
-
-= form_tag destroy_multiple_conversations_path, method: :delete
-  table
-    thead
-      tr
-        th
-        th
-        th
-        th
-          = submit_tag 'Delete'
-    tbody
-      tr
-        td
-          = check_box_tag "conversations[]", conversation.id
-        td
-          - sender = conversation.messages.first.sender
-          - if sender == current_user
-            - receiver = conversation.receipts_for(current_user).first.receiver
-            = "To:" + receiver.name + "[#{receiver.email}]"
-          - else
-            = sender.name + "[#{sender.email}]"
-        td
-          = link_to conversation.subject, conversation
-        td
-          - if conversation.is_completely_trashed?(current_user)
-            = link_to 'Untrash', [:untrash, conversation], method: :post
-            |  
-            = link_to 'Delete', [:mark_as_deleted, conversation], method: :post
-          - else
-            = link_to 'Move to trash', [:trash, conversation], method: :post
+.row
+  .large-12.columns
+    p #{conversation.subject}
