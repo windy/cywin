@@ -138,3 +138,27 @@ $(document).ready ->
         $('.syndicate_info').fadeOut 'slow', ->
           $(this).html(data)
           $(this).fadeIn('slow')
+  # 领投人自动完成绑定
+  $(this).on 'focus', '#money_require_user_name', (e)->
+    if ! $(this).data('autocomplete')
+      $(this).autocomplete
+        source: (request, response)->
+          console.log(request.term)
+          $.get "/investors/autocomplete", search: request.term, (data)->
+            if data.success
+              response $.map(data['data'], (item)->
+                {
+                  leader_id: item.id,
+                  value: item.name,
+                })
+            else
+              Alert.fail(data.message)
+        ,
+        minLength: 1,
+        select: (event, ui)->
+          $('#money_require_leader_id').val( ui.item.leader_id )
+
+  # 添加领投人按钮
+  $(this).on 'click', '#add_leader_money_require', (e)->
+    e.preventDefault()
+    $('#add_leader-modal').foundation('reveal', 'open')

@@ -38,6 +38,9 @@ Eachfund::Application.routes.draw do
       get :stage2
       post :stage2
     end
+    collection do
+      get :autocomplete
+    end
   end
 
   resources :money_requires, only: [ :new, :update, :create ] do

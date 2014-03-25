@@ -78,7 +78,10 @@
               h3.title 投资需求
           div.row
             div.large-12.columns
-              a.expand.button data-reveal-id="invest-modal" 发起融资预热
+              - if @project.opened_money_require
+                a.expand.button.disabled 已经正在融资中
+              - else
+                a.expand.button data-reveal-id="invest-modal" 发起融资预热
           div.reveal-modal.medium#invest-modal data-reveal="" 
             h4 发起新的融资
             hr

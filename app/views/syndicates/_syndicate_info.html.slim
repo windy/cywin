@@ -7,12 +7,14 @@ div.row
         div.row
           div.large-4.columns.large-centered
             - if money_require.can_add_leader?
-              button.button#add_leader_money_require data-reveal-id="add_leader-modal" 添加领投人
+              button.button#add_leader_money_require 添加领投人
               div.reveal-modal.medium#add_leader-modal data-reveal="" 
                 h4 添加领投人
                 hr
                 = simple_form_for( money_require, url: add_leader_money_require_path(money_require), html: { id: 'add_leader_form' } ) do |f|
-                  = f.input :leader_id
+                  = f.hidden_field :leader_id
+                  = f.simple_fields_for User.new do |p|
+                    = p.input :name
                   = f.button :submit, "提交"
                 a.close-reveal-modal &#215;
             - elsif money_require.can_leader_confirm?
