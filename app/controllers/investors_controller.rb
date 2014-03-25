@@ -43,7 +43,7 @@ class InvestorsController < ApplicationController
     if search.nil?
       render_fail
     else
-      searched = User.joins(:roles).where('roles.name' => :admin).joins(:investor).where('users.name like ?', "%#{search}%").select('investors.id', 'users.name')
+      searched = User.joins(:roles).where('roles.name' => :investor).joins(:investor).where('users.name like ?', "%#{search}%").select('investors.id', 'users.name')
       render_success(nil, data: searched)
     end
   end
