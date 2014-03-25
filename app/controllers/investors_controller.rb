@@ -38,6 +38,16 @@ class InvestorsController < ApplicationController
     end
   end
 
+  def autocomplete
+    search = params.permit(:search)[:search]
+    if search.nil?
+      render_fail
+    else
+      searched = User.joins(:roles).where('roles.name' => :admin).joins(:investor).where('users.name like ?', "%#{search}%").select('investors.id', 'users.name')
+      render_success(nil, data: searched)
+    end
+  end
+
   def update
     if @investor.update( investor_params )
       redirect_to stage1_investor_path(@investor.id)

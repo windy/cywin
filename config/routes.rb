@@ -27,9 +27,7 @@ Eachfund::Application.routes.draw do
       get :stage2
       post :stage2
       post :publish
-      post :invest
       post :invite
-      post :close_investment
     end
     resources :members
   end
@@ -39,6 +37,20 @@ Eachfund::Application.routes.draw do
       post :stage1
       get :stage2
       post :stage2
+    end
+    collection do
+      get :autocomplete
+    end
+  end
+
+  resources :money_requires, only: [ :new, :update, :create ] do
+    member do
+      post :add_leader
+      patch :add_leader
+      post :leader_confirm
+      patch :leader_confirm
+      post :close
+      patch :close
     end
   end
 
@@ -68,16 +80,12 @@ Eachfund::Application.routes.draw do
     end
   end
   resources :messages
-  resources :conversations, only: [:index, :show, :new, :create] do
+  resources :conversations, only: [:index ] do
     member do
-      post :reply
-      post :trash
-      post :untrash
-      post :mark_as_deleted
-      get  :filter
+      post :mark_as_read
     end
     collection do
-      delete 'destroy_multiple'
+      get :unread_count
     end
   end
 

@@ -101,34 +101,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # 发起一个新的融资
-  def invest
-    @project = Project.find(params[:id])
-    money_require_params = params.require(:money_require).permit(:money, :share, :description, :deadline)
-    @money_require = MoneyRequire.new(money_require_params)
-    @project.money_requires << @money_require
-    if @project.save
-      @money_require.start!
-      flash[:notice] = "发起融资成功"
-      render template: 'syndicates/syndicate_info', layout: false
-    else
-      render_fail(@money_require.errors.full_messages.to_s)
-    end
-  end
-
-  # 关闭一个打开中的融资
-  def close_investment
-    @money_require = MoneyRequire.find(params[:id])
-    @project = @money_require.project
-    begin
-      @money_require.close!
-      flash[:notice] = "关闭融资成功"
-      render template: 'syndicates/syndicate_info', layout: false
-    rescue =>e
-      render_fail(e.message)
-    end
-  end
-
   # 发起一个新的招聘
   def invite
     person_requires_params = params.require(:person_require).permit(:title, :pay, :stock, :option, :description)

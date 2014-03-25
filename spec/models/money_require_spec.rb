@@ -79,27 +79,36 @@ describe MoneyRequire do
       
       # 启动第一个投资
       first = @project.money_requires.first
-      first.start!
+      first.preheat!
 
       second = MoneyRequire.new(params)
-      @project.money_requires << second
-      expect(@project.save).to be_false
+      second.project = @project
+      expect(second.save).to be_false
+      expect(second).to have(1).errors_on(:base)
 
     end
 
     it '已经有结束的融资, 再创建没有问题' do
       params = attributes_for(:money_require)
       @project.money_requires << MoneyRequire.new(params)
+      @user = create(:user)
+      @project.add_owner(@user)
       @project.save!
+      
+      leader = build(:investor_passed)
+      leader.user = @user
+      leader.save!
+      @user.add_role(:investor)
       
       # 启动第一个投资
       first = @project.money_requires.first
-      first.start!
-      first.close!
+      first.leader = leader
+      first.status = 'closed'
+      first.save!
 
       second = MoneyRequire.new(params)
-      @project.money_requires << second
-      expect(@project.save).to be_true
+      second.project = @project
+      expect(second.save).to be_true
     end
   end
 
@@ -108,125 +117,161 @@ describe MoneyRequire do
       #创建一轮融资
       @project = create(:project)
       params = attributes_for(:money_require)
+      @user = create(:user)
+      @project.add_owner(@user)
       @project.money_requires << MoneyRequire.new(params)
       @project.save!
+      
+      @leader = build(:investor_passed)
+      @leader.user = @user
+      @leader.save!
+      @user.add_role(:investor)
+      
       @money_require = @project.money_requires.first
     end
+
     describe '启动融资' do
       it '启动融资成功' do
         expect(@money_require.status).to eq("ready")
-        @money_require.start!
-        expect(@money_require.status).to eq("open")
+        @money_require.preheat!
+        expect(@money_require.status).to eq("leader_needed")
       end
 
       it '在融资阶段再次启动融资失败' do
         expect(@money_require.status).to eq("ready")
-        @money_require.start!
+        @money_require.preheat!
 
-        expect { @money_require.start! }.to raise_error
+        expect { @money_require.preheat! }.to raise_error
       end
     end
 
     describe '投资' do
-      it '单人投资' do
-        @money_require.start!
-        investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
-        @money_require.investments << investment
-        expect(@money_require.save).to be_true
-      end
+      describe "领投功能" do
+        describe "正确的" do
+          it "找到正确的领投人" do
+            @money_require.preheat!
+            # find an investor
+            expect( @money_require.add_leader_and_wait_confirm(@leader.id) ).to be_true
+          end
 
-      it '重复投资报错' do
-        @money_require.start!
-        investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
-        @money_require.investments << investment
-        @money_require.save!
+          it "领投确认" do
+            @money_require.preheat!
+            @money_require.add_leader_and_wait_confirm(@leader.id)
+            expect(@money_require.leader_confirm).to be_true
+            expect(@money_require.status).to eq("opened")
+            #binding.pry
+            expect(@user.mailbox.conversations.distinct.count).to eq(1)
+          end
+        end
 
-        investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
-        @money_require.investments << investment
-        expect(@money_require.save).to be_false
-      end
-
-      it "二人投资" do
-        @money_require.start!
-        user = create(:user)
-        user.investor = build(:investor)
-        user.save!
-
-        zhang = create(:zhang)
-        zhang.investor = build(:investor)
-        zhang.save!
-        
-        first = Investment.new(money: attributes_for(:investment_for_money)[:money], investor_id: user.id)
-        @money_require.investments << first
-        expect(@money_require.save).to be_true
-
-        second = Investment.new(money: attributes_for(:investment_for_money)[:money], investor_id: zhang.id)
-        @money_require.investments << second
-        expect(@money_require.save).to be_true
-      end
-
-      it "状态错误时投资" do
-        investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
-        @money_require.investments << investment
-        expect(@money_require.save).to be_false
-
-        @money_require.reload.start!
-        expect(@money_require.save).to be_true
-
-        @money_require.close!
-        @money_require.investments << investment
-        expect(@money_require.save).to be_false
-      end
-
-      it "投资金额错误" do
-        @money_require.reload.start!
-        [-1, 1.1, "hello"].each do |m|
-          @money_require.reload
-          investment = Investment.new(money: m)
-          @money_require.investments << investment
-          expect(@money_require.save).to be_false
+        describe "错误的" do
+          it "未领投无法投资" do
+            @money_require.preheat!
+            investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
+            investment.money_require = @money_require
+            expect(investment.save).to be_false
+            expect(investment).to have(1).errors_on(:base)
+          end
         end
       end
 
-      it "投资进度运算" do
-        #设置 money 投资额
-        @money_require.money = 100
-        @money_require.save!
-        @money_require.start!
+      describe "领投完成后的投资" do
+        before do
+          @money_require.quickly_turn_on!(1)
+        end
+        it '单人投资' do
+          investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
+          investment.money_require = @money_require
+          expect(investment.save).to be_true
+        end
 
-        investment = Investment.new(money: 10)
-        @money_require.investments << investment
-        @money_require.save!
+        it '重复投资报错' do
+          investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
+          investment.money_require = @money_require
+          investment.save!
 
-        expect(@money_require.progress).to eq(0.1)
+          investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
+          investment.money_require = @money_require
+          expect(investment.save).to be_false
+          expect(investment).to have(1).errors_on(:money_require_id)
+        end
 
-        investment = Investment.new(money: 100, investor_id: 2)
-        @money_require.reload
-        @money_require.investments << investment
-        @money_require.save!
-        expect(@money_require.progress).to eq(1.1)
+        it "二人投资" do
+          user = @user
+
+          zhang = create(:zhang)
+          zhang.investor = build(:investor)
+          zhang.save!
+          
+          first = Investment.new(money: attributes_for(:investment_for_money)[:money], investor_id: user.id)
+          first.money_require = @money_require
+          expect(first.save).to be_true
+
+          second = Investment.new(money: attributes_for(:investment_for_money)[:money], investor_id: zhang.id)
+          second.money_require = @money_require
+          expect(second.save).to be_true
+        end
+
+        it "状态错误时投资" do
+          investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
+          @money_require.investments << investment
+          investment.money_require = @money_require
+          expect(investment.save).to be_true
+
+          @money_require.reload.close!
+          investment.money_require = @money_require
+          expect(investment.save).to be_false
+        end
+
+        it "投资金额错误" do
+          [-1, 1.1, "hello"].each do |m|
+            @money_require.reload
+            investment = Investment.new(money: m)
+            investment.money_require = @money_require
+            expect(investment.save).to be_false
+            expect(investment).to have(1).errors_on(:money)
+          end
+        end
+
+        it "投资进度运算" do
+          #设置 money 投资额
+          @money_require.money = 100
+          @money_require.save!
+
+          investment = Investment.new(money: 10)
+          @money_require.investments << investment
+          @money_require.save!
+
+          expect(@money_require.progress).to eq(0.1)
+
+          investment = Investment.new(money: 100, investor_id: 2)
+          @money_require.reload
+          @money_require.investments << investment
+          @money_require.save!
+          expect(@money_require.progress).to eq(1.1)
+        end
+
+        describe "关闭融资" do
+          it "正常关闭融资" do
+            investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
+            @money_require.investments << investment
+            @money_require.save!
+            expect(@money_require.close).to be_true
+          end
+
+          it "无任何投资时关闭融资" do
+            expect(@money_require.close).to be_true
+          end
+
+          #TODO 暂不支持
+          it "无任何投资时重新打开融资" do
+            pending
+          end
+        end
+
       end
     end
 
-    describe "关闭融资" do
-      it "正常关闭融资" do
-        @money_require.start!
-        investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
-        @money_require.investments << investment
-        @money_require.save!
-        expect(@money_require.close).to be_true
-      end
-
-      it "无任何投资时关闭融资" do
-        @money_require.start!
-        expect(@money_require.close).to be_true
-      end
-
-      #TODO 暂不支持
-      it "无任何投资时重新打开融资" do
-        pending
-      end
-    end
   end
 
 

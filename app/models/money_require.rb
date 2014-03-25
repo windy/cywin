@@ -4,7 +4,7 @@ class MoneyRequire < ActiveRecord::Base
 
   validates :deadline, presence: true
   validate do |m|
-    errors.add(:base, "时间必须选在未来") unless m.deadline.future?
+    errors.add(:base, "时间必须选在未来") unless m.deadline.future? or m.status == 'closed'
   end
 
   belongs_to :project
@@ -12,26 +12,47 @@ class MoneyRequire < ActiveRecord::Base
 
   has_many :investments
 
+  belongs_to :leader, class_name: Investor
+
   # 不能同时有两个融资需求打开
   #FIXME 效率可能存在问题
   validate do |m|
     if m.new_record?
-      found = MoneyRequire.where(project_id: m.project_id).where(status: :open).first
+      found = MoneyRequire.where(project_id: m.project_id).where.not(status: :closed).first
     else
-      found = MoneyRequire.where(project_id: m.project_id).where(status: :open).where.not(id: m.id).first
+      found = MoneyRequire.where(project_id: m.project_id).where.not(status: :closed).where.not(id: m.id).first
     end
     if found
       errors.add(:base, "不能在已经存在融资需求时再创建一个")
     end
   end
 
+  # ready -> leader_needed -> opened -> closed
   state_machine :status, initial: :ready do
-    event :start do
-      transition ready: :open
+    event :preheat do
+      transition ready: :leader_needed
+    end
+
+    event :add_leader do
+      transition leader_needed: :leader_need_confirmed
+    end
+
+    after_transition on: :add_leader do |money_require, transition|
+      message_body = ERB.new( File.read( 'app/views/messages/leader_invite.erb') ).result(binding)
+      money_require.owner.send_message( money_require.leader_user, message_body, '领投人邀请确认' )
+    end
+
+    event :leader_confirm do
+      transition leader_need_confirmed: :opened
+    end
+
+    state :leader_need_confirmed, :opened do
+      validates_presence_of :leader_id
     end
 
     event :close do
-      transition open: :close
+      transition opened: :closed
+      transition leader_needed: :closed
     end
   end
 
@@ -48,4 +69,25 @@ class MoneyRequire < ActiveRecord::Base
   def has_invested?(user)
     user && user.investor && self.investments.where(investor_id: user.investor.id).first
   end
+
+  def add_leader_and_wait_confirm(leader_id)
+    self.leader_id = leader_id
+    add_leader
+  end
+
+  def owner
+    self.project.owner
+  end
+
+  def leader_user
+    self.leader.user
+  end
+
+  # 仅仅用来测试
+  def quickly_turn_on!(leader_id)
+    self.leader_id = leader_id
+    self.status = 'opened'
+    self.save!
+  end
+
 end

@@ -8,8 +8,8 @@ class Investment < ActiveRecord::Base
   validates :money_require_id, uniqueness: { scope: :investor_id, message: '不能重复投资' }
 
   validate do |m|
-    if m.money_require_id.present? && m.money_require.status != 'open'
-      errors.add(:base, "无法投资非 open 状态的融资需求")
+    if m.money_require_id.present? && m.money_require.status != 'opened'
+      errors.add(:base, "无法投资非 opened 状态的融资需求")
     end
   end
  
