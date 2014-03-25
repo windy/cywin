@@ -1,6 +1,6 @@
 class InvestorsController < ApplicationController
-  before_action :set_investor, only: [:stage1, :stage2, :update]
   before_action :authenticate_user!
+  before_action :set_investor, only: [:stage1, :stage2, :update]
 
   def new
     @investor = current_user.investor || Investor.new
@@ -43,7 +43,7 @@ class InvestorsController < ApplicationController
     if search.nil?
       render_fail
     else
-      searched = User.joins(:roles).where('roles.name' => :admin).joins(:investor).where('users.name like ?', "%#{search}%").select('investors.id', 'users.name')
+      searched = User.joins(:roles).where('roles.name' => :investor).joins(:investor).where('users.name like ?', "%#{search}%").select('investors.id', 'users.name')
       render_success(nil, data: searched)
     end
   end
