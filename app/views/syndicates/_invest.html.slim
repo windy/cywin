@@ -7,7 +7,7 @@ div.row.invest
         / 未登录
         a.button.disabled href="javascript:void(0)" 登录后可投资
       - else
-        - unless current_user.has_role(:investor)
+        - unless current_user.has_role?(:investor)
             / 未认证投资人
             a.button.disabled href="javascript:void(0)" 只有认证投资人可投资
         - else
