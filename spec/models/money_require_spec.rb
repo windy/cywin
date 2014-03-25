@@ -91,11 +91,18 @@ describe MoneyRequire do
     it '已经有结束的融资, 再创建没有问题' do
       params = attributes_for(:money_require)
       @project.money_requires << MoneyRequire.new(params)
+      @user = create(:user)
+      @project.add_owner(@user)
       @project.save!
+      
+      leader = build(:investor_passed)
+      leader.user = @user
+      leader.save!
+      @user.add_role(:investor)
       
       # 启动第一个投资
       first = @project.money_requires.first
-      first.leader_id = 1
+      first.leader = leader
       first.status = 'closed'
       first.save!
 
@@ -110,10 +117,19 @@ describe MoneyRequire do
       #创建一轮融资
       @project = create(:project)
       params = attributes_for(:money_require)
+      @user = create(:user)
+      @project.add_owner(@user)
       @project.money_requires << MoneyRequire.new(params)
       @project.save!
+      
+      @leader = build(:investor_passed)
+      @leader.user = @user
+      @leader.save!
+      @user.add_role(:investor)
+      
       @money_require = @project.money_requires.first
     end
+
     describe '启动融资' do
       it '启动融资成功' do
         expect(@money_require.status).to eq("ready")
@@ -135,15 +151,16 @@ describe MoneyRequire do
           it "找到正确的领投人" do
             @money_require.preheat!
             # find an investor
-            expect( @money_require.add_leader_and_wait_confirm(1) ).to be_true
+            expect( @money_require.add_leader_and_wait_confirm(@leader.id) ).to be_true
           end
 
           it "领投确认" do
             @money_require.preheat!
-            @money_require.add_leader_and_wait_confirm(1)
+            @money_require.add_leader_and_wait_confirm(@leader.id)
             expect(@money_require.leader_confirm).to be_true
             expect(@money_require.status).to eq("opened")
-            expect(user.mailbox.conversations.size).to eq(1)
+            #binding.pry
+            expect(@user.mailbox.conversations.distinct.count).to eq(1)
           end
         end
 
@@ -180,9 +197,7 @@ describe MoneyRequire do
         end
 
         it "二人投资" do
-          user = create(:user)
-          user.investor = build(:investor)
-          user.save!
+          user = @user
 
           zhang = create(:zhang)
           zhang.investor = build(:investor)

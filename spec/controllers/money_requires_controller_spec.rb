@@ -7,6 +7,11 @@ describe MoneyRequiresController do
     @project = build(:project)
     @project.add_owner(@user)
     @project.save!
+    
+    @leader = build(:investor_passed)
+    @leader.user = @user
+    @leader.save!
+    @user.add_role(:investor)
   end
 
   describe "创建融资功能" do
@@ -34,7 +39,7 @@ describe MoneyRequiresController do
 
     describe "正确添加" do
       it "成功" do
-        post 'add_leader', ActionController::Parameters.new( money_require: { leader_id: 1 }, id: @money_require.id )
+        post 'add_leader', ActionController::Parameters.new( money_require: { leader_id: @leader.id }, id: @money_require.id )
         expect(response).to render_template("syndicates/syndicate_info")
         expect( assigns(:money_require).status ).to eq('leader_need_confirmed')
       end
