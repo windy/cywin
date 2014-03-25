@@ -1,6 +1,6 @@
 class InvestorsController < ApplicationController
-  before_action :set_investor, only: [:stage1, :stage2, :update]
   before_action :authenticate_user!
+  before_action :set_investor, only: [:stage1, :stage2, :update]
 
   def new
     @investor = current_user.investor || Investor.new
