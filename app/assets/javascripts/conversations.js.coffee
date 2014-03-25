@@ -1,9 +1,10 @@
 $(document).ready ->
-  setInterval ->
-    $.get '/conversations/unread_count', (data)->
-      unread_count = data.data.count
-      $('.messagebox').text(unread_count)
-  , 5*1000
+  if $('.messagebox').size > 0
+    setInterval ->
+      $.get '/conversations/unread_count', (data)->
+        unread_count = data.data.count
+        $('.messagebox').text(unread_count)
+    , 5*1000
   $('.conversation').hover ->
     $(this).find('button').show()
   , ->
