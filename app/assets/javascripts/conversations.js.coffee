@@ -1,5 +1,5 @@
 $(document).ready ->
-  if $('.messagebox').size > 0
+  if $('.messagebox').size() > 0
     setInterval ->
       $.get '/conversations/unread_count', (data)->
         unread_count = data.data.count
