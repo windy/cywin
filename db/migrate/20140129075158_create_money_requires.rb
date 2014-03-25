@@ -9,6 +9,7 @@ class CreateMoneyRequires < ActiveRecord::Migration
       t.datetime :deadline
       
       t.integer :project_id
+      t.integer :leader_id
       t.timestamps
     end
   end
