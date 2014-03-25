@@ -1,6 +1,6 @@
 $(document).ready ->
   # 投资某个项目
-  $('#new_syndicate').submit (e)->
+  $(this).on 'submit', '#new_syndicate', (e)->
     e.preventDefault()
     $.post $(this).attr('action'), $(this).serialize(), (data)->
       Alert.doit data, ->
