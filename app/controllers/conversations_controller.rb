@@ -19,4 +19,9 @@ class ConversationsController < ApplicationController
     end
   end
 
+  def unread_count
+    count = current_user.mailbox.conversations(unread: true).distinct.count
+    render_success(nil, data: { count: count })
+  end
+
 end

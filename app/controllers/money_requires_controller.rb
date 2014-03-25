@@ -34,7 +34,7 @@ class MoneyRequiresController < ApplicationController
 
   def leader_confirm
     if @money_require.leader_confirm
-      render_success("领投人确认成功")
+      render template: 'syndicates/syndicate_info', layout: false
     else
       render_fail(@money_require.errors.full_messages.to_s)
     end
@@ -45,7 +45,7 @@ class MoneyRequiresController < ApplicationController
     @project = @money_require.project
     if @money_require.close
       flash[:notice] = "关闭融资成功"
-      render template: 'syndicates/syndicate_info', layout: false
+      render template: 'syndicates/invest', layout: false
     else
       render_fail(@money_require.errors.full_messages.to_s)
     end

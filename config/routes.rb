@@ -84,6 +84,9 @@ Eachfund::Application.routes.draw do
     member do
       post :mark_as_read
     end
+    collection do
+      get :unread_count
+    end
   end
 
   mount ChinaCity::Engine => '/china_city'

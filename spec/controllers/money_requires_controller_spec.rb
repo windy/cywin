@@ -73,9 +73,10 @@ describe MoneyRequiresController do
       @money_require.preheat!
       @money_require.add_leader_and_wait_confirm(1)
     end
+
     it "正确确认" do
       post 'leader_confirm', ActionController::Parameters.new( id: @money_require.id )
-      check_json(response.body, :success, true)
+      expect(response).to render_template("syndicates/invest")
     end
 
     it "不是本人" do
