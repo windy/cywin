@@ -11,6 +11,7 @@ describe Admin::InvestorsController do
         check_json(response.body, 'success', true)
         expect(investor.reload).to be_passed
         expect(investor.user).to be_has_role(:investor)
+        expect(investor.user.mailbox.conversations.distinct.count).to eq(1)
       end
 
       it "提交被拒绝, 重新提交审批通过" do
