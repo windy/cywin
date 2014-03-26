@@ -13,6 +13,16 @@ describe InvestorsController do
       get :new
       response.should be_redirect
     end
+
+    it "已经申请通过进行编辑" do
+      investor = build(:investor)
+      investor.user = @user
+      investor.save!
+
+      get :new
+      response.should be_success
+      assigns(:investor).should eq(investor)
+    end
   end
 
   describe "POST create" do

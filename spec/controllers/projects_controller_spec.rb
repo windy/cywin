@@ -161,28 +161,6 @@ describe ProjectsController do
     end
   end
 
-  describe "invest" do
-    login_user
-    before do
-      @project = build(:project)
-      @project.add_owner(@user)
-      @project.save!
-    end
-
-    it "ok" do
-      post 'invest', ActionController::Parameters.new( id: @project.id, money_require: attributes_for(:money_require) )
-      response.should be_success
-      response.should render_template('syndicates/syndicate_info')
-    end
-
-    it "错误的deadline" do
-      money_require_attr = attributes_for(:money_require, deadline: 7.days.ago.to_datetime )
-      post 'invest', ActionController::Parameters.new( id: @project.id, money_require: money_require_attr )
-      response.should be_success
-      check_json(response.body, :success, false)
-    end
-  end
-
   describe "项目的权限控制测试" do
     describe "投资人, 领投人对项目的权限" do
       it "投资人对一般项目都有权限查看" do

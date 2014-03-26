@@ -92,6 +92,17 @@ div.row.invest
           = f.input :money
           = f.button :submit, "提交"
         a.close-reveal-modal &#215;
+      div.reveal-modal.medium#leader-confirm-modal data-reveal=""
+        h4 领投人确认
+        hr
+        p 请确认以下融资需求与线下谈论的一致:
+        = simple_form_for money_require, url: leader_confirm_money_require_path(money_require), html: { id: 'leader_confirm_form' } do |f|
+          = f.input :money, readonly: true
+          = f.input :share, readonly: true
+          = f.input :deadline, readonly: true
+          = f.input :description, readonly: true
+          = f.button :submit, "确认无误"
+        a.close-reveal-modal &#215;
       hr
 
     div.row.jobs

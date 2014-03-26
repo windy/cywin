@@ -1,24 +1,17 @@
 class InvestorsController < ApplicationController
-  before_action :set_investor, only: [:stage1, :stage2, :show, :edit, :update, :destroy]
   before_action :authenticate_user!
-
-  def index
-    @investors = Investor.all
-  end
-
-  def show
-  end
+  before_action :set_investor, only: [:stage1, :stage2, :update]
 
   def new
-    @investor = Investor.new
-    @investor.investment.build
+    @investor = current_user.investor || Investor.new
+    @investor.investment || @investor.investment.build
   end
 
   def stage1
-    @investor.build_investidea
+    @investor.investidea || @investor.build_investidea
     if request.post?
-      @investor.investidea = Investidea.new(investidea_params)
-      if @investor.save
+      @investor.investidea.assign_attributes(investidea_params)
+      if @investor.investidea.save
         redirect_to stage2_investor_path(@investor.id)
       else
         render :stage1
@@ -32,7 +25,7 @@ class InvestorsController < ApplicationController
 
   def stage2
     if request.post?
-      if @investor.update( card_params )
+      if @investor.update( card_params ) &&  @investor.validate_and_submit
         flash[:notice] = "创建申请成功"
         redirect_to root_path
       else
@@ -45,7 +38,22 @@ class InvestorsController < ApplicationController
     end
   end
 
-  def edit
+  def autocomplete
+    search = params.permit(:search)[:search]
+    if search.nil?
+      render_fail
+    else
+      searched = User.joins(:roles).where('roles.name' => :investor).joins(:investor).where('users.name like ?', "%#{search}%").select('investors.id', 'users.name')
+      render_success(nil, data: searched)
+    end
+  end
+
+  def update
+    if @investor.update( investor_params )
+      redirect_to stage1_investor_path(@investor.id)
+    else
+      render :new
+    end
   end
 
   def create
@@ -60,19 +68,13 @@ class InvestorsController < ApplicationController
     end
   end
 
-  def update
-  end
-
-  def destroy
-  end
-
   private
     def set_investor
       @investor = Investor.find(params[:id])
     end
 
     def investor_params
-      params.require(:investor).permit(:name, :phone, :type, :company, :title, :description )
+      params.require(:investor).permit(:name, :phone, :investor_type, :company, :title, :description )
     end
 
     def investment_params
@@ -82,7 +84,8 @@ class InvestorsController < ApplicationController
     def investidea_params
       params.require(:investor).require(:investidea).permit(:coin_type, :min, :max, :industry, :give, :idea)
     end
+    
     def card_params
-      params.require(:investor).permit(:card)
+      params.require(:investor).permit(:card) rescue {}
     end
 end

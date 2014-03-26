@@ -1,0 +1,27 @@
+nav.top-bar(data-options="is_hover:false" data-topbar)
+  ul.title-area
+    li.name
+      h1 
+        = link_to '后台 Dashboard', admin_root_path
+  div.top-bar-section
+    ul.left
+      li
+        = link_to "用户管理", admin_users_path
+      li
+        = link_to "项目管理", admin_projects_path
+      li
+        = link_to "投资人申批", admin_investors_path
+      li
+        = link_to "领投人申批", admin_leaders_path
+    ul.right
+      li.divider
+      li
+        = link_to "返回前台", root_path
+      li.has-dropdown
+        - if current_user.name and current_user.authentications.length > 0
+          a =current_user.name + "[#{current_user.authentications.first.provider}]"
+        - else 
+          a =current_user.name.empty? ? current_user.email : current_user.name
+        ul.dropdown
+          li
+            = link_to '退出', destroy_user_session_path, :method=>'delete'

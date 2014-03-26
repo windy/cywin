@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304085009) do
+ActiveRecord::Schema.define(version: 20140317095155) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -79,6 +79,14 @@ ActiveRecord::Schema.define(version: 20140304085009) do
     t.datetime "updated_at"
   end
 
+  create_table "investor_audits", force: true do |t|
+    t.integer  "investor_id"
+    t.string   "status"
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "investors", force: true do |t|
     t.string   "name"
     t.string   "phone"
@@ -87,6 +95,7 @@ ActiveRecord::Schema.define(version: 20140304085009) do
     t.text     "description"
     t.string   "investor_type"
     t.string   "card"
+    t.string   "status",        default: "drafted"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -112,6 +121,7 @@ ActiveRecord::Schema.define(version: 20140304085009) do
     t.string   "status",      default: "ready"
     t.datetime "deadline"
     t.integer  "project_id"
+    t.integer  "leader_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

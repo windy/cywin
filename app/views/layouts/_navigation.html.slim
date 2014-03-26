@@ -22,18 +22,11 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
             div.small-4.columns
               a.button href="#" Search
 
-      li.divider
       - if user_signed_in?
-        li.has-dropdown
-          - if current_user.mailbox.inbox.length > 0
-            = link_to "Messages: " + current_user.mailbox.inbox(:unread => true).count(:id, :distinct => true).to_s, "#"
-            /= link_to "Messages: " + current_user.mailbox.inbox.count.to_s
-          - else
-            = link_to "Messages", "#"
-          ul.dropdown
-            li = link_to "View: " + current_user.mailbox.inbox.length.to_s, conversations_path
-            /current_user.mailbox.inbox.first
-            li = link_to "Send to...", :new_conversation
+        li
+          = link_to conversations_path do
+            span.messagebox
+              = current_user.mailbox.inbox(:unread => true).distinct.count(:id)
         li.has-dropdown
           - if current_user.name and current_user.authentications.length > 0
             a =current_user.name + "[#{current_user.authentications.first.provider}]"
@@ -42,6 +35,9 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
           ul.dropdown
             li
               = link_to '创建新项目', new_project_path
+            li
+              - unless current_user.has_role?(:investor)
+                = link_to '申请认证投资人', new_investor_path
             - current_user.projects.each do |project|
               li
                 = link_to project.name, edit_project_path(project)
@@ -51,7 +47,7 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
               = link_to 'Edit account', edit_user_registration_path
             - if current_user.has_role? :admin
               li
-                = link_to '后台管理', users_path
+                = link_to '后台管理', admin_root_path
             li
               div.divtar
             li

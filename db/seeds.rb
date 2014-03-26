@@ -17,3 +17,8 @@ user = User.where(email: ENV['ADMIN_EMAIL']).first_or_create(name: ENV['ADMIN_NA
 puts 'user: ' << user.name
 user.save!(:validate => false)
 user.add_role :admin
+
+(1..3).each do |i|
+  user = User.where(email: "tester#{i}@cywin.cn").first_or_create(name: "tester#{i}", password: '11111111', password_confirmation: '11111111')
+  puts 'user created: ' << user.name
+end

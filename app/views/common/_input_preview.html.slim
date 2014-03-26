@@ -1,5 +1,6 @@
-/ locals: { model, column_name, simple_form }
-= f.input column_name do
+/ locals: { model, column_name, simple_form, options = {} }
+- options = {} if options.blank?
+= f.input column_name, options do
   div.row#logo_image_field
     - if model.send("#{column_name}?")
       div.large-2.columns

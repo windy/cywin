@@ -1,0 +1,4 @@
+<% helpers = Rails.application.routes.url_helpers %>
+<%= money_require.owner.name %> 邀请你成为他的项目: '<%= money_require.project.name %>' 的领投人
+请尽快访问以下链接确认:
+<a href="<%= helpers.project_path(money_require.project) %>"><%= money_require.project.name %></a>

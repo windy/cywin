@@ -78,11 +78,15 @@
               h3.title 投资需求
           div.row
             div.large-12.columns
-              a.expand.button data-reveal-id="invest-modal" data-uri=invest_project_path(@project.id) 发起融资
+              - if @project.opened_money_require
+                a.expand.button.disabled 已经正在融资中
+              - else
+                a.expand.button data-reveal-id="invest-modal" 发起融资预热
           div.reveal-modal.medium#invest-modal data-reveal="" 
             h4 发起新的融资
             hr
-            = simple_form_for(MoneyRequire.new, url: invest_project_path(@project.id)) do |f|
+            = simple_form_for(MoneyRequire.new(project_id: @project.id), url: money_requires_path) do |f|
+              = f.hidden_field :project_id
               = f.input :money
               = f.input :share
               = f.input :deadline

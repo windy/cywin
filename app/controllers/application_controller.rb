@@ -21,4 +21,8 @@ class ApplicationController < ActionController::Base
     }.merge(data)
   end
 
+  def current_ability
+    @current_ability ||= Ability.new(current_user, params)
+  end
+
 end

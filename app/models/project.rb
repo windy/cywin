@@ -1,16 +1,5 @@
 class Project < ActiveRecord::Base
-  #STAGES = [ '概念中', '开发中', '已上线', '已盈利']
-  STAGES = []
-  [
-    :IDEA,
-    :DEVELOPING,
-    :ONLINE,
-    :GAINED
-  ].each do |e|
-    real_name = e.to_s.underscore
-    STAGES << real_name
-    const_set(e, real_name)
-  end
+  my_const_set('STAGES', [ 'IDEA', 'DEVELOPING', 'ONLINE', 'GAINED' ])
     
   validates :name, presence: true, uniqueness: true, length: { minimum: 1 }
   validates :oneword, presence: true, length: { minimum: 4 }
@@ -67,11 +56,11 @@ class Project < ActiveRecord::Base
   end
 
   def opened_money_require
-    self.money_requires.where(status: :open).first
+    self.money_requires.where.not(status: :closed).first
   end
 
   def history_money_requires
-    self.money_requires.where.not(status: :open).order(created_at: :desc)
+    self.money_requires.where(status: :closed).order(created_at: :desc)
   end
   
   # 所有投资人

@@ -9,6 +9,7 @@ class CreateInvestors < ActiveRecord::Migration
       t.string   :investor_type
       t.string   :card
 
+      t.string :status, default: :drafted
       t.integer :user_id
 
       t.timestamps

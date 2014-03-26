@@ -119,18 +119,8 @@ $(document).ready ->
         #TODO 局部刷新即可
         window.location.reload()
 
-  # 启动融资项目
-  $('#new_investment').submit (e)->
-    e.preventDefault()
-    $.post $(this).attr('action'), $(this).serialize(), (data)->
-      ALert.doit data, ->
-        $('#add-investment-modal').foundation('reveal', 'close')
-        $('.syndicate_info').fadeOut 'slow', ->
-          $(this).html(data)
-          $(this).fadeIn('slow')
-
   # 关闭融资功能
-  $(this).on 'click', '#close_investment', (e)->
+  $(this).on 'click', '#close_money_require', (e)->
     e.preventDefault()
     if confirm_data = $(this).data('confirm')
       return unless window.confirm( confirm_data )
@@ -139,3 +129,36 @@ $(document).ready ->
         $('.syndicate_info').fadeOut 'slow', ->
           $(this).html(data)
           $(this).fadeIn('slow')
+
+  $(this).on 'submit', '#add_leader_form', (e)->
+    e.preventDefault()
+    $.post $(this).attr('action'), $(this).serialize(), (data)->
+      Alert.doit data, ->
+        $('#add_leader-modal').foundation('reveal', 'close')
+        $('.syndicate_info').fadeOut 'slow', ->
+          $(this).html(data)
+          $(this).fadeIn('slow')
+  # 领投人自动完成绑定
+  $(this).on 'focus', '#money_require_user_name', (e)->
+    if ! $(this).data('autocomplete')
+      $(this).autocomplete
+        source: (request, response)->
+          console.log(request.term)
+          $.get "/investors/autocomplete", search: request.term, (data)->
+            if data.success
+              response $.map(data['data'], (item)->
+                {
+                  leader_id: item.id,
+                  value: item.name,
+                })
+            else
+              Alert.fail(data.message)
+        ,
+        minLength: 1,
+        select: (event, ui)->
+          $('#money_require_leader_id').val( ui.item.leader_id )
+
+  # 添加领投人按钮
+  $(this).on 'click', '#add_leader_money_require', (e)->
+    e.preventDefault()
+    $('#add_leader-modal').foundation('reveal', 'open')
