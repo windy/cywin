@@ -1,4 +1,10 @@
 //= require jquery.pnotify
+stack_bottomright = {"dir1": "up", "dir2": "left", "firstpos1": 25, "firstpos2": 25}
+$.pnotify.defaults.styling = 'jqueryui'
+$.pnotify.defaults.history = false
+$.pnotify.defaults.delay = 3000
+$.pnotify.defaults.mouse_reset = false
+$.pnotify.defaults.stack = stack_bottomright
 window.Alert =
   doit: (data, callback)->
     if typeof data == "string"
@@ -21,6 +27,7 @@ window.Alert =
       $.pnotify
         title: '操作失败'
         text: data.message
+        addclass: 'stack-bottomright'
         type: 'error'
       false
 
