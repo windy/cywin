@@ -7,26 +7,22 @@ $.pnotify.defaults.mouse_reset = false
 $.pnotify.defaults.stack = stack_bottomright
 window.Alert =
   doit: (data, callback)->
-    if typeof data == "string"
+    message = ''
+    if typeof data == "string" or data.success
+      message = data.message unless typeof data == 'string'
       $.pnotify
         title: '操作成功'
-        text: ''
-        type: 'success'
-      if callback
-        callback(data)
-      return true
-    if data.success
-      $.pnotify
-        title: '操作成功'
-        text: data.message
+        text: message
+        addclass: 'stack-bottomright'
         type: 'success'
       if callback
         callback(data)
       true
     else
+      message = data.message
       $.pnotify
         title: '操作失败'
-        text: data.message
+        text: message
         addclass: 'stack-bottomright'
         type: 'error'
       false
