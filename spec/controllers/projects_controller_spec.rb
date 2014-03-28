@@ -44,6 +44,10 @@ describe ProjectsController do
     end
   end
 
+  describe "update" do
+    pending
+  end
+
   describe "stage1" do
     login_user
     before do

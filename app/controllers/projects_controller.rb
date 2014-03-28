@@ -16,6 +16,11 @@ class ProjectsController < ApplicationController
     @project.build_contact
   end
 
+  def stage0
+    @project = Project.find(params[:id])
+    render :new
+  end
+
   def edit
     @project = Project.find(params[:id])
   end
@@ -114,6 +119,12 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    @project = Project.find(params[:id])
+    if @project.update( project_params )
+      redirect_to stage1_project_path(@project)
+    else
+      render :new
+    end
   end
 
   def show
