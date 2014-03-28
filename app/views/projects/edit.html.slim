@@ -1,6 +1,6 @@
 - content_for(:container) do
   = render partial: "publish_header", locals: { project: @project }
-  div.row
+  div.row ng-app="" ng-controller="MoneyRequireCtrl"
     div.large-8.columns
       div.row
         div.large-12.columns.container
@@ -78,10 +78,8 @@
               h3.title 投资需求
           div.row
             div.large-12.columns
-              - if @project.opened_money_require
-                a.expand.button.disabled 已经正在融资中
-              - else
-                a.expand.button data-reveal-id="invest-modal" 发起融资预热
+              a.expand.button.disabled#new_money_require_enable ng-model="new_money_require_enable" ng-init="new_money_require_enable=#{@project.opened_money_require ? false : true}"  ng-show="! new_money_require_enable" 已经正在融资中
+              a.expand.button data-reveal-id="invest-modal" ng-show="new_money_require_enable" 发起融资预热
           div.reveal-modal.medium#invest-modal data-reveal="" 
             h4 发起新的融资
             hr

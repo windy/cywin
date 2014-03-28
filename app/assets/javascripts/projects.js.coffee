@@ -106,6 +106,8 @@ $(document).ready ->
     $.post $(this).attr('action'), $(this).serialize(), (data)->
       Alert.doit data, ->
         $('#invest-modal').foundation('reveal', 'close')
+        angular.element( $('#new_money_require_enable') ).scope().$apply (scope)->
+          scope.new_money_require_enable = false
         $('.syndicate_info').fadeOut 'slow', ->
           $(this).html(data)
           $(this).fadeIn('slow')
