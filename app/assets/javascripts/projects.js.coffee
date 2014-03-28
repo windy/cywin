@@ -163,4 +163,5 @@ $(document).ready ->
   # 添加领投人按钮
   $(this).on 'click', '#add_leader_money_require', (e)->
     e.preventDefault()
+    $('#add_leader-modal').foundation('reveal', 'init')
     $('#add_leader-modal').foundation('reveal', 'open')
