@@ -14,4 +14,5 @@ h1 基本信息
       = f.select :where3, ['--地区--'], {}, class: 'city-select large-4 columns', default: @project.where3
   hr
   = render partial: "contact", locals: { f: f, project: @project }
-  = f.button :submit, "Next"
+  div.control-options
+    = f.button :submit, "下一步"

@@ -1197,8 +1197,12 @@ $topbar-link-bg-active: black;
 
 $title-bg-color: #F5F5F5;
 
+.control-options {
+  margin-left: 40%;
+}
+
 input.button {
-  left: 40%;
+  left: 3%;
 }
 
 .button.cancel {

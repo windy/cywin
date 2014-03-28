@@ -19,4 +19,7 @@ hr
   h5
     = link_to "添加一个成员", new_project_member_path(@project), class: 'add_member'
   div.add_member_section
-  = f.button :submit, "Next"
+
+  div.control-options
+    = link_to '上一步', stage0_project_path(@project), class: 'button cancel left'
+    = f.button :submit, "下一步", class: 'left'
