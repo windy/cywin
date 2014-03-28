@@ -1,4 +1,12 @@
 $(document).ready ->
+  $(this).on 'click', '#add-syndicate-button', (e)->
+    e.preventDefault()
+    $('#add-syndicate-modal').foundation('reveal', 'open')
+
+  $(this).on 'click', '#leader-confirm-button', (e)->
+    e.preventDefault()
+    $('#leader-confirm-modal').foundation('reveal', 'open')
+  
   # 投资某个项目
   $(this).on 'submit', '#new_syndicate', (e)->
     e.preventDefault()
