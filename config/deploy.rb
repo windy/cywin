@@ -11,7 +11,7 @@ require 'mina/git'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :domain, 'yafeilee.me'
-set :deploy_to, '/home/cywin/cywin'
+set :deploy_to, '/home/ruby/cywin'
 set :repository, 'git@github.com:windy/cywin.git'
 set :branch, 'staging'
 set :app_path, "#{deploy_to}/#{current_path}"
