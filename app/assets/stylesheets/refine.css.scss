@@ -1,0 +1,21 @@
+.refine-advertise {
+  padding-top: 2.875rem;
+  background-color: #13a7c7;
+  color: white;
+  h1 {
+    color: white;
+  }
+}
+
+.load-more {
+  width: 100%;
+  text-align: center;
+  button {
+    background-color: transparent;
+    color: #333333;
+    border: 1px solid #DDDDDD;
+    &:focus {
+      outline-style: none;
+    }
+  }
+}
