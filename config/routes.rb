@@ -17,6 +17,7 @@ Eachfund::Application.routes.draw do
       get :job
     end
   end
+  resources :refine
   resources :syndicates
   resources :funds
   resources :jobs, only: [:index]
