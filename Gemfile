@@ -21,7 +21,7 @@ gem 'sendgrid'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'therubyracer', :platform=>:ruby
-gem "foundation-rails"
+gem "foundation-rails", "~> 5.2.2.0"
 
 # for observers
 gem 'rails-observers'
