@@ -1,4 +1,4 @@
-app_path = "/home/cywin/cywin/current"
+app_path = "/home/ruby/cywin/current"
 
 worker_processes   1
 preload_app        true

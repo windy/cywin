@@ -23,7 +23,7 @@ set :app_path, "#{deploy_to}/#{current_path}"
 set :shared_paths, ['config/database.yml', 'config/application.yml', 'config/service.yml', 'log', 'tmp', 'public/uploads']
 
 # Optional settings:
-set :user, 'cywin'    # Username in the server to SSH to.
+set :user, 'ruby'    # Username in the server to SSH to.
 #   set :port, '30000'     # SSH port number.
 
 # This task is the environment that is loaded for most commands, such as
