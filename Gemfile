@@ -23,6 +23,7 @@ gem 'slim-rails'
 gem 'therubyracer', :platform=>:ruby
 gem 'foundation-rails'
 gem 'settingslogic'
+gem 'foundation-icons-sass-rails'
 
 # for observers
 gem 'rails-observers'
