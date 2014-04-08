@@ -1,0 +1,18 @@
+.middle-text {
+  text-align: center;
+  z-index: 999;
+  a {
+    color: #F7F7F7;
+  }
+}
+
+.off-canvas-list {
+  i {
+    margin-right: 0.5rem;
+    display: inline-block;
+    width: 1rem;
+  }
+  label {
+    cursor: default;
+  }
+}
