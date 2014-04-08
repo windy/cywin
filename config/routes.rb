@@ -74,6 +74,12 @@ Eachfund::Application.routes.draw do
     root :to=> "dashboard#index"
   end
   root :to => "home#index"
+  resources :home do
+    collection do
+      get :index
+      get :welcome
+    end
+  end
   #devise_for :users, :controllers => {:registrations => "registrations"}
   devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}
   resources :users do

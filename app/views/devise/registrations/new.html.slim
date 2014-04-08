@@ -1,12 +1,14 @@
-div.row.project
-  div.large-12.columns
-    h2 新用户注册
-    = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f|
-      = f.error_notification
-      = display_base_errors resource
-      = f.input :name, :autofocus => true, :required => true
-      = f.input :email, :required => true
-      = f.input :password, :required => true
-      = f.input :password_confirmation, :required => true
-      = f.button :submit, '注册', :class => 'btn-primary'
-    = render "devise/shared/links"
+.user-new
+  .row
+    .small-12.large-10.large-centered.columns
+      form
+        h1 加入#{Setting.site_name}
+        p 真正的互联网式的创业服务
+        .row
+          .small-12.large-6.columns
+            = text_field_tag 'username', nil, placeholder: '真实姓名'
+            = text_field_tag 'email', nil, placeholder: '邮箱地址'
+            = password_field_tag 'password', nil, placeholder: '密码'
+            = password_field_tag 'password_confirm', nil, placeholder: '再次确认密码'
+            /*button 提交*/
+            = link_to '提交', welcome_home_index_path, class: 'button'
