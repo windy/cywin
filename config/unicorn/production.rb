@@ -1,6 +1,6 @@
-app_path = "/home/cywin/app/current"
+app_path = "/home/cywin/cywin/current"
 
-worker_processes   2
+worker_processes   1
 preload_app        true
 timeout            180
 listen             '/tmp/unicorn_cywin.sock'

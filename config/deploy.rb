@@ -11,7 +11,7 @@ require 'mina/git'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :domain, 'yafeilee.me'
-set :deploy_to, '/home/cywin/app'
+set :deploy_to, '/home/cywin/cywin'
 set :repository, 'git@github.com:windy/cywin.git'
 set :branch, 'staging'
 set :app_path, "#{deploy_to}/#{current_path}"
@@ -45,6 +45,12 @@ end
 task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
+
+  queue! %[mkdir -p "#{deploy_to}/shared/public/uploads"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/public/uploads"]
+
+  queue! %[mkdir -p "#{deploy_to}/shared/tmp"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
 
   queue! %[mkdir -p "#{deploy_to}/shared/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
