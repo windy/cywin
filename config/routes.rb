@@ -22,6 +22,8 @@ Eachfund::Application.routes.draw do
   resources :explore do
     collection do
       get :all
+      get :categories
+      get :trend
     end
   end
   resources :syndicates

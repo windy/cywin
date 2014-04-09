@@ -1,21 +1,9 @@
+- content_for(:title) do
+  | 发现
 .explore.top-blank
   .row
     .small-12.columns
-      .explore-head
-        h1 发现你的好项目
-        .row
-          .list
-            .small-3.large-3.columns
-              a.active href="#" 广场
-          .list
-            .small-3.large-3.columns
-              a href="#" 分类
-          .list
-            .small-3.large-3.columns
-              a href="#" 趋势
-          .list
-            .small-3.large-3.columns
-              a href="#" 所有
+      = render partial: 'head', locals: { type: 'square' }
       / 广场
       .square
         h2 推荐
@@ -35,7 +23,7 @@
                 .category
                   = link_to '互联网', category_path(1)
             .small-12.columns.all-categories
-              = link_to '查看所有分类', categories_path
+              = link_to '查看所有分类', categories_explore_index_path
         h2 最新项目
         .square-projects
           .row

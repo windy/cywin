@@ -1,0 +1,15 @@
+.explore-head
+  h1 发现你的好项目
+  .row
+    .list
+      .small-3.large-3.columns
+        = link_to '广场', explore_index_path, class: active_for(type, 'square')
+    .list
+      .small-3.large-3.columns
+        = link_to '分类', categories_explore_index_path, class: active_for(type, 'categories')
+    .list
+      .small-3.large-3.columns
+        = link_to '趋势', trend_explore_index_path, class: active_for(type, 'trend')
+    .list
+      .small-3.large-3.columns
+        = link_to '所有', trend_explore_index_path, class: active_for(type, 'all')

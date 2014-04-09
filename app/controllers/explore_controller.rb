@@ -4,4 +4,10 @@ class ExploreController < ApplicationController
 
   def all
   end
+
+  def categories
+  end
+
+  def trend
+  end
 end
