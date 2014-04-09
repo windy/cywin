@@ -1,0 +1,26 @@
+.welcome {
+  padding-top: 2.875rem;
+  background-color: white;
+  padding-bottom: 2rem;
+  h1 {
+    padding-bottom: 1rem;
+  }
+
+  .actions {
+    text-align: center;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ddd;
+    .action {
+      padding: 2rem 0;
+      display: inline-block;
+      border: 1px solid #ddd;
+      width: 100%;
+
+      a {
+        color: #333;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
