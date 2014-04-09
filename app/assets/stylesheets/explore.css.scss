@@ -17,14 +17,15 @@
         width: 100%;
         color: #333;
         font-size: 1.2rem;
+        display: inline-block;
+        width: 100%;
+        padding-bottom: 1.875rem;
       }
       .active {
-        padding-bottom: 1.875rem;
-        border-bottom: 1px solid red;
+        border-bottom: 2px solid #d26911;
       }
     }
 
-    padding-bottom: 2rem;
     margin-bottom: 3rem;
     border-bottom: 1px solid #ddd;
     width: 100%;
