@@ -4,4 +4,35 @@
   .row
     .small-12.columns
       = render partial: 'head', locals: { type: 'trend' }
-      h1 hello world
+      .trend
+        h2 一周关注最多
+        .attend-most
+          .recommend-projects
+            .row
+              - 6.times do
+                .small-12.large-4.columns.recommend-project
+                  = link_to root_path do
+                    - image_tag 'j/jingpin2.jpg'
+                  p
+                    | 精品3 - 热爱你的生活
+        h2 一周内融资最多
+        .invest-most
+          .recommend-projects
+            .row
+              - 6.times do
+                .small-12.large-4.columns.recommend-project
+                  = link_to root_path do
+                    - image_tag 'j/jingpin2.jpg'
+                  p
+                    | 精品3 - 热爱你的生活
+        h2 一周内评论最多
+        .invest-most
+          .recommend-projects
+            .row
+              - 6.times do
+                .small-12.large-4.columns.recommend-project
+                  = link_to root_path do
+                    - image_tag 'j/jingpin3.jpg'
+                  p
+                    | 精品3 - 热爱你的生活
+
