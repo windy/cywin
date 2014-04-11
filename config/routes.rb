@@ -38,6 +38,8 @@ Eachfund::Application.routes.draw do
       post :stage2
       post :publish
       post :invite
+      get :team
+      get :invest
     end
     resources :members
   end

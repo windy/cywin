@@ -89,29 +89,6 @@
         margin: 1rem 0;
       }
     }
-    .person {
-      padding: 1rem 0;
-
-      .name {
-        padding-bottom: 0.2rem;
-        a {
-          color: #333;
-          font-weight: 600;
-          font-size: 1.1rem;
-        }
-      }
-
-      .job-title {
-        color: #999;
-        font-weight: 500;
-        padding-bottom: 0.5rem;
-      }
-
-      .description {
-        color: #999;
-      }
-
-    }// person
 
     .job {
 
@@ -133,3 +110,27 @@
     }
   }//content
 }
+
+.person {
+  padding: 1rem 0;
+
+  .name {
+    padding-bottom: 0.2rem;
+    a {
+      color: #333;
+      font-weight: 600;
+      font-size: 120%;
+    }
+  }
+
+  .job-title {
+    color: #999;
+    font-weight: 500;
+    padding-bottom: 0.5rem;
+  }
+
+  .description {
+    color: #999;
+  }
+
+}// person

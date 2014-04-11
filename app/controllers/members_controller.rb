@@ -7,7 +7,6 @@ class MembersController < ApplicationController
   end
 
   def index
-    @members = @project.members_but(current_user)
   end
 
   def new

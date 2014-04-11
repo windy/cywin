@@ -1,11 +1,11 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :authenticate_user!, except: [ :index, :show, :team, :invest ]
 
   before_action( only: [:edit, :stage1, :stage2, :publish, :invest, :invite] ) do 
     @project = Project.find(params[:id])
   end
 
-  load_and_authorize_resource
+  #load_and_authorize_resource
 
   def index
     @projects = Project.published
@@ -129,6 +129,12 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+  end
+
+  def team
+  end
+
+  def invest
   end
 
   private
