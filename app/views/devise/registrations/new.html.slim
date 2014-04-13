@@ -11,4 +11,5 @@
             = password_field_tag 'password', nil, placeholder: '密码'
             = password_field_tag 'password_confirm', nil, placeholder: '再次确认密码'
             /*button 提交*/
-            = link_to '提交', welcome_home_index_path, class: 'button'
+            = link_to '马上注册', welcome_home_index_path, class: 'button'
+            = link_to '已有账号, 登录?', new_user_session_path, class: 'login-link'
