@@ -1,15 +1,19 @@
+- content_for(:title) do
+  | 注册
 .user-new.top-blank
   .row
     .small-12.large-10.large-centered.columns
-      form
+      = devise_error_messages!
+      p #{flash[:notice]}
+      = form_for :user, url: user_registration_path do |f|
         h1 加入#{Setting.site_name}
         p 真正的互联网式的创业服务
         .row
           .small-12.large-6.columns
-            = text_field_tag 'username', nil, placeholder: '真实姓名'
+            = f.text_field 'name', placeholder: '真实姓名'
             = text_field_tag 'email', nil, placeholder: '邮箱地址'
             = password_field_tag 'password', nil, placeholder: '密码'
             = password_field_tag 'password_confirm', nil, placeholder: '再次确认密码'
             /*button 提交*/
-            = link_to '马上注册', welcome_home_index_path, class: 'button'
+            = f.submit '马上注册', class: 'button'
             = link_to '已有账号, 登录?', new_user_session_path, class: 'login-link'

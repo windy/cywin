@@ -30,11 +30,44 @@
     min-height: 8rem;
   }
 
-  .stage0 {
-    .control-actions {
-      width: 100%;
-      text-align: center;
+  .title {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .control-actions {
+    width: 100%;
+    text-align: center;
+    .back-link {
+      margin-left: 0.5rem;
     }
+  }
+
+  .stage1 {
+    .edit {
+      position: absolute;
+      right: 1rem;
+      top: 0.5rem;
+    }
+  }
+
+  .stage2 {
+    .title {
+      display: inline-block;
+      padding: 0;
+      border: none;
+    } 
+
+    .job-box {
+      border: 1px solid #ddd;
+      padding: 1rem 0;
+      margin: 1rem;
+      table {
+        border: none;
+      }
+    }
+
   }
 
 }

@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index, :show, :team, :invest, :new, :stage0, :stage1 ]
+  before_action :authenticate_user!, except: [ :index, :show, :team, :invest, :new, :stage0, :stage1, :stage2 ]
 
   before_action( only: [:edit, :stage1, :stage2, :publish, :invest, :invite] ) do 
     @project = Project.find(params[:id])
@@ -42,37 +42,6 @@ class ProjectsController < ApplicationController
 
   # 创建第三步
   def stage2
-    authorize! :stage2, @project
-    if request.post?
-      # add money_require
-      money_require_flag = params.permit(:money_require)[:money_require]
-      if money_require_flag
-        money_require_params = params.require(:project).require(:money_requires).permit(:money, :share, :deadline, :description)
-        @money_require = MoneyRequire.new(money_require_params)
-        @project.money_requires << @money_require
-      end
-      #TODO 多人招聘的支持
-      person_require_flag = params.permit(:person_require)[:person_require]
-      if person_require_flag
-        person_requires_params = params.require(:project).require(:person_requires).permit(:title, :pay, :stock, :option, :description)
-        @person_require = PersonRequire.new(person_requires_params)
-        @project.person_requires << @person_require
-      end
-      if @project.save
-        flash[:notice] = "项目创建成功"
-        redirect_to edit_project_path(@project.id)
-        return
-      else
-        render :stage2
-        return
-      end
-    # get
-    else
-      @money_require = @project.money_requires.build
-      @person_require = PersonRequire.new
-      render :stage2
-      return
-    end
   end
 
   def publish
