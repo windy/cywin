@@ -91,7 +91,7 @@ Eachfund::Application.routes.draw do
     end
   end
   devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}
-  resources :users, only: [] do
+  resources :users, only: [:show] do
     collection do
       get :autocomplete
     end
