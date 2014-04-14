@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index, :show, :team, :invest ]
+  before_action :authenticate_user!, except: [ :index, :show, :team, :invest, :new ]
 
   before_action( only: [:edit, :stage1, :stage2, :publish, :invest, :invite] ) do 
     @project = Project.find(params[:id])

@@ -1,18 +1,50 @@
-= render partial: "header", locals: { stage: :stage0 }
-h1 基本信息
-= simple_form_for @project do |f|
-  = render(partial: 'common/input_preview', locals: { f: f, model: @project, column_name: :logo})
-  = f.input :name
-  = f.input :oneword
-  = f.input :description
-  = f.input :stage do
-    = f.select :stage, Project::STAGES.collect { |m| [ t('project.stages.' + m), m ] }, { include_blank: true }
-  = f.input :where3 do
-    .city-group
-      = f.select :where1, ['--省份--'] + ChinaCity.list, {}, { class: 'city-select large-4 columns' }
-      = f.select :where2, ['--城市--'], {}, class: 'city-select large-4 columns', default: @project.where2
-      = f.select :where3, ['--地区--'], {}, class: 'city-select large-4 columns', default: @project.where3
-  hr
-  = render partial: "contact", locals: { f: f, project: @project }
-  div.control-options
-    = f.button :submit, "下一步"
+.project-new.top-blank
+  .row
+    .small-12.columns
+      = render partial: "header", locals: { stage: :stage0 }
+      form.stage0
+        h3.title 项目信息
+        .row
+          .small-12.large-6.columns
+            label for='name' 项目名称
+            = text_field_tag 'name', nil, placeholder: '如: 百度'
+        .row
+          .small-12.large-8.columns
+            label for='logo' Logo
+            = file_field_tag 'logo'
+        .row
+          .small-12.large-6.columns
+            label for='oneword' 一句话
+            = text_field_tag 'oneword', nil, placeholder: '一句话说明, 将显示在项目副标题'
+        .row
+          .small-12.large-8.columns
+            label for='description' 产品介绍
+            = text_area_tag 'description', nil, placeholder: '完整描述你的产品'
+        .row
+          .small-12.large-4.columns
+            label for='industry' 所属行业
+            = text_field_tag 'industry', nil, placeholder: ''
+        .row
+          .small-12.large-4.columns
+            label for='city' 城市
+            = text_field_tag 'city', nil, placeholder: ''
+        .row
+          .small-12.large-8.columns
+            hr
+        h3.title 联系方式
+        .row
+          .small-12.large-8.columns
+            label for="address" 项目地址
+            = text_field_tag 'address', nil, placeholder: '如: 百度'
+        .row
+          .small-12.large-6.columns
+            label for='phone' 电话
+            = text_field_tag 'phone', nil, placeholder: ''
+        .row
+          .small-12.large-6.columns
+            label for='weixin' 微信
+            = text_field_tag '微信', nil, placeholder: ''
+        .row
+          .small-12.large-6.columns
+            .control-actions
+              button 下一步

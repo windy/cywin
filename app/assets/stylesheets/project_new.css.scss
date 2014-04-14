@@ -1,0 +1,36 @@
+.project-new {
+  background-color: white;
+
+  .head {
+    margin-bottom: 2rem;
+
+    .list {
+      text-align: center;
+      width: 100%;
+      li {
+        border: 1px solid #ddd;
+        padding: 0;
+      }
+      a {
+        width: 100%;
+        color: #aaa;
+        display: inline-block;
+        width: 100%;
+        padding: 1.5rem 0;
+        font-size: 1.2rem;
+      }
+      .active {
+        color: #333;
+      }
+    }
+
+  }// head
+
+  .stage0 {
+    .control-actions {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+}
