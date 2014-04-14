@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index, :show, :team, :invest, :new ]
+  before_action :authenticate_user!, except: [ :index, :show, :team, :invest, :new, :stage0, :stage1 ]
 
   before_action( only: [:edit, :stage1, :stage2, :publish, :invest, :invite] ) do 
     @project = Project.find(params[:id])
@@ -38,28 +38,6 @@ class ProjectsController < ApplicationController
 
   # 创建第二步
   def stage1
-    @owner = @project.owner
-    @member = @project.member(@owner)
-    if request.post?
-      avatar_params = params.require(:project).require(:owner).permit(:avatar, :avatar_cache)
-      if avatar_params
-        unless @owner.update(avatar_params)
-          render :stage1
-          return
-        end
-      end
-      member_params = params.require(:project).require(:member).permit(:title, :description)
-      unless @member.update(member_params)
-        render :stage1
-        return
-      end
-      redirect_to stage2_project_path(params[:id])
-      return
-    # get
-    else
-      render :stage1
-      return
-    end
   end
 
   # 创建第三步

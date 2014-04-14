@@ -1,25 +1,5 @@
-= render partial: "header", locals: { stage: :stage1 }
-h1 团队信息
-hr
-= simple_form_for @project, url: stage1_project_path(@project.id), method: 'post',html:{ class: 'stage1' } do |f|
-  h4 我
-  div.owner
-    = f.simple_fields_for :owner, @owner do |p|
-      = render partial: "common/input_preview", locals: { model: @owner, column_name: :avatar, f: p }
-    = f.simple_fields_for :member, @member do |p|
-      = p.input :title
-      = p.input :description
-  hr
-  h4 团队其他成员
-  div.members data-uri=project_members_path(@project.id)
-    ul.small-block-grid-3
-      = render partial: 'members/member', collection: @project.members_but(current_user)
-      
-  hr
-  h5
-    = link_to "添加一个成员", new_project_member_path(@project), class: 'add_member'
-  div.add_member_section
-
-  div.control-options
-    = link_to '上一步', stage0_project_path(@project), class: 'button cancel left'
-    = f.button :submit, "下一步", class: 'left'
+.project-new.top-blank
+  .row
+    .small-12.columns
+      = render partial: "header", locals: { stage: :stage1 }
+      h1 团队信息
