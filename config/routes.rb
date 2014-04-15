@@ -95,6 +95,12 @@ Eachfund::Application.routes.draw do
     collection do
       get :autocomplete
     end
+
+    member do
+      get :edit
+      get :starred
+      get :change_password
+    end
   end
   resources :messages
   resources :conversations, only: [:index ] do

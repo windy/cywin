@@ -1,0 +1,14 @@
+- content_for(:title) do
+  | 修改资料 - WinDy
+
+.profile.top-blank
+  .row
+    .small-12.columns
+      form
+        label for='avatar' 头像
+        = file_field_tag 'avatar'
+        label for='name' 名字
+        = text_field_tag 'name', '李亚飞'
+        label for='email' 邮箱
+        = text_field_tag 'name', 'lyfi2003@gmail.com', disabled: true
+        button.small 确认修改

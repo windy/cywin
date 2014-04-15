@@ -20,6 +20,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def edit
+  end
+
+  def change_password
+  end
+
+  def starred
+  end
+
   def update
     authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @user = User.find(params[:id])
