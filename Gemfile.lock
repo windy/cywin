@@ -281,7 +281,8 @@ DEPENDENCIES
   devise_invitable
   factory_girl_rails
   figaro
-  foundation-rails
+  foundation-icons-sass-rails
+  foundation-rails (~> 5.2.2.0)
   guard
   guard-bundler
   guard-rails
