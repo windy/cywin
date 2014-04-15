@@ -17,6 +17,7 @@ html
       .inner-wrap
         = render 'layouts/navigation'
         section.main-section ng-app="app"
-          = yield
+          .main-container
+            = yield
           = render 'layouts/foot'
         a.exit-off-canvas
