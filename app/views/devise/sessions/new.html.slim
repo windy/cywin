@@ -1,9 +1,14 @@
-div.row.project
-  div.large-12.columns
-    h2 登录
-  = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f|
-    = f.input :email, :autofocus => true
-    = f.input :password
-    = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
-    = f.button :submit, "登录", :class => 'btn-primary'
-  = render "devise/shared/links"
+- content_for(:title) do
+  | 登录
+.user-new.top-blank
+  .row
+    .small-12.large-10.large-centered.columns
+      form
+        h1 欢迎回来#{Setting.site_name}
+        p 真正的互联网式的创业服务
+        .row
+          .small-12.large-6.columns
+            = text_field_tag 'email', nil, placeholder: '邮箱地址'
+            = password_field_tag 'password', nil, placeholder: '密码'
+            /*button 提交*/
+            = link_to '登录', welcome_home_index_path, class: 'button'

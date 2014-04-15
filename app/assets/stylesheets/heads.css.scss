@@ -1,0 +1,28 @@
+.middle-text {
+  text-align: center;
+  z-index: 999;
+  a {
+    color: #F7F7F7;
+  }
+
+  .top-right {
+    margin-right: 0.5rem;
+    font-weight: 400;
+    font-size: 1rem;
+    a {
+      display: inline-block;
+      margin-left: 1rem;
+    }
+  }
+}
+
+.off-canvas-list {
+  i {
+    margin-right: 0.5rem;
+    display: inline-block;
+    width: 1rem;
+  }
+  label {
+    cursor: default;
+  }
+}

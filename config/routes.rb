@@ -17,6 +17,15 @@ Eachfund::Application.routes.draw do
       get :job
     end
   end
+  resources :refine
+  resources :categories
+  resources :explore do
+    collection do
+      get :all
+      get :categories
+      get :trend
+    end
+  end
   resources :syndicates
   resources :funds
   resources :jobs, only: [:index]
@@ -29,6 +38,8 @@ Eachfund::Application.routes.draw do
       post :stage2
       post :publish
       post :invite
+      get :team
+      get :invest
     end
     resources :members
   end
@@ -73,11 +84,22 @@ Eachfund::Application.routes.draw do
     root :to=> "dashboard#index"
   end
   root :to => "home#index"
-  #devise_for :users, :controllers => {:registrations => "registrations"}
+  resources :home do
+    collection do
+      get :index
+      get :welcome
+    end
+  end
   devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}
-  resources :users do
+  resources :users, only: [:show] do
     collection do
       get :autocomplete
+    end
+
+    member do
+      get :edit
+      get :starred
+      get :change_password
     end
   end
   resources :messages

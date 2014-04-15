@@ -1,122 +1,134 @@
-div.row.project_container
-  div.large-2.columns
-    = image_tag( @project.logo_url, size: "200x200" )
-  div.large-10.columns
-    h4.project_name = @project.name
-    div.row
-      div.large-7.columns
-        = @project.description
-    ul.sub-nav.right
-      li
-        - if current_user.try(:star?, @project)
-          button#star_project.has_starred data-uri=stars_path data-id=@project.id 已关注
-        - else
-          button#star_project.unstarred data-uri=stars_path data-id=@project.id 关注
-      li
-        button.button 约谈 
-    div.row
-      div.large-7.columns
-        ul.sub-nav
+- content_for(:title) do 
+  | 项目一
+.project-show.top-blank
+  .row.head
+    .small-6.large-2.columns
+      = image_tag 'xingbake.jpg'
+    .small-6.large-10.columns
+      .name-area
+        h4.name
+          = link_to '项目一', project_path(1)
+        p.sub-name
+         | 这是一个项目的简要描述
+  .row.operate
+    .small-6.columns
+      = link_to '关注', '#'
+    .small-6.columns
+      = link_to '约谈', '#'
+  = render partial: 'show_tab', locals: { type: 'basic' }
+  .row.content
+    .small-12.columns
+      .basic-content
+        ul.image data-orbit=""
           li
-            p.address 
-              = project_address(@project)
+            = image_tag 'p/1.jpg'
+            .orbit-caption 正面
           li
-            p.industry
-              | 电子商务
-  hr 
-  div.row
-    div.large-12.columns
-      = image_tag("project_example.png", width: "100%")
-  hr
-  div.row
-    div.large-12.columns
-      p.columns
-        | 这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.
-      p.columns
-        | 这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.这是一段关于产品的简单的介绍.
-  hr 
-div.row.team
-  div.large-12.columns
-    div.row.member
-      div.large-2.columns.logo
-        = image_tag("121.jpg", width: "200x200")
-      div.large-10.columns
-        h3.name 
-          = link_to "李亚飞", user_path(1) 
-        p.title CTO
-        p.description 这是一个CTO的个人介绍.
-    hr
+            = image_tag 'p/2.jpg'
+            .orbit-caption 反面
+          li
+            = image_tag 'p/3.jpg'
+            .orbit-caption 侧面 
+          li
+            = image_tag 'p/4.jpg'
+            .orbit-caption 后面 
+        h3.title 基本介绍
+        p
+          | 星巴克是美国一家连锁咖啡公司的名称，1971年成立，为全球最大的咖啡连锁店，其总部坐落美国华盛顿州西雅图市。星巴克在美国和加拿大的学生与城市白领中非常流行。除咖啡外，星巴克亦有茶、馅皮饼及蛋糕等商品。部分星巴克店甚至与超级市场，书店等异业结盟，于合作店铺内觅地开业.
+        p
+          | We have a variety of investors that we're actively working with: angels, angel funds, high-net-worth individuals, private equity firms, investment banks, and other institutions - over 500 are ready to join the platform.
 
-div.row.invest
-  div.large-12.columns
-    div.row.investors
-      div.large-4.columns
-        div.row.investor
-          div.large-4.columns
-            = image_tag("121.jpg", width: "200x200")
-          div.large-8.columns
-            h3.name
-              = link_to "李投资", user_path(1)
-            p.title Partner at Innovation Works( IW).
-            p.description 另一个投资人的介绍.
+        .invest
+          h3.title 投资情况
+          h4 当前轮次 ( 2014.4.11 - )
+          .row
+            .small-12.large-6.columns
+              .box
+                .sub-title
+                  | 计划融资
+                h5.sub-content 100万
+            .small-12.large-6.columns
+              .box
+                .sub-title
+                  | 领投人
+                h5.sub-content xx 正在领投 
+            .small-12.large-6.columns
+              .box
+                .sub-title
+                  | 已获融资
+                h5.sub-content xx 80万
+            .small-12.columns.more-info
+              = link_to '更多投资信息...', '#'
+            .small-12.columns.invest-button
+              button 我要投资
+          hr
+          h4 历史投资 ( 2013.1.11 - 2013.3.11 )
+          .row
+            .small-12.large-6.columns
+              .box
+                .sub-title
+                  | 融资规模
+                h5.sub-content 100万
+            .small-12.large-6.columns
+              .box
+                .sub-title
+                  | 领投人
+                h5.sub-content xx 正在领投 
+            .small-12.large-6.columns
+              .box
+                .sub-title
+                  | 当时估值
+                h5.sub-content 1000万
+            .small-12.large-6.columns
+              .box
+                .sub-title
+                  | 融资花费时间
+                h5.sub-content 10天
 
-      div.large-4.columns
-        div.row.investor
-          div.large-4.columns
-            = image_tag("121.jpg", width: "200x200")
-          div.large-8.columns
-            h3.name
-              = link_to "李投资", user_path(1)
-            p.title Partner at Innovation Works( IW).
-            p.description 另一个投资人的介绍.
-          
-      div.large-4.columns
-        div.row.investor
-          div.large-4.columns
-            = image_tag("121.jpg", width: "200x200")
-          div.large-8.columns
-            h3.name
-              = link_to "李投资", user_path(1)
-            p.title Partner at Innovation Works( IW).
-            p.description 另一个投资人的介绍.
-      hr
-
-    - if money_require = @project.opened_money_require
-      div#invest
-        = render partial: "syndicates/invest", locals: { money_require: money_require }
-      div.reveal-modal.medium#add-syndicate-modal data-reveal="" 
-        h4 项目投资
-        hr
-        = simple_form_for(Investment.new(money_require_id: money_require.id), url: syndicates_path, html: { id: 'new_syndicate' }) do |f|
-          = f.hidden_field :money_require_id
-          = f.input :money
-          = f.button :submit, "提交"
-        a.close-reveal-modal &#215;
-      div.reveal-modal.medium#leader-confirm-modal data-reveal=""
-        h4 领投人确认
-        hr
-        p 请确认以下融资需求与线下谈论的一致:
-        = simple_form_for money_require, url: leader_confirm_money_require_path(money_require), html: { id: 'leader_confirm_form' } do |f|
-          = f.input :money, readonly: true
-          = f.input :share, readonly: true
-          = f.input :deadline, readonly: true
-          = f.input :description, readonly: true
-          = f.button :submit, "确认无误"
-        a.close-reveal-modal &#215;
-      hr
-
-    div.row.jobs
-      div.large-12.columns
-        div.job 
-          h3 工作招聘
-        div.large-3.columns.large-centered
-          a.button 我感兴趣
-
-    hr
-
-    div.row.discussion
-      div.large-12.columns
-        h3 讨论区
-        = text_area_tag("d")
-          
-          
+        .team
+          h3.title 团队情况
+          .row
+            - 3.times do 
+              .small-12.large-6.columns
+                .person
+                  .row
+                    .small-4.large-3.columns
+                      = image_tag 'm/u1.png'
+                    .small-8.large-9.columns
+                      .name 
+                        = link_to '李亚飞', user_path(1)
+                      .job-title CTO
+                      .description 我毕业于清华大学, 创建过xx项目, xx项目, 属于二次创业.
+          .small-12.columns.more-info
+            = link_to '查看更多团队故事...'
+        .job
+          h3.title 招人情况
+          h4 正在招人
+          .row
+            - 3.times do 
+              .small-12.large-6.columns
+                .job-box
+                  table
+                    tr
+                      td 职位
+                      td 软件开发工程师
+                    tr
+                      td 负责内容
+                      td 开发软件
+                    tr
+                      td 报酬
+                      td 月薪: 20k - 30k
+                    tr
+                      td 
+                      td 期权: 30%
+                    tr
+                      td 
+                      td 股权: 1%
+                    tr
+                      td 可选程
+                      td 是
+                    tr
+                      td 可兼职
+                      td 是
+                  .job-interest
+                    button.small 我感兴趣

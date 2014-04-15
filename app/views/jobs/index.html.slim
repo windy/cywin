@@ -1,59 +1,16 @@
-div.row.job_show
-  div.large-12.columns
-    h1 创业工作
-    ul.sub-nav
-      li 私密
-      li 直接
-      li 直视薪资
-div.row
-  div.large-4.columns.search_side
-    ul.side-nav
-      li
-        a href="#" 感兴趣
-      li
-        a href="#" 所有
-    hr
+.job-show
+  .head.top-blank
+    .row
+      .small-12.columns
+        h1 创业工作
+        p 远程办公, 自由时间, 激情工作
+  .content
+    .row
+      .small-12.columns
+        .row.search.collapse
+          .small-9.large-4.columns
+            = text_field_tag 'search', nil, placeholder: '关键字'
+          .small-3.large-1.end.columns
+            a.button.postfix href="#" 工作搜索
 
-    h4 位置
-    ul.inline-list
-      li
-        a href="#" 北京
-      li
-        a href="#" 上海
-      li
-        a href="#" 深圳
-    hr
-
-    h4 工作性质
-    ul.side-nav
-      li
-        a href="#" 全职
-      li
-        a href="#" 兼职
-      li
-        a href="#" 合伙人
-      li
-        a href="#" 可远程
-    hr
-
-    h4 薪资
-    ul.side-nav
-      li
-        a href="#" 10K 以下
-      li
-        a href="#" 10K-20K
-      li
-        a href="#" 20K 以上
-    hr
-
-    h4 领域
-    ul.side-nav
-      li
-        a href="#" 移动互联网
-      li
-        a href="#" 电子商务
-      li
-        a href="#" 硬件互联网
-  
-  div.large-8.columns
-    = render partial: "projects", locals: { projects: @projects }
+        = render partial: "projects", locals: { projects: @projects }

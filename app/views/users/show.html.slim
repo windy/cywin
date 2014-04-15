@@ -1,8 +1,26 @@
-h3 User
-p
-  | User: #{@user.name}
-p
-  | Email: #{@user.email if @user.email}
-P
-  | Role: #{@user.roles.each do |r| r.name end}
+- content_for(:title) do
+  | 个人主页 - WinDy
 
+.profile.top-blank
+  .row
+    .small-12.columns
+      .person
+        .row
+          .small-4.large-3.columns
+            = image_tag 'm/u1.png'
+          .small-8.large-9.columns
+            .name 
+              = link_to '李亚飞', user_path(1)
+            .job-title CTO
+            .description 我毕业于清华大学, 创建过xx项目, xx项目, 属于二次创业.
+            .edit
+              = link_to '编辑', '#'
+      ul.small-block-grid-4.tab-content
+        li.list
+          = link_to '最近动态', '#', class: 'active'
+        li.list
+          = link_to '粉丝', '#'
+        li.list
+          = link_to '投资产品', '#'
+        li.list
+          = link_to '我的项目', '#'

@@ -22,6 +22,8 @@ gem 'simple_form'
 gem 'slim-rails'
 gem 'therubyracer', :platform=>:ruby
 gem "foundation-rails", "~> 5.2.2.0"
+gem 'settingslogic'
+gem 'foundation-icons-sass-rails'
 
 # for observers
 gem 'rails-observers'

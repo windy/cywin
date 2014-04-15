@@ -1,11 +1,11 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :authenticate_user!, except: [ :index, :show, :team, :invest, :new, :stage0, :stage1, :stage2 ]
 
   before_action( only: [:edit, :stage1, :stage2, :publish, :invest, :invite] ) do 
     @project = Project.find(params[:id])
   end
 
-  load_and_authorize_resource
+  #load_and_authorize_resource
 
   def index
     @projects = Project.published
@@ -38,63 +38,10 @@ class ProjectsController < ApplicationController
 
   # 创建第二步
   def stage1
-    @owner = @project.owner
-    @member = @project.member(@owner)
-    if request.post?
-      avatar_params = params.require(:project).require(:owner).permit(:avatar, :avatar_cache)
-      if avatar_params
-        unless @owner.update(avatar_params)
-          render :stage1
-          return
-        end
-      end
-      member_params = params.require(:project).require(:member).permit(:title, :description)
-      unless @member.update(member_params)
-        render :stage1
-        return
-      end
-      redirect_to stage2_project_path(params[:id])
-      return
-    # get
-    else
-      render :stage1
-      return
-    end
   end
 
   # 创建第三步
   def stage2
-    authorize! :stage2, @project
-    if request.post?
-      # add money_require
-      money_require_flag = params.permit(:money_require)[:money_require]
-      if money_require_flag
-        money_require_params = params.require(:project).require(:money_requires).permit(:money, :share, :deadline, :description)
-        @money_require = MoneyRequire.new(money_require_params)
-        @project.money_requires << @money_require
-      end
-      #TODO 多人招聘的支持
-      person_require_flag = params.permit(:person_require)[:person_require]
-      if person_require_flag
-        person_requires_params = params.require(:project).require(:person_requires).permit(:title, :pay, :stock, :option, :description)
-        @person_require = PersonRequire.new(person_requires_params)
-        @project.person_requires << @person_require
-      end
-      if @project.save
-        flash[:notice] = "项目创建成功"
-        redirect_to edit_project_path(@project.id)
-        return
-      else
-        render :stage2
-        return
-      end
-    # get
-    else
-      @money_require = @project.money_requires.build
-      @person_require = PersonRequire.new
-      render :stage2
-      return
-    end
   end
 
   def publish
@@ -129,6 +76,12 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+  end
+
+  def team
+  end
+
+  def invest
   end
 
   private

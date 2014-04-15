@@ -1,10 +1,25 @@
 - projects.each do |project|
-  div.row.project_show
-    div.large-2.columns
+  .row.job-project
+    .small-4.large-2.columns
       = image_tag(project.logo_url, size: "200x200")
-    div.large-10.columns
-      = link_to project.name, project
-      div.row
-        div.large-7.columns
-          p #{project.description}
-          p.address #{project_address(project)}
+    .small-8.large-10.columns
+      .name-area
+        h5.name
+          = link_to '项目一', project_path(1)
+        p.sub-name
+         | 这是一个项目的简要描述
+      .job-content
+        p 我们正在招聘 CTO, 设计师, Rails 开发工程师.
+      .job-info
+        span.info.address 
+          span.fi-marker
+          | 北京
+        span.info.industry 
+          span.fi-thumbnails
+          | 互联网
+        span.info.remote 
+          span.fi-cloud
+          | 可远程
+        span.info.interest 
+          span.fi-heart
+          | 8 个感兴趣

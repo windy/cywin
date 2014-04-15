@@ -1,0 +1,137 @@
+.project-show {
+  background-color: white;
+  
+  .head {
+    padding-bottom: 2rem;
+    .name a {
+      color: #FF2D2D;
+    }
+  }
+
+  .operate {
+    text-align: center;
+
+    a {
+      display: inline-block;
+      width: 100%;
+      border: 1px solid #ddd;
+      padding: 1rem 0;
+      margin: 1rem 0;
+      color: #333;
+      font-size: 1.5rem;
+    }
+  }
+
+  .tab-content {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    .list {
+      text-align: center;
+      padding-bottom: 0;
+      a {
+        color: #333;
+        font-size: 1.2rem;
+        display: inline-block;
+        width: 100%;
+        padding-bottom: 1.875rem;
+      }
+      .active {
+        border-bottom: 2px solid #d26911;
+      }
+    }
+  }
+
+  .content {
+    margin-top: 2rem;
+    
+    .image {
+      margin-bottom: 2rem;
+    }
+
+    .title {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .invest {
+      .box {
+        background-color: #eee;
+        padding: 1rem 1.5rem;
+        margin: 0.5rem 0;
+
+        .sub-title {
+          color: #888;
+          font-size: 0.9rem;
+        }
+
+        .sub-content {
+          font-weight: 700;
+          font-size: 1.1rem;
+        }
+      }
+
+      .more-info {
+        text-align: center;
+        margin: 1rem 0;
+      }
+
+      .invest-button {
+        text-align: center;
+      }
+    }
+
+    .team {
+      margin-top: 2rem;
+      .more-info {
+        text-align: center;
+        margin: 1rem 0;
+      }
+    }
+
+    .job {
+
+      .job-box {
+        border: 1px solid #ddd;
+        padding: 1rem 0;
+        margin: 1rem;
+        table {
+          border: none;
+        }
+
+        .job-interest {
+          text-align: center;
+        }
+
+        &:hover {
+        }
+      }
+    }
+  }//content
+}
+
+.person {
+  padding: 1rem 0;
+
+  .name {
+    padding-bottom: 0.2rem;
+    a {
+      color: #333;
+      font-weight: 600;
+      font-size: 120%;
+    }
+  }
+
+  .job-title {
+    color: #999;
+    font-weight: 500;
+    padding-bottom: 0.5rem;
+  }
+
+  .description {
+    color: #999;
+  }
+
+}// person

@@ -1,134 +1,49 @@
-div.container
-  /! 文案说明
-  div.row
-    div.large-12
-      h2.text-center 马上开始投资
-    div.large-12
-      h4.text-right 迅速找到你感兴趣的优秀项目，开始你的投资第一步
-    /! 图文说明
-    /! TODO: 完成一个切换的动画
-    ul.sub-nav
-      li.active style=" width: 100% "
-        div.large-12
-          = image_tag("project_example.png", width: '100%')
-      /!
-        li
-          div.large-12
-          = image_tag("project_example.png", width: '100%')
-        li
-          div.large-12
-          = image_tag("project_example.png", width: '100%')
-    /! 投资项目列前三甲
-    div.row
-      div.large-4 class="columns"
-        = image_tag("project_list_1.png")
-      div.large-4 class="columns"
-        = image_tag("project_list_3.png")
-      div.large-4 class="columns"
-        = image_tag("project_list_2.png")
-    /! 查看所有投资项目
-    div.row
-      p
-        = link_to(projects_path) do
-          p.text-center 查看所有投资项目
-  div.row
-    hr
-  /! 关于投资项目结束
-  /! 关于创业者
-  div.row
-    div.large-12
-      h2.text-center 马上参与创业
-    div.large-12
-      h4.text-right 赶快找合适你的创业小伙伴吧
-    /! 创业项目招人
-    div.row
-      div.large-4 class="columns"
-        = image_tag("job1.png")
-      div.large-4 class="columns"
-        = image_tag("job2.png")
-      div.large-4 class="columns"
-        = image_tag("job3.png")
-    /! 查看所有职位
-    div.row
-      p
-        = link_to jobs_path do
-          p.text-center 查看所有职位
-  div.row
-    hr
-  /! 关于创业参与者结束
+- content_for(:title) do
+  | 首页
 
-  /! 关于参与投资人
-  div.row
-    div.large-12
-      h2.text-center 马上找到你的领投人
-    div.large-12
-      h4.text-right 让最专业的投资人带你挑选最好的项目
-    /! 列出最专业的投资人三个
-    div.row
-      div.large-4 class="columns"
-        = image_tag("investor1.png")
-      div.large-4 class="columns"
-        = image_tag("investor2.png")
-      div.large-4 class="columns"
-        = image_tag("investor3.png")
-    /! 正在领投
-    h3 他正在领投
-    div.row
-      div.large-4 class="columns"
-        = image_tag("project_list_1.png")
-      div.large-4 class="columns"
-        = image_tag("project_list_3.png")
-      div.large-4 class="columns"
-        = image_tag("project_list_2.png")
-    /! 查看所有领投人
-    div.row
-      p
-        = link_to investors_path do
-          p.text-center 查看所有领投人
-  div.row
-    hr
-  /! 关于投资参与者结束
+.start-content.top-blank
+  .row
+    .small-12.large-10.large-centered.columns
+      form
+        .row
+          .small-12.large-6.columns
+            h1.heading 创业, 找钱, 找人, 更容易, 更简单
+            p.sub-heading 投资人, 小伙伴, 都在等着你的创业项目. 想要像互联网式的创业融资与招人服务? 马上注册.
 
-  /! 关于基金
-  div.row
-    div.large-12
-      h2.text-center 马上发起基金
-    div.large-12
-      h4.text-right 告诉大家，拥有优秀声誉的你正在发起基金
-    /! 列出四个最好的基金
-    div.row
-      div.large-3 class="columns"
-        = image_tag("fund1.png")
-      div.large-3 class="columns"
-        = image_tag("fund1.png")
-      div.large-3 class="columns"
-        = image_tag("fund1.png")
-      div.large-3 class="columns"
-        = image_tag("fund1.png")
-    /! 查看所有基金
-    div.row
-      p
-        = link_to funds_path do
-          p.text-center 查看所有正在发起的基金
-  div.row
-    hr
-  /! 关于基金结束
+          .small-12.large-6.columns
+            = text_field_tag 'username', nil, placeholder: '你的真实姓名', 'ng-model'=> 'username'
+            = text_field_tag 'email', nil, placeholder: '你的邮箱', 'ng-model'=> 'email'
+            = text_field_tag 'password', nil, placeholder:  '输入一个密码', 'ng-model'=> 'password'
+            button 注册
 
-  /! 准备上线项目
-  div.row
-    div.large-12
-      h2.text-center 准备上线项目
-    div.large-12
-      h4.text-right 让大家提前认识你吧
-    /! 列出八个上线项目
-    ul.large-block-grid-4
-      - 8.times do
-        li
-          = image_tag("project_example.png")
-    /! 查看所有上线项目
-    div.row
-      = link_to projects_path do
-        p.text-center 查看所有正在预热的项目
-  div.row
-    hr
-  /! 关于预热项目结束
+.refine-projects-content
+  .row
+    .small-12.large-10.large-centered.columns
+      h1 精品创业项目
+      = render 'refine/refine_project'
+      .project
+        = link_to "#" do
+          - image_tag 'j/jingpin2.jpg'
+        p
+          span 露薇
+          |  - 
+          span 职业女性纤体午晚餐速递及基于商圈的纯女性社交APP
+        p
+          span 约谈: 3
+          span 投资: 5
+          span 讨论: 10
+        p
+          = link_to '了解更多...', "#"
+      .project
+        = link_to "#" do
+          - image_tag 'j/jingpin3.jpg'
+        p
+          span 露薇
+          |  - 
+          span 职业女性纤体午晚餐速递及基于商圈的纯女性社交APP
+        p
+          span 约谈: 3
+          span 投资: 5
+          span 讨论: 10
+        p
+          = link_to '了解更多...', "#"
