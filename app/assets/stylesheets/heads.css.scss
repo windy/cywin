@@ -1,7 +1,7 @@
 .middle-text {
   text-align: center;
   z-index: 999;
-  a {
+  .title {
     color: #F7F7F7;
   }
 
@@ -9,10 +9,6 @@
     margin-right: 0.5rem;
     font-weight: 400;
     font-size: 1rem;
-    a {
-      display: inline-block;
-      margin-left: 1rem;
-    }
   }
 }
 
@@ -24,5 +20,41 @@
   }
   label {
     cursor: default;
+  }
+}
+
+.user-link-wrapper {
+  position: relative;
+}
+
+a.user-link {
+  color: #F7F7F7;
+}
+.user-dropdown {
+  background-color: #F7F7F7;
+  border: 1px solid #ccc;
+  color: #333;
+  position: absolute;
+  top: 3.2rem;
+  z-index: 9999;
+  right: 0.5rem;
+  padding: 0 1rem;
+
+  .title {
+    color: #888;
+    font-size: 90%;
+  }
+
+  a {
+    color: #555;
+    font-size: 90%;
+    &:hover {
+      color: red;
+    }
+  }
+
+  li {
+    list-style-type: none;
+    padding: 0.2rem 0;
   }
 }

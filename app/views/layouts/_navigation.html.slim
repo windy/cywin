@@ -3,10 +3,34 @@ nav.tab-bar
     a.left-off-canvas-toggle.menu-icon href="#"
       span
   h1.title.middle-text
-    = link_to Setting.site_name, root_path
+    = link_to Setting.site_name, root_path, class: 'title'
     .top-right.right
-      = link_to  '创建新项目', new_project_path
-      = link_to  '注册', new_user_registration_path
+      - if current_user
+        = link_to current_user.name, '#', class: 'user-link'
+        .user-dropdown
+          ul.small-block-grid-2
+            li
+              ul.project
+                h6.title 项目
+                li
+                  a href='#' 项目一
+                li
+                  a href='#' 项目二
+                li
+                  a href='#' 创建新项目
+            li
+              ul.about-me
+                h6.title 我
+                li
+                  a href='#' 申请投资人
+                li
+                  a href='#' 我的主页
+                li
+                  a href='#' 设置
+                li
+                  a href='#' 注销
+      - else
+        = link_to  '注册', new_user_registration_path
 aslide.left-off-canvas-menu
   ul.off-canvas-list
     li
