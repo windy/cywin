@@ -1,6 +1,13 @@
-@app.controller 'RegistrationController', [ '$scope', '$timeout', '$http', ($scope, $timeout, $http)->
+@app.controller 'RegistrationController', [ '$scope', '$http', '$cookieStore', '$cookies', ($scope, $http, $cookieStore, $cookies)->
 
-  $scope.errors = {}
+  $scope.errors = $cookieStore.get('register_errors') || {}
+  $cookieStore.remove('register_errors')
+
+  if user = $cookieStore.get('register_users')
+    $scope.name = user.name
+    $scope.email = user.email
+    $scope.password = user.password
+    $cookieStore.remove('register_users')
   
   $scope.submit = ()->
     $http
