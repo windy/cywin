@@ -14,15 +14,21 @@ class ApplicationController < ActionController::Base
     }.merge(data)
   end
 
-  def render_fail(msg = nil, data = {})
+  def render_fail(msg = nil, model = nil)
     render :json => {
       success: false,
-      message: msg.to_s
-    }.merge(data)
+      message: msg.to_s,
+      errors: flatten_errors(model.errors.messages)
+    }
   end
 
   def current_ability
     @current_ability ||= Ability.new(current_user, params)
+  end
+
+  private
+  def flatten_errors(errors)
+    errors.inject({}) { |res, (k,v)| res[k] = v.first; res }
   end
 
 end

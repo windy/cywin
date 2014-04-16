@@ -9,9 +9,9 @@ class RegistrationsController < Devise::RegistrationsController
     @user = User.new(sign_up_params)
     if @user.save
       flash[:notice] = '注册成功'
-      render :json=> { success: true }
+      render_success
     else
-      render :json=> { success: false, message: '注册失败' }
+      render_fail('注册失败', @user)
     end
   end
 
