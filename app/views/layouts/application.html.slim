@@ -12,11 +12,13 @@ html
     = javascript_include_tag "vendor/modernizr"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  body
+  body ng-app="app"
     .off-canvas-wrap
       .inner-wrap
         = render 'layouts/navigation'
-        section.main-section ng-app="app"
+        section.main-section
+          .alert-container
+            = render 'layouts/alert'
           .main-container
             = yield
           = render 'layouts/foot'

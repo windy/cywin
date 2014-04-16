@@ -23,6 +23,7 @@
   }
 }
 
+// 用户菜单
 .user-link-wrapper {
   position: relative;
 }
@@ -43,18 +44,36 @@ a.user-link {
   .title {
     color: #888;
     font-size: 90%;
+    line-height: 1.5;
   }
 
   a {
     color: #555;
     font-size: 90%;
     &:hover {
-      color: red;
+      color: #e79385;
     }
   }
 
   li {
     list-style-type: none;
-    padding: 0.2rem 0;
+    padding: 0.1rem 0;
   }
+
+  li:first-child:before {
+    left: 100%;
+    margin-left: -21px;
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border: 5px solid transparent;
+    border-bottom-color: #d2d3d5;
+    top: -10px;
+  }
+}
+
+// 提示框
+.alert-box {
+  margin-bottom: 0 !important;
 }

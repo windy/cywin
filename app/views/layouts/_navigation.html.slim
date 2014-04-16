@@ -6,31 +6,32 @@ nav.tab-bar
     = link_to Setting.site_name, root_path, class: 'title'
     .top-right.right
       - if current_user
-        = link_to current_user.name, '#', class: 'user-link'
-        .user-dropdown
-          ul.small-block-grid-2
+        = link_to current_user.name, '', class: 'user-link', 'ng-init' => 'dropdown_open = false ', 'ng-click'=> ' dropdown_open = ! dropdown_open '
+        .user-dropdown.ng-cloak ng-show=' dropdown_open '
+          ul.small-block-grid-1.medium-block-grid-2
             li
               ul.project
                 h6.title 项目
                 li
-                  a href='#' 项目一
+                  = link_to '项目一', project_path(1)
                 li
-                  a href='#' 项目二
+                  = link_to '项目二', project_path(1)
                 li
-                  a href='#' 创建新项目
+                  = link_to '创建新项目', new_project_path
             li
               ul.about-me
                 h6.title 我
                 li
-                  a href='#' 申请投资人
+                  = link_to '申请投资人', new_investor_path
                 li
-                  a href='#' 我的主页
+                  = link_to '我的主页', user_path(current_user)
                 li
-                  a href='#' 设置
+                  = link_to '设置',  edit_user_path(current_user)
                 li
-                  a href='#' 注销
+                  = link_to '注销', destroy_user_session_path, method: 'DELETE'
       - else
         = link_to  '注册', new_user_registration_path
+        = link_to  '登录', new_user_session_path
 aslide.left-off-canvas-menu
   ul.off-canvas-list
     li

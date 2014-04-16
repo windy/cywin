@@ -12,7 +12,7 @@
         'user[password]': $scope.password
     .success (res)->
       if res.success
-        window.location.href = '/'
+        window.location.href = '/home/welcome'
       else
         $scope.errors = res.errors
     .error (res, status)->
