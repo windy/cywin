@@ -15,20 +15,33 @@ class ApplicationController < ActionController::Base
   end
 
   def render_fail(msg = nil, model = nil)
-    render :json => {
+    res = {
       success: false,
       message: msg.to_s,
-      errors: flatten_errors(model.errors.messages)
     }
+
+    if model
+      res.merge!( errors: flatten_errors(model.errors.messages) )
+    end
+
+    render :json => res
   end
 
   def current_ability
     @current_ability ||= Ability.new(current_user, params)
   end
 
-  private
+  protected
   def flatten_errors(errors)
     errors.inject({}) { |res, (k,v)| res[k] = v.first; res }
+  end
+
+  def valid_on(model, column_name)
+    if model.valid?
+      return false
+    else
+      model.errors[column_name].first
+    end
   end
 
 end

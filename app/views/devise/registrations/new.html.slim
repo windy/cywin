@@ -8,21 +8,21 @@
         p 真正的互联网式的创业服务
         .row
           .small-12.large-6.columns
-            = text_field_tag 'name', nil, placeholder: '真实姓名', 'ng-model'=> 'name', 'ng-class'=> '{ error: errors.name }'
+            = text_field_tag 'name', nil, placeholder: '真实姓名', 'ng-model'=> 'name', 'ng-class'=> '{ error: errors.name }', 'ng-blur'=> ' delete_error_on("name") '
             small.error.ng-cloak ng-show="errors.name" {{ errors.name }}
         .row
           .small-12.large-6.columns
-            = text_field_tag 'email', nil, placeholder: '邮箱地址', 'ng-model'=> 'email', 'ng-class'=> '{ error: errors.email }'
+            = text_field_tag 'email', nil, placeholder: '邮箱地址', 'ng-model'=> 'email', 'ng-class'=> '{ error: errors.email }', 'ng-blur'=> 'email_validate()'
             small.error.ng-cloak ng-show="errors.email" {{ errors.email }}
         .row
           .small-12.large-6.columns
-            = password_field_tag 'password', nil, placeholder: '密码', 'ng-model'=> 'password', 'ng-class'=> '{ error: errors.password }'
+            = password_field_tag 'password', nil, placeholder: '密码', 'ng-model'=> 'password', 'ng-class'=> '{ error: errors.password }', 'ng-blur'=> ' delete_error_on("password") '
             small.error.ng-cloak ng-show="errors.password" {{ errors.password }}
         .row
           .small-12.large-6.columns
-            = password_field_tag 'password_confirm', nil, placeholder: '再次确认密码', 'ng-model'=> 'password_confirm', 'ng-class'=> '{ error: errors.password_confirm }'
+            = password_field_tag 'password_confirm', nil, placeholder: '再次确认密码', 'ng-model'=> 'password_confirm', 'ng-class'=> '{ error: errors.password_confirm }', 'ng-blur'=> 'password_confirm_validate()'
             small.error.ng-cloak ng-show="errors.password_confirm" {{ errors.password_confirm }}
         p.alert.ng-cloak
           |{{ error_message }}
-        = submit_tag '马上注册', class: 'button'
+        = submit_tag '马上注册', class: 'button', 'ng-disabled'=> '! submit_validate() '
         = link_to '已有账号, 登录?', new_user_session_path, class: 'login-link'

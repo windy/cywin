@@ -94,6 +94,7 @@ Eachfund::Application.routes.draw do
   resources :users, only: [:show] do
     collection do
       get :autocomplete
+      post :email_validate
     end
 
     member do

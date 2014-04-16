@@ -15,13 +15,8 @@
  *= require_tree .
  */
 
-div.container, div.row.container {
-  margin-top: 2rem;
-  background: white;
-}
-
-table {
-  width: 100%
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
 }
 
 .ui-pnotify.stack-bottomright {
