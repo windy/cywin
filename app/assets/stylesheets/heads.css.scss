@@ -1,7 +1,7 @@
 .middle-text {
   text-align: center;
   z-index: 999;
-  a {
+  .title {
     color: #F7F7F7;
   }
 
@@ -9,10 +9,6 @@
     margin-right: 0.5rem;
     font-weight: 400;
     font-size: 1rem;
-    a {
-      display: inline-block;
-      margin-left: 1rem;
-    }
   }
 }
 
@@ -25,4 +21,67 @@
   label {
     cursor: default;
   }
+}
+
+// 用户菜单
+.user-link-wrapper {
+  position: relative;
+}
+
+a.user-link {
+  color: #F7F7F7;
+}
+.user-dropdown {
+  background-color: #F7F7F7;
+  border: 1px solid #ccc;
+  color: #333;
+  position: absolute;
+  top: 3.2rem;
+  z-index: 9999;
+  right: 0.5rem;
+  padding: 0 1rem;
+
+  .title {
+    color: #888;
+    font-size: 90%;
+    line-height: 1.5;
+  }
+
+  a {
+    color: #555;
+    font-size: 90%;
+    &:hover {
+      color: #e79385;
+    }
+  }
+
+  li {
+    list-style-type: none;
+    padding: 0.1rem 0;
+  }
+
+  li:first-child:before {
+    left: 100%;
+    margin-left: -21px;
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border: 5px solid transparent;
+    border-bottom-color: #d2d3d5;
+    top: -10px;
+  }
+}
+.user-dropdown-exit-link {
+  position: fixed;
+  top: 3.5rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+// 提示框
+.alert-box {
+  margin-bottom: 0 !important;
 }
