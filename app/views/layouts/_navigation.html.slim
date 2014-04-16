@@ -29,6 +29,7 @@ nav.tab-bar
                   = link_to '设置',  edit_user_path(current_user)
                 li
                   = link_to '注销', destroy_user_session_path, method: 'DELETE'
+        .user-dropdown-exit-link ng-show= 'dropdown_open' ng-click=' dropdown_open = false'
       - else
         = link_to  '注册', new_user_registration_path
         = link_to  '登录', new_user_session_path
