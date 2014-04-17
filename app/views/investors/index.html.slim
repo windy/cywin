@@ -1,8 +1,10 @@
-div.row.project
-    p
-      = link_to "申请认证投资人", new_investor_path
-    h1 认证投资人列表
-    - @investors.each do |investor|
-      div.columns.project_show
-        = investor.name
-      hr
+.investor.top-blank
+  .row
+    .small-12.columns
+      p
+        = link_to "申请认证投资人", new_investor_path
+      h1 认证投资人列表
+      - @investors.each do |investor|
+        div.columns.project_show
+          = investor.name
+        hr
