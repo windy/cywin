@@ -37,11 +37,13 @@ html
           section.top-bar-section
             ul.right
               li
-                a href='#' 发现
+                = link_to '发现', explore_index_path
               li
-                a href='#' 精品
+                = link_to '精品', refine_index_path
               li
-                a href='#' 找工作
+                = link_to '找工作', jobs_path
+              li
+                = link_to '登录', new_user_session_path, class: 'login-button'
             ul.left
               li.has-form
                 = text_field_tag 'search', nil, placeholder: '搜索项目, 人'

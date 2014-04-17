@@ -97,9 +97,18 @@ a.user-link {
 $top-nologin-height: 80px;
 // 未登录时的 top-bar
 .top-nologin-nav-wrap {
+  border-bottom: 1px solid #ddd;
   .top-bar input {
     margin-top: 1rem;
     font-size: 1rem;
     width: 20rem;
+  }
+  @media only screen and (min-width: 40.063em) {
+    .login-button {
+      margin-left: 3rem;
+      border: 1px solid #aaa;
+      display: inline;
+      padding: 0.5rem 2rem !important;
+    }
   }
 }
