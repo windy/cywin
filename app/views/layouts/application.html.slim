@@ -13,13 +13,41 @@ html
     = javascript_include_tag "application"
     = csrf_meta_tags
   body ng-app="app"
-    .off-canvas-wrap
-      .inner-wrap
-        = render 'layouts/navigation'
-        section.main-section
-          .alert-container
-            = render 'layouts/alert'
-          .main-container
-            = yield
-          = render 'layouts/foot'
-        a.exit-off-canvas
+    - if current_user
+      .off-canvas-wrap
+        .inner-wrap
+          = render 'layouts/navigation'
+          section.main-section
+            .alert-container
+              = render 'layouts/alert'
+            .main-container
+              = yield
+            = render 'layouts/foot'
+          a.exit-off-canvas
+    - else
+      .top-nologin-nav-wrap
+        nav class="top-bar" data-topbar=""
+          ul.title-area
+            li.name
+              h1
+                = link_to Setting.site_name, root_path
+            li.toggle-topbar.menu-icon
+              a href='#'
+                span Menu
+          section.top-bar-section
+            ul.right
+              li
+                = link_to '发现', explore_index_path
+              li
+                = link_to '精品', refine_index_path
+              li
+                = link_to '找工作', jobs_path
+              li
+                = link_to '登录', new_user_session_path, class: 'login-button'
+            ul.left
+              li.has-form
+                = text_field_tag 'search', nil, placeholder: '搜索项目, 人'
+      .main-container
+        = yield
+      = render 'layouts/foot'
+      

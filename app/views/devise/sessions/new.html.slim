@@ -14,3 +14,4 @@
             p.alert
               | #{flash[:alert]}
             = f.submit '登录', class: 'button'
+            = link_to '没有账号, 注册?', new_user_registration_path, class: 'login-link'
