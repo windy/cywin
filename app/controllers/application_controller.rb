@@ -27,10 +27,6 @@ class ApplicationController < ActionController::Base
     render :json => res
   end
 
-  def current_ability
-    @current_ability ||= Ability.new(current_user, params)
-  end
-
   protected
   def flatten_errors(errors)
     errors.inject({}) { |res, (k,v)| res[k] = v.first; res }
