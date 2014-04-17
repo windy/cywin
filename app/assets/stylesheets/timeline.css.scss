@@ -1,0 +1,60 @@
+.timeline {
+  background-color: white;
+
+  .box {
+    .type {
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 1rem;
+      color: #666;
+    }
+    .content-wrapper {
+      display: inline-block;
+      width: 95%;
+      .created-at {
+        float: right;
+        color: #999;
+        font-size: 90%;
+      }
+    }
+
+    .head {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+
+      a {
+        display: inline-block;
+        margin: 0 0.5rem;
+      }
+    }
+    .content {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      .title {
+        display: inline-block;
+      }
+      .sub-title {
+        display: inline-block;
+        color: #888;
+        padding-left: 1rem;
+        font-size: 90%;
+      }
+      .team {
+        color: #666;
+      }
+    }
+    .foot {
+      color: #666;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      .detail {
+        margin-left: 0.5rem;
+        font-size: 90%;
+      }
+    }
+
+  }
+}
