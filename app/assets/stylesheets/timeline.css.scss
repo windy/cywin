@@ -2,15 +2,15 @@
   background-color: white;
 
   .box {
+    @media only screen and (max-width: 40em) {
+      .type {
+        display: none;
+      }
+    }
     .type {
-      display: inline-block;
-      vertical-align: top;
-      margin-right: 1rem;
       color: #666;
     }
     .content-wrapper {
-      display: inline-block;
-      width: 95%;
       .created-at {
         float: right;
         color: #999;
@@ -26,7 +26,11 @@
       a {
         display: inline-block;
         margin: 0 0.5rem;
+        &:first-child {
+          margin-left: 0;
+        }
       }
+
     }
     .content {
       border-bottom: 1px solid #eee;
