@@ -1,0 +1,39 @@
+- unless top
+  li
+    label Menu
+  li
+    = link_to root_path do
+      - unless top
+        i.fi-home
+      | 首页
+li
+  = link_to refine_index_path do
+    - unless top
+      i.fi-heart
+    | 精品
+- unless top
+  li
+    = link_to categories_path do
+      - unless top
+        i.fi-thumbnails
+      | 分类
+- unless top
+  li
+    label Find
+li
+  = link_to explore_index_path do
+    - unless top
+      i.fi-eye
+    | 探索
+li
+  = link_to investors_path do
+    - unless top
+      i.fi-torsos-all
+    | 投资人
+li
+  = link_to jobs_path do
+    - unless top
+      i.fi-address-book
+    | 找工作
+li
+  = text_field_tag 'search', nil, placeholder: '搜索项目, 人', class: 'search'

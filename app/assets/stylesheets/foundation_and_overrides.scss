@@ -37,6 +37,7 @@
 
 // We use these to control various global styles
 $body-bg: #ECECEC;
+$top-link-color: #e79385;
 // $body-font-color: #222;
 // $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $body-font-weight: normal;
@@ -1145,9 +1146,9 @@ $topbar-dropdown-toggle-color: #666;
 
 // Set the link colors and styles for top-level nav
 $topbar-link-color: #333;
-$topbar-link-color-hover: red;
-$topbar-link-color-active: red;
-$topbar-link-color-active-hover: red;
+$topbar-link-color-hover: $top-link-color;
+$topbar-link-color-active: $top-link-color;
+$topbar-link-color-active-hover: $top-link-color;
 $topbar-link-weight: 600;
 $topbar-link-font-size: rem-calc(18);
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
