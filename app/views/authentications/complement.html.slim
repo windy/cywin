@@ -1,9 +1,0 @@
-h3 Please complete the required information to finish login:
-= session[:omniauth]
-- if session[:omniauth]
-  = simple_form_for @user,
-    :url => url_for(:action => 'create', :controller => 'authentications') do |f|
-    = f.error_notification
-    = display_base_errors resource
-    = f.input :email, :required => true
-    = f.button :submit, 'Complete', :class => 'btn-primary'
