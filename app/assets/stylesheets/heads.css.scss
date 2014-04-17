@@ -49,13 +49,11 @@ a.user-link {
 
   .title {
     color: #888;
-    font-size: 90%;
     line-height: 1.5;
   }
 
   a {
     color: #555;
-    font-size: 90%;
     &:hover {
       color: #e79385;
     }
@@ -64,6 +62,10 @@ a.user-link {
   li {
     list-style-type: none;
     padding: 0.1rem 0;
+    ul {
+      margin: 0;
+      padding: 1rem 2rem;
+    }
   }
 
   li:first-child:before {
