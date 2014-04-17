@@ -101,7 +101,16 @@ $top-nologin-height: 80px;
   .top-bar input {
     margin-top: 1rem;
     font-size: 1rem;
-    width: 20rem;
+  }
+  @media only screen and (min-width: 1048px) {
+    .top-bar input {
+      width: 20rem;
+    }
+  }
+  @media only screen and (min-width: 40.063em) and (max-width: 916px) {
+    .top-bar input {
+      display: none;
+    }
   }
   @media only screen and (min-width: 40.063em) {
     .login-button {
@@ -109,6 +118,7 @@ $top-nologin-height: 80px;
       border: 1px solid #aaa;
       display: inline;
       padding: 0.5rem 2rem !important;
+      margin-right: 1rem;
     }
   }
 }
