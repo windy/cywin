@@ -5,11 +5,9 @@ class CreateProjects < ActiveRecord::Migration
       t.string :name
       t.string :oneword
       t.text :description
-      t.string :stage
-      t.string :where1
-      t.string :where2
-      t.string :where3
+      t.string :stage # 暂时不用
       t.string :industry
+      t.string :city
 
       t.boolean :published, default: false
 

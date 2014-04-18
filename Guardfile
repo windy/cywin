@@ -13,9 +13,3 @@ end
 guard :bundler do
   watch('Gemfile')
 end
-
-guard 'rails' do
-  watch('Gemfile.lock')
-  watch(%r{lib/.*})
-  watch(%r{^config/*.rb})
-end

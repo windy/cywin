@@ -19,12 +19,10 @@ class ProjectsController < ApplicationController
 
   # 创建第一步
   def create
-    #project_params = JSON.parse( params[:project] )
-    #@project = Project.new( project_params )
     @project = Project.new( project_params )
     @project.add_owner( current_user )
     if @project.save
-      render_success
+      render_success(nil, id: @project.id)
     else
       render_fail(nil, @project)
     end

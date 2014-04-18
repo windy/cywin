@@ -36,7 +36,11 @@ Eachfund::Application.routes.draw do
       get :team
       get :invest
     end
-    resources :members
+    resources :members do
+      collection do
+        get :owner
+      end
+    end
   end
   resources :investors do
     member do

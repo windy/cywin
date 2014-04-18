@@ -32,14 +32,9 @@ describe ProjectsController do
 
   describe "create" do
     login_user
-    it "get new" do
-      post :new
-      response.should be_success
-    end
 
     it "create new" do
-      post :create, ActionController::Parameters.new(project: attributes_for(:project).merge(contact_attributes: attributes_for(:contact)) )
-      response.should redirect_to( stage1_project_path(1) )
+      post :create, ActionController::Parameters.new( attributes_for(:project) )
       assigns(:project).owner.should eq(@user)
     end
   end

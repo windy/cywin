@@ -17,6 +17,18 @@ class MembersController < ApplicationController
     @member = @project.members.find(params[:id])
   end
 
+  def owner
+    owner = @project.owner
+    owner_member = @project.member( owner )
+    render_success(nil, data: {
+      avatar: owner.avatar.url,
+      name: owner.name,
+      user_id: owner.id,
+      description: owner_member.description,
+      title: owner_member.title,
+    })
+  end
+
   def create
     user_id = member_params[:user_id]
     role = member_params[:role]
