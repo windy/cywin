@@ -5,8 +5,6 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
-  #load_and_authorize_resource
-
   def index
     @projects = Project.published
   end
@@ -15,32 +13,21 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
-  def stage0
-    @project = Project.find(params[:id])
-    render :new
-  end
-
   def edit
     @project = Project.find(params[:id])
   end
 
   # 创建第一步
   def create
-    @project = Project.new(project_params)
+    #project_params = JSON.parse( params[:project] )
+    #@project = Project.new( project_params )
+    @project = Project.new( project_params )
     @project.add_owner( current_user )
     if @project.save
-      redirect_to stage1_project_path(@project.id)
+      render_success
     else
-      render :new
+      render_fail(nil, @project)
     end
-  end
-
-  # 创建第二步
-  def stage1
-  end
-
-  # 创建第三步
-  def stage2
   end
 
   def publish
@@ -85,9 +72,7 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    new_params = params
-    new_params = params.require(:project) if params[:project]
-    new_params.permit(:id, :logo, :logo_cache, :name, :oneword, :description, :stage, :where1, :where2, :where3, contact_attributes: [ :address, :phone, :qq, :weixin, :weibo ])
+    params.permit(:name, :oneword, :description, :industry, :city)
   end
 
 end

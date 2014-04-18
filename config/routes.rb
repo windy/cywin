@@ -31,11 +31,6 @@ Eachfund::Application.routes.draw do
   resources :jobs, only: [:index]
   resources :projects do
     member do
-      get :stage0
-      get :stage1
-      post :stage1
-      get :stage2
-      post :stage2
       post :publish
       post :invite
       get :team

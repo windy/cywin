@@ -1,54 +1,5 @@
-- content_for(:title) do
-  | 基本信息 - 创建项目
 .project-new.top-blank
   .row
     .small-12.columns
-      = render partial: "header", locals: { stage: :stage0 }
-      form.stage0
-        h3.title 项目信息
-        .row
-          .small-12.large-6.columns
-            label for='name' 项目名称
-            = text_field_tag 'name', nil, placeholder: '如: 百度'
-        .row
-          .small-12.large-8.columns
-            label for='logo' Logo
-            = file_field_tag 'logo'
-        .row
-          .small-12.large-6.columns
-            label for='oneword' 一句话
-            = text_field_tag 'oneword', nil, placeholder: '一句话说明, 将显示在项目副标题'
-        .row
-          .small-12.large-8.columns
-            label for='description' 产品介绍
-            = text_area_tag 'description', nil, placeholder: '完整描述你的产品'
-        .row
-          .small-12.large-4.columns
-            label for='industry' 所属行业
-            = text_field_tag 'industry', nil, placeholder: ''
-        .row
-          .small-12.large-4.columns
-            label for='city' 城市
-            = text_field_tag 'city', nil, placeholder: ''
-        .row
-          .small-12.large-8.columns
-            hr
-        h3.title 联系方式
-        .row
-          .small-12.large-8.columns
-            label for="address" 项目地址
-            = text_field_tag 'address', nil, placeholder: '如: 百度'
-        .row
-          .small-12.large-6.columns
-            label for='phone' 电话
-            = text_field_tag 'phone', nil, placeholder: ''
-        .row
-          .small-12.large-6.columns
-            label for='weixin' 微信
-            = text_field_tag '微信', nil, placeholder: ''
-        .row
-          .small-12.columns
-            hr
-            .control-actions
-              /*button 下一步*/
-              = link_to '下一步', stage1_project_path(1), class: 'button'
+      .wrapper
+        div ng-view=''

@@ -15,10 +15,14 @@
 
     # 配置路由
     $routeProvider.when '/project/basic',
-      templateUrl: 'project/basic.html'
+      templateUrl: '<%= asset_path('project/basic.html') %>'
       controller: 'ProjectCreateBasicController'
+      title: '基本信息 - 创建项目'
     .when '/project/team',
-      templateUrl: 'project/team.html'
+      templateUrl: '<%= asset_path('project/team.html')%>'
       controller: 'ProjectCreateTeamController'
+    .when '/project/require',
+      templateUrl: '<%= asset_path('project/require.html')%>'
+      controller: 'ProjectCreateRequireController'
 ]
 
