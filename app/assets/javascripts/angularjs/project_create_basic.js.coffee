@@ -35,6 +35,4 @@
         $location.url('/project/team' + '?id=' + $scope.project_id)
       else
         $scope.errors = res.errors
-        
-
 ]
