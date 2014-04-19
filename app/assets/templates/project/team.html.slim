@@ -24,26 +24,28 @@
                 |{{ owner.description }}
               .edit
                 a ng-click='owner_edited = true' 编辑
-            form ng-show=' owner_edited '
+            form ng-show=' owner_edited ' ng-submit="update_owner()"
               h6 编辑个人信息
               .row
                 .small-12.medium-8.columns
                   label for='owner_name' 真实姓名
-                  input id='owner_name' type='text' ng-value='owner.name' placeholder='真实姓名'
+                  input id='owner_name' type='text' placeholder='真实姓名' ng-model = 'owner.name'
               .row
                 .small-12.medium-8.columns
                   label for='owner_title' 职位
-                  input id='owner_title' type='text' ng-value='owner.title' placeholder='你在团队的职位'
+                  input id='owner_title' type='text' placeholder='你在团队的职位' ng-model = 'owner.title'
               .row
                 .small-12.medium-8.columns
                   label for='owner_description' 更多详细信息
-                  textarea id='owner_description' placeholder=''
+                  textarea id='owner_description' ng-model = 'owner.description' placeholder=''
                     |{{owner.description}}
               .row
                 .small-12.medium-8.columns
+                  p.alert
+                    |{{ owner_edit_error }}
                   .control-actions
                     button.small 确认
-                    a.cancel ng-click='owner_edited = false' 取消
+                    a.cancel ng-click='cancel_owner_edit()' 取消
 
     .story
       .row
