@@ -1,7 +1,6 @@
 class CreateProjects < ActiveRecord::Migration
   def change
     create_table :projects do |t|
-      t.string :logo
       t.string :name
       t.string :oneword
       t.text :description

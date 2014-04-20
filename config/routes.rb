@@ -29,6 +29,7 @@ Eachfund::Application.routes.draw do
   resources :syndicates
   resources :funds
   resources :jobs, only: [:index]
+  resources :logos, only: [:create]
   resources :projects do
     member do
       post :publish

@@ -6,10 +6,7 @@ class Project < ActiveRecord::Base
   #validates :stage, presence: true, inclusion: STAGES
   validates :description, presence: true
 
-  #validates :logo, presence: true
-
-  mount_uploader :logo, LogoUploader
-
+  has_one :logo
   has_one :contact
   has_and_belongs_to_many :users, join_table: :members
   has_many :members, autosave: true

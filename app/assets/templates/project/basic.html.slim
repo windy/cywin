@@ -14,9 +14,13 @@ form.stage0.ng-cloak ng-submit='submit()'
       input id='name' type='text' placeholder='如: 百度' ng-model="project.name" ng-class= '{ error: errors.name }'
       small.error.ng-cloak ng-show=' errors.name ' {{ errors.name }}
   .row
-    .small-12.medium-6.columns
+    .small-4.medium-2.columns
+      .image-wrapper
+        img ng-src=' {{ logo_url }} '
+    .small-8.medium-6.end.columns
       label for='logo' Logo
-      input id='logo' type='file'
+      input id='logo' type='file' ng-file-select='upload_logo($files)'
+      input type='hidden' id='logo_id' ng-model=' logo_id '
   .row
     .small-12.medium-8.columns
       label for='oneword' 一句话

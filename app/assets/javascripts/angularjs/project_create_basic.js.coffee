@@ -1,4 +1,4 @@
-@app.controller 'ProjectCreateBasicController', [ '$scope', '$http', '$cookieStore', '$location', '$routeParams', ($scope, $http, $cookieStore, $location, $routeParams)->
+@app.controller 'ProjectCreateBasicController', [ '$scope', '$http', '$cookieStore', '$location', '$routeParams', '$upload', ($scope, $http, $cookieStore, $location, $routeParams, $upload)->
   $scope.project_id = $routeParams.id
   if $scope.project_id
     $http.get('/projects/' + $scope.project_id).success (res)->
@@ -35,4 +35,16 @@
         $location.url('/project/team' + '?id=' + $scope.project_id)
       else
         $scope.errors = res.errors
+
+  $scope.upload_logo = ($files)->
+    for file in $files
+      $scope.upload = $upload.upload
+        url: '/logos'
+        method: 'POST'
+        file: file
+      .success (res)->
+        $scope.logo_url = res.url
+        $scope.logo_id = res.id
+      .error ()->
+        console.log '上传失败'
 ]

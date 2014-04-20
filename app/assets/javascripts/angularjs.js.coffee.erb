@@ -1,12 +1,14 @@
+#= require angular-file-upload-shim
 #= require angular
 #= require angular-cookies
 #= require angular-resource
 #= require angular-route
 #= require angular-sanitize
+#= require angular-file-upload
 #= require_self
 #= require_tree ./angularjs
 
-@app = angular.module('app', ['ngCookies', 'ngSanitize', 'ngRoute'])
+@app = angular.module('app', ['ngCookies', 'ngSanitize', 'ngRoute', 'angularFileUpload'])
 
 @app.config ["$httpProvider", '$routeProvider', ($httpProvider, $routeProvider) ->
     # 配置 json 与 csrf
