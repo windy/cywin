@@ -16,11 +16,12 @@ form.stage0.ng-cloak ng-submit='submit()'
   .row
     .small-4.medium-2.columns
       .image-wrapper
-        img ng-src=' {{ logo_url }} '
+        img ng-src=' {{ project.logo_url }} '
     .small-8.medium-6.end.columns
       label for='logo' Logo
       input id='logo' type='file' ng-file-select='upload_logo($files)'
-      input type='hidden' id='logo_id' ng-model=' logo_id '
+      small.error.ng-cloak ng-show=' logo_error ' {{ logo_error }}
+      input type='hidden' id='logo_id' ng-model=' project.logo_id '
   .row
     .small-12.medium-8.columns
       label for='oneword' 一句话
@@ -59,6 +60,8 @@ form.stage0.ng-cloak ng-submit='submit()'
       input id='weixin' type='text' ng-model='contact.weixin'
   .row
     .small-12.columns
+      p.alert
+        |{{ error_message }}
       hr
       .control-actions
         button 下一步

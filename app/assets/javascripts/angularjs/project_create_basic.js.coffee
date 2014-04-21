@@ -1,5 +1,7 @@
-@app.controller 'ProjectCreateBasicController', [ '$scope', '$http', '$cookieStore', '$location', '$routeParams', '$upload', ($scope, $http, $cookieStore, $location, $routeParams, $upload)->
+@app.controller 'ProjectCreateBasicController', [ '$scope', '$http', '$cookieStore', '$location', '$routeParams', '$upload', '$timeout', ($scope, $http, $cookieStore, $location, $routeParams, $upload, $timeout)->
+
   $scope.project_id = $routeParams.id
+  $scope.project = {}
   if $scope.project_id
     $http.get('/projects/' + $scope.project_id).success (res)->
       $scope.project = res.data
@@ -22,7 +24,12 @@
         window.history.replaceState({}, 'basic', new_url)
         $location.url('/project/team' + '?id=' + res.id)
       else
+        $scope.error_message = res.message
         $scope.errors = res.errors
+        $scope.logo_error = res.logo_error
+        $timeout ()->
+          $scope.error_message = null
+        ,5000
 
   $scope.update = ()->
     $http
@@ -34,17 +41,25 @@
       if res.success
         $location.url('/project/team' + '?id=' + $scope.project_id)
       else
+        $scope.error_message = res.message
         $scope.errors = res.errors
+        $timeout ()->
+          $scope.error_message = null
+        ,5000
 
   $scope.upload_logo = ($files)->
+    $scope.logo_error = null
     for file in $files
       $scope.upload = $upload.upload
         url: '/logos'
         method: 'POST'
         file: file
       .success (res)->
-        $scope.logo_url = res.url
-        $scope.logo_id = res.id
+        if res.success
+          $scope.project.logo_url = res.url
+          $scope.project.logo_id = res.id
+        else
+          $scope.logo_error = res.message
       .error ()->
         console.log '上传失败'
 ]

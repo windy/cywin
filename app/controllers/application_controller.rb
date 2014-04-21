@@ -20,7 +20,9 @@ class ApplicationController < ActionController::Base
       message: msg.to_s,
     }
 
-    if model
+    if model.kind_of?(Hash)
+      res.merge!(model)
+    else
       res.merge!( errors: flatten_errors(model.errors.messages) )
     end
 
