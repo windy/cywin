@@ -45,6 +45,10 @@ class Project < ActiveRecord::Base
     self.members.where.not(user_id: user.id)
   end
 
+  def members_without_owner
+    self.members.where.not(:priv, 'owner')
+  end
+
   def complete_degree
     0.8
   end

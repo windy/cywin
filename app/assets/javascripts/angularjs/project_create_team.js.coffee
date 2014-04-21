@@ -5,6 +5,9 @@
   $http.get('/projects/' + $scope.project_id + '/members/owner').success (res)->
     $scope.owner = res.data
 
+  $http.get('/projects/' + $scope.project_id + '/members/team_story').success (res)->
+    $scope.team_story = res.team_story
+
   $scope.update_owner = ()->
     $http
       url: '/projects/' + $scope.project_id + '/members/' + $scope.owner.user_id
@@ -40,6 +43,20 @@
           $scope.avatar_error = res.message
       .error ()->
         console.log '上传失败'
+
+  $scope.update_team_story = ()->
+    $http
+      url: '/projects/' + $scope.project_id + '/members/update_team_story'
+      method: 'POST'
+      params:
+        team_story: $scope.team_story
+    .success (res)->
+      $scope.team_edited = false
+
+  $scope.cancel_team_edit = ()->
+    $http.get('/projects/' + $scope.project_id + '/members/team_story').success (res)->
+      $scope.team_story = res.team_story
+      $scope.team_edited = false
 
   $scope.next = ()->
     $location.url('/project/require' + "?id=" + $scope.project_id)

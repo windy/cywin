@@ -6,6 +6,9 @@ class MembersController < ApplicationController
   end
 
   def index
+    members = @project.members_without_owner
+    render_success(nil, data: {
+    })
   end
 
   def new
@@ -26,6 +29,19 @@ class MembersController < ApplicationController
       description: owner_member.description,
       title: owner_member.title,
     })
+  end
+
+  def team_story
+    render_success(nil, team_story: @project.team_story)
+  end
+
+  def update_team_story
+    authorize! :update, @project
+    if @project.update( team_story: params[:team_story] )
+      render_success
+    else
+      render_fail('更新失败')
+    end
   end
 
   def update
@@ -85,5 +101,8 @@ class MembersController < ApplicationController
 
   def user_params
     params.permit(:name, :email)
+  end
+
+  def member_json(member)
   end
 end

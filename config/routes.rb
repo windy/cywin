@@ -40,6 +40,8 @@ Rails.application.routes.draw do
     resources :members do
       collection do
         get :owner
+        get :team_story
+        post :update_team_story
       end
     end
   end

@@ -55,14 +55,17 @@
         .small-12.columns
           h3.title 我们的故事
           .edit
-            a href='#' 编辑
-      p 我们是一帮好人
-      p 1974.02--1978.10 北京市运输公司汽车修理厂工人
-      p 1978.10—1982.08 中国人民大学中共党史系中共党史专业学生
-      p 1982.08—1983.09 中央教育行政学院教员
-      p 1983.09—1986.07 中国人民大学中共党史系硕士研究生
-      p 1986.07—1989.03 北京市委研究室干部、副处级调研员
-      p 1989.03—1991.04 国务院台办二组副处长
+            a ng-hide='team_edited' ng-click=' team_edited = true ' 编辑
+      .team-story-wrapper.description ng-hide= 'team_edited'
+        |{{ team_story }}
+      .team-story-edit ng-show = 'team_edited'
+        form ng-submit='update_team_story()'
+          textarea placeholder='我的团队故事' ng-model='team_story'
+            |{{ team_story }}
+          .control-actions
+            button.small 确认
+            a.cancel ng-click= 'cancel_team_edit()' 取消
+    hr
 
     /*.members*/
       /*.row*/
