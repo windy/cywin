@@ -19,11 +19,13 @@ class ApplicationController < ActionController::Base
       success: false,
       message: msg.to_s,
     }
-
-    if model.kind_of?(Hash)
-      res.merge!(model)
-    else
-      res.merge!( errors: flatten_errors(model.errors.messages) )
+    
+    if model
+      if model.kind_of?(Hash)
+        res.merge!(model)
+      else
+        res.merge!( errors: flatten_errors(model.errors.messages) )
+      end
     end
 
     render :json => res
