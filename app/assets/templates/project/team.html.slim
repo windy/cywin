@@ -13,6 +13,9 @@
         .row
           .small-4.large-3.columns
             img ng-src=' {{ owner.avatar }} ' alt='owner'
+            input id='owner-avatar' type='file' ng-file-select='upload_avatar($files)'
+            small.error ng-show=' avatar_error '
+              | {{ avatar_error }}
           .small-8.large-9.columns
             div ng-hide=' owner_edited '
               .name

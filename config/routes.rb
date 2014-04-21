@@ -103,6 +103,7 @@ Rails.application.routes.draw do
       get :change_password
     end
   end
+  resources :avatars, only: [:create]
   resources :messages
   resources :conversations, only: [:index ] do
     member do

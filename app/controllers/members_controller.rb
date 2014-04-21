@@ -20,7 +20,7 @@ class MembersController < ApplicationController
     owner = @project.owner
     owner_member = @project.member( owner )
     render_success(nil, data: {
-      avatar: owner.avatar.url,
+      avatar: owner.avatar_url,
       name: owner.name,
       user_id: owner.id,
       description: owner_member.description,

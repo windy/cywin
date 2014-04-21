@@ -11,13 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140419071156) do
+ActiveRecord::Schema.define(version: 20140421070526) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
     t.string   "provider",     null: false
     t.string   "uid",          null: false
     t.string   "access_token", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "avatars", force: true do |t|
+    t.string   "image"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -233,7 +240,6 @@ ActiveRecord::Schema.define(version: 20140419071156) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
-    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
