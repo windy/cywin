@@ -116,7 +116,10 @@
   padding: 1rem 0;
 
   .name {
-    padding-bottom: 0.2rem;
+    padding-bottom: 0.5rem;
+    @media only screen and (max-width: 40em) {
+      padding-bottom: 0.2rem;
+    }
     a {
       color: #333;
       font-weight: 600;
@@ -132,6 +135,8 @@
 
   .description {
     color: #999;
+    margin-top: 0.5rem;
+    line-height: 0.6rem;
   }
 
 }// person

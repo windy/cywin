@@ -29,19 +29,19 @@ Eachfund::Application.routes.draw do
   resources :syndicates
   resources :funds
   resources :jobs, only: [:index]
+  resources :logos, only: [:create]
   resources :projects do
     member do
-      get :stage0
-      get :stage1
-      post :stage1
-      get :stage2
-      post :stage2
       post :publish
       post :invite
       get :team
       get :invest
     end
-    resources :members
+    resources :members do
+      collection do
+        get :owner
+      end
+    end
   end
   resources :investors do
     member do

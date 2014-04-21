@@ -1,0 +1,67 @@
+.head
+  ul.small-block-grid-1.medium-block-grid-3.list
+    li
+      a.active href='javascript:void(0)' 1. 基本信息
+    li
+      a href='javascript:void(0)' 2. 团队信息
+    li
+      a href='javascript:void(0)' 3. 创业需求
+form.stage0.ng-cloak ng-submit='submit()'
+  h3.title 项目信息
+  .row
+    .small-12.medium-6.columns
+      label for='name' 项目名称
+      input id='name' type='text' placeholder='如: 百度' ng-model="project.name" ng-class= '{ error: errors.name }'
+      small.error.ng-cloak ng-show=' errors.name ' {{ errors.name }}
+  .row
+    .small-4.medium-2.columns
+      .image-wrapper
+        img ng-src=' {{ project.logo_url }} '
+    .small-8.medium-6.end.columns
+      label for='logo' Logo
+      input id='logo' type='file' ng-file-select='upload_logo($files)'
+      small.error.ng-cloak ng-show=' logo_error ' {{ logo_error }}
+      input type='hidden' id='logo_id' ng-model=' project.logo_id '
+  .row
+    .small-12.medium-8.columns
+      label for='oneword' 一句话
+      input id='oneword' type='text' placeholder='一句话说明, 将显示在项目副标题' ng-model='project.oneword' ng-class= '{ error: errors.oneword }'
+      small.error.ng-cloak ng-show=' errors.oneword' {{ errors.oneword }}
+  .row
+    .small-12.medium-8.columns
+      label for='description' 产品介绍
+      textarea id='description' placeholder='完整描述你的产品' ng-model='project.description' ng-class= '{ error: errors.description }'
+      small.error.ng-cloak ng-show=' errors.description' {{ errors.description }}
+  .row
+    .small-10.medium-4.columns
+      label for='industry' 所属行业
+      input id='industry' type='text' ng-model='project.industry' ng-class= '{ error: errors.industry }'
+      small.error.ng-cloak ng-show=' errors.industry' {{ errors.industry }}
+  .row
+    .small-10.medium-4.columns
+      label for='city' 城市
+      input id='city' type='text' ng-model='project.city' ng-class= '{ error: errors.city }'
+      small.error.ng-cloak ng-show=' errors.city ' {{ errors.city }}
+  .row
+    .small-12.medium-8.columns
+      hr
+  h3.title 联系方式
+  .row
+    .small-12.large-8.columns
+      label for="address" 项目地址
+      input id='address' type='text' ng-model='contact.address' placeholder='如: 南山街道'
+  .row
+    .small-12.large-6.columns
+      label for='phone' 电话
+      input id='phone' type='text' ng-model='contact.phone'
+  .row
+    .small-12.large-6.columns
+      label for='weixin' 微信
+      input id='weixin' type='text' ng-model='contact.weixin'
+  .row
+    .small-12.columns
+      p.alert
+        |{{ error_message }}
+      hr
+      .control-actions
+        button 下一步

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317095155) do
+ActiveRecord::Schema.define(version: 20140419071156) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -101,6 +101,13 @@ ActiveRecord::Schema.define(version: 20140317095155) do
     t.datetime "updated_at"
   end
 
+  create_table "logos", force: true do |t|
+    t.integer  "project_id"
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "members", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -158,15 +165,12 @@ ActiveRecord::Schema.define(version: 20140317095155) do
   end
 
   create_table "projects", force: true do |t|
-    t.string   "logo"
     t.string   "name"
     t.string   "oneword"
     t.text     "description"
     t.string   "stage"
-    t.string   "where1"
-    t.string   "where2"
-    t.string   "where3"
     t.string   "industry"
+    t.string   "city"
     t.boolean  "published",   default: false
     t.datetime "created_at"
     t.datetime "updated_at"

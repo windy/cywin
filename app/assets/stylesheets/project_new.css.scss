@@ -7,6 +7,7 @@
     .list {
       text-align: center;
       width: 100%;
+      margin-left: 0;
       li {
         border: 1px solid #ddd;
         padding: 0;
@@ -44,11 +45,23 @@
     }
   }
 
+  .image-wrapper {
+    height: 8rem;
+    border: 1px solid #aaa;
+    margin-bottom: 1rem;
+  }
+
   .stage1 {
     .edit {
       position: absolute;
       right: 1rem;
       top: 0.5rem;
+    }
+    .cancel {
+      margin-left: 0.5rem;
+    }
+    img {
+      width: 100%;
     }
   }
 

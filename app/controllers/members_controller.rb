@@ -1,7 +1,6 @@
 class MembersController < ApplicationController
-  layout false
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:update, :create]
   before_action do
     @project = Project.find(params[:project_id])
   end
@@ -15,6 +14,34 @@ class MembersController < ApplicationController
 
   def show
     @member = @project.members.find(params[:id])
+  end
+
+  def owner
+    owner = @project.owner
+    owner_member = @project.member( owner )
+    render_success(nil, data: {
+      avatar: owner.avatar.url,
+      name: owner.name,
+      user_id: owner.id,
+      description: owner_member.description,
+      title: owner_member.title,
+    })
+  end
+
+  def update
+    user = User.find( params[:id] )
+    member = @project.member( user )
+    authorize! :update, @project
+    if member
+      if member.update(title: params[:title], description: params[:description]) && user.update(name: params[:name])
+        render_success
+      else
+        render_fail('更新失败')
+      end
+
+    else
+      render_fail('未找到指定的成员')
+    end
   end
 
   def create

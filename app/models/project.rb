@@ -1,20 +1,15 @@
 class Project < ActiveRecord::Base
   my_const_set('STAGES', [ 'IDEA', 'DEVELOPING', 'ONLINE', 'GAINED' ])
     
-  validates :name, presence: true, uniqueness: true, length: { minimum: 1 }
-  validates :oneword, presence: true, length: { minimum: 4 }
-  validates :stage, presence: true, inclusion: STAGES
-  validates :where1, :where2, :where3, presence: true, format: /\d/, length: 6..6
+  validates :name, presence: true, uniqueness: true
+  validates :oneword, presence: true
+  #validates :stage, presence: true, inclusion: STAGES
+  validates :description, presence: true
 
-  validates :logo, presence: true
-
-  mount_uploader :logo, LogoUploader
-
+  has_one :logo
   has_one :contact
   has_and_belongs_to_many :users, join_table: :members
   has_many :members, autosave: true
-  accepts_nested_attributes_for :contact
-  validates :contact, presence: true
   
   # 创业需求
   has_many :money_requires
@@ -41,7 +36,6 @@ class Project < ActiveRecord::Base
   def add_user( user, option={} )
     member = Member.new
     member.user = user
-    #TODO 处理权限的控制
     member.priv = option[:priv] || 'viewer'
     member.role = option[:role]
     self.members << member
