@@ -14,3 +14,6 @@ ADMIN_NAME: First User
 ADMIN_EMAIL: user@example.com
 ADMIN_PASSWORD: changeme
 ROLES: [admin, investor, leader]
+
+# SECRET_KEY_BASE
+SECRET_KEY_BASE: ba7e7502e0faedd10709b616dec2db58f6eea1d5f3335f7592ceb420699409af510c4f77071df440c4cc6ed51e2b8b6fc29194ae11dbd03a8a63ce81d42f3d3f
