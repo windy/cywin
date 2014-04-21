@@ -1,4 +1,4 @@
-Eachfund::Application.routes.draw do
+Rails.application.routes.draw do
   get "dashboard/index"
   get "activities/show"
   get "projects_searcher/index"
