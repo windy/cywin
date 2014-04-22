@@ -73,10 +73,10 @@
           h3.title 我们的成员
           .edit
             a ng-click='members_edited = true' 添加
-      ul.small-block-grid-1.medium-block-grid-2 ng-repeat=' member in members '
-        li
+      ul.small-block-grid-1.medium-block-grid-2
+        li ng-repeat=' member in members '
           .person
-            .row
+            .row ng-hide=' member.member_edited == member'
               .small-4.medium-5.large-4.columns
                 img ng-src=' {{member.url}} ' alt='member'
               .small-8.medium-7.large-8.columns
@@ -86,22 +86,35 @@
                   |{{member.title}}
                 .description 
                   |{{member.description}}
+                .edit
+                  a ng-click='member.member_edited = member ' 编辑
+            .row ng-show='member.member_edited == member'
+              .small-12.columns
+                form ng-submit=' update_member(member) '
+                  h6 编辑成员信息
+                  input type='text' ng-model='member.title' placeholder='职位'
+                  textarea ng-model='member.description' placeholder='详细描述'
+                  p.alert
+                    |{{ member_error }}
+                  .control-actions
+                    button 确认
+                    a.cancel ng-click='member.member_edited = false' 取消
       .row ng-show= 'members_edited'
         .small-12.columns
           form
             .row
               .small-12.medium-6.columns
                 label for='invite_user' 添加或者邀请成员
-                input id='invite_user' type='text' placeholder='用户名 or 邮箱'
-                ul.autocomplete-wrapper
-                  - 3.times do
-                    li
-                      a
-                        .row
-                          .small-4.medium-3.large-2.columns
-                            img src='/assets/default.png'
-                          .small-8.medium-9.large-10.columns
-                            h6.title 李亚飞 ( 一个纯粹的人 )
+                input id='invite_user' type='text' placeholder='用户名 or 邮箱' ng-model='invite_user' ng-keyup=' autocomplete_search() '
+                ul.autocomplete-wrapper ng-repeat= 'autocomplete_user in autocomplete_users'
+                  li
+                    a ng-click='add_member(autocomplete_user.user_id)'
+                      .row
+                        .small-3.medium-3.large-2.columns
+                          img ng-src= ' {{ autocomplete_user.avatar }} '
+                        .small-9.medium-9.large-10.columns
+                          h6.title
+                            |{{ autocomplete_user.name }} 
 
             .control-actions
               button.small ng-click= 'members_edited = false' 确认

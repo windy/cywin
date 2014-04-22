@@ -12,6 +12,14 @@ describe MembersController do
     end
   end
 
+  describe "autocomplete" do
+    it '成功' do
+      project = create(:project)
+      get :autocomplete, project_id: project.id, search: 'hello'
+      response.should be_success
+    end
+  end
+
   describe "create" do
     login_user
     describe "普通添加用户" do

@@ -42,6 +42,7 @@ Rails.application.routes.draw do
         get :owner
         get :team_story
         post :update_team_story
+        get :autocomplete
       end
     end
   end

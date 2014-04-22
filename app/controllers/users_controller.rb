@@ -1,15 +1,5 @@
 class UsersController < ApplicationController
 
-  def autocomplete
-    search = params.permit(:search)[:search]
-    if search.nil?
-      render_fail
-    else
-      searched = User.where("name like ?", "%#{search}%").select("id", "name")
-      render_success(nil, data: searched)
-    end
-  end
-
   def email_validate
     email = params[:email]
     user = User.new(email: email)
