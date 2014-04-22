@@ -7,8 +7,7 @@ class MembersController < ApplicationController
 
   def index
     members = @project.members_without_owner
-    render_success(nil, data: {
-    })
+    render_success(nil, data: members_json(members) )
   end
 
   def new
@@ -103,6 +102,21 @@ class MembersController < ApplicationController
     params.permit(:name, :email)
   end
 
+  def members_json(members)
+    members.collect do |m|
+      member_json(m)
+    end
+  end
+
   def member_json(member)
+    user = member.user
+    {
+      member_id: member.id,
+      user_id: user.id,
+      name: user.name,
+      url: user.avatar_url,
+      title: member.title,
+      description: member.description
+    }
   end
 end

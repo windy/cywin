@@ -67,27 +67,35 @@
             a.cancel ng-click= 'cancel_team_edit()' 取消
     hr
 
-    /*.members*/
-      /*.row*/
-        /*.small-12.columns*/
-          /*h3.title 我们的成员*/
-          /*.edit*/
-            /*= link_to '添加', '#'*/
-      /*ul.small-block-grid-1.large-block-grid-2*/
-        /*- 6.times do*/
-          /*li*/
-            /*.person*/
-              /*.row*/
-                /*.small-4.large-3.columns*/
-                  /*= image_tag 'm/u1.png'*/
-                /*.small-8.large-9.columns*/
-                  /*.name*/
-                    /*= link_to '李亚飞', user_path(1)*/
-                  /*.job-title CTO*/
-                  /*.description 我毕业于清华大学, 创建过xx项目, xx项目, 属于二次创业.*/
-      /*.control-actions*/
-        /*button.small 添加新的成员*/
-  /*hr*/
+    .members
+      .row
+        .small-12.columns
+          h3.title 我们的成员
+          .edit
+            a ng-click='members_edited = true' 添加
+      ul.small-block-grid-1.large-block-grid-2 ng-repeat=' member in members '
+        li
+          .person
+            .row
+              .small-4.large-3.columns
+                img ng-src=' {{member.url}} ' alt='member'
+              .small-8.large-9.columns
+                .name
+                  a ng-href='/users/{{ member.user_id }}' {{ member.name }}
+                .job-title 
+                  |{{member.title}}
+                .description 
+                  |{{member.description}}
+      .row ng-show= 'members_edited'
+        .small-12.columns
+          form
+            input type='text' placeholder='用户名 or 邮箱'
+            .control-actions
+              button.small ng-click= 'members_edited = false' 确认
+              a.cancel ng-click='members_edited = false' 取消
+      .control-actions ng-hide= 'members_edited'
+        button.small ng-click= 'members_edited = true' 添加新的成员
+  hr
   .control-actions
     a.button ng-click='next()' 下一步
     a.back-link ng-click='prev()' 返回上一步

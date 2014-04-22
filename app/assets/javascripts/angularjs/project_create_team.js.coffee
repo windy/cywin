@@ -8,6 +8,9 @@
   $http.get('/projects/' + $scope.project_id + '/members/team_story').success (res)->
     $scope.team_story = res.team_story
 
+  $http.get('/projects/' + $scope.project_id + '/members').success (res)->
+    $scope.members = res.data
+
   $scope.update_owner = ()->
     $http
       url: '/projects/' + $scope.project_id + '/members/' + $scope.owner.user_id
