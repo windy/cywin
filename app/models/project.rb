@@ -37,12 +37,16 @@ class Project < ActiveRecord::Base
     member = Member.new
     member.user = user
     member.priv = option[:priv] || 'viewer'
-    member.role = option[:role]
+    member.role = option[:role] || Member::MEMBER
     self.members << member
   end
 
   def members_but(user)
     self.members.where.not(user_id: user.id)
+  end
+
+  def members_without_owner
+    self.members.where.not(priv: 'owner')
   end
 
   def complete_degree

@@ -40,6 +40,9 @@ Rails.application.routes.draw do
     resources :members do
       collection do
         get :owner
+        get :team_story
+        post :update_team_story
+        get :autocomplete
       end
     end
   end
@@ -103,6 +106,7 @@ Rails.application.routes.draw do
       get :change_password
     end
   end
+  resources :avatars, only: [:create]
   resources :messages
   resources :conversations, only: [:index ] do
     member do

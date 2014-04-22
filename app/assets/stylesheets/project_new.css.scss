@@ -52,16 +52,44 @@
   }
 
   .stage1 {
+    #owner-avatar {
+      margin-top: 0.5rem;
+    }
     .edit {
       position: absolute;
       right: 1rem;
       top: 0.5rem;
     }
+
     .cancel {
       margin-left: 0.5rem;
     }
-    img {
-      width: 100%;
+
+    .team-story-wrapper {
+      color: #888;
+      min-height: 6rem;
+    }
+
+    .members .person .name {
+      padding-bottom: 0;
+    }
+
+    .autocomplete-wrapper {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+      a {
+        display: block;
+        padding: 0.5rem 0 0.5rem 0.5rem;
+        &:hover {
+          background-color: #ddd;
+        }
+        .title {
+          margin-left: 0.5rem;
+          border: none;
+        }
+      }
     }
   }
 

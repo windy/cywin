@@ -64,6 +64,7 @@ class ProjectsController < ApplicationController
           logo_url: @project.logo.try(:image_url),
         })
       end
+      format.html
     end
   end
 

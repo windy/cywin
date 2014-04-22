@@ -6,6 +6,8 @@ class MembersController < ApplicationController
   end
 
   def index
+    members = @project.members_without_owner
+    render_success(nil, data: members_json(members) )
   end
 
   def new
@@ -20,7 +22,7 @@ class MembersController < ApplicationController
     owner = @project.owner
     owner_member = @project.member( owner )
     render_success(nil, data: {
-      avatar: owner.avatar.url,
+      avatar: owner.avatar_url,
       name: owner.name,
       user_id: owner.id,
       description: owner_member.description,
@@ -28,32 +30,66 @@ class MembersController < ApplicationController
     })
   end
 
+  def team_story
+    render_success(nil, team_story: @project.team_story)
+  end
+
+  def update_team_story
+    authorize! :update, @project
+    if @project.update( team_story: params[:team_story] )
+      render_success
+    else
+      render_fail('更新失败')
+    end
+  end
+
   def update
     user = User.find( params[:id] )
     member = @project.member( user )
     authorize! :update, @project
-    if member
-      if member.update(title: params[:title], description: params[:description]) && user.update(name: params[:name])
-        render_success
-      else
-        render_fail('更新失败')
-      end
-
-    else
+    unless member
       render_fail('未找到指定的成员')
+      return
+    end
+
+    if member.update(title: params[:title], description: params[:description])
+      if params[:name] 
+        if user.update(name: params[:name])
+          render_success
+        else
+          render_fail('更新失败', user)
+        end
+      else
+        render_success
+      end
+    else
+      render_fail('更新失败', @member)
+    end
+  end
+
+  def autocomplete
+    search = params.permit(:search)[:search]
+    if search.nil?
+      render_fail
+    elsif search.include?('@')
+      searched = User.where(email: search)
+      render_success( nil, data: users_json(searched) )
+    else
+      searched = User.where("name like ?", "%#{search}%")
+      render_success( nil, data: users_json(searched) )
     end
   end
 
   def create
     user_id = member_params[:user_id]
-    role = member_params[:role]
 
     if user_id
       # 直接添加用户即可
       user = User.find(user_id)
-      @project.add_user(user, role: role)
+      @project.add_user(user)
       if @project.save
-        render_success("添加成员成功")
+        member = @project.reload.member( user )
+        render_success(nil, data: member_json(member) )
       else
         render_fail(@project.errors.full_messages.to_s)
       end
@@ -85,5 +121,39 @@ class MembersController < ApplicationController
 
   def user_params
     params.permit(:name, :email)
+  end
+
+  def members_json(members)
+    members.collect do |m|
+      member_json(m)
+    end
+  end
+
+  def member_json(member)
+    user = member.user
+    {
+      member_id: member.id,
+      user_id: user.id,
+      name: user.name,
+      url: user.avatar_url,
+      title: member.title,
+      description: member.description
+    }
+  end
+
+  # searched
+  def users_json(users)
+    users.collect do |u|
+      user_json(u)
+    end
+  end
+
+  def user_json(user)
+    {
+      avatar: user.avatar_url,
+      name: user.name,
+      user_id: user.id,
+      joined: false,
+    }
   end
 end

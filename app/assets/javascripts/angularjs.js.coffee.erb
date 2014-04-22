@@ -26,5 +26,7 @@
     .when '/project/require',
       templateUrl: '<%= asset_path('project/require.html')%>'
       controller: 'ProjectCreateRequireController'
+    .otherwise
+      redirectTo: '/project/basic'
 ]
 
