@@ -89,7 +89,20 @@
       .row ng-show= 'members_edited'
         .small-12.columns
           form
-            input type='text' placeholder='用户名 or 邮箱'
+            .row
+              .small-12.medium-6.columns
+                label for='invite_user' 添加或者邀请成员
+                input id='invite_user' type='text' placeholder='用户名 or 邮箱'
+                ul.autocomplete-wrapper
+                  - 3.times do
+                    li
+                      a
+                        .row
+                          .small-4.medium-3.large-2.columns
+                            img src='/assets/default.png'
+                          .small-8.medium-9.large-10.columns
+                            h6.title 李亚飞 ( 一个纯粹的人 )
+
             .control-actions
               button.small ng-click= 'members_edited = false' 确认
               a.cancel ng-click='members_edited = false' 取消
