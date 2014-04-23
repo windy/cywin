@@ -97,28 +97,45 @@
                   p.alert
                     |{{ member_error }}
                   .control-actions
-                    button 确认
-                    a.cancel ng-click='member.member_edited = false' 取消
+                    ul.button-group
+                      li
+                        button.small 确认
+                      li
+                        button.small ng-click='remove_member($event, member)' 移除
+                      li
+                        a.button.small ng-click='member.member_edited = false' 取消
       .row ng-show= 'members_edited'
         .small-12.columns
           form
             .row
               .small-12.medium-6.columns
                 label for='invite_user' 添加或者邀请成员
-                input id='invite_user' type='text' placeholder='用户名 or 邮箱' ng-model='invite_user' ng-keyup=' autocomplete_search() '
-                ul.autocomplete-wrapper ng-repeat= 'autocomplete_user in autocomplete_users'
-                  li
-                    a ng-click='add_member(autocomplete_user.user_id)'
+                input id='invite_user' type='text' placeholder='用户名 or 邮箱' ng-model='invite_user' ng-keyup=' autocomplete_search_with_timeout() '
+                p.no-result ng-show='autocomplete_users.length == 0' 没有结果
+                ul.autocomplete-wrapper
+                  li ng-class= '{ disabled: autocomplete_user.joined }' ng-repeat= 'autocomplete_user in autocomplete_users'
+                    a ng-click='add_member(autocomplete_user)'
                       .row
                         .small-3.medium-3.large-2.columns
                           img ng-src= ' {{ autocomplete_user.avatar }} '
                         .small-9.medium-9.large-10.columns
                           h6.title
                             |{{ autocomplete_user.name }} 
+                            .joined ng-show= 'autocomplete_user.joined' 已加入
+                            .unconfirmed ng-hide='autocomplete_user.confirmed' 邮件未确认
+                .control-actions ng-hide='autocomplete_invite'
+                  button.small ng-click= 'members_edited = false' 确认
+                  a.cancel ng-click='members_edited = false' 取消
+          form ng-show='autocomplete_invite' ng-submit='autocomplete_invite_user()'
+            .row
+              .small-12.medium-6.columns
+                p.invite-tips 这个用户尚未注册, 你可以邀请加入团队, 我们会自动发送邀请邮件, 一旦注册, 将自动加入团队
+                label for='invite_name' 真实姓名
+                input type='text' id='invite_name' ng-model='autocomplete_invite_name'
+                .control-actions
+                  button.small 发送
+                  a.cancel ng-click='autocomplete_invite = false' 取消
 
-            .control-actions
-              button.small ng-click= 'members_edited = false' 确认
-              a.cancel ng-click='members_edited = false' 取消
       .control-actions ng-hide= 'members_edited'
         button.small ng-click= 'members_edited = true' 添加新的成员
   hr
