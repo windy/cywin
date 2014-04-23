@@ -22,6 +22,9 @@
   .success (res)->
     if res.success
       $scope.person_requires = res.data
+      $scope.person_require_flag = true
+    else
+      $scope.person_requires = []
 
   $scope.complete = ()->
     if $scope.money_require_id

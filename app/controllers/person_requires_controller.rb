@@ -6,7 +6,11 @@ class PersonRequiresController < ApplicationController
 
   def index
     person_requires = @project.person_requires
-    render_success( nil, data: person_requires_json(person_requires) )
+    if person_requires.empty?
+      render_fail
+    else
+      render_success( nil, data: person_requires_json(person_requires) )
+    end
   end
 
   def create
