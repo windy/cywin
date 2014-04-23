@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   acts_as_messageable
 
-  validates :name, presence: true
+  #validates :name, presence: true
 
   has_one :avatar
   # 投资角色

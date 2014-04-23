@@ -44,9 +44,9 @@ class MembersController < ApplicationController
   end
 
   def update
+    authorize! :update, @project
     user = User.find( params[:id] )
     member = @project.member( user )
-    authorize! :update, @project
     unless member
       render_fail('未找到指定的成员')
       return
@@ -73,45 +73,66 @@ class MembersController < ApplicationController
       render_fail
     elsif search.include?('@')
       searched = User.where(email: search)
-      render_success( nil, data: users_json(searched) )
+      if searched.empty?
+        render_fail(nil, email: true, name: search.split('@')[0])
+      else
+        render_success( nil, data: users_json(searched), email: true )
+      end
     else
       searched = User.where("name like ?", "%#{search}%")
-      render_success( nil, data: users_json(searched) )
+      if searched.empty?
+        render_fail
+      else
+        render_success( nil, data: users_json(searched) )
+      end
+    end
+  end
+
+  def invite
+    authorize! :update, @project
+    #TODO 邀请制度的完善
+    user = User.invite!( user_params ) do |u|
+      u.skip_invitation = true
+    end
+    unless user.save
+      render_fail(user.errors.full_messages)
+      return
+    end
+
+    @project.add_user(user)
+
+    if @project.save
+      member = @project.reload.member( user )
+      render_success(nil, data: member_json(member) )
+    else
+      render_fail(@project.errors.full_messages.to_s)
     end
   end
 
   def create
+    authorize! :update, @project
     user_id = member_params[:user_id]
 
-    if user_id
-      # 直接添加用户即可
-      user = User.find(user_id)
-      @project.add_user(user)
-      if @project.save
-        member = @project.reload.member( user )
-        render_success(nil, data: member_json(member) )
-      else
-        render_fail(@project.errors.full_messages.to_s)
-      end
+    user = User.find(user_id)
+    @project.add_user(user)
+    if @project.save
+      member = @project.reload.member( user )
+      render_success(nil, data: member_json(member) )
     else
-      #TODO 邀请制度的完善
-      user = User.invite!( user_params ) do |u|
-        u.skip_invitation = true
-      end
-      unless user.save
-        render_fail(user.errors.full_messages)
-        return
-      end
-      @project.add_user(user, role: role)
-      if @project.save
-        render_success
-      else
-        render_fail(@project.errors.full_messages.to_s)
-      end
+      render_fail(@project.errors.full_messages.to_s)
     end
   end
 
   def destroy
+    authorize! :update, @project
+    user_id = params[:id]
+    user = User.find(user_id)
+
+    if @project.remove_user( user )
+      render_success
+    else
+      render_fail
+    end
   end
 
   private
@@ -153,7 +174,7 @@ class MembersController < ApplicationController
       avatar: user.avatar_url,
       name: user.name,
       user_id: user.id,
-      joined: false,
+      joined: @project.member( user ).present?
     }
   end
 end

@@ -41,6 +41,10 @@ class Project < ActiveRecord::Base
     self.members << member
   end
 
+  def remove_user( user )
+    Member.where(user_id: user.id, project_id: self.id).destroy_all
+  end
+
   def members_but(user)
     self.members.where.not(user_id: user.id)
   end

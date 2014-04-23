@@ -43,6 +43,7 @@ Rails.application.routes.draw do
         get :team_story
         post :update_team_story
         get :autocomplete
+        post :invite
       end
     end
   end
