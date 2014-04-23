@@ -9,28 +9,30 @@
 .row.stage2
   .small-12.columns
     form
-      div.title-wrapper
-        input type='checkbox' id='money_require_flag'
+      .title-wrapper
+        input type='checkbox' id='money_require_flag' ng-model='money_require_flag'
         label for="money_require_flag"
           h4.title 我要融资
+      .money-require-wrapper ng-show='money_require_flag'
         label for="money" 计划融资
         .row.collapse
           .small-1.columns
             span.prefix ¥
-          .small-11.large-6.end.columns
-            input type='text' id='money'
-        label for="fund" 出让股份
+          .small-11.medium-8.large-6.end.columns
+            input type='text' id='money' ng-model='money'
+        label for="share" 出让股份
         .row.collapse
-          .small-11.large-3.columns
-            input type='text' id='fund'
+          .small-11.medium-3.columns
+            input type='text' id='share' ng-model='share'
           .small-1.large-1.end.columns
             span.postfix %
 
       hr
       div.title-wrapper
-        input type='checkbox' id='person_require_flag'
+        input type='checkbox' id='person_require_flag' ng-model='person_require_flag'
         label for="person_require_flag"
           h4.title 我要招人 
+      .person-require-wrapper ng-show='person_require_flag'
         .row
           - 3.times do 
             .small-12.large-6.columns
@@ -90,5 +92,5 @@
 
       hr
       .control-actions
-        button 确认完成
+        button ng-click='complete()' 确认完成
         a.back-link ng-click='back()' 上一步

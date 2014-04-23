@@ -59,7 +59,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :money_requires, only: [ :new, :update, :create ] do
+  resources :money_requires do
     member do
       post :add_leader
       patch :add_leader
@@ -67,6 +67,11 @@ Rails.application.routes.draw do
       patch :leader_confirm
       post :close
       patch :close
+      patch :dirty_update
+    end
+    collection do
+      post :dirty_create
+      get :dirty_show
     end
   end
 
