@@ -46,6 +46,9 @@ Rails.application.routes.draw do
         post :invite
       end
     end
+
+    resources :person_requires do
+    end
   end
   resources :investors do
     member do

@@ -33,62 +33,90 @@
         label for="person_require_flag"
           h4.title 我要招人 
       .person-require-wrapper ng-show='person_require_flag'
-        .row
-          - 3.times do 
+        ul.small-block-grid-1.medium-block-grid-2
+          li ng-repeat= 'person_require in person_requires'
+            .job-box
+              table
+                tr
+                  td 职位
+                  td
+                    |{{ person_require.title }}
+                tr
+                  td 负责内容
+                  td.description
+                    |{{ person_require.description }}
+                tr
+                  td 报酬
+                  td
+                    | ¥ 
+                    |{{ person_require.pay }}
+                tr
+                  td 期权
+                  td
+                    |{{ person_require.option }}
+                    |  %
+                tr
+                  td 股权
+                  td
+                    |{{ person_require.stock }}
+                    |  %
+                tr
+                  td 可远程
+                  td
+                    |{{ boolean2human(person_require.remote) }}
+                tr
+                  td 可兼职
+                  td
+                    |{{ boolean2human(person_require.part) }}
+        .control-actions ng-hide='person_require_edited'
+          button.small ng-click='person_require_edited = true' 添加新的招聘
+        .person-require-edit ng-show='person_require_edited'
+          label for='title' 职位
+          .row
+            .small-12.medium-6.columns
+              input type='text' id='title' ng-model='add_person_require_data.title' ng-class=' { error: add_person_require_data.errors.title }'
+              small.error ng-show='add_person_require_data.errors.title' {{ add_person_require_data.errors.title }}
+          label for="description" 工作内容
+          .row
+            .small-12.medium-6.columns
+              textarea id='description' ng-model='add_person_require_data.description' ng-class=' { error: add_person_require_data.errors.description }'
+              small.error ng-show='add_person_require_data.errors.description' {{ add_person_require_data.errors.description}}
+          label 月薪
+          .row.collapse
+            .small-1.columns
+              span.prefix ¥
+            .small-10.medium-4.end.columns
+              input type='text' id='pay' ng-model='add_person_require_data.pay' ng-class=' { error: add_person_require_data.errors.pay }'
+              small.error ng-show='add_person_require_data.errors.pay' {{ add_person_require_data.errors.pay}}
+          label 期权
+          .row.collapse
+            .small-11.medium-4.columns
+              input type='text' ng-class= '{ error: add_person_require_data.errors.option }' id='option' ng-model='add_person_require_data.option'
+              small.error ng-show='add_person_require_data.errors.option' {{ add_person_require_data.errors.option }}
+            .small-1.end.columns
+              span.postfix %
+          label 股权
+          .row.collapse
+            .small-11.medium-4.columns
+              input type='text' id='stock' ng-model='add_person_require_data.stock' ng-class= '{ error: add_person_require_data.errors.stock }'
+              small.error ng-show='add_person_require_data.errors.stock' {{ add_person_require_data.errors.stock }}
+            .small-1.end.columns
+              span.postfix %
+          label for='remote' 可远程
+          .row
             .small-12.large-6.columns
-              .job-box
-                table
-                  tr
-                    td 职位
-                    td 软件开发工程师
-                  tr
-                    td 负责内容
-                    td 开发软件
-                  tr
-                    td 报酬
-                    td 月薪: 20k - 30k
-                  tr
-                    td 
-                    td 期权: 30%
-                  tr
-                    td 
-                    td 股权: 1%
-                  tr
-                    td 可选程
-                    td 是
-                  tr
-                    td 可兼职
-                    td 是
-        label for='title' 职位
-        .row
-          .small-12.large-6.columns
-            input type='text' id='title'
-        label for="content" 工作内容
-        .row
-          .small-12.large-6.columns
-            input type='text' id='content'
-        label 月薪
-        .row
-          .small-12.large-6.columns
-            input type='text' id='content'
-        label 期权
-        .row
-          .small-12.large-6.columns
-            input type='text' id='content'
-        label 股权
-        .row
-          .small-12.large-6.columns
-            input type='text' id='content'
-        label 可远程
-        .row
-          .small-12.large-6.columns
-            input type='checkbox' id='remote'
-        label 可兼职
-        .row
-          .small-12.large-6.columns
-            input type='checkbox' id='part'
-        .control-actions
-          button.small 添加新的招聘
+              input type='checkbox' id='remote' ng-true-value='true' ng-model='add_person_require_data.remote'
+          label for='part' 可兼职
+          .row
+            .small-12.large-6.columns
+              input type='checkbox' id='part' ng-model='add_person_require_data.part'
+          p.alert
+            |{{ add_person_require_error }}
+          .row
+            .small-12.large-6.columns
+              .control-actions
+                button ng-click='add_person_require()' 添加
+                a.cancel ng-click='person_require_edited = false' 取消
 
       hr
       .control-actions
