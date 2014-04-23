@@ -112,8 +112,8 @@
                 label for='invite_user' 添加或者邀请成员
                 input id='invite_user' type='text' placeholder='用户名 or 邮箱' ng-model='invite_user' ng-keyup=' autocomplete_search_with_timeout() '
                 p.no-result ng-show='autocomplete_users.length == 0' 没有结果
-                ul.autocomplete-wrapper ng-repeat= 'autocomplete_user in autocomplete_users'
-                  li ng-class= '{ disabled: autocomplete_user.joined }'
+                ul.autocomplete-wrapper
+                  li ng-class= '{ disabled: autocomplete_user.joined }' ng-repeat= 'autocomplete_user in autocomplete_users'
                     a ng-click='add_member(autocomplete_user)'
                       .row
                         .small-3.medium-3.large-2.columns
@@ -122,6 +122,7 @@
                           h6.title
                             |{{ autocomplete_user.name }} 
                             .joined ng-show= 'autocomplete_user.joined' 已加入
+                            .unconfirmed ng-hide='autocomplete_user.confirmed' 邮件未确认
                 .control-actions ng-hide='autocomplete_invite'
                   button.small ng-click= 'members_edited = false' 确认
                   a.cancel ng-click='members_edited = false' 取消

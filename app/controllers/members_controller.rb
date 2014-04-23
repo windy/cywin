@@ -94,6 +94,7 @@ class MembersController < ApplicationController
     user = User.invite!( user_params ) do |u|
       u.skip_invitation = true
     end
+
     unless user.save
       render_fail(user.errors.full_messages)
       return
@@ -158,7 +159,8 @@ class MembersController < ApplicationController
       name: user.name,
       url: user.avatar_url,
       title: member.title,
-      description: member.description
+      description: member.description,
+      confirmed: user.try(:confirmed?)
     }
   end
 
@@ -174,7 +176,8 @@ class MembersController < ApplicationController
       avatar: user.avatar_url,
       name: user.name,
       user_id: user.id,
-      joined: @project.member( user ).present?
+      joined: @project.member( user ).present?,
+      confirmed: user.try(:confirmed?)
     }
   end
 end
