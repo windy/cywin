@@ -18,6 +18,8 @@ class Project < ActiveRecord::Base
   # 关注人员
   has_many :stars
 
+  has_and_belongs_to_many :categories
+
   scope :published, -> { where(published: true) }
 
   def add_owner( owner )

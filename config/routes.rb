@@ -18,7 +18,11 @@ Rails.application.routes.draw do
     end
   end
   resources :refine
-  resources :categories
+  resources :categories do
+    collection do
+      get :autocomplete
+    end
+  end
   resources :explore do
     collection do
       get :all
