@@ -57,22 +57,6 @@ form.stage0.ng-cloak ng-submit='submit()'
               |{{ autocomplete_city.name }}
       small.error.ng-cloak ng-show=' errors.city ' {{ errors.city }}
   .row
-    .small-12.medium-8.columns
-      hr
-  h3.title 联系方式
-  .row
-    .small-12.large-8.columns
-      label for="address" 项目地址
-      input id='address' type='text' ng-model='contact.address' placeholder='如: 南山街道'
-  .row
-    .small-12.large-6.columns
-      label for='phone' 电话
-      input id='phone' type='text' ng-model='contact.phone'
-  .row
-    .small-12.large-6.columns
-      label for='weixin' 微信
-      input id='weixin' type='text' ng-model='contact.weixin'
-  .row
     .small-12.columns
       p.alert
         |{{ error_message }}
