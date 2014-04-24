@@ -36,7 +36,14 @@ form.stage0.ng-cloak ng-submit='submit()'
   .row
     .small-10.medium-4.columns
       label for='industry' 所属行业
-      input id='industry' type='text' ng-model='project.industry' ng-class= '{ error: errors.industry }'
+      input id='industry' type='text' ng-model='project.industry' ng-class= '{ error: errors.industry, autocomplete: ! autocomplete_categories_is_empty() }' ng-keyup=' autocomplete_categories_search() '
+      .no-result.ng-cloak ng-show=' autocomplete_categories_error ' {{ autocomplete_categories_error }}
+      .autocomplete-wrapper-position
+        ul.autocomplete-wrapper.ng-cloak ng-hide=' autocomplete_categories_is_empty() '
+          li ng-repeat=' autocomplete_category in autocomplete_categories '
+            a ng-click=' add_category(autocomplete_category) '
+              |{{ autocomplete_category.name }}
+
       small.error.ng-cloak ng-show=' errors.industry' {{ errors.industry }}
   .row
     .small-10.medium-4.columns

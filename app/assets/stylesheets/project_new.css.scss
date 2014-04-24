@@ -51,6 +51,38 @@
     //margin-bottom: 1rem;
   }
 
+  .stage0 {
+    input.autocomplete {
+      margin-bottom: 0;
+    }
+    .autocomplete-wrapper-position {
+      position: relative;
+    }
+    .no-result {
+      margin-bottom: 1rem;
+      color: #666;
+    }
+    .autocomplete-wrapper {
+      position: absolute;
+      list-style-type: none;
+      margin-left: 0;
+      border: 1px solid #aaa;
+      z-index: 2;
+      background-color: white;
+      width: 100%;
+      li {
+        padding: 0.25rem 0.5rem;
+        &:hover {
+          background-color: #eee;
+        }
+      }
+      a {
+        display: block;
+        color: #333;
+      }
+    }
+  } 
+
   .stage1 {
     #owner-avatar {
       margin-top: 0.5rem;
@@ -123,7 +155,6 @@
         border: none;
       }
     }
-
   }
 
 }
