@@ -19,6 +19,9 @@ class Project < ActiveRecord::Base
   has_many :stars
 
   has_and_belongs_to_many :categories
+  def categories_name 
+    self.categories.collect { |c| c.name }.join(',')
+  end
 
   scope :published, -> { where(published: true) }
 

@@ -21,6 +21,15 @@ class ProjectsController < ApplicationController
     authorize! :create, Project
     @project = Project.new( project_params )
 
+    if params[:industry].blank?
+      @project.errors.add(:industry, '必须选择一个分类')
+      render_fail('创建失败', @project)
+      return
+    else
+      category = Category.find_or_create_by(name: params[:industry])
+      @project.categories << category
+    end
+
     if logo_params[:logo_id]
       @project.logo = Logo.find( logo_params[:logo_id] )
     else
@@ -45,6 +54,16 @@ class ProjectsController < ApplicationController
       @project.logo = logo
     end
 
+    if params[:industry].blank?
+      @project.errors.add(:industry, '必须选择一个分类')
+      render_fail('创建失败', @project)
+      return
+    else
+      @project.categories.delete_all
+      category = Category.find_or_create_by(name: params[:industry])
+      @project.categories << category
+    end
+
     if @project.update( project_params )
       render_success
     else
@@ -62,6 +81,7 @@ class ProjectsController < ApplicationController
           description: @project.description,
           logo_id: @project.logo.try(:id),
           logo_url: @project.logo.try(:image_url),
+          industry: @project.categories_name
         })
       end
       format.html
@@ -70,7 +90,7 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.permit(:name, :oneword, :description, :industry, :city)
+    params.permit(:name, :oneword, :description)
   end
 
   def logo_params
