@@ -29,6 +29,15 @@ class ProjectsController < ApplicationController
       category = Category.find_or_create_by(name: params[:industry])
       @project.categories << category
     end
+    
+    if params[:city].blank?
+      @project.errors.add(:city, '必须选择一个城市')
+      render_fail('创建失败', @project)
+      return
+    else
+      city = City.find_or_create_by(name: params[:city])
+      @project.cities << city
+    end
 
     if logo_params[:logo_id]
       @project.logo = Logo.find( logo_params[:logo_id] )
@@ -64,6 +73,16 @@ class ProjectsController < ApplicationController
       @project.categories << category
     end
 
+    if params[:city].blank?
+      @project.errors.add(:city, '必须选择一个城市')
+      render_fail('创建失败', @project)
+      return
+    else
+      @project.cities.delete_all
+      city = City.find_or_create_by(name: params[:city])
+      @project.cities << city
+    end
+
     if @project.update( project_params )
       render_success
     else
@@ -81,7 +100,8 @@ class ProjectsController < ApplicationController
           description: @project.description,
           logo_id: @project.logo.try(:id),
           logo_url: @project.logo.try(:image_url),
-          industry: @project.categories_name
+          industry: @project.categories_name,
+          city: @project.cities_name,
         })
       end
       format.html

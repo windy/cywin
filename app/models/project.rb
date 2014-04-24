@@ -23,6 +23,11 @@ class Project < ActiveRecord::Base
     self.categories.collect { |c| c.name }.join(',')
   end
 
+  has_and_belongs_to_many :cities
+  def cities_name 
+    self.cities.collect { |c| c.name }.join(',')
+  end
+
   scope :published, -> { where(published: true) }
 
   def add_owner( owner )

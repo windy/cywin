@@ -48,7 +48,13 @@ form.stage0.ng-cloak ng-submit='submit()'
   .row
     .small-10.medium-4.columns
       label for='city' 城市
-      input id='city' type='text' ng-model='project.city' ng-class= '{ error: errors.city }'
+      input id='city' type='text' ng-model='project.city' ng-class= '{ error: errors.city, autocomplete: ! autocomplete_cities_is_empty() }' ng-keyup=' autocomplete_cities_search() '
+      .no-result.ng-cloak ng-show=' autocomplete_cities_error ' {{ autocomplete_cities_error }}
+      .autocomplete-wrapper-position
+        ul.autocomplete-wrapper.ng-cloak ng-hide=' autocomplete_cities_is_empty() '
+          li ng-repeat=' autocomplete_city in autocomplete_cities '
+            a ng-click=' add_city(autocomplete_city) '
+              |{{ autocomplete_city.name }}
       small.error.ng-cloak ng-show=' errors.city ' {{ errors.city }}
   .row
     .small-12.medium-8.columns

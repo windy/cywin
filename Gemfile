@@ -41,7 +41,6 @@ gem 'mailboxer'
 # For upload picture
 gem 'mini_magick'
 gem 'carrierwave'
-gem 'china_city'
 
 gem 'angularjs-rails'
 

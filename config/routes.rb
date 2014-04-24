@@ -23,6 +23,11 @@ Rails.application.routes.draw do
       get :autocomplete
     end
   end
+  resources :cities do
+    collection do
+      get :autocomplete
+    end
+  end
   resources :explore do
     collection do
       get :all
@@ -129,6 +134,4 @@ Rails.application.routes.draw do
       get :unread_count
     end
   end
-
-  mount ChinaCity::Engine => '/china_city'
 end
