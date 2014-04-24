@@ -14,14 +14,7 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
       li
         = link_to "领投人申批", admin_leaders_path
     ul.right
-      li.divider
       li
         = link_to "返回前台", root_path
-      li.has-dropdown
-        - if current_user.name and current_user.authentications.length > 0
-          a =current_user.name + "[#{current_user.authentications.first.provider}]"
-        - else 
-          a =current_user.name.empty? ? current_user.email : current_user.name
-        ul.dropdown
-          li
-            = link_to '退出', destroy_user_session_path, :method=>'delete'
+      li
+        = link_to current_user.name + '[ 退出 ]', destroy_user_session_path, :method=>'delete'
