@@ -1,0 +1,18 @@
+.dashboard {
+  background-color: white;
+  border-top: 1px solid #ddd;
+
+  .dash-title {
+    padding: 2rem 0;
+  }
+
+  table {
+    width: 100%;
+    td a {
+      margin-right: 1rem;
+      &:last-child {
+      margin-right: 0;
+      }
+    }
+  }
+}
