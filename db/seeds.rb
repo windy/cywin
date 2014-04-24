@@ -22,3 +22,14 @@ user.add_role :admin
   user = User.where(email: "tester#{i}@cywin.cn").first_or_create(name: "tester#{i}", password: '11111111', password_confirmation: '11111111')
   puts 'user created: ' << user.name
 end
+
+puts 'DEFAULT categories'
+['互联网', '电子', '餐饮', '企业'].each do |name|
+  Category.find_or_create_by(name: name)
+end
+
+puts 'DEFAULT cities'
+['深圳', '上海', '北京', '成都', '西安', '广州', '杭州'].each do |name|
+  City.find_or_create_by(name: name)
+end
+
