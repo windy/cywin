@@ -60,6 +60,8 @@ class MoneyRequire < ActiveRecord::Base
   # 返回百分比,如 10% -> 0.1
   def progress
     (self.investments.inject(0) { |s,m| s + m.money }).to_f / self.money
+  rescue
+    0
   end
   
   def syndicate_money

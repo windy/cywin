@@ -97,4 +97,8 @@ class Project < ActiveRecord::Base
     user_ids = self.stars.collect { |m| m.user_id }
     User.where(id: user_ids)
   end
+
+  def fullname
+    "#{self.name} ( #{self.oneword} )"
+  end
 end

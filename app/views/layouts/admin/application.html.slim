@@ -16,9 +16,6 @@ html
     header
       = render 'layouts/admin/navigation'
     main role="main" 
-      - if content_for?(:container)
-        = yield(:container)
-      - else
-        div.row.container
-          div.large-12.columns
-            = yield
+      .dashboard
+        = yield
+      = render 'layouts/foot'

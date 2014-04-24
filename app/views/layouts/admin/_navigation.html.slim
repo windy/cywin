@@ -3,16 +3,16 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
     li.name
       h1 
         = link_to '后台 Dashboard', admin_root_path
+    li.toggle-topbar.menu-icon
+      a href='#' Menu
   div.top-bar-section
     ul.left
-      li
+      li class=active_for('admin/users', params[:controller])
         = link_to "用户管理", admin_users_path
-      li
+      li class=active_for('admin/projects', params[:controller])
         = link_to "项目管理", admin_projects_path
-      li
+      li class=active_for('admin/investors', params[:controller])
         = link_to "投资人申批", admin_investors_path
-      li
-        = link_to "领投人申批", admin_leaders_path
     ul.right
       li
         = link_to "返回前台", root_path
