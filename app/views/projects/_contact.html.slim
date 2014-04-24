@@ -1,9 +1,0 @@
-div.row
-  div.large-12.columns
-    h4 项目联系方式
-    = f.simple_fields_for :contact_attributes, project.contact do |p|
-      = p.input :address
-      = p.input :phone
-      = p.input :qq
-      = p.input :weixin
-      = p.input :weibo
