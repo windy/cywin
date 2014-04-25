@@ -217,9 +217,6 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
-    sendgrid (1.2.0)
-      json
-      json
     settingslogic (2.0.9)
     simple_form (3.0.2)
       actionpack (~> 4.0)
@@ -305,7 +302,6 @@ DEPENDENCIES
   rolify
   rspec-rails
   sass-rails (~> 4.0.3)
-  sendgrid
   settingslogic
   simple_form
   slim-rails

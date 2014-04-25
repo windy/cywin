@@ -17,7 +17,6 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'figaro'
 gem 'rolify'
-gem 'sendgrid'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'therubyracer', :platform=>:ruby
