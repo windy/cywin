@@ -5,3 +5,10 @@
 .login-link {
   margin-left: 1rem;
 }
+
+.blank-link {
+  color: #ddd;
+  &:hover {
+    color: #aaa;
+  }
+}
