@@ -5,16 +5,3 @@
     color: white;
   }
 }
-
-.load-more {
-  width: 100%;
-  text-align: center;
-  button {
-    background-color: transparent;
-    color: #333333;
-    border: 1px solid #DDDDDD;
-    &:focus {
-      outline-style: none;
-    }
-  }
-}

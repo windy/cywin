@@ -111,32 +111,3 @@
     }
   }//content
 }
-
-.person {
-  padding: 1rem 0;
-
-  .name {
-    padding-bottom: 0.5rem;
-    @media only screen and (max-width: 40em) {
-      padding-bottom: 0.2rem;
-    }
-    a {
-      color: #333;
-      font-weight: 600;
-      font-size: 120%;
-    }
-  }
-
-  .job-title {
-    color: #999;
-    font-weight: 500;
-    padding-bottom: 0.5rem;
-  }
-
-  .description {
-    color: #999;
-    margin-top: 0.5rem;
-    line-height: 1.2;
-  }
-
-}// person
