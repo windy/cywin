@@ -1,0 +1,9 @@
+table {
+  width: 100%;
+  td a {
+    margin-right: 1rem;
+    &:last-child {
+    margin-right: 0;
+    }
+  }
+}
