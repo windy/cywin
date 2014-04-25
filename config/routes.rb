@@ -1,4 +1,4 @@
-Eachfund::Application.routes.draw do
+Rails.application.routes.draw do
   get "dashboard/index"
   get "activities/show"
   get "projects_searcher/index"
@@ -17,19 +17,47 @@ Eachfund::Application.routes.draw do
       get :job
     end
   end
+  resources :refine
+  resources :categories do
+    collection do
+      get :autocomplete
+    end
+  end
+  resources :cities do
+    collection do
+      get :autocomplete
+    end
+  end
+  resources :explore do
+    collection do
+      get :all
+      get :categories
+      get :trend
+    end
+  end
   resources :syndicates
   resources :funds
   resources :jobs, only: [:index]
+  resources :logos, only: [:create]
   resources :projects do
     member do
-      get :stage1
-      post :stage1
-      get :stage2
-      post :stage2
       post :publish
       post :invite
+      get :team
+      get :invest
     end
-    resources :members
+    resources :members do
+      collection do
+        get :owner
+        get :team_story
+        post :update_team_story
+        get :autocomplete
+        post :invite
+      end
+    end
+
+    resources :person_requires do
+    end
   end
   resources :investors do
     member do
@@ -43,7 +71,7 @@ Eachfund::Application.routes.draw do
     end
   end
 
-  resources :money_requires, only: [ :new, :update, :create ] do
+  resources :money_requires do
     member do
       post :add_leader
       patch :add_leader
@@ -51,6 +79,11 @@ Eachfund::Application.routes.draw do
       patch :leader_confirm
       post :close
       patch :close
+      patch :dirty_update
+    end
+    collection do
+      post :dirty_create
+      get :dirty_show
     end
   end
 
@@ -72,13 +105,26 @@ Eachfund::Application.routes.draw do
     root :to=> "dashboard#index"
   end
   root :to => "home#index"
-  #devise_for :users, :controllers => {:registrations => "registrations"}
-  devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}
-  resources :users do
+  resources :home do
     collection do
-      get :autocomplete
+      get :index
+      get :welcome
     end
   end
+  devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}
+  resources :users, only: [:show] do
+    collection do
+      get :autocomplete
+      post :email_validate
+    end
+
+    member do
+      get :edit
+      get :starred
+      get :change_password
+    end
+  end
+  resources :avatars, only: [:create]
   resources :messages
   resources :conversations, only: [:index ] do
     member do
@@ -88,6 +134,4 @@ Eachfund::Application.routes.draw do
       get :unread_count
     end
   end
-
-  mount ChinaCity::Engine => '/china_city'
 end

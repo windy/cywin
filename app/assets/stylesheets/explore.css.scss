@@ -1,0 +1,33 @@
+.explore {
+  padding-bottom: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+  background-color: white;
+  .explore-head {
+    h1 {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1rem;
+    }
+
+    .list {
+      text-align: center;
+      width: 100%;
+      a {
+        width: 100%;
+        color: #333;
+        font-size: 1.2rem;
+        display: inline-block;
+        width: 100%;
+        padding-bottom: 1.875rem;
+      }
+      .active {
+        border-bottom: 2px solid #d26911;
+      }
+    }
+
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+  }
+}

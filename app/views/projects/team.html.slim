@@ -1,0 +1,53 @@
+- content_for(:title) do 
+  | 项目一
+.project-show.top-blank
+  .row.head
+    .small-6.large-2.columns
+      = image_tag 'xingbake.jpg'
+    .small-6.large-10.columns
+      .name-area
+        h4.name
+          = link_to '项目一', project_path(1)
+        p.sub-name
+         | 这是一个项目的简要描述
+  .row.operate
+    .small-6.columns
+      = link_to '关注', '#'
+    .small-6.columns
+      = link_to '约谈', '#'
+  = render partial: 'show_tab', locals: { type: 'team' }
+  .row.team
+    .small-12.columns
+      .owner
+        .person
+          .row
+            .small-4.large-3.columns
+              = image_tag 'm/u1.png'
+            .small-8.large-9.columns
+              .name 
+                = link_to '李亚飞( Owner )', user_path(1)
+              .job-title CTO
+              .description 我毕业于清华大学, 创建过xx项目, xx项目, 属于二次创业.
+      .story
+        h3.title 我们的故事
+        p 我们是一帮好人
+        p 1974.02--1978.10 北京市运输公司汽车修理厂工人
+        p 1978.10—1982.08 中国人民大学中共党史系中共党史专业学生
+        p 1982.08—1983.09 中央教育行政学院教员
+        p 1983.09—1986.07 中国人民大学中共党史系硕士研究生
+        p 1986.07—1989.03 北京市委研究室干部、副处级调研员
+        p 1989.03—1991.04 国务院台办二组副处长
+      .members
+        h3.title 我们的成员
+        ul.small-block-grid-1.large-block-grid-2
+          - 6.times do
+            li
+              .person
+                .row
+                  .small-4.large-3.columns
+                    = image_tag 'm/u1.png'
+                  .small-8.large-9.columns
+                    .name 
+                      = link_to '李亚飞', user_path(1)
+                    .job-title CTO
+                    .description 我毕业于清华大学, 创建过xx项目, xx项目, 属于二次创业.

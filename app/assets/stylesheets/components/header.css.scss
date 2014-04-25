@@ -1,0 +1,169 @@
+.middle-text {
+  text-align: center;
+  z-index: 999;
+  .title {
+    color: #F7F7F7;
+  }
+
+  .top-right {
+    margin-right: 0.5rem;
+    font-weight: 400;
+    font-size: 1rem;
+
+    .login-button a {
+      display: inline-block;
+      margin-right: 0.5rem;
+      color: #F7F7F7;
+    }
+  }
+}
+
+.off-canvas-list {
+  i {
+    margin-right: 0.5rem;
+    display: inline-block;
+    width: 1rem;
+  }
+  label {
+    cursor: default;
+  }
+  .search {
+    margin: 0.66667rem;
+    width: 92%;
+    background-color: #F1F1F1;
+  }
+}
+
+// 用户菜单
+.user-link-wrapper {
+  position: relative;
+}
+
+a.user-link {
+  color: #F7F7F7;
+}
+.user-dropdown {
+  background-color: #F7F7F7;
+  border: 1px solid #ccc;
+  color: #333;
+  position: absolute;
+  top: 3.2rem;
+  z-index: 9999;
+  right: 0.5rem;
+  padding: 0 1rem;
+
+  .title {
+    color: #888;
+    line-height: 1.5;
+  }
+
+  a {
+    color: #555;
+    &:hover {
+      color: #e79385;
+    }
+  }
+
+  li {
+    list-style-type: none;
+    padding: 0.1rem 0;
+    ul {
+      margin: 0;
+      padding: 1rem 2rem;
+    }
+  }
+
+  li:first-child:before {
+    left: 100%;
+    margin-left: -21px;
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border: 5px solid transparent;
+    border-bottom-color: #d2d3d5;
+    top: -10px;
+  }
+}
+.user-dropdown-exit-link {
+  position: fixed;
+  top: 3.5rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+// 提示框
+.alert-box {
+  margin-bottom: 0 !important;
+}
+
+$top-nologin-height: 80px;
+// 未登录时的 top-bar
+.top-nologin-nav-wrap {
+  border-bottom: 1px solid #ddd;
+  .top-bar input {
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+  @media only screen and (min-width: 1048px) {
+    .top-bar input {
+      width: 20rem;
+    }
+  }
+  @media only screen and (min-width: 40.063em) and (max-width: 916px) {
+    .top-bar input {
+      display: none;
+    }
+  }
+  @media only screen and (min-width: 40.063em) {
+    .login-button {
+      margin-left: 3rem;
+      border: 1px solid #aaa;
+      display: inline;
+      padding: 0.5rem 2rem !important;
+      margin-right: 1rem;
+    }
+  }
+}
+
+// 登录后菜单
+//
+.nav-big-wrapper {
+  border-bottom: 1px solid #ddd;
+}
+
+@media only screen and (min-width: 1080px) {
+  .nav-small-wrapper {
+    display: none;
+  }
+  .nav-big-wrapper {
+    .messagebox {
+      padding: 1rem !important;
+      display: inline;
+      border: 1px solid #ddd;
+      color: #aaa;
+    }
+    .user-link {
+      padding: 1rem !important;
+      display: inline;
+    }
+  }
+  .user-dropdown {
+    top: 80px;
+  }
+  .top-bar-section .search {
+    margin: 1.2rem 0 !important;
+    width: 20rem !important;
+  }
+  .top-bar-section .left a {
+    padding: 0 1rem !important;
+  }
+}
+
+@media only screen and (max-width: 1079px) {
+  .nav-big-wrapper {
+    display: none;
+  }
+}

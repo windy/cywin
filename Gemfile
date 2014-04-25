@@ -5,12 +5,12 @@ else
   source 'https://rubygems.org'
 end
 ruby '2.0.0'
-gem 'rails', '4.0.4'
-gem 'sass-rails', '~> 4.0.2'
+gem 'rails', '4.1.0'
+gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'jquery-rails'
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 2.0'
 gem 'cancancan', '~> 1.7'
 gem 'compass-rails'
 gem 'devise'
@@ -21,7 +21,9 @@ gem 'sendgrid'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'therubyracer', :platform=>:ruby
-gem "foundation-rails", "~> 5.0.3.1"
+gem "foundation-rails", "~> 5.2.2.0"
+gem 'settingslogic'
+gem 'foundation-icons-sass-rails'
 
 # for observers
 gem 'rails-observers'
@@ -37,18 +39,16 @@ gem 'oauth_china'
 gem 'mailboxer'
 
 # For upload picture
+gem 'mini_magick'
 gem 'carrierwave'
-gem 'china_city'
 
-# Ajax Upload
-gem 'remotipart'
+gem 'angularjs-rails'
 
 # i18n
 gem 'rails-i18n', '~> 4.0.0'
 
 group :development do
-  #gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
+  gem 'spring'
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'guard'

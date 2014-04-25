@@ -1,65 +1,28 @@
-nav.top-bar(data-options="is_hover:false" data-topbar)
-  ul.title-area
-    li.name
-      h1 
-        = link_to '创业赢 CYwin', root_path
-  div.top-bar-section
-    ul.left
-      li class="#{cal_navbar_active(params[:controller], :projects)}"
-        = link_to "浏览项目", projects_path
-      li class="#{cal_navbar_active(params[:controller], :syndicates)}"
-        = link_to "联合投资", syndicates_path
-      li class="#{cal_navbar_active(params[:controller], :jobs)}"
-        = link_to "参与创业", jobs_path
-      li class="#{cal_navbar_active(params[:controller], :activities)}"
-        = link_to "动态", activity_path
-    ul.right
-      li.has-form
-        form
-          div.row.collapse
-            div.small-8.columns
-              input type="text"
-            div.small-4.columns
-              a.button href="#" Search
-
-      - if user_signed_in?
+.nav-small-wrapper
+  nav.tab-bar
+    section.left-small
+      a.left-off-canvas-toggle.menu-icon href="#"
+        span
+    h1.title.middle-text
+      = link_to Setting.site_name, root_path, class: 'title'
+      .top-right.right
+        = render 'layouts/messagebox'
+        = render 'layouts/user'
+  aslide.left-off-canvas-menu
+    ul.off-canvas-list
+      = render partial: 'layouts/menu', locals: { top: false }
+.nav-big-wrapper
+  nav.top-bar data-topbar=""
+    ul.title-area
+      li.name
+        h1
+          = link_to Setting.site_name, root_path, class: 'title'
+    section.top-bar-section
+      ul.left
+        = render partial: 'layouts/menu', locals: { top: true }
+      ul.right
         li
-          = link_to conversations_path do
-            span.messagebox
-              = current_user.mailbox.inbox(:unread => true).distinct.count(:id)
-        li.has-dropdown
-          - if current_user.name and current_user.authentications.length > 0
-            a =current_user.name + "[#{current_user.authentications.first.provider}]"
-          - else 
-            a =current_user.name.empty? ? current_user.email : current_user.name
-          ul.dropdown
-            li
-              = link_to '创建新项目', new_project_path
-            li
-              - unless current_user.has_role?(:investor)
-                = link_to '申请认证投资人', new_investor_path
-            - current_user.projects.each do |project|
-              li
-                = link_to project.name, edit_project_path(project)
-            li
-              div.divtar
-            li
-              = link_to 'Edit account', edit_user_registration_path
-            - if current_user.has_role? :admin
-              li
-                = link_to '后台管理', admin_root_path
-            li
-              div.divtar
-            li
-              = link_to '退出', destroy_user_session_path, :method=>'delete'
-      - else
-        li.has-dropdown
-          a Login
-          ul.dropdown
-            li
-              = link_to 'Normal', new_user_session_path
-            li
-              = link_to 'Weibo', '/users/auth/weibo', class: 'weibo'
+          = render 'layouts/messagebox'
         li
-          = link_to 'Sign up', new_user_registration_path
-
+          = render 'layouts/user'
+= render 'layouts/user_dropdown'

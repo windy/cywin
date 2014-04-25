@@ -1,0 +1,23 @@
+.user-dropdown.ng-cloak ng-show=' dropdown_open '
+  ul.small-block-grid-1.medium-block-grid-2
+    li
+      ul.project
+        h6.title 项目
+        li
+          = link_to '项目一', project_path(1)
+        li
+          = link_to '项目二', project_path(1)
+        li
+          = link_to '创建新项目', new_project_path + "#/project/basic"
+    li
+      ul.about-me
+        h6.title 我
+        li
+          = link_to '申请投资人', new_investor_path
+        li
+          = link_to '我的主页', user_path(current_user)
+        li
+          = link_to '设置',  edit_user_path(current_user)
+        li
+          = link_to '注销', destroy_user_session_path, method: 'DELETE'
+.user-dropdown-exit-link ng-show= 'dropdown_open' ng-click=' dropdown_open = false'

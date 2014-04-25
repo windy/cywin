@@ -1,10 +1,10 @@
-app_path = "/home/cywin/app/current"
+app_path = "/home/ruby/cywin/current"
 
-worker_processes   2
+worker_processes   1
 preload_app        true
 timeout            180
 listen             '/tmp/unicorn_cywin.sock'
-user               'cywin', 'cywin'
+user               'ruby', 'ruby'
 working_directory  app_path
 pid                "#{app_path}/tmp/pids/unicorn_cywin.pid"
 stderr_path        "log/unicorn.log"

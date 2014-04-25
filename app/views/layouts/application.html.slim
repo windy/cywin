@@ -3,23 +3,49 @@ html
   head
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1.0" 
-    meta property="wb:webmaster" content="558874198d91f969"
-    title= content_for?(:title) ? yield(:title) : 'CYwin'
-    meta name="description" content=("#{content_for?(:description) ? yield(:description) : 'CYwin'}") 
+    title
+      - if content_for?(:title)
+        = yield(:title) + " | " + Setting.site_name
+      - else
+        = Setting.site_name
     = stylesheet_link_tag "application", media: "all"
-    /  Modernizr is required for Zurb Foundation 5
     = javascript_include_tag "vendor/modernizr"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  body
-    header
-      = render 'layouts/navigation'
-    main role="main" 
-      = render 'layouts/messages'
-      - if content_for?(:container)
-        = yield(:container)
-      - else
-        div.row.container
-          div.large-12.columns
-            = yield
-    = render 'layouts/foot'
+  body ng-app="app"
+    - if current_user
+      .off-canvas-wrap
+        .inner-wrap
+          = render 'layouts/navigation'
+          section.main-section
+            .main-container
+              = yield
+            = render 'layouts/foot'
+          a.exit-off-canvas
+    - else
+      .top-nologin-nav-wrap
+        nav class="top-bar" data-topbar=""
+          ul.title-area
+            li.name
+              h1
+                = link_to Setting.site_name, root_path
+            li.toggle-topbar.menu-icon
+              a href='#'
+                span Menu
+          section.top-bar-section
+            ul.right
+              li
+                = link_to '发现', explore_index_path
+              li
+                = link_to '精品', refine_index_path
+              li
+                = link_to '找工作', jobs_path
+              li
+                = link_to '登录', new_user_session_path, class: 'login-button'
+            ul.left
+              li.has-form
+                = text_field_tag 'search', nil, placeholder: '搜索项目, 人'
+      .main-container
+        = yield
+      = render 'layouts/foot'
+      

@@ -1,0 +1,144 @@
+.head
+  ul.small-block-grid-1.medium-block-grid-3.list
+    li
+      a href='javascript:void(0)' 1. 基本信息
+    li
+      a.active href='javascript:void(0)' 2. 团队信息
+    li
+      a href='javascript:void(0)' 3. 创业需求
+.row.stage1
+  .small-12.columns
+    .owner
+      .person.ng-cloak ng-init= 'owner_edited = false' 
+        .row
+          .small-4.large-3.columns
+            img ng-src=' {{ owner.avatar }} ' alt='owner'
+            input id='owner-avatar' type='file' ng-file-select='upload_avatar($files)'
+            small.error ng-show=' avatar_error '
+              | {{ avatar_error }}
+          .small-8.large-9.columns
+            div ng-hide=' owner_edited '
+              .name
+                a ng-href='/users/{{ owner.user_id }}'
+                  |{{ owner.name }}
+              .job-title
+                |{{ owner.title }}
+              .description
+                |{{ owner.description }}
+              .edit
+                a ng-click='owner_edited = true' 编辑
+            form ng-show=' owner_edited ' ng-submit="update_owner()"
+              h6 编辑个人信息
+              .row
+                .small-12.medium-8.columns
+                  label for='owner_name' 真实姓名
+                  input id='owner_name' type='text' placeholder='真实姓名' ng-model = 'owner.name'
+              .row
+                .small-12.medium-8.columns
+                  label for='owner_title' 职位
+                  input id='owner_title' type='text' placeholder='你在团队的职位' ng-model = 'owner.title'
+              .row
+                .small-12.medium-8.columns
+                  label for='owner_description' 更多详细信息
+                  textarea id='owner_description' ng-model = 'owner.description' placeholder=''
+                    |{{owner.description}}
+              .row
+                .small-12.medium-8.columns
+                  p.alert
+                    |{{ owner_edit_error }}
+                  .control-actions
+                    button.small 确认
+                    a.cancel ng-click='cancel_owner_edit()' 取消
+
+    .story
+      .row
+        .small-12.columns
+          h3.title 我们的故事
+          .edit
+            a ng-hide='team_edited' ng-click=' team_edited = true ' 编辑
+      .team-story-wrapper.description ng-hide= 'team_edited'
+        |{{ team_story }}
+      .team-story-edit ng-show = 'team_edited'
+        form ng-submit='update_team_story()'
+          textarea placeholder='我的团队故事' ng-model='team_story'
+            |{{ team_story }}
+          .control-actions
+            button.small 确认
+            a.cancel ng-click= 'cancel_team_edit()' 取消
+    hr
+
+    .members
+      .row
+        .small-12.columns
+          h3.title 我们的成员
+          .edit
+            a ng-click='members_edited = true' 添加
+      ul.small-block-grid-1.medium-block-grid-2
+        li ng-repeat=' member in members '
+          .person
+            .row ng-hide=' member.member_edited == member'
+              .small-4.medium-5.large-4.columns
+                img ng-src=' {{member.url}} ' alt='member'
+              .small-8.medium-7.large-8.columns
+                .name
+                  a ng-href='/users/{{ member.user_id }}' {{ member.name }}
+                .job-title 
+                  |{{member.title}}
+                .description 
+                  |{{member.description}}
+                .edit
+                  a ng-click='member.member_edited = member ' 编辑
+            .row ng-show='member.member_edited == member'
+              .small-12.columns
+                form ng-submit=' update_member(member) '
+                  h6 编辑成员信息
+                  input type='text' ng-model='member.title' placeholder='职位'
+                  textarea ng-model='member.description' placeholder='详细描述'
+                  p.alert
+                    |{{ member_error }}
+                  .control-actions
+                    ul.button-group
+                      li
+                        button.small 确认
+                      li
+                        button.small ng-click='remove_member($event, member)' 移除
+                      li
+                        a.button.small ng-click='member.member_edited = false' 取消
+      .row ng-show= 'members_edited'
+        .small-12.columns
+          form
+            .row
+              .small-12.medium-6.columns
+                label for='invite_user' 添加或者邀请成员
+                input id='invite_user' type='text' placeholder='用户名 or 邮箱' ng-model='invite_user' ng-keyup=' autocomplete_search_with_timeout() '
+                p.no-result ng-show='autocomplete_users.length == 0' 没有结果
+                ul.autocomplete-wrapper
+                  li ng-class= '{ disabled: autocomplete_user.joined }' ng-repeat= 'autocomplete_user in autocomplete_users'
+                    a ng-click='add_member(autocomplete_user)'
+                      .row
+                        .small-3.medium-3.large-2.columns
+                          img ng-src= ' {{ autocomplete_user.avatar }} '
+                        .small-9.medium-9.large-10.columns
+                          h6.title
+                            |{{ autocomplete_user.name }} 
+                            .joined ng-show= 'autocomplete_user.joined' 已加入
+                            .unconfirmed ng-hide='autocomplete_user.confirmed' 邮件未确认
+                .control-actions ng-hide='autocomplete_invite'
+                  button.small ng-click= 'members_edited = false' 确认
+                  a.cancel ng-click='members_edited = false' 取消
+          form ng-show='autocomplete_invite' ng-submit='autocomplete_invite_user()'
+            .row
+              .small-12.medium-6.columns
+                p.invite-tips 这个用户尚未注册, 你可以邀请加入团队, 我们会自动发送邀请邮件, 一旦注册, 将自动加入团队
+                label for='invite_name' 真实姓名
+                input type='text' id='invite_name' ng-model='autocomplete_invite_name'
+                .control-actions
+                  button.small 发送
+                  a.cancel ng-click='autocomplete_invite = false' 取消
+
+      .control-actions ng-hide= 'members_edited'
+        button.small ng-click= 'members_edited = true' 添加新的成员
+  hr
+  .control-actions
+    a.button ng-click='next()' 下一步
+    a.back-link ng-click='prev()' 返回上一步

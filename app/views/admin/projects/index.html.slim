@@ -1,2 +1,20 @@
-h1 Admin::Projects#index
-p Find me in app/views/admin/projects/index.html.slim
+.row
+  .small-12.columns.top-blank
+    table
+      thead
+        tr
+          th 项目名称
+          th 项目所有人
+          th 创建时间
+          th 修改时间
+          th 操作
+      tbody
+        - @projects.each do |p|
+          tr 
+            td #{p.fullname}
+            td #{p.owner.try(:name)}
+            td #{format_date(p.created_at)}
+            td #{format_date(p.updated_at)}
+            td
+              = link_to '进入', project_path(p), target: '_blank'
+              = link_to '编辑', edit_project_path(p), target: '_blank'

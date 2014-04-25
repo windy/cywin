@@ -11,7 +11,7 @@ require 'mina/git'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :domain, 'yafeilee.me'
-set :deploy_to, '/home/cywin/app'
+set :deploy_to, '/home/ruby/cywin'
 set :repository, 'git@github.com:windy/cywin.git'
 set :branch, 'staging'
 set :app_path, "#{deploy_to}/#{current_path}"
@@ -23,7 +23,7 @@ set :app_path, "#{deploy_to}/#{current_path}"
 set :shared_paths, ['config/database.yml', 'config/application.yml', 'config/service.yml', 'log', 'tmp', 'public/uploads']
 
 # Optional settings:
-set :user, 'cywin'    # Username in the server to SSH to.
+set :user, 'ruby'    # Username in the server to SSH to.
 #   set :port, '30000'     # SSH port number.
 
 # This task is the environment that is loaded for most commands, such as
@@ -45,6 +45,12 @@ end
 task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
+
+  queue! %[mkdir -p "#{deploy_to}/shared/public/uploads"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/public/uploads"]
+
+  queue! %[mkdir -p "#{deploy_to}/shared/tmp"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
 
   queue! %[mkdir -p "#{deploy_to}/shared/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]

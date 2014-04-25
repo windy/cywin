@@ -1,1 +1,26 @@
-h1 欢迎进入创业赢后台管理系统!
+.row
+  .small-12.columns
+    h2.dash-title 统计数据
+    hr
+    table
+      thead
+        tr
+          th 条目
+          th 数据
+      tbody
+        tr
+          td 总用户数
+          td #{@users_count}
+        tr
+
+          td 总项目数
+          td #{@projects_count}
+        tr
+          td 发起的融资数
+          td #{@money_requires_count}
+        tr
+          td 成功的融资数
+          td #{@money_requires_success_count}
+        tr
+          td 发起的工作数
+          td #{@person_requires_count}

@@ -10,15 +10,6 @@ describe Project do
     expect(project.published).to be_false
   end
 
-  it "logo_cache" do
-    project = build(:project)
-    project.where3 = ""
-    expect(project.save).to be_false
-    project.logo = nil
-    project.where3 = "110011"
-    expect(project.save).to be_true
-  end
-
   describe "project user" do
     it "#add_owner #owner #member" do
       project = build(:project)

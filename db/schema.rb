@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317095155) do
+ActiveRecord::Schema.define(version: 20140424061539) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -20,6 +20,37 @@ ActiveRecord::Schema.define(version: 20140317095155) do
     t.string   "access_token", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "avatars", force: true do |t|
+    t.string   "image"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories_projects", id: false, force: true do |t|
+    t.integer "category_id"
+    t.integer "project_id"
+  end
+
+  create_table "cities", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cities_projects", force: true do |t|
+    t.integer "project_id"
+    t.integer "city_id"
   end
 
   create_table "contacts", force: true do |t|
@@ -101,6 +132,13 @@ ActiveRecord::Schema.define(version: 20140317095155) do
     t.datetime "updated_at"
   end
 
+  create_table "logos", force: true do |t|
+    t.integer  "project_id"
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "members", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -155,21 +193,21 @@ ActiveRecord::Schema.define(version: 20140317095155) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "remote"
+    t.boolean  "part"
   end
 
   create_table "projects", force: true do |t|
-    t.string   "logo"
     t.string   "name"
     t.string   "oneword"
     t.text     "description"
     t.string   "stage"
-    t.string   "where1"
-    t.string   "where2"
-    t.string   "where3"
     t.string   "industry"
+    t.string   "city"
     t.boolean  "published",   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "team_story"
   end
 
   create_table "receipts", force: true do |t|
@@ -229,7 +267,6 @@ ActiveRecord::Schema.define(version: 20140317095155) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
-    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -1,6 +1,6 @@
 class MoneyRequire < ActiveRecord::Base
   validates :money, presence: true, numericality: { greater_than: 0, only_integer: true }
-  validates :share, presence: true, numericality: true, inclusion: 1..100
+  validates :share, presence: true, numericality: { greater_than: 0, less_than: 100, only_integer: true }
 
   validates :deadline, presence: true
   validate do |m|
@@ -60,6 +60,8 @@ class MoneyRequire < ActiveRecord::Base
   # 返回百分比,如 10% -> 0.1
   def progress
     (self.investments.inject(0) { |s,m| s + m.money }).to_f / self.money
+  rescue
+    0
   end
   
   def syndicate_money

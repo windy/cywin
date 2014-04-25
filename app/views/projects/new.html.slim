@@ -1,17 +1,5 @@
-= render partial: "header", locals: { stage: :stage0 }
-h1 基本信息
-= simple_form_for @project do |f|
-  = render(partial: 'common/input_preview', locals: { f: f, model: @project, column_name: :logo})
-  = f.input :name
-  = f.input :oneword
-  = f.input :description
-  = f.input :stage do
-    = f.select :stage, Project::STAGES.collect { |m| [ t('project.stages.' + m), m ] }, { include_blank: true }
-  = f.input :where3 do
-    .city-group
-      = f.select :where1, ['--省份--'] + ChinaCity.list, {}, { class: 'city-select large-4 columns' }
-      = f.select :where2, ['--城市--'], {}, class: 'city-select large-4 columns', default: @project.where2
-      = f.select :where3, ['--地区--'], {}, class: 'city-select large-4 columns', default: @project.where3
-  hr
-  = render partial: "contact", locals: { f: f, project: @project }
-  = f.button :submit, "Next"
+.project-new.top-blank
+  .row
+    .small-12.columns
+      .wrapper
+        div ng-view=''
