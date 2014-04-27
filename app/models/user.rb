@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable, :confirmable,
+  devise :invitable, :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:weibo]
 
@@ -60,6 +60,9 @@ class User < ActiveRecord::Base
 
   def confirmation_required?
     false
+  end
+  after_create do
+    self.send_confirmation_instructions
   end
 
 end

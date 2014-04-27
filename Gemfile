@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'cancancan', '~> 1.7'
 gem 'compass-rails'
 gem 'devise'
+gem 'devise-async'
 gem 'devise_invitable'
 gem 'figaro'
 gem 'rolify'
@@ -23,6 +24,10 @@ gem 'therubyracer', :platform=>:ruby
 gem "foundation-rails", "~> 5.2.2.0"
 gem 'settingslogic'
 gem 'foundation-icons-sass-rails'
+
+#background cron
+gem 'sidekiq'
+gem 'sinatra', '>= 1.3.0', require: nil
 
 # for observers
 gem 'rails-observers'
