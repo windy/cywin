@@ -134,4 +134,9 @@ Rails.application.routes.draw do
       get :unread_count
     end
   end
+
+  require 'sidekiq/web'
+  authenticate :user, lambda { |u| u.has_role?(:admin) } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

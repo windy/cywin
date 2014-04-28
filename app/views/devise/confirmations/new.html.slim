@@ -1,0 +1,12 @@
+.row
+  .small-12.medium-10.medium-centered.columns.top-blank
+    .row
+      .small-12.medium-8.large-7.columns
+        h2
+          | 重新发送邮件确认
+        = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+          = f.error_notification
+          = f.full_error :confirmation_token
+          = f.input :email, required: true, autofocus: true
+          = f.button :submit, "发送重置密码邮件"
+        = render "devise/shared/links"

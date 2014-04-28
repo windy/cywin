@@ -1,0 +1,11 @@
+.row
+  .small-12.medium-10.medium-centered.columns.top-blank
+    .row
+      .small-12.medium-8.large-7.columns
+        h2
+          = t "devise.invitations.new.header"
+        = simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f|
+          = devise_error_messages!
+          - resource.class.invite_key_fields.each do |field|
+            = f.input field
+          = f.submit t("devise.invitations.new.submit_button")
