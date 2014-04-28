@@ -1,0 +1,13 @@
+.row
+  .small-12.medium-10.medium-centered.columns.top-blank
+    .row
+      .small-12.medium-8.large-7.columns
+        h2
+          | 重新发送解锁邮件
+        p 解锁账号
+        = simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+          = f.error_notification
+          = f.full_error :unlock_token
+          = f.input :email, required: true, autofocus: true
+          = f.button :submit, "发送解锁邮件"
+        = render "devise/shared/links"
