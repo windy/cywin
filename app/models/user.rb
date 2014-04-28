@@ -56,13 +56,5 @@ class User < ActiveRecord::Base
     end
     self.avatar.image_url
   end
-  protected
-
-  def confirmation_required?
-    false
-  end
-  after_create do
-    self.send_confirmation_instructions
-  end
 
 end
