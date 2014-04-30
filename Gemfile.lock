@@ -85,8 +85,6 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
-    foreigner (1.6.1)
-      activerecord (>= 3.0.0)
     formatador (0.2.4)
     foundation-icons-sass-rails (3.0.0)
       railties (>= 3.1.1)
@@ -129,10 +127,6 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mailboxer (0.11.0)
-      carrierwave (>= 0.5.8)
-      foreigner (>= 0.9.1)
-      rails (> 3.0.0)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_magick (3.7.0)
@@ -305,7 +299,6 @@ DEPENDENCIES
   guard-rspec
   jbuilder (~> 2.0)
   jquery-rails
-  mailboxer
   mini_magick
   oauth
   oauth_china

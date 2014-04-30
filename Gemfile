@@ -34,15 +34,13 @@ gem 'rails-observers'
 
 gem 'state_machine'
 
-# For sns login
+# for sns login
 gem 'omniauth-weibo-oauth2'
 gem 'weibo2'
 gem 'oauth'
 gem 'oauth_china'
-# For user custom message
-gem 'mailboxer'
 
-# For upload picture
+# for upload picture
 gem 'mini_magick'
 gem 'carrierwave'
 
