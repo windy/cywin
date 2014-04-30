@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424061539) do
+ActiveRecord::Schema.define(version: 20140430043329) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -151,6 +151,18 @@ ActiveRecord::Schema.define(version: 20140424061539) do
   end
 
   add_index "members", ["user_id", "project_id"], name: "index_members_on_user_id_and_project_id", unique: true
+
+  create_table "messages", force: true do |t|
+    t.integer  "user_id"
+    t.string   "action"
+    t.integer  "project_id"
+    t.boolean  "must_action"
+    t.string   "status"
+    t.string   "target_type"
+    t.integer  "target_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "money_requires", force: true do |t|
     t.integer  "money"
