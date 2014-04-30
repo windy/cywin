@@ -1,40 +1,4 @@
-.project-show {
-  
-  .operate {
-    text-align: center;
-
-    a {
-      display: inline-block;
-      width: 100%;
-      border: 1px solid #ddd;
-      padding: 1rem 0;
-      margin: 1rem 0;
-      color: #333;
-      font-size: 1.5rem;
-    }
-  }
-
-  .tab-content {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    .list {
-      text-align: center;
-      padding-bottom: 0;
-      a {
-        color: #333;
-        font-size: 1.2rem;
-        display: inline-block;
-        width: 100%;
-        padding-bottom: 1.875rem;
-      }
-      .active {
-        border-bottom: 2px solid #d26911;
-      }
-    }
-  }
-
+.project-show, .project-edit {
   .content {
     margin-top: 2rem;
     

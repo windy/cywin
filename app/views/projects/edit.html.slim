@@ -1,121 +1,81 @@
-- content_for(:container) do
-  = render partial: "publish_header", locals: { project: @project }
-  div.row ng-app="" ng-controller="MoneyRequireCtrl"
-    div.large-8.columns
-      div.row
-        div.large-12.columns.container
-          div.row.title
-            div.large-12.columns
-              h3.title 基本资料
-          div.row.basic
-            div.large-3.columns
-              = link_to project_path(@project.id) do
-                - image_tag(@project.logo.url, size: "200x200")
-            div.large-9.columns
-              h4 #{@project.name}
-              p.description #{@project.oneword}
-              p.address #{project_address(@project)}
-      div.row
-        div.large-12.columns.container
-          div.row.title
-            div.large-12.columns
-              h3.title 详细信息
-          h4 产品描述
-          div.row.production
-            div.large-12.columns
-              h4 xxx
-              h4 xxx
-          hr
-          h4 视频及图片
-          div.row.video_image
-            div.large-12.columns
-              h4 xxx
-              h4 xxx
-      div.row
-        div.large-12.columns.container
-          div.row.title
-            div.large-12.columns
-              h3.title 核心优势
-      div.row
-        div.large-12.columns.container
-          div.row.title
-            div.large-12.columns
-              h3.title 成员
-          div.row.members
-            div.large-12.columns
-              ul.small-block-grid-3
-                = render partial: "members/member", collection: @project.members
-      div.row
-        div.large-12.columns.container
-          div.row.title
-            div.large-12.columns
-              h3.title 投资信息
-          div.syndicate_info
-            = render partial: "syndicates/syndicate_info", locals: { project: @project }
-          div.row.investors
-            div.large-12.columns
-              h4 投资人情况
-              ul.small-block-grid-3
-                = render partial: 'investor', collection: @project.investor_users, as: :investor_user
+- content_for(:title) do
+  | 编辑项目
 
-    div.large-3.columns.large-offset-1
-      div.row
-        div.large-12.columns.container
-          div.row.title
-            div.large-12.columns
-              h3.title 完整度
-          div.progress
-            span.meter style="width: #{ @project.complete_degree * 100 }%" 
-          hr
-          - unless @project.published
-            button.expand#publish data-uri=publish_project_path(@project.id) data-confirm="发布后将无法修改, 请确认?" 发布
-          - else
-            button.expand.disabled#published 已发布
-      div.row
-        div.large-12.columns.container
-          div.row.title
-            div.large-12.columns
-              h3.title 投资需求
-          div.row
-            div.large-12.columns
-              a.expand.button.disabled#new_money_require_enable ng-model="new_money_require_enable" ng-init="new_money_require_enable=#{@project.opened_money_require ? false : true}"  ng-show="! new_money_require_enable" 已经正在融资中
-              a.expand.button data-reveal-id="invest-modal" ng-show="new_money_require_enable" 发起融资预热
-          div.reveal-modal.medium#invest-modal data-reveal="" 
-            h4 发起新的融资
-            hr
-            = simple_form_for(MoneyRequire.new(project_id: @project.id), url: money_requires_path) do |f|
-              = f.hidden_field :project_id
-              = f.input :money
-              = f.input :share
-              = f.input :deadline
-              = f.input :description
-              = f.button :submit, "提交"
-            a.close-reveal-modal &#215;
-      div.row
-        div.large-12.columns.container
-          div.row.title
-            div.large-12.columns
-              h3.title 招人需求
-          div.row
-            div.large-12.columns
-              a.expand.button data-reveal-id="invite-modal" 发起招聘
-          div.reveal-modal.medium#invite-modal data-reveal="" 
-            h4 发起新的招聘
-            hr
-            = simple_form_for(PersonRequire.new, url: invite_project_path(@project.id)) do |f|
-              = f.input :title
-              = f.input :pay
-              = f.input :stock
-              = f.input :option
-              = f.input :description
-              = f.button :submit, "提交"
-            a.close-reveal-modal &#215;
-      div.row
-        div.large-12.columns.container
-          div.row.title
-            div.large-12.columns
-              h3.title 关注人员
-          div.row.star_users
-            div.large-12.columns
-              ul.small-block-grid-3
-                = render partial: "stars/star", collection: @project.star_users, as: :star_user
+.project-edit.top-blank
+  .row.head
+    .small-4.medium-3.large-2.columns
+      = image_tag 'xingbake.jpg'
+    .small-8.medium-9.large-10.columns
+      .name-area
+        h4.name
+          = link_to '项目一', project_path(1)
+        p.sub-name
+         | 这是一个项目的简要描述
+        .edit
+          a href='#' 编辑
+  .row.content
+    .small-12.columns
+      .basic-content
+        h3.title 产品介绍
+        p
+          | 星巴克是美国一家连锁咖啡公司的名称，1971年成立，为全球最大的咖啡连锁店，其总部坐落美国华盛顿州西雅图市。星巴克在美国和加拿大的学生与城市白领中非常流行。除咖啡外，星巴克亦有茶、馅皮饼及蛋糕等商品。部分星巴克店甚至与超级市场，书店等异业结盟，于合作店铺内觅地开业.
+        .edit
+          a href='#' 编辑
+      .row
+        .small-12.columns
+          .image-content
+            h3.title 产品截图
+            ul.image data-orbit=""
+              li
+                = image_tag 'p/1.jpg'
+                .orbit-caption 正面
+              li
+                = image_tag 'p/2.jpg'
+                .orbit-caption 反面
+              li
+                = image_tag 'p/3.jpg'
+                .orbit-caption 侧面 
+              li
+                = image_tag 'p/4.jpg'
+                .orbit-caption 后面 
+            .edit
+              a href='#' 编辑
+      .row
+        .small-12.columns
+          .team-content
+            .edit
+              a href='#' 编辑
+            h3.title 团队情况
+            .owner
+              .person
+                .row
+                  .small-4.large-3.columns
+                    = image_tag 'm/u1.png'
+                  .small-8.large-9.columns
+                    .name 
+                      = link_to '李亚飞( Owner )', user_path(1)
+                    .job-title CTO
+                    .description 我毕业于清华大学, 创建过xx项目, xx项目, 属于二次创业.
+            .story
+              h3.title 我们的故事
+              p 我们是一帮好人
+              p 1974.02--1978.10 北京市运输公司汽车修理厂工人
+              p 1978.10—1982.08 中国人民大学中共党史系中共党史专业学生
+              p 1982.08—1983.09 中央教育行政学院教员
+              p 1983.09—1986.07 中国人民大学中共党史系硕士研究生
+              p 1986.07—1989.03 北京市委研究室干部、副处级调研员
+              p 1989.03—1991.04 国务院台办二组副处长
+            .members
+              h3.title 我们的成员
+              ul.small-block-grid-1.large-block-grid-2
+                - 6.times do
+                  li
+                    .person
+                      .row
+                        .small-4.large-3.columns
+                          = image_tag 'm/u1.png'
+                        .small-8.large-9.columns
+                          .name 
+                            = link_to '李亚飞', user_path(1)
+                          .job-title CTO
+                          .description 我毕业于清华大学, 创建过xx项目, xx项目, 属于二次创业.
