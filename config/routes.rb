@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get "dashboard/index"
   get "activities/show"
   get "projects_searcher/index"
@@ -86,6 +87,8 @@ Rails.application.routes.draw do
       get :dirty_show
     end
   end
+
+  resources :messages
 
   namespace :admin do
     resources :users
