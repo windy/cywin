@@ -1,0 +1,42 @@
+.project-show, .project-edit {
+  .content {
+    margin-top: 2rem;
+    
+    .image {
+      margin-bottom: 2rem;
+    }
+
+    .title {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .team {
+      margin-top: 2rem;
+      .more-info {
+        text-align: center;
+        margin: 1rem 0;
+      }
+    }
+
+    .job {
+
+      .job-box {
+        border: 1px solid #ddd;
+        padding: 1rem 0;
+        margin: 1rem;
+        table {
+          border: none;
+        }
+
+        .job-interest {
+          text-align: center;
+        }
+
+        &:hover {
+        }
+      }
+    }
+  }//content
+}
