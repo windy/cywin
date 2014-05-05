@@ -1,4 +1,6 @@
+// 投资信息
 .invest {
+  position: relative;
   margin-top: 2rem;
 
   .title {
@@ -21,6 +23,15 @@
       font-weight: 700;
       font-size: 1.1rem;
     }
+  }
+
+  .more-info {
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  .invest-button {
+    text-align: center;
   }
 
   .invest-leader {
