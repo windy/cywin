@@ -16,7 +16,8 @@
     ul.title-area
       li.name
         h1
-          = link_to Setting.site_name, root_path, class: 'title'
+          = link_to root_path, class: 'title' do
+            - image_tag 'logo.png'
     section.top-bar-section
       ul.left
         = render partial: 'layouts/menu', locals: { top: true }
