@@ -3,10 +3,9 @@
     li
       ul.project
         h6.title 项目
-        li
-          = link_to '项目一', project_path(1)
-        li
-          = link_to '项目二', project_path(1)
+        - current_user.projects.each do |project|
+          li
+            = link_to project.name, edit_project_path(project)
         li
           = link_to '创建新项目', new_project_path + "#/project/basic"
     li

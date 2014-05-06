@@ -1,8 +1,15 @@
 class MoneyRequiresController < ApplicationController
   before_action :set_money_require, only: [ :add_leader, :leader_confirm, :close ]
-  before_action :authenticate_user!
 
-  load_and_authorize_resource
+  def opened
+    @project = Project.find( params[:project_id] )
+    @money_require = @project.opened_money_require
+  end
+
+  def history
+    @project = Project.find( params[:project_id] )
+    @money_requires = @project.history_money_requires
+  end
 
   # 创建项目时使用, 取临时创建的需求
   def dirty_show

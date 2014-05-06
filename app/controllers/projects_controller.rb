@@ -13,7 +13,6 @@ class ProjectsController < ApplicationController
   def edit
     @project = Project.find(params[:id])
     authorize! :update, @project
-    #TODO
   end
 
   # 创建第一步

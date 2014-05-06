@@ -27,7 +27,7 @@ class MoneyRequire < ActiveRecord::Base
     end
   end
 
-  # ready -> leader_needed -> opened -> closed
+  # ready -> leader_needed -> leader_need_confirmed -> opened -> closed
   state_machine :status, initial: :ready do
     event :preheat do
       transition ready: :leader_needed
@@ -82,7 +82,7 @@ class MoneyRequire < ActiveRecord::Base
   end
 
   def leader_user
-    self.leader.user
+    self.leader.try(:user)
   end
 
   # 仅仅用来测试

@@ -84,49 +84,68 @@
         .small-12.columns
           .data-content
             h3.title 其他数据
-      .invest
+      .invest ng-controller='MoneyRequireController' ng-init= 'init(#{@project.id})'
         .edit
           a href='#' 编辑
         h3.title 投资情况
-        h4 当前轮次 ( 2014.4.11 - )
-        .row
+        h4 
+          | 当前轮次 {{ format_start_end_time(opened) }}
+        .row ng-show= 'opened'
           .small-12.medium-6.columns
             .box
               .sub-title
                 | 计划融资
-              h5.sub-content 100万
+              h5.sub-content 
+                | {{ opened.money }}
+          .small-12.medium-6.columns
+            .box
+              .sub-title
+                | 当前状态
+              h5.sub-content 
+                | {{ format_status(opened.status) }}
           .small-12.medium-6.columns
             .box
               .sub-title
                 | 领投人
-              h5.sub-content xx 正在领投 
+              h5.sub-content
+                | {{ format_leader(opened.leader) }}
           .small-12.medium-6.end.columns
             .box
               .sub-title
                 | 已获融资
               h5.sub-content xx 80万
-        h4 历史投资 ( 2013.1.11 - 2013.3.11 )
-        .row
-          .small-12.medium-6.columns
-            .box
-              .sub-title
-                | 融资规模
-              h5.sub-content 100万
-          .small-12.medium-6.columns
-            .box
-              .sub-title
-                | 领投人
-              h5.sub-content xx 正在领投 
-          .small-12.medium-6.columns
-            .box
-              .sub-title
-                | 当时估值
-              h5.sub-content 1000万
-          .small-12.medium-6.columns
-            .box
-              .sub-title
-                | 融资花费时间
-              h5.sub-content 10天
+        .row ng-hide= 'opened'
+          .small-12.columns.no-invest-content
+            p 当前无正在发起的投资
+            button 发起新的融资需求
+        .history ng-repeat='history in histories'
+          h4
+            | 历史投资 {{ format_start_end_time(history) }}
+          .row
+            .small-12.medium-6.columns
+              .box
+                .sub-title
+                  | 融资规模
+                h5.sub-content
+                  | {{ history.money }}
+            .small-12.medium-6.columns
+              .box
+                .sub-title
+                  | 领投人
+                h5.sub-content 
+                  | {{ history.leader.name }} 正在领投 
+            .small-12.medium-6.columns
+              .box
+                .sub-title
+                  | 当时估值
+                h5.sub-content 
+                  | 1000万
+            .small-12.medium-6.columns
+              .box
+                .sub-title
+                  | 融资花费时间
+                h5.sub-content 
+                  | 10天
       .row
         .small-12.columns 
           h3.title 招人需求
