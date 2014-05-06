@@ -2,7 +2,7 @@ json.money_require do
   unless @money_require
     json.nil!
   else
-    json.extract! @money_require, :id, :money, :share, :status
+    json.extract! @money_require, :id, :money, :share, :deadline, :status
     json.start format_date(@money_require.created_at)
     if @money_require.leader_user
       json.leader do 

@@ -2,10 +2,7 @@ class MoneyRequire < ActiveRecord::Base
   validates :money, presence: true, numericality: { greater_than: 0, only_integer: true }
   validates :share, presence: true, numericality: { greater_than: 0, less_than: 100, only_integer: true }
 
-  validates :deadline, presence: true
-  validate do |m|
-    errors.add(:base, "时间必须选在未来") unless m.deadline.future? or m.status == 'closed'
-  end
+  validates :deadline, presence: true, numericality: { greater_than: 30, only_integer: true }
 
   belongs_to :project
   validates :project_id, presence: true

@@ -1,6 +1,10 @@
 class MoneyRequiresController < ApplicationController
   before_action :set_money_require, only: [ :add_leader, :leader_confirm, :close ]
 
+  def admin
+    @project = Project.find( params[:project_id] )
+  end
+
   def opened
     @project = Project.find( params[:project_id] )
     @money_require = @project.opened_money_require
@@ -64,7 +68,7 @@ class MoneyRequiresController < ApplicationController
       @money_require.preheat!
       render_success
     else
-      render_fail(@money_require.errors.full_messages.to_s)
+      render_fail(nil, @money_require)
     end
   end
 

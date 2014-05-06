@@ -87,6 +87,7 @@ Rails.application.routes.draw do
       get :dirty_show
       get :opened
       get :history
+      get :admin
     end
   end
 

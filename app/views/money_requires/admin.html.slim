@@ -1,0 +1,49 @@
+- content_for(:title) do
+  | 融资管理
+
+.money-require-admin ng-controller='MoneyRequireAdminController' ng-init='init(#{@project.id})'
+  .row
+    .small-12.columns
+      .head.top-blank
+        ul.small-block-grid-1.medium-block-grid-5.list
+          li
+            a.active
+              | 1. 融资预热
+          li
+            a 
+              | 2. 寻找领投人
+          li
+            a 
+              | 3. 领投人确认
+          li
+            a
+              | 4. 融资中
+          li
+            a
+              | 5. 融资结束
+
+  // 融资预热
+  .row ng-show=' money_require.status == null || money_require.status == "ready" '
+    .small-12.large-10.large-centered.columns
+      form ng-submit= 'create_or_update()'
+        h4.title 创建新的一轮融资
+        label for="money" 计划融资
+        .row.collapse
+          .small-1.columns
+            span.prefix ¥
+          .small-11.medium-8.large-6.end.columns
+            input type='text' id='money' ng-model='money_require.money'
+        label for="share" 出让股份
+        .row.collapse
+          .small-11.medium-3.columns
+            input type='text' id='share' ng-model='money_require.share'
+          .small-1.large-1.end.columns
+            span.postfix %
+        label for='deadline' 融资周期
+        .row.collapse
+          .small-11.medium-3.columns
+            input type='text' id='deadline' ng-model='money_require.deadline'
+          .small-1.large-1.end.columns
+            span.postfix 天
+        button.ng-cloak ng-hide='money_require.id' 创建并预热
+        button.ng-cloak ng-show='money_require.id'  开始预热

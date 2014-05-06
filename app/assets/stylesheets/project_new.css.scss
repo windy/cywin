@@ -1,31 +1,4 @@
 .project-new {
-  background-color: white;
-
-  .head {
-    margin-bottom: 2rem;
-
-    .list {
-      text-align: center;
-      width: 100%;
-      margin-left: 0;
-      li {
-        border: 1px solid #ddd;
-        padding: 0;
-      }
-      a {
-        width: 100%;
-        color: #aaa;
-        display: inline-block;
-        width: 100%;
-        padding: 1.5rem 0;
-        font-size: 1.2rem;
-      }
-      .active {
-        color: #333;
-      }
-    }
-
-  }// head
 
   textarea {
     min-height: 8rem;

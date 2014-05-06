@@ -86,7 +86,8 @@
             h3.title 其他数据
       .invest ng-controller='MoneyRequireController' ng-init= 'init(#{@project.id})'
         .edit
-          a href='#' 编辑
+          = link_to '管理', admin_money_requires_path( project_id: @project.id )
+          /*a href='#' 管理*/
         h3.title 投资情况
         h4 
           | 当前轮次 {{ format_start_end_time(opened) }}
