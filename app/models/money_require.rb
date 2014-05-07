@@ -35,8 +35,6 @@ class MoneyRequire < ActiveRecord::Base
     end
 
     after_transition on: :add_leader do |money_require, transition|
-      message_body = ERB.new( File.read( 'app/views/messages/leader_invite.erb') ).result(binding)
-      money_require.owner.send_message( money_require.leader_user, message_body, '领投人邀请确认' )
     end
 
     event :leader_confirm do

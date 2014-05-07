@@ -76,7 +76,7 @@ class MoneyRequiresController < ApplicationController
   def add_leader
     leader_id = params[:leader_id]
     if @money_require.add_leader_and_wait_confirm(leader_id)
-      render template: 'syndicates/syndicate_info', layout: false
+      render partial: 'money_require'
     else
       render_fail(@money_require.errors.full_messages.to_s)
     end

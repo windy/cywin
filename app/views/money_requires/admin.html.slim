@@ -55,7 +55,7 @@
         | 注意: 一旦邀请, 无法修改.
       form ng-submit='add_leader()'
         .leader
-          person ng-show='selected_leader' person='selected_leader'
+          person ng-show='selected_leader' user='selected_leader'
         .row
           .small-12.medium-6.end.columns
             input type='text' id='leader' placeholder='投资人姓名 or 邮箱' ng-keyup='autocomplete_search_with_timeout()' ng-model='autocomplete_user'
@@ -69,6 +69,4 @@
                     .small-9.medium-9.large-10.columns
                       h6.title
                         |{{ autocomplete_user.name }} 
-                        .joined ng-show= 'autocomplete_user.joined' 已加入
-                        .unconfirmed ng-hide='autocomplete_user.confirmed' 邮件未确认
-            button 邀请领投人
+            button ng-disabled= '! selected_leader' 邀请领投人

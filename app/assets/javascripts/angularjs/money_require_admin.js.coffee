@@ -70,7 +70,7 @@
       url: '/money_requires/' + $scope.money_require.id + '/add_leader'
       method: 'PATCH'
       params:
-        leader_id: $scope.select_leader.id
+        leader_id: $scope.selected_leader.id
     .success (res)->
-      $scope.money_require = res.money_require
+      $scope.money_require = res
 ]
