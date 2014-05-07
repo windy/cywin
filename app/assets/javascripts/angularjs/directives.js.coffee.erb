@@ -1,0 +1,5 @@
+@app.directive 'person', ->
+  restrict: 'E'
+  scope:
+    member: '='
+  templateUrl: '<%= asset_path("directives/person.html") %>'

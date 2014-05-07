@@ -7,23 +7,23 @@
       .head.top-blank
         ul.small-block-grid-1.medium-block-grid-5.list
           li
-            a.active
+            a ng-class='{ active: money_require.status == "ready" }'
               | 1. 融资预热
           li
-            a 
+            a ng-class='{ active: money_require.status == "leader_needed" }'
               | 2. 寻找领投人
           li
-            a 
+            a ng-class='{ active: money_require.status == "leader_need_confirmed" }'
               | 3. 领投人确认
           li
-            a
+            a ng-class='{ active: money_require.status == "opened" }'
               | 4. 融资中
           li
-            a
+            a ng-class='{ active: money_require.status == "closed" }'
               | 5. 融资结束
 
   // 融资预热
-  .row ng-show=' money_require.status == null || money_require.status == "ready" '
+  .row.ng-cloak ng-show=' money_require && ( money_require.status == null || money_require.status == "ready") '
     .small-12.large-10.large-centered.columns
       form ng-submit= 'create_or_update()'
         h4.title 创建新的一轮融资
@@ -47,3 +47,28 @@
             span.postfix 天
         button.ng-cloak ng-hide='money_require.id' 创建并预热
         button.ng-cloak ng-show='money_require.id'  开始预热
+  .row.ng-cloak ng-show='money_require.status == "leader_needed"'
+    .small-12.large-10.large-centered.columns
+      p
+        | 通过线上或线下寻找合适的领投人, 当找到后请在以下邀请他(她)成为项目的领投人.
+      p.notice
+        | 注意: 一旦邀请, 无法修改.
+      form ng-submit='add_leader()'
+        .leader
+          person ng-show='selected_leader' person='selected_leader'
+        .row
+          .small-12.medium-6.end.columns
+            input type='text' id='leader' placeholder='投资人姓名 or 邮箱' ng-keyup='autocomplete_search_with_timeout()' ng-model='autocomplete_user'
+            p.no-result ng-show='autocomplete_users.length == 0' 没有结果
+            ul.autocomplete-wrapper
+              li ng-class= '{ disabled: autocomplete_user.joined }' ng-repeat= 'autocomplete_user in autocomplete_users'
+                a ng-click='select_leader(autocomplete_user)'
+                  .row
+                    .small-3.medium-3.large-2.columns
+                      img ng-src= ' {{ autocomplete_user.avatar }} '
+                    .small-9.medium-9.large-10.columns
+                      h6.title
+                        |{{ autocomplete_user.name }} 
+                        .joined ng-show= 'autocomplete_user.joined' 已加入
+                        .unconfirmed ng-hide='autocomplete_user.confirmed' 邮件未确认
+            button 邀请领投人

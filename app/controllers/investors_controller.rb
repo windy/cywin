@@ -43,12 +43,11 @@ class InvestorsController < ApplicationController
   end
 
   def autocomplete
-    search = params.permit(:search)[:search]
-    if search.nil?
-      render_fail
+    #@users = User.joins(:roles).where('roles.name' => :investor).where('users.name like ?', "%#{params[:search]}%").limit(5)
+    if params[:search].blank?
+      @users = []
     else
-      searched = User.joins(:roles).where('roles.name' => :investor).joins(:investor).where('users.name like ?', "%#{search}%").select('investors.id', 'users.name')
-      render_success(nil, data: searched)
+      @users = User.all.limit(5)
     end
   end
 

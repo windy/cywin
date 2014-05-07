@@ -1,0 +1,11 @@
+.person
+  .row
+    .small-4.medium-5.large-4.columns
+      img ng-src=' {{member.url}} ' alt='member'
+    .small-8.medium-7.large-8.columns
+      .name
+        a ng-href='/users/{{ member.user_id }}' {{ member.name }}
+      .job-title 
+        |{{member.title}}
+      .description 
+        |{{member.description}}
