@@ -29,6 +29,9 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
+    YAML.load(ENV['ROLES']).each do |role|
+      Role.where(name: role).first_or_create
+    end
   end
 
   config.after(:each) do

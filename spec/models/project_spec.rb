@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Project do
-  it "logo should be presence" do
+  it "简单创建可以成功" do
     expect { create(:project) }.not_to raise_error
   end
 
@@ -31,18 +31,10 @@ describe Project do
     end
   end
 
-  describe "#complete_degree" do
-    pending
-  end
-
   describe "#investor_users" do
     before do
-      @project = build(:project)
-      @owner = create(:user)
-      @project.add_owner(@owner)
-      @project.save!
-      @owner.investor = build(:investor)
-      @owner.save!
+      @owner = create_investor_user(:user)
+      @project = create_project_with_owner(@owner)
     end
 
     it "成功" do
@@ -50,11 +42,11 @@ describe Project do
       money_require = build(:money_require)
       @project.money_requires << money_require
       @project.save!
-      money_require.quickly_turn_on!(1)
+      money_require.quickly_turn_on!(@owner.id)
 
       investment = build(:investment_for_money)
-      investment.investor_id = @owner.investor.id
-      investment.money_require_id = money_require.id
+      investment.user = @owner
+      investment.money_require = money_require
       investment.save!
 
       expect(@project.investor_users.first.id).to eq( @owner.id )

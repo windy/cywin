@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_one :avatar
   # 投资角色
   has_one :investor
+  has_many :investments
   has_and_belongs_to_many :projects, join_table: :members
   # 关注功能
   has_many :stars

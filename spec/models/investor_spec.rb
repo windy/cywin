@@ -47,11 +47,11 @@ describe Investor do
 
   describe "多次投资" do
     it "many investments" do
-      investor = build(:investor)
-      investor.investment.build( attributes_for(:investment) )
-      investor.investment.build( attributes_for(:investment) )
+      investor = create_investor_user(:user)
+      investor.investments.build( attributes_for(:investment) )
+      investor.investments.build( attributes_for(:investment) )
       investor.save.should be_true
-      investor.investment.size.should == 2
+      investor.investments.size.should == 2
     end
   end
   
