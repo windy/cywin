@@ -9,7 +9,7 @@ class MoneyRequire < ActiveRecord::Base
 
   has_many :investments
 
-  belongs_to :leader, class_name: Investor
+  belongs_to :leader, class_name: User
 
   # 不能同时有两个融资需求打开
   #FIXME 效率可能存在问题
@@ -77,7 +77,7 @@ class MoneyRequire < ActiveRecord::Base
   end
 
   def leader_user
-    self.leader.try(:user)
+    self.leader
   end
 
   # 仅仅用来测试
