@@ -1,21 +1,17 @@
 class MoneyRequire < ActiveRecord::Base
-  validates :money, presence: true, numericality: { greater_than: 0, only_integer: true }
+  validates :money, presence: true, numericality: { greater_than_or_equal_to: 1000, only_integer: true }
   validates :share, presence: true, numericality: { greater_than: 0, less_than: 100, only_integer: true }
 
-  validates :deadline, presence: true
-  validate do |m|
-    errors.add(:base, "时间必须选在未来") unless m.deadline.future? or m.status == 'closed'
-  end
+  validates :deadline, presence: true, numericality: { greater_than_or_equal_to: 30, only_integer: true }
 
   belongs_to :project
   validates :project_id, presence: true
 
   has_many :investments
 
-  belongs_to :leader, class_name: Investor
+  belongs_to :leader, class_name: User
 
   # 不能同时有两个融资需求打开
-  #FIXME 效率可能存在问题
   validate do |m|
     if m.new_record?
       found = MoneyRequire.where(project_id: m.project_id).where.not(status: :closed).first
@@ -27,7 +23,7 @@ class MoneyRequire < ActiveRecord::Base
     end
   end
 
-  # ready -> leader_needed -> opened -> closed
+  # ready -> leader_needed -> leader_need_confirmed -> opened -> closed
   state_machine :status, initial: :ready do
     event :preheat do
       transition ready: :leader_needed
@@ -38,8 +34,6 @@ class MoneyRequire < ActiveRecord::Base
     end
 
     after_transition on: :add_leader do |money_require, transition|
-      message_body = ERB.new( File.read( 'app/views/messages/leader_invite.erb') ).result(binding)
-      money_require.owner.send_message( money_require.leader_user, message_body, '领投人邀请确认' )
     end
 
     event :leader_confirm do
@@ -82,7 +76,7 @@ class MoneyRequire < ActiveRecord::Base
   end
 
   def leader_user
-    self.leader.user
+    self.leader
   end
 
   # 仅仅用来测试

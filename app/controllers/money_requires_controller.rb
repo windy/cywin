@@ -1,8 +1,19 @@
 class MoneyRequiresController < ApplicationController
   before_action :set_money_require, only: [ :add_leader, :leader_confirm, :close ]
-  before_action :authenticate_user!
 
-  load_and_authorize_resource
+  def admin
+    @project = Project.find( params[:project_id] )
+  end
+
+  def opened
+    @project = Project.find( params[:project_id] )
+    @money_require = @project.opened_money_require
+  end
+
+  def history
+    @project = Project.find( params[:project_id] )
+    @money_requires = @project.history_money_requires
+  end
 
   # 创建项目时使用, 取临时创建的需求
   def dirty_show
@@ -57,15 +68,15 @@ class MoneyRequiresController < ApplicationController
       @money_require.preheat!
       render_success
     else
-      render_fail(@money_require.errors.full_messages.to_s)
+      render_fail(nil, @money_require)
     end
   end
 
   # 添加一个领投人, 并等待确认
   def add_leader
-    leader_id = params.require(:money_require).permit(:leader_id)[:leader_id]
+    leader_id = params[:leader_id]
     if @money_require.add_leader_and_wait_confirm(leader_id)
-      render template: 'syndicates/syndicate_info', layout: false
+      render partial: 'money_require'
     else
       render_fail(@money_require.errors.full_messages.to_s)
     end
@@ -93,8 +104,9 @@ class MoneyRequiresController < ApplicationController
   def update
     @money_require = MoneyRequire.find( params[:id] )
     @project = @money_require.project
-    authorize! :update, @project
+    authorize! :update, @money_require
     if @money_require.update( money_require_params )
+      @money_require.preheat!
       render_success
     else
       render_fail(@money_require.errors.full_messages.to_s)
@@ -108,6 +120,6 @@ class MoneyRequiresController < ApplicationController
   end
 
   def money_require_params
-    money_require_params = params.require(:money_require).permit(:money, :share, :description, :deadline, :project_id)
+    money_require_params = params.permit(:money, :share, :description, :deadline, :project_id)
   end
 end

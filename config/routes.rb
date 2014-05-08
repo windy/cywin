@@ -85,6 +85,9 @@ Rails.application.routes.draw do
     collection do
       post :dirty_create
       get :dirty_show
+      get :opened
+      get :history
+      get :admin
     end
   end
 

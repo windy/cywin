@@ -1,0 +1,26 @@
+.autocomplete-wrapper {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 2rem;
+
+  li.disabled {
+    opacity: .5;
+  }
+
+  a {
+    display: block;
+    padding: 0.5rem 0 0.5rem 0.5rem;
+    &:hover {
+      background-color: #ddd;
+    }
+    .title {
+      margin-left: 0.5rem;
+      border: none;
+    }
+  }
+
+  .joined, .unconfirmed {
+    color: #888;
+  }
+}

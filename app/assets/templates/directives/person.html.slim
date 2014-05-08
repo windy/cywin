@@ -1,0 +1,11 @@
+.person
+  .row
+    .small-4.medium-5.large-4.columns
+      img ng-src=' {{user.avatar}} ' alt='user'
+    .small-8.medium-7.large-8.columns
+      .name
+        a ng-href='/users/{{ user.id }}' {{ user.name }}
+      .job-title 
+        |{{user.title}}
+      .description 
+        |{{user.description}}
