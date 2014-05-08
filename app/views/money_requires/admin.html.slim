@@ -75,3 +75,9 @@
       h4 等待领投人确认
       p 请领投人确认
       person user='money_require.leader'
+  .row.ng-cloak ng-show='money_require.status == "opened"'
+    .small-12.large-10.large-centered.columns
+      h4 目前融资进度
+      .money_require
+        moneyrequire
+      h4 融资事件
