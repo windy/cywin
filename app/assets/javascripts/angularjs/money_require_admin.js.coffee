@@ -12,16 +12,20 @@
       params:
         project_id: $scope.project_id
     .success (res)->
-      $scope.money_require = res.money_require
+      if res == "null"
+        $scope.money_require = {}
+      else
+        $scope.money_require = res
 
   $scope.create_or_update = ()->
+    $scope.money_require.errors = null
     if $scope.money_require.id
       $scope.update()
     else
       $scope.create()
 
   $scope.create = ()->
-    $scope.money_require.errors = null
+    $scope.money_require.project_id = $scope.project_id
     $http
       url: '/money_requires'
       method: 'POST'
@@ -34,7 +38,6 @@
         $scope.money_require.errors = res.errors
 
   $scope.update = ()->
-    $scope.money_require.errors = null
     $http
       url: '/money_requires/' + $scope.money_require.id
       method: 'PATCH'

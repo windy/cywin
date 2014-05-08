@@ -1,13 +1,19 @@
 - content_for(:title) do
   | 融资管理
 
+.row.top-blank
+  .small-12.columns
+    = link_to edit_project_path(@project), class: 'back-link' do
+      | 回到项目
+      span <
+
 .money-require-admin ng-controller='MoneyRequireAdminController' ng-init='init(#{@project.id})'
   .row
     .small-12.columns
-      .head.top-blank
+      .head
         ul.small-block-grid-1.medium-block-grid-5.list
           li
-            a ng-class='{ active: money_require.status == "ready" }'
+            a ng-class='{ active: money_require.status == "ready" || !money_require }'
               | 1. 融资预热
           li
             a ng-class='{ active: money_require.status == "leader_needed" }'
@@ -23,7 +29,7 @@
               | 5. 融资结束
 
   // 融资预热
-  .row.ng-cloak ng-show=' money_require && ( money_require.status == null || money_require.status == "ready") '
+  .row.ng-cloak ng-show=' money_require && ( money_require.status == null || money_require.status == "ready")  || ! money_require'
     .small-12.large-10.large-centered.columns
       form ng-submit= 'create_or_update()'
         h4.title 创建新的一轮融资
@@ -32,17 +38,20 @@
           .small-1.columns
             span.prefix ¥
           .small-11.medium-8.large-6.end.columns
-            input type='text' id='money' ng-model='money_require.money'
+            input type='text' id='money' ng-model='money_require.money' ng-class='{ error: money_require.errors.money }'
+            small.error ng-show='money_require.errors.money' {{ money_require.errors.money }}
         label for="share" 出让股份
         .row.collapse
           .small-11.medium-3.columns
-            input type='text' id='share' ng-model='money_require.share'
+            input type='text' id='share' ng-model='money_require.share' ng-class='{ error: money_require.errors.share }'
+            small.error ng-show='money_require.errors.share' {{ money_require.errors.share }}
           .small-1.large-1.end.columns
             span.postfix %
         label for='deadline' 融资周期
         .row.collapse
           .small-11.medium-3.columns
-            input type='text' id='deadline' ng-model='money_require.deadline'
+            input type='text' id='deadline' ng-model='money_require.deadline' ng-class='{ error: money_require.errors.deadline }'
+            small.error ng-show='money_require.errors.deadline' {{ money_require.errors.deadline }}
           .small-1.large-1.end.columns
             span.postfix 天
         button.ng-cloak ng-hide='money_require.id' 创建并预热
@@ -81,3 +90,6 @@
       .money_require
         moneyrequire
       h4 融资事件
+  .row.ng-cloak ng-show='money_require.status == "closed"'
+    .small-12.large-10.large-centered.columns
+      h4 融资已完成

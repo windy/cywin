@@ -1,8 +1,8 @@
 class MoneyRequire < ActiveRecord::Base
-  validates :money, presence: true, numericality: { greater_than: 0, only_integer: true }
+  validates :money, presence: true, numericality: { greater_than_or_equal_to: 1000, only_integer: true }
   validates :share, presence: true, numericality: { greater_than: 0, less_than: 100, only_integer: true }
 
-  validates :deadline, presence: true, numericality: { greater_than: 30, only_integer: true }
+  validates :deadline, presence: true, numericality: { greater_than_or_equal_to: 30, only_integer: true }
 
   belongs_to :project
   validates :project_id, presence: true
@@ -12,7 +12,6 @@ class MoneyRequire < ActiveRecord::Base
   belongs_to :leader, class_name: User
 
   # 不能同时有两个融资需求打开
-  #FIXME 效率可能存在问题
   validate do |m|
     if m.new_record?
       found = MoneyRequire.where(project_id: m.project_id).where.not(status: :closed).first
