@@ -54,9 +54,7 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'guard'
-  gem 'guard-rails'
   gem 'guard-rspec', require: false
-  gem 'guard-bundler', require: false
 end
 
 group :development, :test do
