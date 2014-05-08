@@ -7,6 +7,10 @@ Dir[Rails.root.join("spec/supports/**/*.rb")].each { |f| require f }
 
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
+RSpec::Sidekiq.configure do |config|
+    config.warn_when_jobs_not_processed_by_sidekiq = false
+end
+
 RSpec.configure do |config|
 
   # If true, the base class of anonymous controllers will be inferred
