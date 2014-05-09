@@ -12,10 +12,6 @@ class ProjectsSearcherController < ApplicationController
     unless search_params[:industry].blank?
       @projects = @projects.where(industry: search_params[:industry])
     end
-    # 城市相关, where1: 省, where2: 城市, where3: 地区
-    unless search_params[:district].blank?
-      @projects = @projects.where(where2: search_params[:district])
-    end
   end
 
   private
