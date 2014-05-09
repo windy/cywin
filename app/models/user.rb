@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :stars
   # 粉丝功能
   has_many :funs
+  has_many :messages
 
   def add_star(project)
     unless self.stars.where(project_id: project.id).first

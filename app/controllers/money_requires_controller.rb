@@ -3,6 +3,7 @@ class MoneyRequiresController < ApplicationController
 
   def admin
     @project = Project.find( params[:project_id] )
+    authorize! :udpate, @project
   end
 
   def opened
@@ -46,8 +47,7 @@ class MoneyRequiresController < ApplicationController
 
   def dirty_update
     @money_require = MoneyRequire.find( params[:id] )
-    @project = @money_require.project
-    authorize! :update, @project
+    authorize! :update, @money_require
     @money_require.money = params[:money]
     @money_require.share = params[:share]
     if @money_require.save(validate: false)
@@ -74,6 +74,7 @@ class MoneyRequiresController < ApplicationController
 
   # 添加一个领投人, 并等待确认
   def add_leader
+    authorize! :update, @money_require
     leader_id = params[:leader_id]
     if @money_require.add_leader_and_wait_confirm(leader_id)
       render partial: 'money_require'
@@ -83,8 +84,9 @@ class MoneyRequiresController < ApplicationController
   end
 
   def leader_confirm
+    authorize! :leader_confirm, @money_require
     if @money_require.leader_confirm
-      render template: 'syndicates/invest', layout: false
+      render_success
     else
       render_fail(@money_require.errors.full_messages.to_s)
     end
@@ -92,10 +94,9 @@ class MoneyRequiresController < ApplicationController
 
   # 关闭打开中的融资
   def close
-    @project = @money_require.project
+    authorize! :update, @money_require
     if @money_require.close
-      flash[:notice] = "关闭融资成功"
-      render template: 'syndicates/syndicate_info', layout: false
+      render_success
     else
       render_fail(@money_require.errors.full_messages.to_s)
     end
@@ -103,7 +104,6 @@ class MoneyRequiresController < ApplicationController
 
   def update
     @money_require = MoneyRequire.find( params[:id] )
-    @project = @money_require.project
     authorize! :update, @money_require
     if @money_require.update( money_require_params )
       @money_require.preheat!

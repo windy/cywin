@@ -2,12 +2,7 @@
 
 FactoryGirl.define do
   factory :message do
-    user_id 1
-    action "MyString"
-    project_id 1
+    action Message::LEADER_CONFIRM
     must_action false
-    status "MyString"
-    target_type "MyString"
-    target_id 1
   end
 end

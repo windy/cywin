@@ -34,10 +34,15 @@ class MoneyRequire < ActiveRecord::Base
     end
 
     after_transition on: :add_leader do |money_require, transition|
+      money_require.add_leader_notify
     end
 
     event :leader_confirm do
       transition leader_need_confirmed: :opened
+    end
+
+    after_transition on: :leader_confirm do |money_require, transition|
+      money_require.add_leader_confirm_notify
     end
 
     state :leader_need_confirmed, :opened do
@@ -84,6 +89,28 @@ class MoneyRequire < ActiveRecord::Base
     self.leader_id = leader_id
     self.status = 'opened'
     self.save!
+  end
+
+  def add_leader_notify
+    Message.create!(
+      user_id: self.leader.id,
+      project_id: self.project.id,
+      action: Message::LEADER_INVITE,
+      must_action: true,
+      target_type: :MoneyRequire,
+      target_id: self.id,
+    )
+  end
+
+  def add_leader_confirm_notify
+    Message.create!(
+      user_id: self.owner.id,
+      project_id: self.project.id,
+      action: Message::LEADER_CONFIRM,
+      must_action: false,
+      target_type: :MoneyRequire,
+      target_id: self.id,
+    )
   end
 
 end
