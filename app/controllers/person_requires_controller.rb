@@ -36,6 +36,7 @@ class PersonRequiresController < ApplicationController
   def person_require_params
     params.permit(:title, :description, :pay, :option, :stock, :remote, :part)
   end
+
   def person_requires_json(person_requires)
     person_requires.collect do |p|
       person_require_json(p)

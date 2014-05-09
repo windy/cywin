@@ -10,7 +10,7 @@ div.row.project
     = f.input :description
     hr
     h2 过往投资案例
-    = f.simple_fields_for :investment, @investor.investment[0] do |p|
+    = f.simple_fields_for :investment, Investment.new do |p|
       = p.input :name
       = p.input :address
       = p.input :description

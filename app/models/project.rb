@@ -33,6 +33,10 @@ class Project < ActiveRecord::Base
   def add_owner( owner )
     add_user(owner, role: Member::FOUNDER, priv: 'owner')
   end
+
+  def add_owner!( owner )
+    add_user!(owner, role: Member::FOUNDER, priv: 'owner')
+  end
   
   # user 
   def owner
@@ -44,6 +48,16 @@ class Project < ActiveRecord::Base
   end
 
   def add_user( user, option={} )
+    _add_user( user, option )
+    self.save
+  end
+
+  def add_user!( user, option={} )
+    _add_user( user, option )
+    self.save!
+  end
+
+  def _add_user( user, option={} )
     member = Member.new
     member.user = user
     member.priv = option[:priv] || 'viewer'
@@ -78,8 +92,7 @@ class Project < ActiveRecord::Base
   # 所有投资人
   def investor_users
     money_require_ids = self.money_requires.collect { |m| m.id }
-    investor_ids = Investment.where(money_require_id: money_require_ids).collect{ |m| m.investor_id }
-    user_ids = Investor.where(id: investor_ids).collect{ |m| m.user_id }
+    user_ids = Investment.where(money_require_id: money_require_ids).collect{ |m| m.user_id }
     User.where(id: user_ids)
   end
 

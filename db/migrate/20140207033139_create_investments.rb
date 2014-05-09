@@ -7,7 +7,7 @@ class CreateInvestments < ActiveRecord::Migration
       t.integer :money
 
       t.integer :money_require_id
-      t.integer :investor_id
+      t.integer :user_id
 
       t.timestamps
     end

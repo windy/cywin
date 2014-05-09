@@ -8,7 +8,6 @@ class InvestorsController < ApplicationController
 
   def new
     @investor = current_user.investor || Investor.new
-    @investor.investment || @investor.investment.build
   end
 
   def stage1
@@ -62,8 +61,6 @@ class InvestorsController < ApplicationController
   def create
     @investor = Investor.new( investor_params )
     @investor.user_id = current_user.id
-    #TODO 支持多个项目
-    @investor.investment.build( investment_params )
     if @investor.save
       redirect_to stage1_investor_path(@investor.id)
     else

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :city do
-    name "MyString"
-    description "MyText"
+    name "深圳"
+    description "深圳是一个好城市"
   end
 end

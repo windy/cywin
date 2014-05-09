@@ -34,16 +34,6 @@ describe InvestorsController do
       end
 
     end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved investor as @investor" do
-        pending
-      end
-
-      it "re-renders the 'new' template" do
-        pending
-      end
-    end
   end
 
   describe "stage1" do

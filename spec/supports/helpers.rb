@@ -6,3 +6,19 @@ def check_json(json_str, key, expected)
   result = json_str[key.to_sym] || json_str[key.to_s]
   expect(result).to be(expected)
 end
+
+def create_project_with_owner(owner = nil)
+  owner ||= @user
+  owner ||= create(:user)
+  project = build(:project)
+  project.add_owner!(owner)
+  project
+end
+
+def create_investor_user(user_sym = :user)
+  user = create(user_sym)
+  user.investor = build(:investor)
+  user.add_role(:investor)
+  user.save!
+  user
+end

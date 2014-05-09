@@ -17,7 +17,6 @@ class Investor < ActiveRecord::Base
   end
 
   belongs_to :user
-  has_many :investment
   has_one :investidea
 
   # 领投人信息
