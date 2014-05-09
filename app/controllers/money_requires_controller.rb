@@ -59,8 +59,8 @@ class MoneyRequiresController < ApplicationController
 
   # 发起一个新的融资
   def create
-    authorize! :update, @project
     @project = Project.find( params[:project_id] )
+    authorize! :update, @project
     money_require_params = params.permit(:money, :share, :description, :deadline)
     @money_require = MoneyRequire.new(money_require_params)
     @money_require.project = @project
