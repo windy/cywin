@@ -22,7 +22,6 @@ class Admin::InvestorsController < Admin::ApplicationController
     if investor_audit.save
       @investor.pass!
       @investor.user.add_role(:investor)
-      current_user.send_message(@investor.user, 'RT', '认证投资人申请已经通过')
       render_success("审批通过")
     else
       render_fail(investor_audit.errors.full_messages.to_s)
@@ -45,7 +44,6 @@ class Admin::InvestorsController < Admin::ApplicationController
     if investor_audit.save
       @investor.reject!
       @investor.user.remove_role(:investor)
-      current_user.send_message(@investor.user, "原因: #{investor_audit.note}, 请修改后再次提交", '你的认证投资人申请被拒绝')
       render_success("审核已拒绝")
     else
       render_fail(investor_audit.errors.full_messages.to_s)
