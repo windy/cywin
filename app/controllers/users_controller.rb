@@ -31,6 +31,5 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     authorize! :update, @user
-    #TODO
   end
 end

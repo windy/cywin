@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140430043329) do
+ActiveRecord::Schema.define(version: 20140509075922) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(version: 20140430043329) do
     t.integer  "target_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_read"
   end
 
   create_table "money_requires", force: true do |t|
