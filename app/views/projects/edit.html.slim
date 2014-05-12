@@ -118,7 +118,7 @@
         .row ng-hide= 'opened'
           .small-12.columns.no-invest-content
             p 当前无正在发起的投资
-            button 发起新的融资需求
+            = link_to '发起新的融资需求', admin_money_requires_path( project_id: @project.id ), class: 'button'
         .history ng-repeat='history in histories'
           h4
             | 历史投资 {{ format_start_end_time(history) }}

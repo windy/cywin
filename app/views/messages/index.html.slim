@@ -42,4 +42,6 @@
                   | 确认或拒绝.
                 - when Message::LEADER_CONFIRM
                   = link_to message.target.leader.name, message.target.leader
-                  | 已经确认了你的领投邀请.
+                  | 已经确认了你的项目
+                  = link_to message.project.name, message.project
+                  | 领投邀请, 请知悉.
