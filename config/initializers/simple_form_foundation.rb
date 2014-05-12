@@ -9,7 +9,7 @@ SimpleForm.setup do |config|
     b.optional :readonly
 
     b.wrapper :label_input, class: 'row' do |ba|
-      ba.wrapper class: 'small-12 columns' do |baa|
+      ba.wrapper class: 'small-12 medium-8 large-6 columns' do |baa|
         baa.use :label
         baa.use :input
         baa.use :error, wrap_with: { tag: 'small', class: 'error' }
