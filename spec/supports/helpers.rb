@@ -15,14 +15,16 @@ def create_project_with_owner(owner = nil)
   project
 end
 
-def create_investor_user(user_sym = :user)
+def create_investor_user(user_sym = :user, norole:  false, investor: :investor)
   if ! user_sym.kind_of?(User)
     user = create(user_sym)
   else
     user = user_sym
   end
-  user.investor = build(:investor)
-  user.add_role(:investor)
+  user.investor = build(investor)
+  unless norole
+    user.add_role(:investor)
+  end
   user.save!
   user
 end

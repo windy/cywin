@@ -42,4 +42,24 @@ class Investor < ActiveRecord::Base
     end
     submit
   end
+
+  def pass_with_audit(note = nil)
+    investor_audit = InvestorAudit.new
+    investor_audit.note = note
+    investor_audit.status = InvestorAudit::PASSED
+    investor_audit.investor = self
+    investor_audit.save!
+    self.pass!
+    self.user.add_role(:investor)
+  end
+
+  def reject_with_audit(note = nil)
+    investor_audit = InvestorAudit.new
+    investor_audit.note = note
+    investor_audit.status = InvestorAudit::REJECTED
+    investor_audit.investor = self
+    investor_audit.save!
+    self.reject!
+    self.user.remove_role(:investor)
+  end
 end

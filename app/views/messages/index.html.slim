@@ -34,10 +34,14 @@
               span
                 - case message.action
                 - when Message::LEADER_INVITE
-                - when Message::LEADER_CONFIRM
                   = link_to message.target.owner.name, message.target.owner
                   | 邀请你参加
                   = link_to message.project.name, message.project
                   | 项目的领投, 请点击
                   = link_to message.project.name, message.project
                   | 确认或拒绝.
+                - when Message::LEADER_CONFIRM
+                  = link_to message.target.leader.name, message.target.leader
+                  | 已经确认了你的项目
+                  = link_to message.project.name, message.project
+                  | 领投邀请, 请知悉.

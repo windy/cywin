@@ -4,10 +4,18 @@ module ApplicationHelper
   end
 
   def format_date(time)
-    time.strftime("%Y.%m.%d")
+    if time
+      time.strftime("%Y.%m.%d")
+    else
+      ''
+    end
   end
   
   def format_time(time)
-    time.strftime("%Y-%m-%d %H:%S")
+    if time
+      time.strftime("%Y-%m-%d %H:%S")
+    else
+      ''
+    end
   end
 end

@@ -14,18 +14,8 @@ class Admin::InvestorsController < Admin::ApplicationController
       return
     end
 
-    audit_params = params.permit(:note)
-    investor_audit = InvestorAudit.new( audit_params )
-    investor_audit.status = InvestorAudit::PASSED
-    investor_audit.investor = @investor
-
-    if investor_audit.save
-      @investor.pass!
-      @investor.user.add_role(:investor)
-      render_success("审批通过")
-    else
-      render_fail(investor_audit.errors.full_messages.to_s)
-    end
+    @investor.pass_with_audit( params[:note] )
+    render_success
   end
 
   def reject
@@ -36,18 +26,8 @@ class Admin::InvestorsController < Admin::ApplicationController
       return
     end
 
-    audit_params = params.permit(:note)
-    investor_audit = InvestorAudit.new( audit_params )
-    investor_audit.status = InvestorAudit::REJECTED
-    investor_audit.investor = @investor
-
-    if investor_audit.save
-      @investor.reject!
-      @investor.user.remove_role(:investor)
-      render_success("审核已拒绝")
-    else
-      render_fail(investor_audit.errors.full_messages.to_s)
-    end
+    @investor.reject_with_audit(params[:note])
+    render_success
   end
 
   private

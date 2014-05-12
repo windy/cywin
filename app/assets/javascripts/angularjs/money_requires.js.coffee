@@ -10,7 +10,10 @@
       params:
         project_id: $scope.project_id
     .success (res)->
-      $scope.opened = res.money_require
+      if res == "null"
+        $scope.opened = null
+      else
+        $scope.opened = res
 
   $scope.init_history = ()->
     $http
