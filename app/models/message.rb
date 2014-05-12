@@ -3,6 +3,8 @@ class Message < ActiveRecord::Base
   [
     :LEADER_INVITE,
     :LEADER_CONFIRM,
+    :APPLY_INVESTOR_SUCCESS,
+    :APPLY_INVESTOR_FAIL,
   ])
   belongs_to :user
   belongs_to :project

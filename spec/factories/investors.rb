@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :investor do
-    user_id 1
     investor_type Investor::PERSON
     name "投资人名字"
     phone "15911112222"

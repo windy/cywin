@@ -38,9 +38,9 @@ describe InvestorsController do
 
   describe "stage1" do
     it "get" do
-      investor = create(:investor)
-      Investor.stub(:find).and_return(investor)
-      get :stage1, id: 1
+      @user = create_investor_user(@user)
+      investor = @user.investor
+      get :stage1, id: investor.id
       response.should render_template(:stage1)
     end
   end
