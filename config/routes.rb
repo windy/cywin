@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get "dashboard/index"
   get "activities/show"
   get "projects_searcher/index"
   resources :stars, only: [:create] do 
@@ -108,6 +107,7 @@ Rails.application.routes.draw do
       post :reject
       end
     end
+    resources :recommends
     root :to=> "dashboard#index"
   end
   root :to => "home#index"

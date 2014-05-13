@@ -7,31 +7,27 @@
       / 广场
       .square
         h2 推荐
-        .recommend-projects
-          .row
-            - 6.times do
-              .small-12.large-4.columns.recommend-project
-                = link_to root_path do
-                  - image_tag 'j/jingpin3.jpg'
-                p
-                  | 精品3 - 热爱你的生活
+        ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.recommend-projects
+          - 6.times do
+            .small-12.large-4.columns.recommend-project
+              = link_to root_path do
+                - image_tag 'j/jingpin3.jpg'
+              p
+                | 精品3 - 热爱你的生活
         h2 分类
-        .square-categories
-          .row
-            - 6.times do
-              .small-12.large-4.columns
-                .category
-                  = link_to '互联网', category_path(1)
-            .small-12.columns.all-categories
-              = link_to '查看所有分类', categories_explore_index_path
+        ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.square-categories
+          - @categories.each do |c|
+            li.category
+              = link_to c.name, c
+          .small-12.columns.all-categories
+            = link_to '查看所有分类', categories_explore_index_path
         h2 最新项目
-        .square-projects
-          .row
-            - 6.times do
-              .small-12.large-4.columns.recommend-project
-                = link_to root_path do
-                  - image_tag 'j/jingpin2.jpg'
-                p
-                  | 精品2 - 热爱你的生活
-            .small-12.columns.all-projects
-              = link_to '查看所有项目', all_explore_index_path
+        ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.square-projects
+          - @newest_projects.each do |p|
+            li.recommend-project
+              = link_to root_path do
+                - image_tag 'j/jingpin2.jpg'
+              p
+                | #{p.fullname}
+          .small-12.columns.all-projects
+            = link_to '查看所有项目', all_explore_index_path
