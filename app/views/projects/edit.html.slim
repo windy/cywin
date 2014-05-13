@@ -88,7 +88,8 @@
         .edit
           = link_to '管理', admin_money_requires_path( project_id: @project.id )
         h3.title 投资情况
-        moneyrequire ng-show='opened' require='opened' title='"当前轮次"'
+        .money-require ng-show='opened'
+          moneyrequire require='opened' title='"当前轮次"'
         .row ng-hide= 'opened'
           .small-12.columns.no-invest-content
             p 当前无正在发起的投资

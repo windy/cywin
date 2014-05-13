@@ -12,9 +12,10 @@
     params:
       project_id: $scope.project_id
   .success (res)->
-    $scope.money = res.data.money
-    $scope.share = res.data.share
-    $scope.money_require_id = res.data.id
+    unless res == 'null'
+      $scope.money = res.money
+      $scope.share = res.share
+      $scope.money_require_id = res.id
 
   $http
     url: '/projects/' + $scope.project_id + '/person_requires'
@@ -36,7 +37,7 @@
           share: $scope.share
       .success (res)->
         if res.success
-          $window.location.href = '/projects/' + $scope.project_id
+          $window.location.href = '/projects/' + $scope.project_id + '/edit'
         else
           $scope.complete_error = res.message
     else
@@ -49,7 +50,7 @@
           share: $scope.share
       .success (res)->
         if res.success
-          $window.location.href = '/projects/' + $scope.project_id
+          $window.location.href = '/projects/' + $scope.project_id + '/edit'
         else
           $scope.complete_error = res.message
 
