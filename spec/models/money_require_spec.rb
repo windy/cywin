@@ -72,6 +72,20 @@ describe MoneyRequire do
       expect(@project.save).to be_false
     end
 
+    it "ended_at 测试" do
+      money_require = build(:money_require)
+      money_require.deadline = 60
+      money_require.project = @project
+      money_require.save!
+      money_require.opened_at = Time.now
+      money_require.quickly_turn_on!(@user.id)
+
+      expect(money_require.ended_at).to be_nil
+      money_require.close!
+      expect(money_require.ended_at).not_to be_nil
+    
+    end
+
     it '已经有开启的融资, 再创建一个会失败' do
       params = attributes_for(:money_require)
       @project.money_requires << MoneyRequire.new(params)
@@ -147,6 +161,7 @@ describe MoneyRequire do
             @money_require.add_leader_and_wait_confirm(@leader.id)
             expect(@money_require.leader_confirm).to be_true
             expect(@money_require.status).to eq("opened")
+            expect(@money_require.opened_at).not_to be_nil
           end
         end
 

@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20140513022056) do
     t.text     "description"
     t.integer  "money"
     t.integer  "money_require_id"
-    t.integer  "user_id"
+    t.integer  "investor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -169,6 +169,9 @@ ActiveRecord::Schema.define(version: 20140513022056) do
     t.integer  "leader_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "opened_at"
+    t.datetime "closed_at"
+    t.boolean  "success"
   end
 
   create_table "person_requires", force: true do |t|

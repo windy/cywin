@@ -84,69 +84,21 @@
         .small-12.columns
           .data-content
             h3.title 其他数据
-      .invest ng-controller='MoneyRequireController' ng-init= 'init(#{@project.id})'
+      .invest-content ng-controller='MoneyRequireController' ng-init= 'init(#{@project.id})'
         .edit
           = link_to '管理', admin_money_requires_path( project_id: @project.id )
-          /*a href='#' 管理*/
         h3.title 投资情况
-        h4 
-          | 当前轮次 {{ format_start_end_time(opened) }}
-        .row ng-show= 'opened'
-          .small-12.medium-6.columns
-            .box
-              .sub-title
-                | 计划融资
-              h5.sub-content 
-                | {{ opened.money }}
-          .small-12.medium-6.columns
-            .box
-              .sub-title
-                | 当前状态
-              h5.sub-content 
-                | {{ format_status(opened.status) }}
-          .small-12.medium-6.columns
-            .box
-              .sub-title
-                | 领投人
-              h5.sub-content
-                | {{ format_leader(opened.leader) }}
-          .small-12.medium-6.end.columns
-            .box
-              .sub-title
-                | 已获融资
-              h5.sub-content xx 80万
+        moneyrequire ng-show='opened' require='opened' title='"当前轮次"'
         .row ng-hide= 'opened'
           .small-12.columns.no-invest-content
             p 当前无正在发起的投资
             = link_to '发起新的融资需求', admin_money_requires_path( project_id: @project.id ), class: 'button'
         .history ng-repeat='history in histories'
-          h4
-            | 历史投资 {{ format_start_end_time(history) }}
-          .row
-            .small-12.medium-6.columns
-              .box
-                .sub-title
-                  | 融资规模
-                h5.sub-content
-                  | {{ history.money }}
-            .small-12.medium-6.columns
-              .box
-                .sub-title
-                  | 领投人
-                h5.sub-content 
-                  | {{ history.leader.name }} 正在领投 
-            .small-12.medium-6.columns
-              .box
-                .sub-title
-                  | 当时估值
-                h5.sub-content 
-                  | 1000万
-            .small-12.medium-6.columns
-              .box
-                .sub-title
-                  | 融资花费时间
-                h5.sub-content 
-                  | 10天
+          moneyrequire require='history' title='"历史投资"'
+        .row ng-show= 'is_histories_empty()'
+          .small-12.columns
+            h4.title 历史投资
+            p.no-invest-content 无历史投资记录
       .row
         .small-12.columns 
           h3.title 招人需求
