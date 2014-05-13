@@ -6,6 +6,7 @@ class ExploreController < ApplicationController
   end
 
   def categories
+    @categories = Category.all
   end
 
   def trend

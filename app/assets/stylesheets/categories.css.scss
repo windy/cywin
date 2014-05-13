@@ -1,12 +1,9 @@
 .categories {
-  background-color: white;
   min-height: 20rem;
 }
 
 .category {
   text-align: center;
-  border: 1px solid #ddd;
-  padding-top: 2rem;
   margin-bottom: 1rem;
   width: 100%;
 
@@ -14,7 +11,8 @@
     color: #333;
     font-size: 1.5rem;
     display: inline-block;
-    padding-bottom: 2rem;
+    padding: 2rem 0;
+    border: 1px solid #ddd;
     width: 100%;
   }
 }
