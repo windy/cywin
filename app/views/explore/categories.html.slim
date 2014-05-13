@@ -6,8 +6,4 @@
       = render partial: 'head', locals: { type: 'categories' }
 
       .square-categories
-        .row
-          - 12.times do
-            .small-12.medium-6.large-4.columns
-              .category
-                = link_to '互联网', category_path(1)
+        = render 'categories/categories'

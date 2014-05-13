@@ -1,0 +1,7 @@
+.row
+  .small-12.columns.top-blank
+    h2 推荐新的项目
+    = simple_form_for @recommend, url: admin_recommends_path do |f|
+      = f.input :project_id, label: '输入项目ID'
+      = f.input :description, label: '为什么推荐'
+      = f.submit '提交', class: 'button'
