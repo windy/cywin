@@ -21,7 +21,10 @@
       params:
         project_id: $scope.project_id
     .success (res)->
-      $scope.histories = res
+      if res == 'null'
+        $scope.histories = []
+      else
+        $scope.histories = res
 
   $scope.is_histories_empty = ()->
     Utils.is_empty($scope.histories)

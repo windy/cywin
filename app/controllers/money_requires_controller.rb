@@ -19,16 +19,7 @@ class MoneyRequiresController < ApplicationController
   # 创建项目时使用, 取临时创建的需求
   def dirty_show
     @project = Project.find( params[:project_id] )
-    money_require = MoneyRequire.where(status: :ready, project_id: @project.id).first
-    if money_require
-      render_success(nil, data: {
-        money: money_require.money,
-        share: money_require.share,
-        id: money_require.id,
-      })
-    else
-      render_fail
-    end
+    @money_require = @project.opened_money_require
   end
 
   # 创建项目时使用, 取临时创建的需求
@@ -77,7 +68,7 @@ class MoneyRequiresController < ApplicationController
     authorize! :update, @money_require
     leader_id = params[:leader_id]
     if @money_require.add_leader_and_wait_confirm(leader_id)
-      render partial: 'money_require'
+      render partial: 'money_require', locals: { money_require: @money_require }
     else
       render_fail(@money_require.errors.full_messages.to_s)
     end

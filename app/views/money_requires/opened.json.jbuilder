@@ -1,1 +1,1 @@
-json.partial! 'money_require'
+json.partial! 'money_require', money_require: @money_require

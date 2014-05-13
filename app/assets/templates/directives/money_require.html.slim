@@ -30,12 +30,12 @@
         h5.sub-content
           | {{ require.format_status }}
     li
-      .box ng-show= 'require.left'
+      .box ng-show= 'require.left != null'
         .sub-title
           | 剩余天数
         h5.sub-content
           | {{ require.left }}
-      .box ng-show= 'require.cost'
+      .box ng-show= 'require.cost != null'
         .sub-title
           | 融资完成时间
         h5.sub-content
