@@ -3,9 +3,10 @@
 
 .row.top-blank
   .small-12.columns
-    = link_to edit_project_path(@project), class: 'back-link' do
-      | 回到项目
-      span <
+    .back-link
+      = link_to edit_project_path(@project) do
+        | 回到项目
+        span <
 
 .money-require-admin ng-controller='MoneyRequireAdminController' ng-init='init(#{@project.id})'
   .row
