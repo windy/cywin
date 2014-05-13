@@ -86,10 +86,9 @@
       person user='money_require.leader'
   .row.ng-cloak ng-show='money_require.status == "opened"'
     .small-12.large-10.large-centered.columns
-      h4 目前融资进度
       .money_require
-        moneyrequire
+        moneyrequire require='money_require' title='"目前融资进度"'
       h4 融资事件
   .row.ng-cloak ng-show='money_require.status == "closed"'
     .small-12.large-10.large-centered.columns
-      h4 融资已完成
+      moneyrequire require='money_require' title='"融资已完成"'

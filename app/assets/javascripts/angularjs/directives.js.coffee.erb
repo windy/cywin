@@ -6,5 +6,6 @@
 .directive 'moneyrequire', ->
   restrict: 'E'
   scope:
-    money_require: '='
+    require: '='
+    title: '='
   templateUrl: '<%= asset_path("directives/money_require.html") %>'

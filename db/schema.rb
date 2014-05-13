@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509075922) do
+ActiveRecord::Schema.define(version: 20140513073501) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20140509075922) do
     t.text     "description"
     t.integer  "money"
     t.integer  "money_require_id"
-    t.integer  "user_id"
+    t.integer  "investor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -169,6 +169,9 @@ ActiveRecord::Schema.define(version: 20140509075922) do
     t.integer  "leader_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "opened_at"
+    t.datetime "closed_at"
+    t.boolean  "success"
   end
 
   create_table "person_requires", force: true do |t|
@@ -195,6 +198,14 @@ ActiveRecord::Schema.define(version: 20140509075922) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "team_story"
+  end
+
+  create_table "recommends", force: true do |t|
+    t.integer  "project_id"
+    t.text     "description"
+    t.boolean  "deleted",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "roles", force: true do |t|

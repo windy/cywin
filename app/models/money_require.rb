@@ -42,6 +42,8 @@ class MoneyRequire < ActiveRecord::Base
     end
 
     after_transition on: :leader_confirm do |money_require, transition|
+      money_require.opened_at = DateTime.now
+      money_require.save!
       money_require.add_leader_confirm_notify
     end
 
@@ -52,6 +54,36 @@ class MoneyRequire < ActiveRecord::Base
     event :close do
       transition opened: :closed
       transition leader_needed: :closed
+    end
+
+    after_transition on: :close do |money_require, transition|
+      money_require.closed_at = DateTime.now
+      if money_require.progress < 1
+        money_require.success = false
+      else
+        money_require.success = true
+      end
+      money_require.save!
+    end
+  end
+
+  # 虚拟属性
+  def ended_at
+    if self.status == 'closed'
+      self.opened_at + self.deadline.days
+    end
+  end
+
+  # 剩余天数
+  def left
+    if self.opened?
+      (( self.deadline.days - ( Time.now - self.opened_at ) ) / 60 / 60 / 24 ).to_i
+    end
+  end
+
+  def cost
+    if self.closed?
+      ( (self.closed_at - self.opened_at)/ 60 / 60 /24 ).to_i
     end
   end
 
