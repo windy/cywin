@@ -49,6 +49,9 @@ gem 'angularjs-rails'
 # i18n
 gem 'rails-i18n', '~> 4.0.0'
 
+# web server
+gem 'unicorn'
+
 group :development do
   gem 'spring'
   gem 'quiet_assets'
