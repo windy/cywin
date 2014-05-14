@@ -41,10 +41,9 @@
         .invest-content ng-controller='MoneyRequireController' ng-init='init(#{@project.id})'
           h3.title 投资情况
           moneyrequire require='opened' title='"当前轮次"'
-          .small-12.columns.more-info
-            = link_to '更多投资信息...', '#'
-          .small-12.columns.invest-button
-            button 我要投资
+          .more-info
+            = link_to '更多投资信息...', invest_project_path(@project)
+          investbutton require='opened'
           .history ng-repeat='history in histories'
             moneyrequire require='history' title='"历史投资"'
 
@@ -64,7 +63,7 @@
                       .job-title CTO
                       .description 我毕业于清华大学, 创建过xx项目, xx项目, 属于二次创业.
           .small-12.columns.more-info
-            = link_to '查看更多团队故事...'
+            = link_to '查看更多团队故事...', team_project_path(@project)
         .job
           h3.title 招人情况
           h4 正在招人
