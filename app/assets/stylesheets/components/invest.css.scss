@@ -24,6 +24,11 @@
     }
   }
 
+}
+
+.invest-content {
+
+  position: relative;
   .new-invest-button {
     text-align: center;
   }
@@ -58,10 +63,7 @@
     border-top: 1px solid #ddd;
     text-align: center;
   }
-}
 
-.invest-content {
-  position: relative;
 }
 
 .no-invest-content {
