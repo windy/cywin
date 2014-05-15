@@ -1,5 +1,5 @@
 class SyndicatesController < ApplicationController
-  before_action :authenticate_user!, except: [ :index ]
+  before_action :authenticate_user!
 
   # 投资确认
   def create
@@ -10,9 +10,9 @@ class SyndicatesController < ApplicationController
     investment.user = current_user
     investment.money_require = @money_require
     if investment.save
-      render_success
+      render 'create'
     else
-      render_fail(investment.errors.full_messages)
+      render_fail('投资失败', investment)
     end
   end
 

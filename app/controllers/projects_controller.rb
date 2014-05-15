@@ -107,6 +107,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def invest
+    @project = Project.find( params[:id] )
+  end
+
   private
   def project_params
     params.permit(:name, :oneword, :description)
