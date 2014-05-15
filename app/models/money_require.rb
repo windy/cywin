@@ -119,6 +119,7 @@ class MoneyRequire < ActiveRecord::Base
   # 仅仅用来测试
   def quickly_turn_on!(leader_id)
     self.leader_id = leader_id
+    self.opened_at = Time.now
     self.status = 'opened'
     self.save!
   end

@@ -36,6 +36,9 @@
       resolve:
         opened: ->
           $scope.opened
+    
+    modal.result.then (new_opened)->
+      $scope.opened = new_opened
 
 ]
 
@@ -53,7 +56,8 @@
         money: $scope.hash.money
     .success (res)->
       if res.success
-        $modalInstance.close()
+        new_opened = res.data
+        $modalInstance.close(new_opened)
       else
         $scope.errors = res.errors
 

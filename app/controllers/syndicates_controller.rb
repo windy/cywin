@@ -10,7 +10,7 @@ class SyndicatesController < ApplicationController
     investment.user = current_user
     investment.money_require = @money_require
     if investment.save
-      render_success
+      render 'create'
     else
       render_fail('投资失败', investment)
     end
