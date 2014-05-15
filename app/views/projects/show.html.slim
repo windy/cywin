@@ -44,9 +44,6 @@
           .more-info
             = link_to '更多投资信息...', invest_project_path(@project)
           investbutton require='opened'
-          button ng-click='open_syndicate()' hello
-          script type='text/ng-template' id='syndicate.html'
-            h3 hello
           .history ng-repeat='history in histories'
             moneyrequire require='history' title='"历史投资"'
 

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe SyndicatesController do
 
   describe "POST 'syndicate'" do
+
     login_user
     before do
       project = create_project_with_owner(@user)
@@ -10,9 +11,10 @@ describe SyndicatesController do
       project.save!
       @money_require = project.money_requires.first
     end
+
     it "success" do
       @user = create_investor_user(@user)
-      @money_require.quickly_turn_on!(1)
+      @money_require.quickly_turn_on!(@user.id)
       expect(@money_require.reload.progress).to eq(0)
       post 'create', ActionController::Parameters.new( money_require_id: @money_require.id, money: 10 )
       check_json(response.body, :success, true)

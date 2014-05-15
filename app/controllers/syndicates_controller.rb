@@ -12,7 +12,7 @@ class SyndicatesController < ApplicationController
     if investment.save
       render_success
     else
-      render_fail(investment.errors.full_messages)
+      render_fail('投资失败', investment)
     end
   end
 

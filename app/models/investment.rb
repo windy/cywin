@@ -2,7 +2,7 @@ class Investment < ActiveRecord::Base
   belongs_to :user
   belongs_to :money_require
 
-  validates_associated :user
+  #validates_associated :user
 
   # 只有一份投资
   validates :money_require_id, uniqueness: { scope: :user_id, message: '不能重复投资' }

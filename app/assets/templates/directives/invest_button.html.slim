@@ -1,4 +1,17 @@
 .invest-button.ng-cloak
-  button ng-show='require.status == "leader_needed"' 领投约谈
-  button ng-show='require.status == "leader_need_confirmed"' 领投约谈
-  button ng-show='require.status == "opened"' 我要投资
+  button ng-show='opened.status == "leader_needed"' 领投约谈
+  button ng-show='opened.status == "leader_need_confirmed"' 领投约谈
+  button ng-show='opened.status == "opened"' ng-click='open_syndicate()' 我要投资
+script type='text/ng-template' id='syndicate.html'
+  .row
+    .small-12.columns
+      h3 投资给该项目
+      hr
+      form ng-submit='syndicate()'
+        input type='text' ng-class='{ error: errors.money }' placeholder='投资金额' ng-model='hash.money'
+        small.error ng-show=' errors.money '
+          | {{ errors.money }}
+
+        p.alert ng-show='errors.money_require_id'
+          | {{ errors.money_require_id }}
+        button 投资

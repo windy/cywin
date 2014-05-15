@@ -29,24 +29,32 @@
   $scope.is_histories_empty = ()->
     Utils.is_empty($scope.histories)
 
-  $scope.syndicate = (money)->
+  $scope.open_syndicate = ()->
+    modal = $modal.open
+      templateUrl: 'syndicate.html'
+      controller: 'SyndicateModalController',
+      resolve:
+        opened: ->
+          $scope.opened
+
+]
+
+@app.controller 'SyndicateModalController', [ '$scope', '$http', '$modalInstance', 'opened', ($scope, $http, $modalInstance, opened)->
+  
+  $scope.hash = {
+  }
+
+  $scope.syndicate = ()->
     $http
       url: '/syndicates'
       method: 'POST'
       params:
-        money_require_id: $scope.opened.id
-        money: money
+        money_require_id: opened.id
+        money: $scope.hash.money
     .success (res)->
       if res.success
-        # TODO
+        $modalInstance.close()
       else
-        # TODO
-
-  $scope.open_syndicate = ()->
-    modal = $modal.open
-      templateUrl: 'syndicate.html'
-      resolve:
-        money_require_id: ->
-          $scope.money_require_id
+        $scope.errors = res.errors
 
 ]
