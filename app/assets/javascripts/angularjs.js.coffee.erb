@@ -5,10 +5,11 @@
 #= require angular-route
 #= require angular-sanitize
 #= require angular-file-upload
+#= require mm-foundation-tpls-0.2.0
 #= require_self
 #= require_tree ./angularjs
 
-@app = angular.module('app', ['ngCookies', 'ngSanitize', 'ngRoute', 'angularFileUpload'])
+@app = angular.module('app', ['ngCookies', 'ngSanitize', 'ngRoute', 'angularFileUpload', 'mm.foundation'])
 
 @app.config ["$httpProvider", '$routeProvider', ($httpProvider, $routeProvider) ->
     # 配置 json 与 csrf

@@ -1,5 +1,5 @@
 class SyndicatesController < ApplicationController
-  before_action :authenticate_user!, except: [ :index ]
+  before_action :authenticate_user!
 
   # 投资确认
   def create
