@@ -46,4 +46,6 @@ Rails.application.configure do
   Weibo2::Config.api_secret = SERVICES['weibo']['api_secret']
   Weibo2::Config.redirect_uri = SERVICES['weibo']['redirect_uri']
 
+  config.middleware.use Rack::LiveReload, host: 'localhost', port: 33333
+
 end

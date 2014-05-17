@@ -58,6 +58,8 @@ group :development do
   gem 'rails_layout'
   gem 'guard'
   gem 'guard-rspec', require: false
+  gem 'guard-livereload', require: false
+  gem 'rack-livereload'
 end
 
 group :development, :test do
