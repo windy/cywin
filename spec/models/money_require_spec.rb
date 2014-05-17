@@ -180,6 +180,7 @@ describe MoneyRequire do
         before do
           @money_require.quickly_turn_on!(1)
         end
+
         it '单人投资' do
           investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
           investment.money_require = @money_require
@@ -195,6 +196,13 @@ describe MoneyRequire do
           investment.money_require = @money_require
           expect(investment.save).to be_false
           expect(investment).to have(1).errors_on(:money_require_id)
+        end
+
+        it '投资限额' do
+          investment = Investment.new(money: attributes_for(:investment_for_money_wrong)[:money])
+          investment.money_require = @money_require
+          expect(investment.save).to be_false
+          expect(investment).to have(1).errors_on(:money)
         end
 
         it "二人投资" do
@@ -230,7 +238,7 @@ describe MoneyRequire do
             investment = Investment.new(money: m)
             investment.money_require = @money_require
             expect(investment.save).to be_false
-            expect(investment).to have(1).errors_on(:money)
+            expect(investment.errors_on(:money)).not_to be_blank
           end
         end
 

@@ -4,6 +4,8 @@ class MoneyRequire < ActiveRecord::Base
 
   validates :deadline, presence: true, numericality: { greater_than_or_equal_to: 30, only_integer: true }
 
+  validates :maxnp, numericality: { greater_than: 0, less_than_or_equal_to: 50, only_integer: true }
+
   belongs_to :project
   validates :project_id, presence: true
 
@@ -85,6 +87,11 @@ class MoneyRequire < ActiveRecord::Base
     if self.closed?
       ( (self.closed_at - self.opened_at)/ 60 / 60 /24 ).to_i
     end
+  end
+
+  # 每笔投资最低额度
+  def min_money
+    (self.money.to_f / self.maxnp).ceil
   end
 
   # 查询融资进度

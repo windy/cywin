@@ -5,6 +5,7 @@ FactoryGirl.define do
     money 10000
     share 10
     deadline 60
+    maxnp 10
     description "第一轮融资需求"
   end
 end
