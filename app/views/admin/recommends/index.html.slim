@@ -16,4 +16,4 @@
             td #{r.project.owner.try(:name)}
             td #{format_date(r.created_at)}
             td
-              = link_to '取消', admin_recommend_path(r.id), method: 'DELETE'
+              = link_to '取消', admin_recommend_path(r.id), method: 'DELETE', 'data-confirm'=> '确认?'
