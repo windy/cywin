@@ -23,8 +23,8 @@ script type='text/ng-template' id='syndicate.html'
             span.prefix ¥
           .small-11.medium-8.large-6.end.columns
             input type='text' ng-class='{ error: errors.money }' placeholder='投资金额' ng-model='hash.money'
-        small.error ng-show=' errors.money '
-          | {{ errors.money }}
+            small.error ng-show=' errors.money '
+              | {{ errors.money }}
         p.total-money ng-show='opened.syndicate.already_money'
           /*TODO money 显示*/
           | 你总的投资额将为:

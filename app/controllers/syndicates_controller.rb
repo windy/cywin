@@ -21,7 +21,7 @@ class SyndicatesController < ApplicationController
     already_money = @investment.money
     authorize! :update, @investment
 
-    if @investment.update(money: already_money + params[:money].to_i)
+    if @investment.update(money: params[:money])
       @money_require = @investment.money_require
       render :create
     else
