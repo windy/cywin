@@ -43,22 +43,50 @@
 ]
 
 @app.controller 'SyndicateModalController', [ '$scope', '$http', '$modalInstance', 'opened', ($scope, $http, $modalInstance, opened)->
-  
+
+  $scope.opened = opened
+  # 注意
+  # opened.syndicate.already_money 作为追加投资的标识
   $scope.hash = {
+    submit: '投资'
+    message: ''
+    min_money: opened.syndicate.min_money
+    money: opened.syndicate.min_money
   }
 
+  if opened.syndicate.already_money
+    $scope.hash.submit = '追加'
+    $scope.hash.money = 0
+    $scope.hash.already_message = '你正在追加投资, 你已经投资了: ' + opened.syndicate.already_money
+
   $scope.syndicate = ()->
-    $http
-      url: '/syndicates'
-      method: 'POST'
-      params:
-        money_require_id: opened.id
-        money: $scope.hash.money
-    .success (res)->
-      if res.success
-        new_opened = res.data
-        $modalInstance.close(new_opened)
-      else
-        $scope.errors = res.errors
+    if $scope.opened.syndicate.already_money
+      $http
+        url: '/syndicates/' + $scope.opened.syndicate.already_investment_id
+        method: 'PATCH'
+        params:
+          money: $scope.cal_total_money()
+      .success (res)->
+        if res.success
+          new_opened = res.data
+          $modalInstance.close(new_opened)
+        else
+          $scope.errors = res.errors
+    else
+      $http
+        url: '/syndicates'
+        method: 'POST'
+        params:
+          money_require_id: opened.id
+          money: $scope.hash.money
+      .success (res)->
+        if res.success
+          new_opened = res.data
+          $modalInstance.close(new_opened)
+        else
+          $scope.errors = res.errors
+
+  $scope.cal_total_money = ()->
+     parseInt(opened.syndicate.already_money) + parseInt($scope.hash.money || 0 )
 
 ]

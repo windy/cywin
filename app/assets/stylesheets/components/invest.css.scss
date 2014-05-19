@@ -62,10 +62,31 @@
     padding-top: 1rem;
     border-top: 1px solid #ddd;
     text-align: center;
+
+    button {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
 }
 
 .no-invest-content {
   text-align: center;
+}
+
+.invest-modal {
+  .min-money {
+    color: #666;
+  }
+  .total-money {
+    color: #666;
+    span {
+      margin-left: 0.5rem;
+      color: #333;
+      font-weight: 600;
+    }
+  }
+
 }

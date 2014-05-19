@@ -107,7 +107,15 @@ class MoneyRequire < ActiveRecord::Base
   end
 
   def has_invested?(user)
-    user && user.investor && self.investments.where(investor_id: user.investor.id).first
+    !! ( user && user.investor && self.investments.where(user_id: user.id).first )
+  end
+
+  def already_money(user)
+    self.investments.where(user_id: user.id).first.try(:money)
+  end
+
+  def already_investment_id(user)
+    self.investments.where(user_id: user.id).first.try(:id)
   end
 
   def add_leader_and_wait_confirm(leader_id)

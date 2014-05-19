@@ -14,6 +14,15 @@ else
     # 剩余天数
     json.left money_require.left
     json.syndicate_money money_require.syndicate_money
+
+    # 可投资信息
+    json.syndicate do
+      json.can true
+      json.already_money money_require.already_money(current_user)
+      json.already_investment_id money_require.already_investment_id(current_user)
+      json.min_money money_require.min_money
+    end
+
   end
 
   if money_require.closed?
