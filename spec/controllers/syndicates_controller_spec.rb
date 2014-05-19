@@ -16,7 +16,19 @@ describe SyndicatesController do
       @user = create_investor_user(@user)
       @money_require.quickly_turn_on!(@user.id)
       expect(@money_require.reload.progress).to eq(0)
-      xhr :post, 'create', ActionController::Parameters.new( money_require_id: @money_require.id, money: 10 )
+      xhr :post, 'create', ActionController::Parameters.new( money_require_id: @money_require.id, money: 1000 )
+      check_json(response.body, :success, true)
+      expect(@money_require.reload.progress).not_to eq(0)
+    end
+
+    it "追加投资成功" do
+      @user = create_investor_user(@user)
+      @money_require.quickly_turn_on!(@user.id)
+      expect(@money_require.reload.progress).to eq(0)
+      investment = Investment.create!(money: 1000, money_require_id: @money_require.id)
+      investment.user = @user
+      investment.save!
+      xhr :patch, 'update', ActionController::Parameters.new( money: 1000, id: investment.id )
       check_json(response.body, :success, true)
       expect(@money_require.reload.progress).not_to eq(0)
     end

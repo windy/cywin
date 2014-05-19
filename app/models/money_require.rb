@@ -4,6 +4,8 @@ class MoneyRequire < ActiveRecord::Base
 
   validates :deadline, presence: true, numericality: { greater_than_or_equal_to: 30, only_integer: true }
 
+  validates :maxnp, numericality: { greater_than: 0, less_than_or_equal_to: 50, only_integer: true }
+
   belongs_to :project
   validates :project_id, presence: true
 
@@ -87,6 +89,11 @@ class MoneyRequire < ActiveRecord::Base
     end
   end
 
+  # 每笔投资最低额度
+  def min_money
+    (self.money.to_f / self.maxnp).ceil
+  end
+
   # 查询融资进度
   # 返回百分比,如 10% -> 0.1
   def progress
@@ -100,7 +107,15 @@ class MoneyRequire < ActiveRecord::Base
   end
 
   def has_invested?(user)
-    user && user.investor && self.investments.where(investor_id: user.investor.id).first
+    !! ( user && user.investor && self.investments.where(user_id: user.id).first )
+  end
+
+  def already_money(user)
+    self.investments.where(user_id: user.id).first.try(:money)
+  end
+
+  def already_investment_id(user)
+    self.investments.where(user_id: user.id).first.try(:id)
   end
 
   def add_leader_and_wait_confirm(leader_id)
