@@ -42,11 +42,10 @@ class InvestorsController < ApplicationController
   end
 
   def autocomplete
-    #@users = User.joins(:roles).where('roles.name' => :investor).where('users.name like ?', "%#{params[:search]}%").limit(5)
     if params[:search].blank?
       @users = []
     else
-      @users = User.all.limit(5)
+      @users = User.joins(:roles).where('roles.name' => :investor).where('users.name like ?', "%#{params[:search]}%").limit(5)
     end
   end
 

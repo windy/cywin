@@ -1,10 +1,12 @@
 @app.controller 'MoneyRequireAdminController', [ '$scope', '$http', '$timeout', ($scope, $http, $timeout)->
   
   # 存储当前项目正在融资的需求, 如无, 则为 {}
+  $scope.loading = true
   
   $scope.init = (project_id)->
     $scope.project_id = project_id
     $scope.init_money_require()
+    $scope.loading = false
 
   $scope.init_money_require = ()->
     $http
@@ -49,31 +51,27 @@
       else
         $scope.money_require.errors = res.errors
 
-  # 搜索
-  $scope.autocomplete_search_with_timeout = ()->
-    if $scope.autocomplete_timeout
-      $timeout.cancel( $scope.autocomplete_timeout )
-    $scope.autocomplete_timeout = $timeout( $scope.autocomplete_search, 500 )
-
     
-  $scope.autocomplete_search = ()->
+  $scope.autocomplete_search = (val)->
     $http
       url: '/investors/autocomplete.json'
       params:
-        search: $scope.autocomplete_user
-    .success (res)->
-      $scope.autocomplete_users = res
+        search: val
+    .then (res)->
+      res.data
 
-  $scope.select_leader = (user)->
-    $scope.selected_leader = user
-    $scope.autocomplete_users = null
+  $scope.selected_leader = ()->
+    typeof($scope.autocomplete_user) == "object"
 
   $scope.add_leader = ()->
     $http
       url: '/money_requires/' + $scope.money_require.id + '/add_leader'
       method: 'PATCH'
       params:
-        leader_id: $scope.selected_leader.id
+        leader_id: $scope.autocomplete_user.id
     .success (res)->
-      $scope.money_require = res
+      if res.success == false
+        $scope.leader_error_message = res.message
+      else
+        $scope.money_require = res
 ]
