@@ -77,7 +77,18 @@ class MoneyRequiresController < ApplicationController
   def leader_confirm
     authorize! :leader_confirm, @money_require
     if @money_require.leader_confirm
-      render_success
+      if params[:money].present?
+        investment = Investment.new(money: params[:money])
+        investment.user = current_user
+        investment.money_require = @money_require
+        if investment.save
+          render "syndicates/create"
+        else
+          render_fail('领投成功但投资失败', investment)
+        end
+      else
+        render_success
+      end
     else
       render_fail(@money_require.errors.full_messages.to_s)
     end

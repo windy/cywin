@@ -17,10 +17,11 @@
       width: 100%;
       padding: 1.5rem 0;
       font-size: 1.2rem;
-      cursor: normal;
+      cursor: default;
     }
     .active {
       color: #333;
+      font-weight: 600;
     }
   }
 
