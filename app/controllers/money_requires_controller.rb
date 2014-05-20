@@ -100,7 +100,7 @@ class MoneyRequiresController < ApplicationController
       @money_require.preheat!
       render_success
     else
-      render_fail(@money_require.errors.full_messages.to_s)
+      render_fail(nil, @money_require)
     end
   end
 
