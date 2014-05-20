@@ -30,7 +30,7 @@
               | 5. 融资结束
 
   // 融资预热
-  .row.ng-cloak ng-show=' money_require && ( money_require.status == null || money_require.status == "ready")  || ! money_require'
+  .row.ng-cloak ng-show=' !loading && money_require && ( money_require.status == null || money_require.status == "ready")  || ! money_require'
     .small-12.large-10.large-centered.columns
       form ng-submit= 'create_or_update()'
         h4.title 创建新的一轮融资
@@ -65,25 +65,26 @@
         | 注意: 一旦邀请, 无法修改.
       form ng-submit='add_leader()'
         .leader
-          person ng-show='selected_leader' user='selected_leader'
+          person ng-show='selected_leader()' user='autocomplete_user'
         .row
           .small-12.medium-6.end.columns
-            input type='text' id='leader' placeholder='投资人姓名 or 邮箱' ng-keyup='autocomplete_search_with_timeout()' ng-model='autocomplete_user'
-            p.no-result ng-show='autocomplete_users.length == 0' 没有结果
-            ul.autocomplete-wrapper
-              li ng-class= '{ disabled: autocomplete_user.joined }' ng-repeat= 'autocomplete_user in autocomplete_users'
-                a ng-click='select_leader(autocomplete_user)'
-                  .row
-                    .small-3.medium-3.large-2.columns
-                      img ng-src= ' {{ autocomplete_user.avatar }} '
-                    .small-9.medium-9.large-10.columns
-                      h6.title
-                        |{{ autocomplete_user.name }} 
-            button ng-disabled= '! selected_leader' 邀请领投人
+            input type='text' id='leader' placeholder='投资人姓名 or 邮箱' ng-model='autocomplete_user' typeahead="user as user.name for user in autocomplete_search($viewValue)" typeahead-template-url="leader_select.html"
+            script type='text/ng-template' id='leader_select.html'
+              a ng-class='{ disabled: match.model.joined }'
+                .row
+                  .small-3.columns
+                    img ng-src= ' {{ match.model.avatar }} '
+                  .small-9.columns
+                    h6.title
+                      |{{ match.model.name }} 
+            p.alert ng-show='leader_error_message'
+              | {{ leader_error_message }}
+            button ng-disabled= '! selected_leader()' 邀请领投人
   .row.ng-cloak ng-show='money_require.status == "leader_need_confirmed"'
     .small-12.large-10.large-centered.columns
-      h4 等待领投人确认
+      h4 等待领投人确认...
       p 请领投人确认
+      p.alert 我们已经通过系统消息告之对方, 请尽快让其确认, 确认后融资流程正式开始
       person user='money_require.leader'
   .row.ng-cloak ng-show='money_require.status == "opened"'
     .small-12.large-10.large-centered.columns

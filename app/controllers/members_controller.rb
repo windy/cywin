@@ -68,7 +68,7 @@ class MembersController < ApplicationController
   end
 
   def autocomplete
-    search = params.permit(:search)[:search]
+    search = params[:search]
     if search.nil?
       render_fail
     elsif search.include?('@')
