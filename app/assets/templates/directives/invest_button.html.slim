@@ -1,16 +1,19 @@
 .invest-button.ng-cloak
   button ng-show='opened.status == "leader_needed"' 领投约谈
-  button ng-show='opened.status == "leader_need_confirmed"' 领投约谈
+  button ng-show='opened.status == "leader_need_confirmed" && ! opened.leader.me' disabled=true 领投确认中
+  button ng-show='opened.status == "leader_need_confirmed" && opened.leader.me' ng-click='open_syndicate()' 我是领投人, 马上确认
   button ng-show='opened.syndicate.can && ! opened.syndicate.already_money' ng-click='open_syndicate(already_money)' 我要投资
   button ng-show='opened.syndicate.already_money' disabled=''
     | 我已投资了: 
     | {{ opened.syndicate.already_money }}
   button ng-show='opened.syndicate.can && opened.syndicate.already_money' ng-click='open_syndicate()' 追加投资
+
 script type='text/ng-template' id='syndicate.html'
   .row.invest-modal
     .small-12.columns
-      h3 ng-hide='opened.syndicate.already_money' 投资给该项目
-      h3 ng-show='opened.syndicate.already_money' 追加投资给该项目
+      h3 ng-show='behave == "leader_confirm"' 领投确认
+      h3 ng-show='behave == "invest"' 投资给该项目
+      h3 ng-show='behave == "add"' 追加投资给该项目
       hr
       form ng-submit='syndicate()'
 

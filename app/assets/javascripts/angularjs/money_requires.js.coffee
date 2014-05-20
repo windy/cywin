@@ -45,22 +45,52 @@
 @app.controller 'SyndicateModalController', [ '$scope', '$http', '$modalInstance', 'opened', ($scope, $http, $modalInstance, opened)->
 
   $scope.opened = opened
+  
   # 注意
   # opened.syndicate.already_money 作为追加投资的标识
-  $scope.hash = {
-    submit: '投资'
-    message: ''
-    min_money: opened.syndicate.min_money
-    money: opened.syndicate.min_money
-  }
-
-  if opened.syndicate.already_money
-    $scope.hash.submit = '追加'
-    $scope.hash.money = 0
-    $scope.hash.already_message = '你正在追加投资, 你已经投资了: ' + opened.syndicate.already_money
+  if $scope.opened.status == 'leader_need_confirmed'
+    $scope.behave = 'leader_confirm'
+  else if $scope.opened.status == 'opened' && ! $scope.opened.syndicate.already_money
+    $scope.behave = 'invest'
+  else if $scope.opened.status == 'opened' && $scope.opened.syndicate.already_money
+    $scope.behave = 'add'
+  else
+    console.log "error behave found"
+    
+  switch $scope.behave
+    when "leader_confirm"
+      $scope.hash = {
+        submit: '领投确认并投资'
+        min_money: $scope.opened.min_money
+        money: $scope.min_money
+      }
+    when "invest"
+      $scope.hash = {
+        submit: '投资'
+        min_money: $scope.opened.min_money
+        money: $scope.min_money
+      }
+    when "add"
+      $scope.hash = {
+        submit: '追加'
+        money: 0
+        already_message: '你正在追加投资, 你已经投资了: ' + $scope.opened.syndicate.already_money
+      }
 
   $scope.syndicate = ()->
-    if $scope.opened.syndicate.already_money
+    if $scope.behave == 'leader_confirm'
+      $http
+        url: '/money_requires/' + $scope.opened.id + '/leader_confirm'
+        method: 'POST'
+        params:
+          money: $scope.hash.money
+      .success (res)->
+        if res.success
+          new_opened = res.data
+          $modalInstance.close(new_opened)
+        else
+          $scope.errors = res.errors
+    else if $scope.behave == 'add'
       $http
         url: '/syndicates/' + $scope.opened.syndicate.already_investment_id
         method: 'PATCH'
@@ -72,7 +102,7 @@
           $modalInstance.close(new_opened)
         else
           $scope.errors = res.errors
-    else
+    else if $scope.behave == 'invest'
       $http
         url: '/syndicates'
         method: 'POST'
@@ -87,6 +117,11 @@
           $scope.errors = res.errors
 
   $scope.cal_total_money = ()->
-     parseInt(opened.syndicate.already_money) + parseInt($scope.hash.money || 0 )
+    money = $scope.hash.money || 0
+    if ! $scope.opened.syndicate
+      already_money = 0
+    else
+      already_money = $scope.opened.syndicate.already_money
+    parseInt(already_money) + parseInt(money)
 
 ]
