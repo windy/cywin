@@ -2,8 +2,8 @@
   .small-12.columns
     ul.small-block-grid-3.tab-content
       li.list
-        = link_to '基本', project_path(1), class: active_for(type, 'basic')
+        = link_to '基本', @project, class: active_for(type, 'basic')
       li.list
-        = link_to '团队', team_project_path(1), class: active_for(type, 'team')
+        = link_to '团队', team_project_path(@project.id), class: active_for(type, 'team')
       li.list
-        = link_to '投资', invest_project_path(1), class: active_for(type, 'invest')
+        = link_to '投资', invest_project_path(@project.id), class: active_for(type, 'invest')

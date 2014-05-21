@@ -1,15 +1,7 @@
 - content_for(:title) do 
   | 项目一
 .project-show.top-blank
-  .row.head
-    .small-4.medium-3.large-2.columns
-      = image_tag 'xingbake.jpg'
-    .small-8.medium-9.large-10.columns
-      .name-area
-        h4.name
-          = link_to '项目一', project_path(1)
-        p.sub-name
-         | 这是一个项目的简要描述
+  = render 'head'
   .row.operate
     .small-6.columns
       = link_to '关注', '#'
