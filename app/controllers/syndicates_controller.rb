@@ -1,5 +1,11 @@
 class SyndicatesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
+
+  # 投资信息
+  def index
+    @money_require = MoneyRequire.find( params[:money_require_id] )
+    @investments = @money_require.investments.order(created_at: :desc)
+  end
 
   # 投资确认
   def create
