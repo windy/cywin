@@ -74,6 +74,7 @@
       $scope.hash = {
         submit: '追加'
         money: 0
+        min_money: $scope.opened.min_money
         already_message: '你正在追加投资, 你已经投资了: ' + $scope.opened.syndicate.already_money
       }
 
