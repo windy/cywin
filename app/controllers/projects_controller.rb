@@ -113,6 +113,7 @@ class ProjectsController < ApplicationController
 
   def invest
     @project = Project.find( params[:id] )
+    @money_require = @project.opened_money_require
   end
 
   private

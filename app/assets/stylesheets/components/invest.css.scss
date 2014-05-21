@@ -42,21 +42,6 @@
     text-align: center;
   }
 
-  .invest-leader {
-    margin: 1rem 0;
-    .name {
-      padding-bottom: 0.5rem;
-    }
-    .name a {
-      color: #333;
-      font-size: 120%;
-      font-weight: 500;
-    }
-    .description {
-      color: #888;
-    }
-  }
-
   .invest-button {
     margin-top: 1rem;
     padding-top: 1rem;
@@ -89,4 +74,40 @@
     }
   }
 
+}
+
+.syndicate-info {
+
+  .title {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .invest-leader {
+    margin: 1rem 0;
+    .name {
+      padding-bottom: 0.5rem;
+    }
+    .name a {
+      color: #333;
+      font-size: 120%;
+      font-weight: 500;
+    }
+    .description {
+      color: #888;
+    }
+  }
+
+  .investments {
+    .money {
+      font-weight: 700;
+      color: #666;
+    }
+
+    .time {
+      color: #999;
+      margin-bottom: 1rem;
+    }
+  }
 }
