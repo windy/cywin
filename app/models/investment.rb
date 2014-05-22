@@ -21,5 +21,13 @@ class Investment < ActiveRecord::Base
       errors.add(:base, "无法投资非 opened 状态的融资需求")
     end
   end
+
+  after_save do |m|
+    if m.money_require_id.present?
+      if m.money_require.progress >= 1
+        m.money_require.close!
+      end
+    end
+  end
  
 end
