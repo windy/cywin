@@ -2,6 +2,28 @@ require 'spec_helper'
 
 describe SyndicatesController do
 
+  describe "GET 'index'" do
+    before do
+      @user = create_investor_user
+      project = create_project_with_owner(@user)
+      project.money_requires << build(:money_require)
+      project.save!
+      @money_require = project.money_requires.first
+      @money_require.quickly_turn_on!(@user.id)
+    end
+
+    it "success" do
+      # invest first
+      investment = Investment.new( money: 1000 )
+      investment.user = @user
+      investment.money_require = @money_require
+      investment.save!
+      xhr :get, :index, money_require_id: @money_require.id
+      res = JSON.parse(response.body)
+      expect(res['investments'].size).to eq(1)
+    end
+  end
+
   describe "POST 'syndicate'" do
 
     login_user

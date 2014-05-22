@@ -74,6 +74,7 @@
       $scope.hash = {
         submit: '追加'
         money: 0
+        min_money: $scope.opened.min_money
         already_message: '你正在追加投资, 你已经投资了: ' + $scope.opened.syndicate.already_money
       }
 
@@ -84,6 +85,7 @@
         method: 'POST'
         params:
           money: $scope.hash.money
+          leader_word: $scope.hash.leader_word
       .success (res)->
         if res.success
           new_opened = res.data
@@ -115,6 +117,9 @@
           $modalInstance.close(new_opened)
         else
           $scope.errors = res.errors
+
+  $scope.cancel = ()->
+    $modalInstance.dismiss('cancel')
 
   $scope.cal_total_money = ()->
     money = $scope.hash.money || 0

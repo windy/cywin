@@ -138,6 +138,19 @@ class MoneyRequire < ActiveRecord::Base
     self.status = 'opened'
     self.save!
   end
+  
+  def leader_confirm_and_invest(investment, leader_word: nil)
+    money_require = self
+    ActiveRecord::Base.transaction do
+      money_require.leader_word = leader_word
+      money_require.save!
+      money_require.leader_confirm!
+      investment.save!
+    end
+    true
+  rescue
+    false
+  end
 
   def add_leader_notify
     Message.create!(
