@@ -7,5 +7,6 @@
         = link_to @project.name, @project
       p.sub-name
         | #{@project.description}
-  .edit
-    a href='#' 编辑
+  - if defined?(edit) && edit
+    .edit
+      a href='#' 编辑
