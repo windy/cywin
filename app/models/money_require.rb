@@ -4,7 +4,7 @@ class MoneyRequire < ActiveRecord::Base
 
   validates :deadline, presence: true, numericality: { greater_than_or_equal_to: 30, only_integer: true }
 
-  validates :maxnp, numericality: { greater_than: 0, less_than_or_equal_to: 50, only_integer: true }
+  validates :maxnp, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 50, only_integer: true }
 
   belongs_to :project
   validates :project_id, presence: true
