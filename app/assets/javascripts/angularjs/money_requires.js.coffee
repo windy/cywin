@@ -1,8 +1,12 @@
 @app.controller 'MoneyRequireController', [ '$scope', '$http', '$modal', ($scope, $http, $modal)->
-  $scope.init = (project_id)->
+  $scope.init = (project_id, { init_opened, init_history })->
+    init_opened ?= true
+    init_history ?= true
     $scope.project_id = project_id
-    $scope.init_opened()
-    $scope.init_history()
+    if init_opened
+      $scope.init_opened()
+    if init_history
+      $scope.init_history()
 
   $scope.init_opened = ()->
     $http

@@ -30,7 +30,7 @@
         p
           | We have a variety of investors that we're actively working with: angels, angel funds, high-net-worth individuals, private equity firms, investment banks, and other institutions - over 500 are ready to join the platform.
 
-        .invest-content ng-controller='MoneyRequireController' ng-init='init(#{@project.id})'
+        .invest-content ng-controller='MoneyRequireController' ng-init='init(#{@project.id}, {})'
           h3.title 投资情况
           moneyrequire require='opened' title='"当前轮次"'
           .more-info

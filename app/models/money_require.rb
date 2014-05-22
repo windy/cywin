@@ -72,7 +72,7 @@ class MoneyRequire < ActiveRecord::Base
   # 虚拟属性
   def ended_at
     if self.status == 'closed'
-      self.opened_at + self.deadline.days
+      self.closed_at
     end
   end
 
