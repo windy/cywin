@@ -2,17 +2,7 @@
   | 编辑项目
 
 .project-edit.top-blank
-  .row.head
-    .small-4.medium-3.large-2.columns
-      = image_tag 'xingbake.jpg'
-    .small-8.medium-9.large-10.columns
-      .name-area
-        h4.name
-          = link_to '项目一', project_path(1)
-        p.sub-name
-         | 这是一个项目的简要描述
-        .edit
-          a href='#' 编辑
+  = render 'head', locals: { edit: true }
   .row.content
     .small-12.columns
       .basic-content
@@ -84,7 +74,7 @@
         .small-12.columns
           .data-content
             h3.title 其他数据
-      .invest-content ng-controller='MoneyRequireController' ng-init= 'init(#{@project.id})'
+      .invest-content ng-controller='MoneyRequireController' ng-init= 'init(#{@project.id}, {})'
         .edit
           = link_to '管理', admin_money_requires_path( project_id: @project.id )
         h3.title 投资情况
