@@ -26,7 +26,6 @@ class MoneyRequiresController < ApplicationController
   def dirty_create
     @project = Project.find( params[:project_id] )
     authorize! :update, @project
-    money_require_params = params.permit(:money, :share)
     @money_require = MoneyRequire.new(money_require_params)
     @money_require.project = @project
     if @money_require.save(validate: false)
@@ -52,7 +51,6 @@ class MoneyRequiresController < ApplicationController
   def create
     @project = Project.find( params[:project_id] )
     authorize! :update, @project
-    money_require_params = params.permit(:money, :share, :description, :deadline)
     @money_require = MoneyRequire.new(money_require_params)
     @money_require.project = @project
     if @money_require.save
@@ -114,6 +112,6 @@ class MoneyRequiresController < ApplicationController
   end
 
   def money_require_params
-    money_require_params = params.permit(:money, :share, :description, :deadline, :project_id)
+    money_require_params = params.permit(:money, :share, :description, :deadline, :maxnp)
   end
 end

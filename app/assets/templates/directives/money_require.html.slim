@@ -1,7 +1,9 @@
 .invest.ng-cloak
   h4.title 
     | {{ title }} {{ require.format_start_end_time }}
-  ul.small-block-grid-1.medium-block-grid-2
+  p.no-invest-content ng-hide='require'
+    | 当前暂无融资需求, 请关注
+  ul.small-block-grid-1.medium-block-grid-2 ng-show='require'
     li
       .box
         .sub-title
