@@ -1,11 +1,11 @@
 ---
-:concurrency: 5
+:concurrency: 2
 :pidfile: tmp/pids/sidekiq.pid
 :logfile: log/sidekiq.log
 staging:
-  :concurrency: 10
+  :concurrency: 2
 production:
-  :concurrency: 20
+  :concurrency: 2
 :queues:
   - default
   - [mailer, 2]
