@@ -21,7 +21,7 @@ class Ability
     # register user
     if user.id
       #项目权限
-      can [ :update ] , Project do |project|
+      can [:update], Project do |project|
         project.owner.try(:id) == user.id
       end
       can [:create], Project

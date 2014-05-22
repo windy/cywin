@@ -1,9 +1,10 @@
 class MoneyRequiresController < ApplicationController
   before_action :set_money_require, only: [ :add_leader, :leader_confirm, :close ]
+  before_action :authenticate_user!, only: [ :admin ]
 
   def admin
     @project = Project.find( params[:project_id] )
-    authorize! :udpate, @project
+    authorize! :update, @project
   end
 
   def opened
