@@ -2,6 +2,7 @@ unless money_require
   json.null!
 else
   json.extract! money_require, :id, :money, :share, :deadline, :status, :min_money
+  json.is_investor current_user.has_role?(:investor)
   json.format_status format_status(money_require.status)
   if money_require.opened_at.present?
     # 开始与结束时间
@@ -17,7 +18,7 @@ else
 
     # 可投资信息
     json.syndicate do
-      json.can true
+      json.can current_user.has_role?(:investor)
       json.already_money money_require.already_money(current_user)
       json.already_investment_id money_require.already_investment_id(current_user)
     end
