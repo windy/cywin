@@ -1,15 +1,16 @@
+- content_for(:title) do
+  | 欢迎
 .welcome.top-blank
   .row
-    .small-12.large-10.columns
+    .small-12.medium-10.medium-centered.columns
       h1 下一步你可以:
-      .actions
-        .row
-          .small-12.large-6.columns
-            .action
-              = link_to '浏览项目', root_path
-          .small-12.large-6.columns
-            .action
-              = link_to '申请认证投资人', root_path
+      ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.list
+        li
+          = link_to '浏览项目', explore_index_path
+        li
+          = link_to '创建项目', new_project_path
+        li
+          = link_to '申请认证投资人', new_investor_path
 
       .refine-projects-content
         .row
