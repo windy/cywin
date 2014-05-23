@@ -1,0 +1,19 @@
+// 链接列表显示, 例如分类显示, 欢迎页
+ul.list {
+  text-align: center;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ddd;
+  li {
+    margin-bottom: 1rem;
+
+    a {
+      border: 1px solid #ddd;
+      padding: 2rem 1rem;
+      display: inline-block;
+      width: 100%;
+      color: #333;
+      font-size: 1.5rem;
+    }
+  }
+}
