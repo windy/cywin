@@ -63,58 +63,21 @@
       .error ()->
         console.log '上传失败'
   
-  $scope.autocomplete_categories_search = ()->
-    $scope.autocomplete_categories_error = null
-    if $scope.autocomplete_categories_search_timeout
-      $timeout.cancel( $scope.autocomplete_categories_search_timeout )
-    $scope.autocomplete_categories_search_timeout = $timeout ()->
-      $http
-        url: '/categories/autocomplete'
-        method: 'GET'
-        params:
-          search: $scope.project.industry
-      .success (res)->
-        if res.success
-          $scope.autocomplete_categories = res.data
-        else
-          $scope.autocomplete_categories_error = '系统中尚无此行业分类, 我们将直接创建'
-          $scope.autocomplete_categories = []
+  $scope.autocomplete_category = (viewValue)->
+    $http
+      url: '/categories/autocomplete'
+      method: 'GET'
+      params:
+        search: viewValue
+    .then (res)->
+      res.data.data
 
-    , 500
-
-  $scope.autocomplete_categories_is_empty = ()->
-    unless $scope.autocomplete_categories
-      return true
-    $scope.autocomplete_categories.length == 0
-
-  $scope.add_category = (category)->
-    $scope.project.industry = category.name
-    $scope.autocomplete_categories = []
-
-  $scope.autocomplete_cities_search = ()->
-    $scope.autocomplete_cities_error = null
-    if $scope.autocomplete_cities_search_timeout
-      $timeout.cancel( $scope.autocomplete_cities_search_timeout )
-    $scope.autocomplete_cities_search_timeout = $timeout ()->
-      $http
-        url: '/cities/autocomplete'
-        method: 'GET'
-        params:
-          search: $scope.project.city
-      .success (res)->
-        if res.success
-          $scope.autocomplete_cities = res.data
-        else
-          $scope.autocomplete_cities_error = '系统中尚无此城市分类, 我们将直接创建'
-          $scope.autocomplete_cities = []
-    , 500
-
-  $scope.autocomplete_cities_is_empty = ()->
-    unless $scope.autocomplete_cities
-      return true
-    $scope.autocomplete_cities.length == 0
-
-  $scope.add_city = (city)->
-    $scope.project.city = city.name
-    $scope.autocomplete_cities = []
+  $scope.autocomplete_city = (viewValue)->
+    $http
+      url: '/cities/autocomplete'
+      method: 'GET'
+      params:
+        search: viewValue
+    .then (res)->
+      res.data.data
 ]
