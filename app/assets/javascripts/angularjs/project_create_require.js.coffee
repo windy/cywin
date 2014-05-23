@@ -28,6 +28,12 @@
       $scope.person_requires = []
 
   $scope.complete = ()->
+    after_url = '/projects/' + $scope.project_id + '/edit'
+
+    if ! $scope.money_require_flag
+      $window.location.href = after_url
+      return
+
     if $scope.money_require_id
       $http
         url: '/money_requires/' + $scope.money_require_id + '/dirty_update'
@@ -37,7 +43,7 @@
           share: $scope.share
       .success (res)->
         if res.success
-          $window.location.href = '/projects/' + $scope.project_id + '/edit'
+          $window.location.href = after_url
         else
           $scope.complete_error = res.message
     else
@@ -50,7 +56,7 @@
           share: $scope.share
       .success (res)->
         if res.success
-          $window.location.href = '/projects/' + $scope.project_id + '/edit'
+          $window.location.href = after_url
         else
           $scope.complete_error = res.message
 
