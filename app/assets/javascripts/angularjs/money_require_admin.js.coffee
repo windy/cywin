@@ -31,7 +31,7 @@
     $http
       url: '/money_requires'
       method: 'POST'
-      params:
+      data:
         $scope.money_require
     .success (res)->
       if res.success
@@ -43,7 +43,7 @@
     $http
       url: '/money_requires/' + $scope.money_require.id
       method: 'PATCH'
-      params:
+      data:
         $scope.money_require
     .success (res)->
       if res.success
@@ -67,7 +67,7 @@
     $http
       url: '/money_requires/' + $scope.money_require.id + '/add_leader'
       method: 'PATCH'
-      params:
+      data:
         leader_id: $scope.autocomplete_user.id
     .success (res)->
       if res.success == false

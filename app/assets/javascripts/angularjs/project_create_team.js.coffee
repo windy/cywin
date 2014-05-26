@@ -18,7 +18,7 @@
     $http
       url: '/projects/' + $scope.project_id + '/members/' + $scope.owner.user_id
       method: 'PATCH'
-      params:
+      data:
         name: $scope.owner.name
         title: $scope.owner.title
         description: $scope.owner.description
@@ -39,7 +39,7 @@
       $scope.upload = $upload.upload
         url: '/avatars'
         method: 'POST'
-        params:
+        data:
           user_id: $scope.owner.user_id
         file: file
       .success (res)->
@@ -54,7 +54,7 @@
     $http
       url: '/projects/' + $scope.project_id + '/members/update_team_story'
       method: 'POST'
-      params:
+      data:
         team_story: $scope.team_story
     .success (res)->
       $scope.team_edited = false
@@ -98,7 +98,7 @@
     $http
       url: '/projects/' + $scope.project_id + '/members'
       method: 'POST'
-      params:
+      data:
         user_id: autocomplete_user.user_id
     .success (res)->
       if res.success
@@ -128,7 +128,7 @@
     $http
       url: '/projects/' + $scope.project_id + '/members/' + member.user_id
       method: 'PATCH'
-      params:
+      data:
         title: member.title
         description: member.description
     .success (res)->
@@ -142,7 +142,7 @@
     $http
       url: '/projects/' + $scope.project_id + '/members/invite'
       method: 'POST'
-      params:
+      data:
         name: $scope.autocomplete_invite_name
         email: $scope.invite_user
     .success (res)->

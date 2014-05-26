@@ -79,7 +79,7 @@
       $http
         url: '/money_requires/' + $scope.opened.id + '/leader_confirm'
         method: 'POST'
-        params:
+        data:
           money: $scope.hash.money
           leader_word: $scope.hash.leader_word
       .success (res)->
@@ -92,7 +92,7 @@
       $http
         url: '/syndicates/' + $scope.opened.syndicate.already_investment_id
         method: 'PATCH'
-        params:
+        data:
           money: $scope.cal_total_money()
       .success (res)->
         if res.success
@@ -104,7 +104,7 @@
       $http
         url: '/syndicates'
         method: 'POST'
-        params:
+        data:
           money_require_id: opened.id
           money: $scope.hash.money
       .success (res)->
