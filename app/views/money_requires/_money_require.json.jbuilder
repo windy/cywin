@@ -2,7 +2,6 @@ unless money_require
   json.null!
 else
   json.extract! money_require, :id, :money, :share, :deadline, :status, :min_money
-  json.is_investor current_user.has_role?(:investor)
   json.format_status format_status(money_require.status)
   if money_require.opened_at.present?
     # 开始与结束时间
@@ -15,14 +14,40 @@ else
     # 剩余天数
     json.left money_require.left
     json.syndicate_money money_require.syndicate_money
+  end
 
-    # 可投资信息
-    json.syndicate do
-      json.can current_user.has_role?(:investor)
-      json.already_money money_require.already_money(current_user)
-      json.already_investment_id money_require.already_investment_id(current_user)
+  # 可投资信息
+  json.syndicate do
+    # behave 当前行为的支持
+    if current_user.nil?
+      json.behave :need_login
+    elsif ! current_user.has_role?(:investor)
+      json.behave :need_be_investor
+    else
+      if money_require.ready?
+        json.behave :ready
+      elsif money_require.leader_needed?
+        json.behave :need_leader
+      elsif money_require.leader_need_confirmed?
+        if money_require.leader_user == current_user
+          # 是 leader 本人
+          json.can true
+          json.behave :leader_confirm
+        else
+          json.behave :leader_confirming
+        end
+      elsif money_require.opened?
+        json.can true
+        # 已经投资过
+        if money_require.already_money(current_user)
+          json.behave :add
+          json.already_money money_require.already_money(current_user)
+          json.already_investment_id money_require.already_investment_id(current_user)
+        else
+          json.behave :invest
+        end
+      end
     end
-
   end
 
   if money_require.closed?

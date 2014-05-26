@@ -1,23 +1,31 @@
-.invest-button.ng-cloak ng-show='opened.is_investor'
-  button ng-show='opened.status == "leader_needed"' 领投约谈
-  button ng-show='opened.status == "leader_need_confirmed" && ! opened.leader.me' disabled=true 领投确认中
-  button ng-show='opened.status == "leader_need_confirmed" && opened.leader.me' ng-click='open_syndicate()' 我是领投人, 马上确认
-  button ng-show='opened.syndicate.can && ! opened.syndicate.already_money' ng-click='open_syndicate(already_money)' 我要投资
-  button ng-show='opened.syndicate.already_money' disabled=''
-    | 我已投资了: 
-    | {{ opened.syndicate.already_money }}
-  button ng-show='opened.syndicate.can && opened.syndicate.already_money' ng-click='open_syndicate()' 追加投资
-.invest-button.ng-cloak ng-hide='opened.is_investor'
-  button disabled=true 申请投资人后才能投资
-  a.button href='/investors/new' 申请投资人资格
+.invest-button.ng-cloak
+  .ready ng-show='opened.syndicate.behave == "ready"'
+    button 约谈
+  .need-login-button ng-show='opened.syndicate.behave == "need_login"'
+    button disabled=true 需要登录才能投资和领投
+    a.button href='/users/sign_in' 马上登录
+
+  .need-be-investor ng-show='opened.syndicate.behave == "need_be_investor"'
+    button disabled=true 申请投资人后才能投资
+    a.button href='/investors/new' 申请投资人资格
+
+  button ng-show='opened.syndicate.behave == "need_leader"' 领投约谈
+  button ng-show='opened.syndicate.behave == "leader_confirming"' disabled=true 领投确认中
+  button ng-show='opened.syndicate.behave == "leader_confirm"' ng-click='open_syndicate()' 我是领投人, 马上确认
+  button ng-show='opened.syndicate.behave == "invest"' ng-click='open_syndicate()' 我要投资
+  .add-button ng-show='opened.syndicate.behave =="add"' 
+    button disabled=true
+      | 我已投资了: 
+      | {{ opened.syndicate.already_money }}
+    button ng-click='open_syndicate()' 追加投资
 
 script type='text/ng-template' id='syndicate.html'
   .row.invest-modal
     a.close-reveal-modal ng-click="cancel()" ×
     .small-12.columns
-      h3 ng-show='behave == "leader_confirm"' 领投确认
-      h3 ng-show='behave == "invest"' 投资给该项目
-      h3 ng-show='behave == "add"' 追加投资给该项目
+      h3 ng-show='behave() == "leader_confirm"' 领投确认
+      h3 ng-show='behave() == "invest"' 投资给该项目
+      h3 ng-show='behave() == "add"' 追加投资给该项目
       hr
       form ng-submit='syndicate()'
 
@@ -37,7 +45,7 @@ script type='text/ng-template' id='syndicate.html'
           | 你总的投资额将为:
           span 
             | {{ cal_total_money() || "0" }}
-        .row ng-show='behave == "leader_confirm"'
+        .row ng-show='behave() == "leader_confirm"'
           .small-12.medium-10.end.columns
             textarea ng-class='{ error: errors.leader_word }' placeholder='告诉潜在投资人为什么要投资这个项目' ng-model='hash.leader_word'
 
