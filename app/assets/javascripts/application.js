@@ -4,6 +4,7 @@
 //= require angularjs
 //= require foundation/foundation
 //= require foundation/foundation.orbit
+//= require foundation/foundation.topbar
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
