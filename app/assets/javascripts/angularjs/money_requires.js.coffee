@@ -49,19 +49,11 @@
 @app.controller 'SyndicateModalController', [ '$scope', '$http', '$modalInstance', 'opened', ($scope, $http, $modalInstance, opened)->
 
   $scope.opened = opened
-  
-  # 注意
-  # opened.syndicate.already_money 作为追加投资的标识
-  if $scope.opened.status == 'leader_need_confirmed'
-    $scope.behave = 'leader_confirm'
-  else if $scope.opened.status == 'opened' && ! $scope.opened.syndicate.already_money
-    $scope.behave = 'invest'
-  else if $scope.opened.status == 'opened' && $scope.opened.syndicate.already_money
-    $scope.behave = 'add'
-  else
-    console.log "error behave found"
+
+  $scope.behave = ()->
+    $scope.opened.syndicate.behave
     
-  switch $scope.behave
+  switch $scope.behave()
     when "leader_confirm"
       $scope.hash = {
         submit: '领投确认并投资'
@@ -83,7 +75,7 @@
       }
 
   $scope.syndicate = ()->
-    if $scope.behave == 'leader_confirm'
+    if $scope.behave() == 'leader_confirm'
       $http
         url: '/money_requires/' + $scope.opened.id + '/leader_confirm'
         method: 'POST'
@@ -96,7 +88,7 @@
           $modalInstance.close(new_opened)
         else
           $scope.errors = res.errors
-    else if $scope.behave == 'add'
+    else if $scope.behave() == 'add'
       $http
         url: '/syndicates/' + $scope.opened.syndicate.already_investment_id
         method: 'PATCH'
@@ -108,7 +100,7 @@
           $modalInstance.close(new_opened)
         else
           $scope.errors = res.errors
-    else if $scope.behave == 'invest'
+    else if $scope.behave() == 'invest'
       $http
         url: '/syndicates'
         method: 'POST'
