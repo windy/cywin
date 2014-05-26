@@ -16,7 +16,7 @@
     $http
       url: '/projects'
       method: 'POST'
-      params:
+      data:
         $scope.project
     .success (res)->
       if res.success

@@ -15,19 +15,19 @@
           a.button.postfix href="#" 搜索
 
       .small-12.large-10.columns.projects
-        - 10.times do
+        - @projects.each do |project|
             .row.project
-              .small-4.large-2.columns
-                = link_to project_path(1) do
-                  - image_tag 'xingbake.jpg'
-              .small-8.large-10.columns
+              .small-3.medium-2.columns
+                = link_to project_path(project) do
+                  - image_tag project.logo.image_url
+              .small-9.medium-10.columns
                 .name-area
                   h4.name
-                    = link_to '项目一', project_path(1)
+                    = link_to project.name, project_path(project)
                   p.sub-name
-                   | 这是一个项目的简要描述
+                    | #{project.oneword}
                 .team
-                  p
-                    | team 成员介绍
+                  p.description
+                    | #{project.description}
         .load-more
           button.small Load More
