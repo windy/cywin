@@ -15,9 +15,9 @@
               p
                 | 精品3 - 热爱你的生活
         h2 分类
-        ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.square-categories
+        ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.square-categories.list
           - @categories.each do |c|
-            li.category
+            li
               = link_to c.name, c
           .small-12.columns.all-categories
             = link_to '查看所有分类', categories_explore_index_path
