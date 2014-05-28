@@ -5,6 +5,7 @@
 //= require foundation/foundation
 //= require foundation/foundation.orbit
 //= require foundation/foundation.topbar
+//= require foundation/foundation.alert
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
