@@ -10,7 +10,7 @@ class Message < ActiveRecord::Base
   belongs_to :project
   belongs_to :target, :polymorphic => true
 
-  scope :default_order,    order('created_at DESC')
+  scope :default_order, -> { order('created_at DESC') }
   scope :untreat, -> { where(status: nil) }
 
   def is_read?

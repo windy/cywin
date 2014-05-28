@@ -45,3 +45,5 @@
                   | 已经确认了你的项目
                   = link_to message.project.name, message.project
                   | 领投邀请, 请知悉.
+              span.time
+                | #{time_ago_in_words(message.created_at)}前
