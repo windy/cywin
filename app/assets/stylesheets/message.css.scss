@@ -1,3 +1,5 @@
+@import "variables";
+
 .messages-wrapper {
   .label {
     margin-right: 0.5rem;
@@ -7,8 +9,18 @@
   }
 
   .message-content {
+    @media #{$small-only}{
+      border-top: 1px solid #eee;
+      padding-top: 1rem;
+    }
     a {
       margin: 0 0.5rem;
+    }
+
+    .time {
+      margin-left: 1rem;
+      color: #999;
+      font-size: 90%;
     }
   }
 }
