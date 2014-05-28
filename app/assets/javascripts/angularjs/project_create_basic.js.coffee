@@ -4,7 +4,7 @@
   $scope.project = {}
   if $scope.project_id
     $http.get('/projects/' + $scope.project_id).success (res)->
-      $scope.project = res.data
+      $scope.project = res
 
   $scope.submit = ()->
     if $scope.project_id

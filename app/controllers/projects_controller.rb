@@ -18,6 +18,7 @@ class ProjectsController < ApplicationController
   # 创建第一步
   def create
     authorize! :create, Project
+    img ng-src=
     @project = Project.new( project_params )
 
     if params[:industry].blank?
@@ -92,17 +93,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     respond_to do |format|
-      format.json do
-        render_success(nil, data: {
-          name: @project.name,
-          oneword: @project.oneword,
-          description: @project.description,
-          logo_id: @project.logo.try(:id),
-          logo_url: @project.logo.try(:image_url),
-          industry: @project.categories_name,
-          city: @project.cities_name,
-        })
-      end
+      format.json { render partial: "project" }
       format.html
     end
   end
