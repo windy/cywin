@@ -1,4 +1,5 @@
 class Message < ActiveRecord::Base
+  paginates_per 10
   my_const_set('ACTIONS',
   [
     :LEADER_INVITE,

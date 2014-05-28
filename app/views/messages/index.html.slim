@@ -47,3 +47,5 @@
                   | 领投邀请, 请知悉.
               span.time
                 | #{time_ago_in_words(message.created_at)}前
+      
+    = paginate @messages
