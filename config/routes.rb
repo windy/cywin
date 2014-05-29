@@ -36,9 +36,9 @@ Rails.application.routes.draw do
     end
   end
   resources :syndicates
-  resources :funds
   resources :jobs, only: [:index]
   resources :logos, only: [:create]
+  resources :screenshots, only: [:create]
   resources :projects do
     member do
       post :publish

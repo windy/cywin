@@ -78,4 +78,11 @@
       if res.success
         $scope.project.description = $scope.description_edit
         $scope.description_edited = false
+
+  $scope.open_screenshot_edit = ()->
+    if $scope.open_screenshot_edited
+      $scope.description_edited = false
+      return
+    $scope.screenshot_edited = true
+    $scope.screenshots_edit = $scope.project.screenshots
 ]

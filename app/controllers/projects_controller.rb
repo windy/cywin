@@ -63,6 +63,17 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def screenshots_update
+    @project = Project.find( params[:id] )
+    authorize! :update, @project
+    @project.screenshots = params[:screenshots]
+    if @project.save(validate: false)
+      render_success
+    else
+      render_fail
+    end
+  end
+
   def update
     @project = Project.find( params[:id] )
     authorize! :update, @project
