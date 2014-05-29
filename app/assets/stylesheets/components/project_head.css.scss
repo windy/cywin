@@ -4,5 +4,17 @@
     .name a {
       color: #FF2D2D;
     }
+    
+    .info {
+      i[class^=fi-] {
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+      }
+    }
   }
 }

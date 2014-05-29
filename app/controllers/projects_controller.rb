@@ -18,7 +18,6 @@ class ProjectsController < ApplicationController
   # 创建第一步
   def create
     authorize! :create, Project
-    img ng-src=
     @project = Project.new( project_params )
 
     if params[:industry].blank?
@@ -51,6 +50,16 @@ class ProjectsController < ApplicationController
       render_success(nil, id: @project.id)
     else
       render_fail('创建失败', @project)
+    end
+  end
+
+  def dirty_update
+    @project = Project.find( params[:id] )
+    authorize! :update, @project
+    if @project.update(description: params[:description])
+      render_success
+    else
+      render_fail
     end
   end
 

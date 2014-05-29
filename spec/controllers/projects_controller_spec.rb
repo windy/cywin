@@ -16,7 +16,7 @@ describe ProjectsController do
     it "get json" do
       project = create(:project)
       get :show, id: project.id, format: :json
-      expect(JSON.parse(response.body)['data']['name']).to eq(project.name)
+      expect(JSON.parse(response.body)['name']).to eq(project.name)
     end
   end
 

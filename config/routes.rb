@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       post :invite
       get :team
       get :invest
+      patch :dirty_update
     end
     resources :members do
       collection do
