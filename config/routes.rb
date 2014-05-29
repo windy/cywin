@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       get :team
       get :invest
       patch :dirty_update
+      patch :screenshots_update
     end
     resources :members do
       collection do

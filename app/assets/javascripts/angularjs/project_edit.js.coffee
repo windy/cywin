@@ -80,9 +80,37 @@
         $scope.description_edited = false
 
   $scope.open_screenshot_edit = ()->
-    if $scope.open_screenshot_edited
-      $scope.description_edited = false
+    if $scope.screenshot_edited
+      $scope.screenshot_edited = false
       return
     $scope.screenshot_edited = true
     $scope.screenshots_edit = $scope.project.screenshots
+
+  $scope.upload_screenshot = ($files)->
+    $scope.screenshot_error = null
+    for file in $files
+      $scope.upload = $upload.upload
+        url: '/screenshots'
+        method: 'POST'
+        file: file
+      .success (res)->
+        if res.success
+          $scope.screenshots_edit.push(res.data)
+        else
+          $scope.screenshot_error = res.message
+      .error ()->
+        console.log '上传失败'
+
+  $scope.update_screenshots = ()->
+    $http
+      url: '/projects/' + $scope.project_id + '/screenshots_update'
+      method: 'PATCH'
+      data:
+         ids: $.map($scope.screenshots_edit, (v)->
+           v.id
+         )
+    .success (res)->
+      if res.success
+        $scope.project.screenshots = $scope.screenshots_edit
+        $scope.screenshot_edited = false
 ]

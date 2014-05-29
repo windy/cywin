@@ -82,20 +82,26 @@
           .image-content
             h3.title 产品截图
             ul.image data-orbit=""
-              li
-                = image_tag 'p/1.jpg'
-                .orbit-caption 正面
-              li
-                = image_tag 'p/2.jpg'
-                .orbit-caption 反面
-              li
-                = image_tag 'p/3.jpg'
-                .orbit-caption 侧面 
-              li
-                = image_tag 'p/4.jpg'
-                .orbit-caption 后面 
+              li ng-repeat="screenshot in project.screenshots"
+                img ng-src="{{ screenshot.image_url }}"
+                .orbit-caption
+                  | {{ screenshot.name }}
             .edit
-              a href='#' 编辑
+              a ng-click='open_screenshot_edit()' 编辑
+          .image-content ng-show='screenshot_edited'
+            ul.image-edit
+              li ng-repeat="screenshot in screenshots_edit"
+                img ng-src="{{ screenshot.thumb_url }}"
+                span.name
+                  | {{ screenshot.name }}
+                span.operation
+                  a 删除
+            form ng-submit='update_screenshots()'
+              input id='screenshot_file' type='file' ng-file-select='upload_screenshot($files)'
+              .control-actions
+                button 确认
+                a.back ng-click='screenshot_edited = false' 取消
+              
       .row
         .small-12.columns
           .team-content

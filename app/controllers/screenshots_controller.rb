@@ -4,10 +4,13 @@ class ScreenshotsController < ApplicationController
   def create
     @screenshot = Screenshot.new
     @screenshot.image = params[:file]
+    @screenshot.name = params[:file].original_filename
     if @screenshot.save
-      render_success(nil, {
+      render_success(nil, data: {
         id: @screenshot.id,
+        name: @screenshot.name,
         url: @screenshot.image.url,
+        thumb_url: @screenshot.image.thumb.url,
       })
     else
       render_fail( valid_on(@screenshot, :image) )
