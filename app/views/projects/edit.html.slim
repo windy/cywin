@@ -1,35 +1,107 @@
 - content_for(:title) do
   | 编辑项目
 
-.project-edit.top-blank
-  = render partial: 'head', locals: { edit: true }
+.project-edit.top-blank ng-controller="ProjectEditController" ng-init="init(#{@project.id})"
+  .row.head.ng-cloak
+    .small-6.large-2.columns
+      img ng-src='{{ project.logo_url }}'
+    .small-6.large-10.columns
+      .name-area
+        h4.name
+          a ng-href='{{ project.url }}'
+            | {{ project.name }}
+        p.sub-name
+          | {{ project.oneword}}
+        p.info
+          i.fi-home
+          span.city
+            | {{ project.city }}
+          i.fi-list-thumbnails
+          span.category
+            | {{ project.industry }}
+      .edit
+        a ng-click='open_head_edit()' 编辑
+  .row ng-show='head_edited'
+    .small-12.columns
+      form ng-submit='head_edit_submit()'
+        .row
+          .small-12.medium-6.columns
+            label for='name' 项目名称
+            input id='name' type='text' placeholder='如: 百度' ng-model="head_edit.name" ng-class= '{ error: head_edit.errors.name }'
+            small.error.ng-cloak ng-show=' head_edit.errors.name ' {{ head_edit.errors.name }}
+        .row
+          .small-4.medium-2.columns
+            .image-wrapper
+              img ng-src=' {{ head_edit.logo_url }} '
+        .row
+          .small-8.medium-6.end.columns
+            label for='logo' Logo
+            input id='logo' type='file' ng-file-select='upload_logo($files)'
+            small.error.ng-cloak ng-show=' head_edit.logo_error ' {{ head_edit.logo_error }}
+            input type='hidden' id='logo_id' ng-model=' head_edit.logo_id '
+        .row
+          .small-12.medium-8.columns
+            label for='oneword' 一句话
+            input id='oneword' type='text' placeholder='一句话说明, 将显示在项目副标题' ng-model='head_edit.oneword' ng-class= '{ error: head_edit.errors.oneword }'
+            small.error.ng-cloak ng-show=' head_edit.errors.oneword' {{ head_edit.errors.oneword }}
+        .row
+          .small-10.medium-4.columns
+            label for='industry' 所属行业
+            input id='industry' type='text' ng-model='head_edit.industry' typeahead="industry.name for industry in autocomplete_category($viewValue)" typeahead-loading="loadingIndustry" ng-class='{ error: head_edit.errors.industry }' placeholder="请用中文输入"
+            i ng-show="loadingIndustry" class="glyphicon glyphicon-refresh"
+
+            small.error.ng-cloak ng-show=' head_edit.errors.industry' {{ head_edit.errors.industry }}
+        .row
+          .small-10.medium-4.columns
+            label for='city' 城市
+            input id='city' type='text' ng-model='head_edit.city' ng-class= '{ error: head_edit.errors.city}' typeahead="city.name for city in autocomplete_city($viewValue)" typeahead-loading="loadingCity" placeholder="请用中文输入"
+            i ng-show="loadingCity" class="glyphicon glyphicon-refresh"
+            small.error.ng-cloak ng-show=' head_edit.errors.city ' {{ head_edit.errors.city }}
+        .row
+          .small-12.medium-8.columns
+            .control-actions
+              button 提交
+              a.back ng-click='head_edited = false' 取消
   .row.content
     .small-12.columns
       .basic-content
         h3.title 产品介绍
         p
-          | 星巴克是美国一家连锁咖啡公司的名称，1971年成立，为全球最大的咖啡连锁店，其总部坐落美国华盛顿州西雅图市。星巴克在美国和加拿大的学生与城市白领中非常流行。除咖啡外，星巴克亦有茶、馅皮饼及蛋糕等商品。部分星巴克店甚至与超级市场，书店等异业结盟，于合作店铺内觅地开业.
+          | {{ project.description }}
         .edit
-          a href='#' 编辑
+          a ng-click='open_description_edit()' 编辑
+        .row ng-show= 'description_edited'
+          .small-12.columns
+            form ng-submit='update_description()'
+              textarea ng-model='description_edit' placeholder='完整描述你的产品'
+              .control-actions
+                button 提交
+                a.back ng-click='description_edited = false' 取消
       .row
         .small-12.columns
-          .image-content
-            h3.title 产品截图
-            ul.image data-orbit=""
-              li
-                = image_tag 'p/1.jpg'
-                .orbit-caption 正面
-              li
-                = image_tag 'p/2.jpg'
-                .orbit-caption 反面
-              li
-                = image_tag 'p/3.jpg'
-                .orbit-caption 侧面 
-              li
-                = image_tag 'p/4.jpg'
-                .orbit-caption 后面 
-            .edit
-              a href='#' 编辑
+          h3.title 产品截图
+          .image-content ng-hide='screenshot_edited'
+            ul.image#image-show data-orbit=""
+              li ng-repeat="screenshot in project.screenshots"
+                img ng-src="{{ screenshot.image_url }}"
+                .orbit-caption
+                  | {{ screenshot.name }}
+          .edit
+            a ng-click='open_screenshot_edit()' 编辑
+          .image-content ng-show='screenshot_edited'
+            ul.image-edit
+              li ng-repeat="screenshot in screenshots_edit"
+                img ng-src="{{ screenshot.thumb_url }}"
+                span.name
+                  | {{ screenshot.name }}
+                span.operation
+                  a ng-click='remove_screenshot($index)' 删除
+            form ng-submit='update_screenshots()'
+              input id='screenshot_file' type='file' ng-file-select='upload_screenshot($files)'
+              .control-actions
+                button 确认
+                a.back ng-click='screenshot_edited = false' 取消
+              
       .row
         .small-12.columns
           .team-content

@@ -61,6 +61,7 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'guard-livereload', require: false
   gem 'rack-livereload'
+  gem "spring-commands-rspec"
 end
 
 group :development, :test do

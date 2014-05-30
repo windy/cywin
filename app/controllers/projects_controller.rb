@@ -53,6 +53,29 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def dirty_update
+    @project = Project.find( params[:id] )
+    authorize! :update, @project
+    if @project.update(description: params[:description])
+      render_success
+    else
+      render_fail
+    end
+  end
+
+  def screenshots_update
+    @project = Project.find( params[:id] )
+    authorize! :update, @project
+    @project.screenshots = params[:ids].to_a.map do |id|
+      Screenshot.find(id)
+    end
+    if @project.save(validate: false)
+      render_success
+    else
+      render_fail
+    end
+  end
+
   def update
     @project = Project.find( params[:id] )
     authorize! :update, @project
@@ -92,17 +115,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     respond_to do |format|
-      format.json do
-        render_success(nil, data: {
-          name: @project.name,
-          oneword: @project.oneword,
-          description: @project.description,
-          logo_id: @project.logo.try(:id),
-          logo_url: @project.logo.try(:image_url),
-          industry: @project.categories_name,
-          city: @project.cities_name,
-        })
-      end
+      format.json { render partial: "project" }
       format.html
     end
   end
