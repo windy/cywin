@@ -79,15 +79,15 @@
                 a.back ng-click='description_edited = false' 取消
       .row
         .small-12.columns
-          .image-content
-            h3.title 产品截图
-            ul.image data-orbit=""
+          h3.title 产品截图
+          .image-content ng-hide='screenshot_edited'
+            ul.image#image-show data-orbit=""
               li ng-repeat="screenshot in project.screenshots"
                 img ng-src="{{ screenshot.image_url }}"
                 .orbit-caption
                   | {{ screenshot.name }}
-            .edit
-              a ng-click='open_screenshot_edit()' 编辑
+          .edit
+            a ng-click='open_screenshot_edit()' 编辑
           .image-content ng-show='screenshot_edited'
             ul.image-edit
               li ng-repeat="screenshot in screenshots_edit"
