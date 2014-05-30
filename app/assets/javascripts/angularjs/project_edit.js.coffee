@@ -101,6 +101,9 @@
       .error ()->
         console.log '上传失败'
 
+  $scope.remove_screenshot = (index)->
+    $scope.screenshots_edit.splice(index, 1)
+
   $scope.update_screenshots = ()->
     $http
       url: '/projects/' + $scope.project_id + '/screenshots_update'

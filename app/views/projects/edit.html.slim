@@ -95,7 +95,7 @@
                 span.name
                   | {{ screenshot.name }}
                 span.operation
-                  a 删除
+                  a ng-click='remove_screenshot($index)' 删除
             form ng-submit='update_screenshots()'
               input id='screenshot_file' type='file' ng-file-select='upload_screenshot($files)'
               .control-actions
