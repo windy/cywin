@@ -11,24 +11,14 @@
   .row.content
     .small-12.columns
       .basic-content
-        ul.image data-orbit=""
-          li
-            = image_tag 'p/1.jpg'
-            .orbit-caption 正面
-          li
-            = image_tag 'p/2.jpg'
-            .orbit-caption 反面
-          li
-            = image_tag 'p/3.jpg'
-            .orbit-caption 侧面 
-          li
-            = image_tag 'p/4.jpg'
-            .orbit-caption 后面 
+        - if @project.screenshots.present?
+          ul.image data-orbit=""
+            - @project.screenshots.each do |s|
+              li
+                = image_tag s.image_url
+                .orbit-caption #{s.name}
         h3.title 基本介绍
-        p
-          | 星巴克是美国一家连锁咖啡公司的名称，1971年成立，为全球最大的咖啡连锁店，其总部坐落美国华盛顿州西雅图市。星巴克在美国和加拿大的学生与城市白领中非常流行。除咖啡外，星巴克亦有茶、馅皮饼及蛋糕等商品。部分星巴克店甚至与超级市场，书店等异业结盟，于合作店铺内觅地开业.
-        p
-          | We have a variety of investors that we're actively working with: angels, angel funds, high-net-worth individuals, private equity firms, investment banks, and other institutions - over 500 are ready to join the platform.
+        p.description #{@project.description}
 
         .invest-content ng-controller='MoneyRequireController' ng-init='init(#{@project.id}, {})'
           h3.title 投资情况
