@@ -1,6 +1,5 @@
-class Settings::ProfilesController < ApplicationController
+class Settings::ProfilesController < Settings::ApplicationController
   def show
-    @user = current_user
   end
 
   def update

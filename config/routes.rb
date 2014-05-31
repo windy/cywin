@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   namespace :settings do
     resource :profile, only: [:show, :update]
+    resource :password, only: [:show, :update]
+    resource :notification, only: [:show, :update]
   end
 
   devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}
