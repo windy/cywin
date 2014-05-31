@@ -1,12 +1,34 @@
 Rails.application.routes.draw do
 
+  namespace :settings do
+    resource :profile, only: [:show, :update]
+  end
+
+  devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}
+  resources :users, only: [:show] do
+    collection do
+      get :autocomplete
+      post :email_validate
+    end
+
+    scope module: 'users' do
+      resources :projects, only: [:index]
+      resources :invitements, only: :index
+      resources :funs, only: :index
+      resource :activities, only: :show
+    end
+  end
+
+
   get "activities/show"
   get "projects_searcher/index"
+
   resources :stars, only: [:create] do 
     collection do
       delete :destroy
     end
   end
+
   resource :activity, only: [:show]
   resources :about do
     collection do
@@ -117,19 +139,6 @@ Rails.application.routes.draw do
     collection do
       get :index
       get :welcome
-    end
-  end
-  devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}
-  resources :users, only: [:show] do
-    collection do
-      get :autocomplete
-      post :email_validate
-    end
-
-    member do
-      get :edit
-      get :starred
-      get :change_password
     end
   end
   resources :avatars, only: [:create]

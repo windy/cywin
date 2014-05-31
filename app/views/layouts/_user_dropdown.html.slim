@@ -16,7 +16,7 @@
         li
           = link_to '我的主页', user_path(current_user)
         li
-          = link_to '设置',  edit_user_path(current_user)
+          = link_to '设置',  settings_profile_path
         li
           = link_to '注销', destroy_user_session_path, method: 'DELETE'
 .user-dropdown-exit-link ng-show= 'dropdown_open' ng-click=' dropdown_open = false'
