@@ -1,0 +1,13 @@
+- content_for(:title) do
+  | 密码设置
+= render 'common/flash'
+
+.row.top-blank
+  .small-12.medium-3.columns
+    = render 'settings/sidebar'
+  .small-12.medium-9.columns
+    = simple_form_for(@user, :url => settings_password_path) do |f|
+      = f.input :current_password
+      = f.input :password
+      = f.input :password_confirmation
+      = f.button :submit, '提交', class: 'small'

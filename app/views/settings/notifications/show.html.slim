@@ -1,0 +1,11 @@
+- content_for(:title) do
+  | 通知设置 
+
+.row.top-blank
+  .small-12.medium-3.columns
+    = render 'settings/sidebar'
+  .small-12.medium-9.columns
+    = simple_form_for(@user) do |f|
+      = f.input :name
+      = f.input :description
+      = f.button :submit, '提交', class: 'small'
