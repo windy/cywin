@@ -2,9 +2,11 @@
   | 项目一
 .project-show.top-blank
   = render 'head'
-  .row.operate
+  .row.operate ng-controller='StarsController' ng-init='init(#{@project.id}, #{current_user.star?(@project)})'
     .small-6.columns
-      = link_to '关注', '#'
+      a ng-click='add_star()' ng-hide='is_starred || loading' 关注
+      a ng-click='remove_star()' ng-show='is_starred && ! loading' 取消关注
+      a ng-show='loading' loading
     .small-6.columns
       = link_to '约谈', '#'
   = render partial: 'show_tab', locals: { type: 'basic' }

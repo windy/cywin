@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   end
 
   def star?(project)
-    self.stars.where(project_id: project.id).first
+    !! self.stars.where(project_id: project.id).first
   end
 
   def add_fun(user)
