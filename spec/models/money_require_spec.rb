@@ -251,13 +251,13 @@ describe MoneyRequire do
           @money_require.investments << investment
           @money_require.save!
 
-          expect(@money_require.progress).to eq(0.1)
+          expect(@money_require.reload.progress).to eq(0.1)
 
           investment = Investment.new(money: 1000, user_id: 2)
           @money_require.reload
           @money_require.investments << investment
           @money_require.save!
-          expect(@money_require.progress).to eq(1.1)
+          expect(@money_require.reload.progress).to eq(1.1)
         end
 
         describe "关闭融资" do
