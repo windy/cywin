@@ -6,12 +6,9 @@ class AvatarsController < ApplicationController
     @avatar.image = params[:file]
     @avatar.user = user
     if @avatar.save
-      render_success(nil, {
-        id: @avatar.id,
-        url: @avatar.image.url,
-      })
+      render 'create'
     else
-      render_fail( valid_on(@avatar, :image) )
+      render_fail(nil, valid_on(@avatar, :image) )
     end
 
   end
