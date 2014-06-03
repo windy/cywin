@@ -2,11 +2,7 @@
   | 项目一
 .project-show.top-blank
   = render 'head'
-  .row.operate
-    .small-6.columns
-      = link_to '关注', '#'
-    .small-6.columns
-      = link_to '约谈', '#'
+  = render 'star'
   = render partial: 'show_tab', locals: { type: 'team' }
   .row.team
     .small-12.columns
