@@ -65,7 +65,7 @@ describe MoneyRequiresController do
     end
 
     it "正确确认" do
-      post 'leader_confirm', ActionController::Parameters.new( id: @money_require.id )
+      xhr :post, 'leader_confirm', ActionController::Parameters.new( id: @money_require.id, money: 1000 )
       check_json(response.body, :success, true)
     end
 
