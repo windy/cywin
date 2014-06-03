@@ -22,7 +22,8 @@ class Event < ActiveRecord::Base
   # 更新个人资料
   :USER_UPDATE,
   # 被人关注,
-  :UESR_FUN,
+  :USER_FUN,
+  :PROJECT_STAR,
   # 申请投资人
   :APPLY_INVESTOR,
   :APPLY_INVESTOR_FAIL,
