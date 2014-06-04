@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   has_many :funs
   has_many :messages
 
+  has_many :events
+
   def add_star(project)
     unless self.stars.where(project_id: project.id).first
       star = Star.new(user: self, project: project)
