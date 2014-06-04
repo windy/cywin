@@ -21,11 +21,13 @@ Rails.application.routes.draw do
     end
   end
 
-
-  get "activities/show"
-  get "projects_searcher/index"
-
   resources :stars, only: [:create] do 
+    collection do
+      delete :destroy
+    end
+  end
+
+  resources :funs, only: [:create] do
     collection do
       delete :destroy
     end

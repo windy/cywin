@@ -47,4 +47,7 @@ class Event < ActiveRecord::Base
   ])
   validates :action, presence: true, inclusion: ACTIONS
   validates :user_id, presence: true
+
+  belongs_to :user
+  belongs_to :target, polymorphic: true
 end

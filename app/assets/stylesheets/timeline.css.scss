@@ -1,15 +1,18 @@
+@import 'variables';
+
 .timeline {
-  background-color: white;
 
   .box {
-    @media only screen and (max-width: 40em) {
+    @media #{$small-only} {
       .type {
         display: none;
       }
     }
+
     .type {
       color: #666;
     }
+
     .content-wrapper {
       .created-at {
         float: right;
@@ -32,6 +35,7 @@
       }
 
     }
+
     .content {
       border-bottom: 1px solid #eee;
       padding-bottom: 1rem;
@@ -49,6 +53,7 @@
         color: #666;
       }
     }
+
     .foot {
       color: #666;
       border-bottom: 1px solid #ddd;

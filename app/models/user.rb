@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     self.funs.where(interested_user_id: user.id).destroy_all
   end
 
+  def fun?(user)
+    !! self.funs.where(interested_user_id: user.id).first
+  end
+
   def avatar_url
     if self.avatar.blank?
       self.avatar = Avatar.new
