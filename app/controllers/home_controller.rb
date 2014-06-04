@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   def index
     if current_user
-      @events = current_user.events
+      @events = current_user.events.default_order.limit(Event::PER_PAGE)
+      @start_with = @events[-1].created_at.to_i
       render 'login'
     else
       render 'nologin'

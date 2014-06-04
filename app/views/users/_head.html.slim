@@ -17,9 +17,9 @@
     - unless current_user == @user
       ul.small-block-grid-2.list.ng-cloak ng-controller='FunsController' ng-init='init(#{@user.id}, #{current_user.fun?(@user)})'
         li 
-          a href='#' ng-hide='loading || is_fun' ng-click='add_fun()' 关注
-          a href='#' ng-show='!loading && is_fun' ng-click='remove_fun()' 取消关注
-          a href='#' ng-show='loading' ng-click='add_fun()' loading
+          a ng-hide='loading || is_fun' ng-click='add_fun()' 关注
+          a ng-show='!loading && is_fun' ng-click='remove_fun()' 取消关注
+          a ng-show='loading' ng-click='add_fun()' loading
         li
           a href='#' 约谈
     ul.small-block-grid-4.tab-content

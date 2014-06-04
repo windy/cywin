@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :events, only: [:index]
+
   resources :funs, only: [:create] do
     collection do
       delete :destroy

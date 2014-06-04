@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  PER_PAGE = 20
   # table columns
   # t.string   "target_type"
   # t.integer  "target_id"
@@ -51,4 +52,6 @@ class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :target, polymorphic: true
   belongs_to :project
+
+  scope :default_order, -> { order('created_at DESC') }
 end

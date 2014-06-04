@@ -23,3 +23,14 @@
             | 融资 30 万
             span.detail
               = link_to '更多...', project_path(event.project)
+- if event.action == Event::USER_FUN
+  .box
+    .row.collapse
+      .small-0.medium-1.columns.type
+        span.fi-eye
+      .small-12.medium-11.columns.content-wrapper
+        .head
+          = link_to event.user.name, user_path(event.user)
+          | 关注了用户
+          = link_to event.target.name, user_path(event.target)
+          span.created-at #{time_ago_in_words(event.created_at)}前
