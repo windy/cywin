@@ -31,12 +31,27 @@ class MoneyRequire < ActiveRecord::Base
       transition ready: :leader_needed
     end
 
+    after_transition on: :preheat do |money_require, transition|
+      Event.create(
+        user: money_require.project.owner,
+        project_id: money_require.project_id,
+        action: Event::MONEY_REQUIRE_CREATE,
+        target: money_require,
+      )
+    end
+
     event :add_leader do
       transition leader_needed: :leader_need_confirmed
     end
 
     after_transition on: :add_leader do |money_require, transition|
       money_require.add_leader_notify
+      Event.create(
+        user: money_require.project.owner,
+        project_id: money_require.project_id,
+        action: Event::MONEY_REQUIRE_LEADER,
+        target: money_require,
+      )
     end
 
     event :leader_confirm do
@@ -47,6 +62,13 @@ class MoneyRequire < ActiveRecord::Base
       money_require.opened_at = DateTime.now
       money_require.save!
       money_require.add_leader_confirm_notify
+
+      Event.create(
+        user: money_require.project.owner,
+        project_id: money_require.project_id,
+        action: Event::MONEY_REQUIRE_OPENED,
+        target: money_require,
+      )
     end
 
     state :leader_need_confirmed, :opened do

@@ -17,6 +17,11 @@ class Event < ActiveRecord::Base
   :PROJECT_JOIN,
   # 投资
   :PROJECT_INVEST,
+  # 追加投资
+  :PROJECT_INVEST_ADD,
+  :MONEY_REQUIRE_CREATE,
+  :MONEY_REQUIRE_LEADER,
+  :MONEY_REQUIRE_OPENED,
   # 约谈
   :PROJECT_TALK,
 
