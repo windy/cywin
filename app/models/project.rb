@@ -1,4 +1,12 @@
 class Project < ActiveRecord::Base
+
+  searchable do
+    text :name, :oneword, :description
+  end
+
+  paginates_per 10
+  PER_PAGE = 10
+
   my_const_set('STAGES', [ 'IDEA', 'DEVELOPING', 'ONLINE', 'GAINED' ])
     
   validates :name, presence: true, uniqueness: true
@@ -33,6 +41,7 @@ class Project < ActiveRecord::Base
   end
 
   scope :published, -> { where(published: true) }
+  scope :default_order, -> { order(created_at: :desc) }
 
   def add_owner( owner )
     add_user(owner, role: Member::FOUNDER, priv: 'owner')

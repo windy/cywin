@@ -85,3 +85,4 @@ pickle-email-*.html
 
 # db journal file
 **.sqlite3-journal
+/solr

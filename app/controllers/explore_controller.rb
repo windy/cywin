@@ -6,7 +6,15 @@ class ExploreController < ApplicationController
   end
 
   def all
-    @projects = Project.all.order(created_at: :desc)
+    @projects = Project.default_order.page( params[:page] )
+  end
+
+  def search
+    @projects = Project.search do
+      fulltext "*#{params[:q]}*"
+      paginate page: params[:page], per_page: Project::PER_PAGE
+    end.results
+    render :all
   end
 
   def categories

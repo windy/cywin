@@ -56,13 +56,16 @@ Rails.application.routes.draw do
       get :autocomplete
     end
   end
+
   resources :explore do
     collection do
       get :all
       get :categories
       get :trend
+      get :search
     end
   end
+
   resources :syndicates
   resources :jobs, only: [:index]
   resources :logos, only: [:create]
