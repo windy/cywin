@@ -34,23 +34,13 @@ describe InvestorsController do
       end
 
     end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved investor as @investor" do
-        pending
-      end
-
-      it "re-renders the 'new' template" do
-        pending
-      end
-    end
   end
 
   describe "stage1" do
     it "get" do
-      investor = create(:investor)
-      Investor.stub(:find).and_return(investor)
-      get :stage1, id: 1
+      @user = create_investor_user(@user)
+      investor = @user.investor
+      get :stage1, id: investor.id
       response.should render_template(:stage1)
     end
   end

@@ -1,4 +1,6 @@
 class Investor < ActiveRecord::Base
+  paginates_per 10
+
   my_const_set(:INVESTOR_TYPES, [ :PERSON, :ORGANIZATION ])
 
   # status 标志是否开始审核, 并同时创建审核单
@@ -17,7 +19,6 @@ class Investor < ActiveRecord::Base
   end
 
   belongs_to :user
-  has_many :investment
   has_one :investidea
 
   # 领投人信息
@@ -34,6 +35,9 @@ class Investor < ActiveRecord::Base
   validates :title, presence: true
   validates :description, presence: true, length: { minimum: 3 }
 
+  scope :default_order, -> { order(created_at: :desc) }
+  scope :passed, -> { where(status: 'passed') }
+
   mount_uploader :card, CardUploader
 
   def validate_and_submit
@@ -42,5 +46,25 @@ class Investor < ActiveRecord::Base
       return false
     end
     submit
+  end
+
+  def pass_with_audit(note = nil)
+    investor_audit = InvestorAudit.new
+    investor_audit.note = note
+    investor_audit.status = InvestorAudit::PASSED
+    investor_audit.investor = self
+    investor_audit.save!
+    self.pass!
+    self.user.add_role(:investor)
+  end
+
+  def reject_with_audit(note = nil)
+    investor_audit = InvestorAudit.new
+    investor_audit.note = note
+    investor_audit.status = InvestorAudit::REJECTED
+    investor_audit.investor = self
+    investor_audit.save!
+    self.reject!
+    self.user.remove_role(:investor)
   end
 end

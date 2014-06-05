@@ -1,6 +1,5 @@
 class ProjectObserver < ActiveRecord::Observer
   def after_create(project)
-    #TODO 增加 Event 的处理
     Event.create(
       project_id: project.id,
       action: Event::PROJECT_CREATE,

@@ -1,10 +1,2 @@
 - projects.each do |project|
-  div.row.project_show
-    div.large-2.columns
-      = image_tag(project.logo_url, size: "200x200")
-    div.large-10.columns
-      = link_to project.name, project
-      div.row
-        div.large-7.columns
-          p #{project.description}
-          p.address #{project_address(project)}
+  h1 #{project.name}

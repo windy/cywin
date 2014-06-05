@@ -3,12 +3,11 @@ class InvestorsController < ApplicationController
   before_action :set_investor, only: [:stage1, :stage2, :update]
 
   def index
-    @investors = []
+    @investors = Investor.passed.default_order.page(params[:page])
   end
 
   def new
     @investor = current_user.investor || Investor.new
-    @investor.investment || @investor.investment.build
   end
 
   def stage1
@@ -43,12 +42,10 @@ class InvestorsController < ApplicationController
   end
 
   def autocomplete
-    search = params.permit(:search)[:search]
-    if search.nil?
-      render_fail
+    if params[:search].blank?
+      @users = []
     else
-      searched = User.joins(:roles).where('roles.name' => :investor).joins(:investor).where('users.name like ?', "%#{search}%").select('investors.id', 'users.name')
-      render_success(nil, data: searched)
+      @users = User.joins(:roles).where('roles.name' => :investor).where('users.name like ?', "%#{params[:search]}%").limit(5)
     end
   end
 
@@ -63,8 +60,6 @@ class InvestorsController < ApplicationController
   def create
     @investor = Investor.new( investor_params )
     @investor.user_id = current_user.id
-    #TODO 支持多个项目
-    @investor.investment.build( investment_params )
     if @investor.save
       redirect_to stage1_investor_path(@investor.id)
     else

@@ -1,0 +1,8 @@
+p 欢迎你, #{@email}:
+
+p 你可以点击以下链接确认你的邮箱
+
+p
+  = link_to '确认我的邮箱', confirmation_url(@resource, confirmation_token: @token)
+
+= render 'devise/mailer/mail_footer'

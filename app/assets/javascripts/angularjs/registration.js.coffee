@@ -13,7 +13,7 @@
     $http
       url: '/users'
       method: 'POST'
-      params:
+      data:
         'user[name]': $scope.name
         'user[email]': $scope.email
         'user[password]': $scope.password
@@ -29,7 +29,7 @@
     $http
       url: '/users/email_validate'
       method: 'POST'
-      params:
+      data:
         email: $scope.email
     .success (res)->
       if ! res.success

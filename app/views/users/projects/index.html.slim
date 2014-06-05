@@ -1,0 +1,5 @@
+- content_for(:title) do
+  | 我的项目 - #{@user.name}
+
+.profile.top-blank
+  = render partial: 'users/head', locals: { type: :project }

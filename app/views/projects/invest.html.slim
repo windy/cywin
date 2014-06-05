@@ -1,71 +1,58 @@
 - content_for(:title) do 
-  | 项目一
+  | #{@project.name}
 .project-show.top-blank
-  .row.head
-    .small-6.large-2.columns
-      = image_tag 'xingbake.jpg'
-    .small-6.large-10.columns
-      .name-area
-        h4.name
-          = link_to '项目一', project_path(1)
-        p.sub-name
-         | 这是一个项目的简要描述
-  .row.operate
-    .small-6.columns
-      = link_to '关注', '#'
-    .small-6.columns
-      = link_to '约谈', '#'
+  = render 'head'
+  = render 'star'
   = render partial: 'show_tab', locals: { type: 'invest' }
   
   .row
     .small-12.columns
-      .invest
-        h3.title 当前轮次 ( 2014.4.11 - )
-        .row
-          .small-12.large-6.columns
-            .box
-              .sub-title
-                | 计划融资
-              h5.sub-content 100万
-          .small-12.large-6.columns
-            .box
-              .sub-title
-                | 已获融资
-              h5.sub-content xx 80万
+      .invest-content ng-controller='MoneyRequireController' ng-init='init(#{@project.id}, {init_history: false})'
+        moneyrequire require='opened' ng-show='opened' title='"当前轮次"'
+        investbutton require='opened'
+      .syndicate-info.ng-cloak ng-show='money_require_id' ng-controller='SyndicateInfoController' ng-init='init(#{@money_require.try(:id)})'
         h4.title 领投人信息
-        .row.invest-leader
+        .row.invest-leader ng-show='leader'
           .small-4.large-3.columns
-            = image_tag 'm/u2.jpg'
+            img ng-src='{{ leader.avatar }}'
           .small-8.large-9.columns
             .name 
-              = link_to '领投人( Leader )', user_path(3)
-            .description 领投过 xx 公司, xx 机构.
+              a ng-href='/users/{{ leader.id }}' 
+                | {{ leader.name }}( 领投人 )
+            .description
+              | {{ leader.description }}
         h4.title 领投人的话
         .row.invest-word
           .small-12.columns
             p
-              | 这个项目靠谱, 人也靠谱, 我也靠谱.
-        .small-12.columns.invest-button
-          button 我要投资
+              | {{ leader.leader_word }}
         h4.title 已跟投
-        ul.small-block-grid-1.large-block-grid-2
-          - 3.times do |i|
-            li
-              .row.invest-leader
-                .small-4.large-3.columns
-                  = image_tag 'm/u2.jpg'
-                .small-8.large-9.columns
-                  .name 
-                    = link_to "跟投人#{i+1}", user_path(3)
-                  .description 领投过 xx 公司, xx 机构.
-        h4.title 已关注
-        ul.small-block-grid-1.large-block-grid-2
-          - 3.times do |i|
-            li
-              .row.invest-leader
-                .small-4.large-3.columns
-                  = image_tag 'm/u1.png'
-                .small-8.large-9.columns
-                  .name 
-                    = link_to "粉丝#{i+1}", user_path(3)
-                  .description 我是大粉丝
+        ul.small-block-grid-1.large-block-grid-2.investments
+          li ng-repeat="investment in investments"
+            .row.invest-leader
+              .small-4.medium-3.columns
+                = image_tag 'm/u2.jpg'
+              .small-8.medium-9.columns
+                .name 
+                  a ng-href="/users/{{ investment.user.id }}"
+                    | {{ investment.user.name }}( 跟投人 )
+                .money
+                  | ¥ {{ investment.money }}
+                .time
+                  | {{ investment.created_at }}
+                .description
+                  | {{ investment.user.description }}
+      .invest-content ng-controller="MoneyRequireController" ng-init="init(#{@project.id}, {init_opened: false})"
+        .history ng-repeat='history in histories'
+          moneyrequire require='history' title='"历史投资"'
+      h4.title 已关注
+      ul.small-block-grid-1.large-block-grid-2
+        - 3.times do |i|
+          li
+            .row.invest-leader
+              .small-4.large-3.columns
+                = image_tag 'm/u1.png'
+              .small-8.large-9.columns
+                .name 
+                  = link_to "粉丝#{i+1}", user_path(3)
+                .description 我是大粉丝

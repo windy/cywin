@@ -1,0 +1,10 @@
+.row
+  .small-12.medium-10.medium-centered.columns.top-blank
+    .row
+      .small-12.medium-8.large-7.columns
+        h2 忘记你的密码?
+        p 找回密码
+        = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+          = f.input :email, required: true, autofocus: true, placeholder: '邮箱地址'
+          = f.button :submit, "发送重置密码邮件"
+        = render "devise/shared/links"

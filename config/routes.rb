@@ -1,12 +1,40 @@
 Rails.application.routes.draw do
-  get "dashboard/index"
-  get "activities/show"
-  get "projects_searcher/index"
+
+  namespace :settings do
+    resource :profile, only: [:show, :update]
+    resource :password, only: [:show, :update]
+    resource :notification, only: [:show, :update]
+  end
+
+  devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}
+  resources :users, only: [:show] do
+    collection do
+      get :autocomplete
+      post :email_validate
+    end
+
+    scope module: 'users' do
+      resources :projects, only: [:index]
+      resources :invitements, only: :index
+      resources :funs, only: :index
+      resource :activities, only: :show
+    end
+  end
+
   resources :stars, only: [:create] do 
     collection do
       delete :destroy
     end
   end
+
+  resources :events, only: [:index]
+
+  resources :funs, only: [:create] do
+    collection do
+      delete :destroy
+    end
+  end
+
   resource :activity, only: [:show]
   resources :about do
     collection do
@@ -36,15 +64,17 @@ Rails.application.routes.draw do
     end
   end
   resources :syndicates
-  resources :funds
   resources :jobs, only: [:index]
   resources :logos, only: [:create]
+  resources :screenshots, only: [:create]
   resources :projects do
     member do
       post :publish
       post :invite
       get :team
       get :invest
+      patch :dirty_update
+      patch :screenshots_update
     end
     resources :members do
       collection do
@@ -84,8 +114,13 @@ Rails.application.routes.draw do
     collection do
       post :dirty_create
       get :dirty_show
+      get :opened
+      get :history
+      get :admin
     end
   end
+
+  resources :messages
 
   namespace :admin do
     resources :users
@@ -102,6 +137,7 @@ Rails.application.routes.draw do
       post :reject
       end
     end
+    resources :recommends
     root :to=> "dashboard#index"
   end
   root :to => "home#index"
@@ -109,19 +145,6 @@ Rails.application.routes.draw do
     collection do
       get :index
       get :welcome
-    end
-  end
-  devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "authentications"}
-  resources :users, only: [:show] do
-    collection do
-      get :autocomplete
-      post :email_validate
-    end
-
-    member do
-      get :edit
-      get :starred
-      get :change_password
     end
   end
   resources :avatars, only: [:create]
@@ -133,5 +156,10 @@ Rails.application.routes.draw do
     collection do
       get :unread_count
     end
+  end
+
+  require 'sidekiq/web'
+  authenticate :user, lambda { |u| u.has_role?(:admin) } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 end

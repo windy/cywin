@@ -15,22 +15,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def edit
-    @user = User.find(params[:id])
-    authorize! :update, @user
-  end
-
-  def change_password
-    @user = User.find(params[:id])
-    authorize! :update, @user
-  end
-
-  def starred
-  end
-
   def update
     @user = User.find(params[:id])
     authorize! :update, @user
-    #TODO
   end
 end

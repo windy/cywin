@@ -1,20 +1,8 @@
 - content_for(:title) do 
   | 项目一
 .project-show.top-blank
-  .row.head
-    .small-6.large-2.columns
-      = image_tag 'xingbake.jpg'
-    .small-6.large-10.columns
-      .name-area
-        h4.name
-          = link_to '项目一', project_path(1)
-        p.sub-name
-         | 这是一个项目的简要描述
-  .row.operate
-    .small-6.columns
-      = link_to '关注', '#'
-    .small-6.columns
-      = link_to '约谈', '#'
+  = render 'head'
+  = render 'star'
   = render partial: 'show_tab', locals: { type: 'team' }
   .row.team
     .small-12.columns

@@ -51,6 +51,7 @@ a.user-link {
   z-index: 9999;
   right: 0.5rem;
   padding: 0 1rem;
+  white-space: nowrap;
 
   .title {
     color: #888;
@@ -151,7 +152,7 @@ $top-nologin-height: 80px;
     }
   }
   .user-dropdown {
-    top: 80px;
+    top: 85px;
   }
   .top-bar-section .search {
     margin: 1.2rem 0 !important;
@@ -166,4 +167,8 @@ $top-nologin-height: 80px;
   .nav-big-wrapper {
     display: none;
   }
+}
+
+.main-container {
+  background-color: #fff;
 }

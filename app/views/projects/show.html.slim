@@ -1,89 +1,36 @@
 - content_for(:title) do 
   | 项目一
 .project-show.top-blank
-  .row.head
-    .small-6.large-2.columns
-      = image_tag 'xingbake.jpg'
-    .small-6.large-10.columns
-      .name-area
-        h4.name
-          = link_to '项目一', project_path(1)
-        p.sub-name
-         | 这是一个项目的简要描述
-  .row.operate
+  = render 'head'
+  .row.operate ng-controller='StarsController' ng-init='init(#{@project.id}, #{current_user.star?(@project)})'
     .small-6.columns
-      = link_to '关注', '#'
+      a ng-click='add_star()' ng-hide='is_starred || loading' 关注
+      a ng-click='remove_star()' ng-show='is_starred && ! loading' 取消关注
+      a ng-show='loading' loading
     .small-6.columns
       = link_to '约谈', '#'
   = render partial: 'show_tab', locals: { type: 'basic' }
   .row.content
     .small-12.columns
       .basic-content
-        ul.image data-orbit=""
-          li
-            = image_tag 'p/1.jpg'
-            .orbit-caption 正面
-          li
-            = image_tag 'p/2.jpg'
-            .orbit-caption 反面
-          li
-            = image_tag 'p/3.jpg'
-            .orbit-caption 侧面 
-          li
-            = image_tag 'p/4.jpg'
-            .orbit-caption 后面 
+        - if @project.screenshots.present?
+          ul.image data-orbit=""
+            - @project.screenshots.each do |s|
+              li
+                = image_tag s.image_url
+                .orbit-caption #{s.name}
         h3.title 基本介绍
-        p
-          | 星巴克是美国一家连锁咖啡公司的名称，1971年成立，为全球最大的咖啡连锁店，其总部坐落美国华盛顿州西雅图市。星巴克在美国和加拿大的学生与城市白领中非常流行。除咖啡外，星巴克亦有茶、馅皮饼及蛋糕等商品。部分星巴克店甚至与超级市场，书店等异业结盟，于合作店铺内觅地开业.
-        p
-          | We have a variety of investors that we're actively working with: angels, angel funds, high-net-worth individuals, private equity firms, investment banks, and other institutions - over 500 are ready to join the platform.
+        p.description #{@project.description}
 
-        .invest
+        .invest-content ng-controller='MoneyRequireController' ng-init='init(#{@project.id}, {})'
           h3.title 投资情况
-          h4 当前轮次 ( 2014.4.11 - )
-          .row
-            .small-12.large-6.columns
-              .box
-                .sub-title
-                  | 计划融资
-                h5.sub-content 100万
-            .small-12.large-6.columns
-              .box
-                .sub-title
-                  | 领投人
-                h5.sub-content xx 正在领投 
-            .small-12.large-6.columns
-              .box
-                .sub-title
-                  | 已获融资
-                h5.sub-content xx 80万
-            .small-12.columns.more-info
-              = link_to '更多投资信息...', '#'
-            .small-12.columns.invest-button
-              button 我要投资
-          hr
-          h4 历史投资 ( 2013.1.11 - 2013.3.11 )
-          .row
-            .small-12.large-6.columns
-              .box
-                .sub-title
-                  | 融资规模
-                h5.sub-content 100万
-            .small-12.large-6.columns
-              .box
-                .sub-title
-                  | 领投人
-                h5.sub-content xx 正在领投 
-            .small-12.large-6.columns
-              .box
-                .sub-title
-                  | 当时估值
-                h5.sub-content 1000万
-            .small-12.large-6.columns
-              .box
-                .sub-title
-                  | 融资花费时间
-                h5.sub-content 10天
+          moneyrequire require='opened' title='"当前轮次"'
+          .more-info
+            = link_to '更多投资信息...', invest_project_path(@project)
+          investbutton require='opened'
+          .history ng-repeat='history in histories'
+            moneyrequire require='history' title='"历史投资"'
+
 
         .team
           h3.title 团队情况
@@ -100,7 +47,7 @@
                       .job-title CTO
                       .description 我毕业于清华大学, 创建过xx项目, xx项目, 属于二次创业.
           .small-12.columns.more-info
-            = link_to '查看更多团队故事...'
+            = link_to '查看更多团队故事...', team_project_path(@project)
         .job
           h3.title 招人情况
           h4 正在招人

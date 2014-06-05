@@ -1,0 +1,18 @@
+.project-edit {
+  .head {
+    border-bottom: 1px solid #ddd;
+    position: relative;
+  }
+
+  .image-edit {
+    list-style: none;
+    margin-left: 0;
+    li {
+      margin-bottom: 1rem;
+
+      .name {
+        margin: 0 1rem;
+      }
+    }
+  }
+}

@@ -1,17 +1,20 @@
-div.row.project
-  = render partial: "header", locals: { stage: :stage0 }
-  h1 基本信息
-  = simple_form_for @investor do |f|
-    = f.input :name
-    = f.input :phone
-    = f.input :investor_type, as: :radio_buttons, collection: Investor::INVESTOR_TYPES.collect { |m| [ t('investor.investor_types.' + m), m ] }
-    = f.input :company
-    = f.input :title
-    = f.input :description
-    hr
-    h2 过往投资案例
-    = f.simple_fields_for :investment, @investor.investment[0] do |p|
-      = p.input :name
-      = p.input :address
-      = p.input :description
-    = f.button :submit, 'Next'
+- content_for(:title) do
+  | 申请投资人
+.row.top-blank
+  .small-12.columns
+    = render partial: "header", locals: { stage: :stage0 }
+    h3.title 基本信息
+    = simple_form_for @investor do |f|
+      = f.input :name
+      = f.input :phone
+      = f.input :investor_type, as: :radio_buttons, collection: Investor::INVESTOR_TYPES.collect { |m| [ t('investor.investor_types.' + m), m ] }
+      = f.input :company
+      = f.input :title
+      = f.input :description
+      hr
+      h4.title 过往投资案例
+      = f.simple_fields_for :investment, Investment.new do |p|
+        = p.input :name
+        = p.input :address
+        = p.input :description
+      = f.button :submit, 'Next'

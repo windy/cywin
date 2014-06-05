@@ -1,54 +1,9 @@
 .project-new {
-  background-color: white;
-
-  .head {
-    margin-bottom: 2rem;
-
-    .list {
-      text-align: center;
-      width: 100%;
-      margin-left: 0;
-      li {
-        border: 1px solid #ddd;
-        padding: 0;
-      }
-      a {
-        width: 100%;
-        color: #aaa;
-        display: inline-block;
-        width: 100%;
-        padding: 1.5rem 0;
-        font-size: 1.2rem;
-      }
-      .active {
-        color: #333;
-      }
-    }
-
-  }// head
-
-  textarea {
-    min-height: 8rem;
-  }
 
   .title {
     border-bottom: 1px solid #ddd;
     padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
-  }
-
-  .control-actions {
-    width: 100%;
-    text-align: center;
-    .back-link {
-      margin-left: 0.5rem;
-    }
-  }
-
-  .image-wrapper {
-    //height: 8rem;
-    //border: 1px solid #aaa;
-    //margin-bottom: 1rem;
   }
 
   .stage0 {
@@ -105,32 +60,6 @@
     .members .person .name {
       padding-bottom: 0;
     }
-
-    .autocomplete-wrapper {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-
-      li.disabled {
-        opacity: .5;
-      }
-
-      a {
-        display: block;
-        padding: 0.5rem 0 0.5rem 0.5rem;
-        &:hover {
-          background-color: #ddd;
-        }
-        .title {
-          margin-left: 0.5rem;
-          border: none;
-        }
-      }
-
-      .joined, .unconfirmed {
-        color: #888;
-      }
-    }
     
     .invite-tips {
       color: #888;
@@ -138,6 +67,9 @@
   }
 
   .stage2 {
+    .purpose {
+      color: #888;
+    }
     .cancel {
       margin-left: 0.5rem;
     }

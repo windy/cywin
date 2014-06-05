@@ -1,8 +1,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui-1.10.4.custom
-//= require foundation
 //= require angularjs
+//= require foundation/foundation
+//= require foundation/foundation.orbit
+//= require foundation/foundation.topbar
+//= require foundation/foundation.alert
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

@@ -2,24 +2,26 @@ class User < ActiveRecord::Base
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable, :confirmable,
+  devise :invitable, :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:weibo]
 
   has_many :authentications
 
-  acts_as_messageable
-
-  #validates :name, presence: true
+  validates :name, presence: true
 
   has_one :avatar
   # 投资角色
   has_one :investor
+  has_many :investments
   has_and_belongs_to_many :projects, join_table: :members
   # 关注功能
   has_many :stars
   # 粉丝功能
   has_many :funs
+  has_many :messages
+
+  has_many :events
 
   def add_star(project)
     unless self.stars.where(project_id: project.id).first
@@ -34,7 +36,7 @@ class User < ActiveRecord::Base
   end
 
   def star?(project)
-    self.stars.where(project_id: project.id).first
+    !! self.stars.where(project_id: project.id).first
   end
 
   def add_fun(user)
@@ -49,6 +51,10 @@ class User < ActiveRecord::Base
     self.funs.where(interested_user_id: user.id).destroy_all
   end
 
+  def fun?(user)
+    !! self.funs.where(interested_user_id: user.id).first
+  end
+
   def avatar_url
     if self.avatar.blank?
       self.avatar = Avatar.new
@@ -56,10 +62,10 @@ class User < ActiveRecord::Base
     end
     self.avatar.image_url
   end
-  protected
 
-  def confirmation_required?
-    false
+  #TODO 目前在领投人使用
+  def description
+    "暂无描述"
   end
 
 end

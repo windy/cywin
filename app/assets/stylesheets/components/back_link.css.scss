@@ -1,0 +1,17 @@
+.back-link {
+  display: block;
+  position: relative;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+
+  span {
+    position: absolute;
+    top: -0.8rem;
+    left: -2.5rem;
+    font-weight: 700;
+    color: #aaa;
+    font-size: 2.5rem;
+  }
+}

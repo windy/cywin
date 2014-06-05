@@ -30,12 +30,12 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.sendgrid.net",
-    port: 25,
+    address: "smtp.mailgun.org",
+    port: 587,
     domain: ENV["DOMAIN_NAME"],
     authentication: "plain",
-    user_name: ENV["SENDGRID_USERNAME"],
-    password: ENV["SENDGRID_PASSWORD"]
+    user_name: ENV["MAIL_USERNAME"],
+    password: ENV["MAIL_PASSWORD"]
   }
   # Send email in development mode.
   config.action_mailer.perform_deliveries = true
@@ -45,5 +45,7 @@ Rails.application.configure do
   Weibo2::Config.api_key = SERVICES['weibo']['api_key']
   Weibo2::Config.api_secret = SERVICES['weibo']['api_secret']
   Weibo2::Config.redirect_uri = SERVICES['weibo']['redirect_uri']
+
+  config.middleware.use Rack::LiveReload, host: 'localhost', port: 33333
 
 end

@@ -6,7 +6,7 @@ class CreateMoneyRequires < ActiveRecord::Migration
       t.text :description
 
       t.string :status, default: 'ready'
-      t.datetime :deadline
+      t.integer :deadline
       
       t.integer :project_id
       t.integer :leader_id

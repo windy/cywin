@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424061539) do
+ActiveRecord::Schema.define(version: 20140529083039) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -64,12 +64,6 @@ ActiveRecord::Schema.define(version: 20140424061539) do
     t.datetime "updated_at"
   end
 
-  create_table "conversations", force: true do |t|
-    t.string   "subject",    default: ""
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
   create_table "events", force: true do |t|
     t.string   "target_type"
     t.integer  "target_id"
@@ -105,7 +99,7 @@ ActiveRecord::Schema.define(version: 20140424061539) do
     t.text     "description"
     t.integer  "money"
     t.integer  "money_require_id"
-    t.integer  "investor_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -152,49 +146,47 @@ ActiveRecord::Schema.define(version: 20140424061539) do
 
   add_index "members", ["user_id", "project_id"], name: "index_members_on_user_id_and_project_id", unique: true
 
+  create_table "messages", force: true do |t|
+    t.integer  "user_id"
+    t.string   "action"
+    t.integer  "project_id"
+    t.boolean  "must_action"
+    t.string   "status"
+    t.string   "target_type"
+    t.integer  "target_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_read"
+  end
+
   create_table "money_requires", force: true do |t|
     t.integer  "money"
     t.integer  "share"
     t.text     "description"
     t.string   "status",      default: "ready"
-    t.datetime "deadline"
+    t.integer  "deadline"
     t.integer  "project_id"
     t.integer  "leader_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "opened_at"
+    t.datetime "closed_at"
+    t.boolean  "success"
+    t.integer  "maxnp",       default: 50
+    t.text     "leader_word"
   end
-
-  create_table "notifications", force: true do |t|
-    t.string   "type"
-    t.text     "body"
-    t.string   "subject",              default: ""
-    t.integer  "sender_id"
-    t.string   "sender_type"
-    t.integer  "conversation_id"
-    t.boolean  "draft",                default: false
-    t.datetime "updated_at",                           null: false
-    t.datetime "created_at",                           null: false
-    t.integer  "notified_object_id"
-    t.string   "notified_object_type"
-    t.string   "notification_code"
-    t.string   "attachment"
-    t.boolean  "global",               default: false
-    t.datetime "expires"
-  end
-
-  add_index "notifications", ["conversation_id"], name: "index_notifications_on_conversation_id"
 
   create_table "person_requires", force: true do |t|
     t.string   "title"
-    t.string   "pay"
-    t.string   "stock"
-    t.string   "option"
+    t.integer  "pay"
+    t.integer  "stock"
+    t.integer  "option"
     t.text     "description"
     t.integer  "project_id"
+    t.boolean  "remote",      default: false
+    t.boolean  "part",        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "remote"
-    t.boolean  "part"
   end
 
   create_table "projects", force: true do |t|
@@ -210,19 +202,13 @@ ActiveRecord::Schema.define(version: 20140424061539) do
     t.text     "team_story"
   end
 
-  create_table "receipts", force: true do |t|
-    t.integer  "receiver_id"
-    t.string   "receiver_type"
-    t.integer  "notification_id",                            null: false
-    t.boolean  "is_read",                    default: false
-    t.boolean  "trashed",                    default: false
-    t.boolean  "deleted",                    default: false
-    t.string   "mailbox_type",    limit: 25
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+  create_table "recommends", force: true do |t|
+    t.integer  "project_id"
+    t.text     "description"
+    t.boolean  "deleted",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "receipts", ["notification_id"], name: "index_receipts_on_notification_id"
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -234,6 +220,14 @@ ActiveRecord::Schema.define(version: 20140424061539) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "screenshots", force: true do |t|
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
+    t.string   "name"
+  end
 
   create_table "stars", force: true do |t|
     t.integer  "user_id"

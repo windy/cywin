@@ -1,0 +1,13 @@
+- content_for(:title) do
+  | 时间线
+
+.timeline.top-blank ng-controller='TimelineController' ng-init='init(#{@start_with})'
+  .row
+    .small-12.medium-10.medium-centered.columns
+      - @events.each do |event|
+        = render partial: 'event', locals: { event: event }
+      .event.ng-cloak ng-repeat= 'event in events' ng-bind-html='event'
+      .no-content ng-show='no_content_flag' 没有更多内容
+      .load-more
+        button ng-hide='loading' ng-click='load_more()' 加载更多
+        button ng-show='loading' 加载中...

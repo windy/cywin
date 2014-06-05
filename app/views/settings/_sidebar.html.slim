@@ -1,0 +1,9 @@
+.row
+  .small-12.columns
+    ul.side-nav
+      li class=active_for(controller_name, :profiles)
+        = link_to '个人资料', settings_profile_path
+      li class=active_for(controller_name, :passwords)
+        = link_to '密码设置', settings_password_path
+      li class=active_for(controller_name, :notifications)
+        = link_to '通知设置', settings_notification_path

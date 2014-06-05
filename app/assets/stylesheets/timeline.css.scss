@@ -1,16 +1,39 @@
+@import 'variables';
+
 .timeline {
-  background-color: white;
+
+  .no-content {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .event > .box {
+    border-top: 1px solid #f1f1f1 !important;
+    padding-top: 2rem !important;
+  }
 
   .box {
-    @media only screen and (max-width: 40em) {
+
+    &:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+    border-top: 1px solid #f1f1f1;
+    padding-top: 2rem;
+
+    .type {
+      display: inline-block;
+      color: #999;
+    }
+
+    @media #{$small-only} {
       .type {
         display: none;
       }
     }
-    .type {
-      color: #666;
-    }
+
     .content-wrapper {
+
       .created-at {
         float: right;
         color: #999;
@@ -18,10 +41,7 @@
       }
     }
 
-    .head {
-      border-bottom: 1px solid #eee;
-      padding-bottom: 1rem;
-      margin-bottom: 1rem;
+    .head, .foot {
 
       a {
         display: inline-block;
@@ -32,8 +52,8 @@
       }
 
     }
+
     .content {
-      border-bottom: 1px solid #eee;
       padding-bottom: 1rem;
       margin-bottom: 1rem;
       .title {
@@ -49,11 +69,10 @@
         color: #666;
       }
     }
+
     .foot {
       color: #666;
-      border-bottom: 1px solid #ddd;
       padding-bottom: 1rem;
-      margin-bottom: 1rem;
       .detail {
         margin-left: 0.5rem;
         font-size: 90%;

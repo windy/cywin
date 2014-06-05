@@ -1,21 +1,19 @@
 class MoneyRequire < ActiveRecord::Base
-  validates :money, presence: true, numericality: { greater_than: 0, only_integer: true }
+  validates :money, presence: true, numericality: { greater_than_or_equal_to: 1000, only_integer: true }
   validates :share, presence: true, numericality: { greater_than: 0, less_than: 100, only_integer: true }
 
-  validates :deadline, presence: true
-  validate do |m|
-    errors.add(:base, "时间必须选在未来") unless m.deadline.future? or m.status == 'closed'
-  end
+  validates :deadline, presence: true, numericality: { greater_than_or_equal_to: 30, only_integer: true }
+
+  validates :maxnp, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 50, only_integer: true }
 
   belongs_to :project
   validates :project_id, presence: true
 
   has_many :investments
 
-  belongs_to :leader, class_name: Investor
+  belongs_to :leader, class_name: User
 
   # 不能同时有两个融资需求打开
-  #FIXME 效率可能存在问题
   validate do |m|
     if m.new_record?
       found = MoneyRequire.where(project_id: m.project_id).where.not(status: :closed).first
@@ -27,10 +25,19 @@ class MoneyRequire < ActiveRecord::Base
     end
   end
 
-  # ready -> leader_needed -> opened -> closed
+  # ready -> leader_needed -> leader_need_confirmed -> opened -> closed
   state_machine :status, initial: :ready do
     event :preheat do
       transition ready: :leader_needed
+    end
+
+    after_transition on: :preheat do |money_require, transition|
+      Event.create(
+        user: money_require.project.owner,
+        project_id: money_require.project_id,
+        action: Event::MONEY_REQUIRE_CREATE,
+        target: money_require,
+      )
     end
 
     event :add_leader do
@@ -38,12 +45,30 @@ class MoneyRequire < ActiveRecord::Base
     end
 
     after_transition on: :add_leader do |money_require, transition|
-      message_body = ERB.new( File.read( 'app/views/messages/leader_invite.erb') ).result(binding)
-      money_require.owner.send_message( money_require.leader_user, message_body, '领投人邀请确认' )
+      money_require.add_leader_notify
+      Event.create(
+        user: money_require.project.owner,
+        project_id: money_require.project_id,
+        action: Event::MONEY_REQUIRE_LEADER,
+        target: money_require,
+      )
     end
 
     event :leader_confirm do
       transition leader_need_confirmed: :opened
+    end
+
+    after_transition on: :leader_confirm do |money_require, transition|
+      money_require.opened_at = DateTime.now
+      money_require.save!
+      money_require.add_leader_confirm_notify
+
+      Event.create(
+        user: money_require.project.owner,
+        project_id: money_require.project_id,
+        action: Event::MONEY_REQUIRE_OPENED,
+        target: money_require,
+      )
     end
 
     state :leader_need_confirmed, :opened do
@@ -54,6 +79,41 @@ class MoneyRequire < ActiveRecord::Base
       transition opened: :closed
       transition leader_needed: :closed
     end
+
+    after_transition on: :close do |money_require, transition|
+      money_require.closed_at = DateTime.now
+      if money_require.progress < 1
+        money_require.success = false
+      else
+        money_require.success = true
+      end
+      money_require.save!
+    end
+  end
+
+  # 虚拟属性
+  def ended_at
+    if self.status == 'closed'
+      self.closed_at
+    end
+  end
+
+  # 剩余天数
+  def left
+    if self.opened?
+      (( self.deadline.days - ( Time.now - self.opened_at ) ) / 60 / 60 / 24 ).to_i
+    end
+  end
+
+  def cost
+    if self.closed?
+      ( (self.closed_at - self.opened_at)/ 60 / 60 /24 ).to_i
+    end
+  end
+
+  # 每笔投资最低额度
+  def min_money
+    (self.money.to_f / self.maxnp).ceil
   end
 
   # 查询融资进度
@@ -69,7 +129,15 @@ class MoneyRequire < ActiveRecord::Base
   end
 
   def has_invested?(user)
-    user && user.investor && self.investments.where(investor_id: user.investor.id).first
+    !! ( user && user.investor && self.investments.where(user_id: user.id).first )
+  end
+
+  def already_money(user)
+    self.investments.where(user_id: user.id).first.try(:money)
+  end
+
+  def already_investment_id(user)
+    self.investments.where(user_id: user.id).first.try(:id)
   end
 
   def add_leader_and_wait_confirm(leader_id)
@@ -82,14 +150,50 @@ class MoneyRequire < ActiveRecord::Base
   end
 
   def leader_user
-    self.leader.user
+    self.leader
   end
 
   # 仅仅用来测试
   def quickly_turn_on!(leader_id)
     self.leader_id = leader_id
+    self.opened_at = Time.now
     self.status = 'opened'
     self.save!
+  end
+  
+  def leader_confirm_and_invest(investment, leader_word: nil)
+    money_require = self
+    ActiveRecord::Base.transaction do
+      money_require.leader_word = leader_word
+      money_require.save!
+      money_require.leader_confirm!
+      investment.save!
+    end
+    true
+  rescue
+    false
+  end
+
+  def add_leader_notify
+    Message.create!(
+      user_id: self.leader.id,
+      project_id: self.project.id,
+      action: Message::LEADER_INVITE,
+      must_action: true,
+      target_type: :MoneyRequire,
+      target_id: self.id,
+    )
+  end
+
+  def add_leader_confirm_notify
+    Message.create!(
+      user_id: self.owner.id,
+      project_id: self.project.id,
+      action: Message::LEADER_CONFIRM,
+      must_action: false,
+      target_type: :MoneyRequire,
+      target_id: self.id,
+    )
   end
 
 end

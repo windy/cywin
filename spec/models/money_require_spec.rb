@@ -4,7 +4,8 @@ describe MoneyRequire do
 
   describe "创建一轮融资" do
     before do
-      @project = create(:project)
+      @user = create_investor_user
+      @project = create_project_with_owner(@user)
     end
 
     it "正确的金额与时间" do
@@ -17,7 +18,7 @@ describe MoneyRequire do
 
     it "正确的金融" do
       params = attributes_for(:money_require)
-      params[:money] = 1
+      params[:money] = 1000
       @project.money_requires << MoneyRequire.new(params)
       expect(@project.save).to be_true
     end
@@ -37,12 +38,11 @@ describe MoneyRequire do
       params[:share] = 1
       @project.money_requires << MoneyRequire.new(params)
       expect(@project.save).to be_true
-
     end
 
     it "正确的百分比最大值" do
       params = attributes_for(:money_require)
-      params[:share] = 100
+      params[:share] = 99
       @project.money_requires << MoneyRequire.new(params)
       expect(@project.save).to be_true
     end
@@ -67,9 +67,23 @@ describe MoneyRequire do
 
     it '错误的时间' do
       params = attributes_for(:money_require)
-      params[:deadline] = 7.days.ago.to_datetime
+      params[:deadline] = 20
       @project.money_requires << MoneyRequire.new(params)
       expect(@project.save).to be_false
+    end
+
+    it "ended_at 测试" do
+      money_require = build(:money_require)
+      money_require.deadline = 60
+      money_require.project = @project
+      money_require.save!
+      money_require.opened_at = Time.now
+      money_require.quickly_turn_on!(@user.id)
+
+      expect(money_require.ended_at).to be_nil
+      money_require.close!
+      expect(money_require.ended_at).not_to be_nil
+    
     end
 
     it '已经有开启的融资, 再创建一个会失败' do
@@ -91,18 +105,10 @@ describe MoneyRequire do
     it '已经有结束的融资, 再创建没有问题' do
       params = attributes_for(:money_require)
       @project.money_requires << MoneyRequire.new(params)
-      @user = create(:user)
-      @project.add_owner(@user)
-      @project.save!
-      
-      leader = build(:investor_passed)
-      leader.user = @user
-      leader.save!
-      @user.add_role(:investor)
       
       # 启动第一个投资
       first = @project.money_requires.first
-      first.leader = leader
+      first.leader = @user
       first.status = 'closed'
       first.save!
 
@@ -115,17 +121,13 @@ describe MoneyRequire do
   describe "融资功能" do
     before do
       #创建一轮融资
-      @project = create(:project)
+      @user = create_investor_user(:user)
+      @project = create_project_with_owner(@user)
       params = attributes_for(:money_require)
-      @user = create(:user)
-      @project.add_owner(@user)
       @project.money_requires << MoneyRequire.new(params)
       @project.save!
-      
-      @leader = build(:investor_passed)
-      @leader.user = @user
-      @leader.save!
-      @user.add_role(:investor)
+
+      @leader = @user
       
       @money_require = @project.money_requires.first
     end
@@ -159,8 +161,7 @@ describe MoneyRequire do
             @money_require.add_leader_and_wait_confirm(@leader.id)
             expect(@money_require.leader_confirm).to be_true
             expect(@money_require.status).to eq("opened")
-            #binding.pry
-            expect(@user.mailbox.conversations.distinct.count).to eq(1)
+            expect(@money_require.opened_at).not_to be_nil
           end
         end
 
@@ -179,6 +180,7 @@ describe MoneyRequire do
         before do
           @money_require.quickly_turn_on!(1)
         end
+
         it '单人投资' do
           investment = Investment.new(money: attributes_for(:investment_for_money)[:money])
           investment.money_require = @money_require
@@ -196,6 +198,13 @@ describe MoneyRequire do
           expect(investment).to have(1).errors_on(:money_require_id)
         end
 
+        it '投资限额' do
+          investment = Investment.new(money: attributes_for(:investment_for_money_wrong)[:money])
+          investment.money_require = @money_require
+          expect(investment.save).to be_false
+          expect(investment).to have(1).errors_on(:money)
+        end
+
         it "二人投资" do
           user = @user
 
@@ -203,11 +212,11 @@ describe MoneyRequire do
           zhang.investor = build(:investor)
           zhang.save!
           
-          first = Investment.new(money: attributes_for(:investment_for_money)[:money], investor_id: user.id)
+          first = Investment.new(money: attributes_for(:investment_for_money)[:money], user_id: user.id)
           first.money_require = @money_require
           expect(first.save).to be_true
 
-          second = Investment.new(money: attributes_for(:investment_for_money)[:money], investor_id: zhang.id)
+          second = Investment.new(money: attributes_for(:investment_for_money)[:money], user_id: zhang.id)
           second.money_require = @money_require
           expect(second.save).to be_true
         end
@@ -229,26 +238,26 @@ describe MoneyRequire do
             investment = Investment.new(money: m)
             investment.money_require = @money_require
             expect(investment.save).to be_false
-            expect(investment).to have(1).errors_on(:money)
+            expect(investment.errors_on(:money)).not_to be_blank
           end
         end
 
         it "投资进度运算" do
           #设置 money 投资额
-          @money_require.money = 100
+          @money_require.money = 1000
           @money_require.save!
 
-          investment = Investment.new(money: 10)
+          investment = Investment.new(money: 100)
           @money_require.investments << investment
           @money_require.save!
 
-          expect(@money_require.progress).to eq(0.1)
+          expect(@money_require.reload.progress).to eq(0.1)
 
-          investment = Investment.new(money: 100, investor_id: 2)
+          investment = Investment.new(money: 1000, user_id: 2)
           @money_require.reload
           @money_require.investments << investment
           @money_require.save!
-          expect(@money_require.progress).to eq(1.1)
+          expect(@money_require.reload.progress).to eq(1.1)
         end
 
         describe "关闭融资" do
@@ -263,19 +272,10 @@ describe MoneyRequire do
             expect(@money_require.close).to be_true
           end
 
-          #TODO 暂不支持
-          it "无任何投资时重新打开融资" do
-            pending
-          end
         end
 
       end
     end
 
-  end
-
-
-  describe "融资权限测试" do
-    pending
   end
 end

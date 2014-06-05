@@ -1,0 +1,17 @@
+.investor
+  .row
+    .small-3.medium-2.columns
+      = link_to user_path(investor.user) do
+        - image_tag investor.user.avatar_url
+    .small-9.medium-10.columns
+      .name-area
+        h4.name
+          = link_to investor.user.name, user_path(investor.user)
+        .title #{investor.title}
+      .content
+        .description
+          | #{investor.description}
+        .industry-area
+          | 投资领域:
+          span.industry
+            | #{investor.investidea.industry}

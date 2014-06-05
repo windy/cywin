@@ -5,10 +5,13 @@ FactoryGirl.define do
     name "MyString"
     address "MyString"
     description "MyText"
-    investor_id 1
   end
 
   factory :investment_for_money, class: Investment do
-    money 10
+    money 1000
+  end
+
+  factory :investment_for_money_wrong, class: Investment do
+    money 1
   end
 end

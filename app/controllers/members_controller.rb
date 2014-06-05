@@ -68,7 +68,7 @@ class MembersController < ApplicationController
   end
 
   def autocomplete
-    search = params.permit(:search)[:search]
+    search = params[:search]
     if search.nil?
       render_fail
     elsif search.include?('@')
@@ -90,10 +90,7 @@ class MembersController < ApplicationController
 
   def invite
     authorize! :update, @project
-    #TODO 邀请制度的完善
-    user = User.invite!( user_params ) do |u|
-      u.skip_invitation = true
-    end
+    user = User.invite!( user_params )
 
     unless user.save
       render_fail(user.errors.full_messages)

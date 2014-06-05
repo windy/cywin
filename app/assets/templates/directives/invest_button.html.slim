@@ -1,0 +1,55 @@
+.invest-button.ng-cloak
+  .ready ng-show='opened.syndicate.behave == "ready"'
+    button 约谈
+  .need-login-button ng-show='opened.syndicate.behave == "need_login"'
+    button disabled=true 需要登录才能投资和领投
+    a.button href='/users/sign_in' 马上登录
+
+  .need-be-investor ng-show='opened.syndicate.behave == "need_be_investor"'
+    button disabled=true 申请投资人后才能投资
+    a.button href='/investors/new' 申请投资人资格
+
+  button ng-show='opened.syndicate.behave == "need_leader"' 领投约谈
+  button ng-show='opened.syndicate.behave == "leader_confirming"' disabled=true 领投确认中
+  button ng-show='opened.syndicate.behave == "leader_confirm"' ng-click='open_syndicate()' 我是领投人, 马上确认
+  button ng-show='opened.syndicate.behave == "invest"' ng-click='open_syndicate()' 我要投资
+  .add-button ng-show='opened.syndicate.behave =="add"' 
+    button disabled=true
+      | 我已投资了: 
+      | {{ opened.syndicate.already_money }}
+    button ng-click='open_syndicate()' 追加投资
+
+script type='text/ng-template' id='syndicate.html'
+  .row.invest-modal
+    a.close-reveal-modal ng-click="cancel()" ×
+    .small-12.columns
+      h3 ng-show='behave() == "leader_confirm"' 领投确认
+      h3 ng-show='behave() == "invest"' 投资给该项目
+      h3 ng-show='behave() == "add"' 追加投资给该项目
+      hr
+      form ng-submit='syndicate()'
+
+        p.alert ng-show='hash.already_message'
+          | {{ hash.already_message }}
+        p.min-money
+          | 该项目的最低投资额为: {{ hash.min_money }}
+        .row.collapse
+          .small-1.columns
+            span.prefix ¥
+          .small-11.medium-8.large-6.end.columns
+            input type='text' ng-class='{ error: errors.money }' placeholder='投资金额' ng-model='hash.money'
+            small.error ng-show=' errors.money '
+              | {{ errors.money }}
+        p.total-money ng-show='opened.syndicate.already_money'
+          /*TODO money 显示*/
+          | 你总的投资额将为:
+          span 
+            | {{ cal_total_money() || "0" }}
+        .row ng-show='behave() == "leader_confirm"'
+          .small-12.medium-10.end.columns
+            textarea ng-class='{ error: errors.leader_word }' placeholder='告诉潜在投资人为什么要投资这个项目' ng-model='hash.leader_word'
+
+        p.alert ng-show='errors.money_require_id'
+          | {{ errors.money_require_id }}
+        button
+          | {{ hash.submit }}

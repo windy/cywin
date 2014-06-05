@@ -1,0 +1,113 @@
+// 投资信息
+.invest {
+  position: relative;
+  margin-top: 2rem;
+
+  .title {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .box {
+    background-color: #eee;
+    padding: 1rem 1.5rem;
+
+    .sub-title {
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    .sub-content {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+  }
+
+}
+
+.invest-content {
+
+  position: relative;
+  .new-invest-button {
+    text-align: center;
+  }
+
+  .more-info {
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  .invest-button {
+    text-align: center;
+  }
+
+  .invest-button {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+    text-align: center;
+
+    button {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+}
+
+.no-invest-content {
+  text-align: center;
+}
+
+.invest-modal {
+  .min-money {
+    color: #666;
+  }
+  .total-money {
+    color: #666;
+    span {
+      margin-left: 0.5rem;
+      color: #333;
+      font-weight: 600;
+    }
+  }
+
+}
+
+.syndicate-info {
+
+  .title {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .invest-leader {
+    margin: 1rem 0;
+    .name {
+      padding-bottom: 0.5rem;
+    }
+    .name a {
+      color: #333;
+      font-size: 120%;
+      font-weight: 500;
+    }
+    .description {
+      color: #888;
+    }
+  }
+
+  .investments {
+    .money {
+      font-weight: 700;
+      color: #666;
+    }
+
+    .time {
+      color: #999;
+      margin-bottom: 1rem;
+    }
+  }
+}

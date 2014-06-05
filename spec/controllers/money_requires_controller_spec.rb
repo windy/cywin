@@ -4,26 +4,21 @@ describe MoneyRequiresController do
 
   login_user
   before do
-    @project = build(:project)
-    @project.add_owner(@user)
-    @project.save!
-    
-    @leader = build(:investor_passed)
-    @leader.user = @user
-    @leader.save!
-    @user.add_role(:investor)
+    @user = create_investor_user(@user)
+    @leader = @user
+    @project = create_project_with_owner(@user)
   end
 
   describe "创建融资功能" do
     it "成功创建" do
-      post 'create', ActionController::Parameters.new( money_require: attributes_for(:money_require).merge(project_id: @project.id) )
+      post 'create', ActionController::Parameters.new( attributes_for(:money_require).merge(project_id: @project.id) )
       response.should be_success
-      response.should render_template('syndicates/syndicate_info')
+      check_json(response.body, :success, true)
     end
 
     it "错误的deadline" do
-      money_require_attr = attributes_for(:money_require, deadline: 7.days.ago.to_datetime )
-      post 'create', ActionController::Parameters.new( money_require: money_require_attr.merge(project_id: @project.id) )
+      money_require_attr = attributes_for(:money_require, deadline: -10)
+      post 'create', ActionController::Parameters.new( money_require_attr.merge(project_id: @project.id) )
       response.should be_success
       check_json(response.body, :success, false)
     end
@@ -39,8 +34,7 @@ describe MoneyRequiresController do
 
     describe "正确添加" do
       it "成功" do
-        post 'add_leader', ActionController::Parameters.new( money_require: { leader_id: @leader.id }, id: @money_require.id )
-        expect(response).to render_template("syndicates/syndicate_info")
+        post 'add_leader', ActionController::Parameters.new( leader_id: @leader.id, id: @money_require.id, format: 'json' )
         expect( assigns(:money_require).status ).to eq('leader_need_confirmed')
       end
     end
@@ -63,20 +57,16 @@ describe MoneyRequiresController do
 
   describe "投资人确认功能" do
     before do
-      investor = build(:investor)
-      investor.user = @user
-      investor.save!
-      @user.add_role(:investor)
       @money_require = build(:money_require)
       @money_require.project = @project
       @money_require.save!
       @money_require.preheat!
-      @money_require.add_leader_and_wait_confirm(1)
+      @money_require.add_leader_and_wait_confirm(@user.id)
     end
 
     it "正确确认" do
-      post 'leader_confirm', ActionController::Parameters.new( id: @money_require.id )
-      expect(response).to render_template("syndicates/invest")
+      xhr :post, 'leader_confirm', ActionController::Parameters.new( id: @money_require.id, money: 1000 )
+      check_json(response.body, :success, true)
     end
 
     it "不是本人" do

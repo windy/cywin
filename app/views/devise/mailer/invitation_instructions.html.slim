@@ -1,0 +1,11 @@
+p Hi #{@resource.email}:
+p
+  | 有人邀请你加入 #{Setting.site_name}
+  = root_url
+  | , 你可以点击以下链接接受邀请.
+p
+  = link_to '接受邀请链接', accept_invitation_url(@resource, :invitation_token => @token)
+p
+  | 如果你不想接受此邀请, 请忽略.
+
+= render 'devise/mailer/mail_footer'

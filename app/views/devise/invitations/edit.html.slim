@@ -1,0 +1,13 @@
+.row
+  .small-12.medium-10.medium-centered.columns.top-blank
+    .row
+      .small-12.medium-8.large-7.columns
+        h2
+          = t 'devise.invitations.edit.header'
+        p 重新设定你的密码
+        = simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f|
+          = devise_error_messages!
+          = f.hidden_field :invitation_token
+          = f.input :password
+          = f.input :password_confirmation
+          = f.button :submit, t("devise.invitations.edit.submit_button")

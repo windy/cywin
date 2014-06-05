@@ -1,0 +1,14 @@
+@app.directive 'person', ->
+  restrict: 'E'
+  scope:
+    user: '='
+  templateUrl: '<%= asset_path("directives/person.html") %>'
+.directive 'moneyrequire', ->
+  restrict: 'E'
+  scope:
+    require: '='
+    title: '='
+  templateUrl: '<%= asset_path("directives/money_require.html") %>'
+.directive 'investbutton', ->
+  restrict: 'E'
+  templateUrl: '<%= asset_path("directives/invest_button.html") %>'

@@ -11,15 +11,21 @@
           th 拥有项目
           th 操作
       tbody
-        tr
-          td 李亚飞
-          td lyfi2003@sina.com
-          td 2014-12-13
-          td 2014-12-15
-          td 是
-          td
-            a href='#' 项目一
-            a href='#' 项目二
-          td
-            a href='#' 删除
-            a href='#' 禁用
+        - @users.each do |user|
+          tr
+            td 
+              | #{user.name}
+              - if user.has_role?(:admin)
+                | ( admin )
+            td 
+              | #{user.email}
+              - unless user.confirmed?
+                | ( unconfirmed )
+            td #{format_time(user.created_at)}
+            td #{format_time(user.last_sign_in_at)}
+            td #{user.has_role?(:investor)}
+            td
+              - user.projects.each do |project|
+                = link_to project.name, project
+            td
+              a href='#' 禁用

@@ -1,0 +1,9 @@
+p Hi #{@resource.email}
+p
+  | 你的账号由于超出登录重试次数而被锁定.
+p
+  | 点击以下链接解锁:
+p
+  = link_to '解锁我的账号', unlock_url(@resource, unlock_token: @token)
+
+= render 'devise/mailer/mail_footer'

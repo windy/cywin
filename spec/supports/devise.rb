@@ -8,9 +8,6 @@ module ControllerDevise
   def login_admin
     before do
       single_login_user
-      YAML.load(ENV['ROLES']).each do |role|
-        Role.where(name: role).first_or_create
-      end
       @user.add_role(:admin)
     end
   end

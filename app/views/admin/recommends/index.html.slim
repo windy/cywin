@@ -1,0 +1,19 @@
+.row
+  .small-12.columns.top-blank
+    p
+      = link_to '添加推荐项目', new_admin_recommend_path
+    table
+      thead
+        tr
+          th 被推荐项目
+          th 项目所有人
+          th 推荐时间
+          th 操作
+      tbody
+        - @recommends.each do |r|
+          tr 
+            td #{r.project.name}
+            td #{r.project.owner.try(:name)}
+            td #{format_date(r.created_at)}
+            td
+              = link_to '取消', admin_recommend_path(r.id), method: 'DELETE', 'data-confirm'=> '确认?'
