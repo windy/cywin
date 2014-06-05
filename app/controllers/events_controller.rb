@@ -3,11 +3,13 @@ class EventsController < ApplicationController
 
   def index
     start_with = params[:start_with]
-    @events = current_user.events.default_order.limit(Event::PER_PAGE)
+    @events = Event.default_order.limit(Event::PER_PAGE)
 
     if start_with.present?
       @events = @events.where('created_at < ?', Time.at(start_with.to_i) )
     end
+
+    @events = @events.related(current_user.id)
 
     unless @events.blank?
       start_with = @events[-1].created_at.to_i.to_s

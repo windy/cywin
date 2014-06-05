@@ -62,4 +62,10 @@ class Event < ActiveRecord::Base
 
   scope :default_order, -> { order('created_at DESC') }
   scope :in_projects, ->(project_id) { where(project_id: project_id).default_order }
+
+  scope :related, ->(user_id) do
+    fun_ids = Fun.where(user_id: user_id).collect(&:interested_user_id)
+    star_project_ids = Star.where(user_id: user_id).collect(&:project_id)
+    where('user_id in (?) or project_id in (?)', fun_ids, star_project_ids)
+  end
 end
