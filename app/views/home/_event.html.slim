@@ -10,20 +10,14 @@
           | 关注了项目
           = link_to event.project.name, project_path(event.project)
           span.created-at #{time_ago_in_words(event.created_at)}前
-        .content
-          .row
-            .small-4.large-2.columns
-              = image_tag event.project.logo.image_url
-            .small-8.large-10.columns
-              h6.title #{event.project.name}
-              span.sub-title #{event.project.oneword}
-              p.team.description #{event.project.description}
+        = render partial: 'home/event_project_content', locals: { event: event }
         .foot
           p 
             | 融资 30 万
             span.detail
               = link_to '更多...', project_path(event.project)
 - if event.action == Event::USER_FUN
+  /! user fun
   .box
     .row.collapse
       .small-0.medium-1.columns.type
@@ -34,3 +28,29 @@
           | 关注了用户
           = link_to event.target.name, user_path(event.target)
           span.created-at #{time_ago_in_words(event.created_at)}前
+- if event.action == Event::PROJECT_CREATE
+  /! project create
+  .box
+    .row.collapse
+      .small-0.medium-1.columns.type
+        span.fi-plus
+      .small-12.medium-11.columns.content-wrapper
+        .head
+          = link_to event.user.name, user_path(event.user)
+          | 创建了新项目
+          = link_to event.project.name, project_path(event.project)
+          span.created-at #{time_ago_in_words(event.created_at)}前
+        = render partial: 'home/event_project_content', locals: { event: event }
+- if event.action == Event::PROJECT_JOIN
+  /! project join
+  .box
+    .row.collapse
+      .small-0.medium-1.columns.type
+        span.fi-torsos
+      .small-12.medium-11.columns.content-wrapper
+        .head
+          = link_to event.user.name, user_path(event.user)
+          | 加入了项目
+          = link_to event.project.name, project_path(event.project)
+          span.created-at #{time_ago_in_words(event.created_at)}前
+        = render partial: 'home/event_project_content', locals: { event: event }

@@ -53,5 +53,8 @@ class Event < ActiveRecord::Base
   belongs_to :target, polymorphic: true
   belongs_to :project
 
+  serialize :data
+
   scope :default_order, -> { order('created_at DESC') }
+  scope :in_projects, ->(project_id) { where(project_id: project_id).default_order }
 end
