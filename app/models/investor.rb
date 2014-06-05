@@ -1,5 +1,5 @@
 class Investor < ActiveRecord::Base
-  PER_PAGE = 20
+  paginates_per 10
 
   my_const_set(:INVESTOR_TYPES, [ :PERSON, :ORGANIZATION ])
 
