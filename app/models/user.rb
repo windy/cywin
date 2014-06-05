@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   has_many :funs
   has_many :messages
 
+  has_many :events
+
   def add_star(project)
     unless self.stars.where(project_id: project.id).first
       star = Star.new(user: self, project: project)
@@ -47,6 +49,10 @@ class User < ActiveRecord::Base
 
   def remove_fun(user)
     self.funs.where(interested_user_id: user.id).destroy_all
+  end
+
+  def fun?(user)
+    !! self.funs.where(interested_user_id: user.id).first
   end
 
   def avatar_url
