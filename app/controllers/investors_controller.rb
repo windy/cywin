@@ -3,7 +3,7 @@ class InvestorsController < ApplicationController
   before_action :set_investor, only: [:stage1, :stage2, :update]
 
   def index
-    @investors = []
+    @investors = Investor.passed.default_order
   end
 
   def new

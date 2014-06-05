@@ -1,9 +1,0 @@
-= form_for @investor do |f|
-  - if @investor.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@investor.errors.count, "error")} prohibited this investor from being saved:"
-      ul
-        - @investor.errors.full_messages.each do |message|
-          li = message
-
-  .actions = f.submit 'Save'
