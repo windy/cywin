@@ -25,6 +25,9 @@ gem "foundation-rails", "~> 5.2.2.0"
 gem 'settingslogic'
 gem 'foundation-icons-sass-rails'
 gem 'kaminari', github: 'amatsuda/kaminari'
+gem 'progress_bar'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 #background cron
 gem 'sidekiq'
@@ -66,7 +69,7 @@ end
 
 group :development, :test do
   gem 'factory_girl_rails'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '2.14.2'
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'sqlite3'
