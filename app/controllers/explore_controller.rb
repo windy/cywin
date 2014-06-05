@@ -6,7 +6,7 @@ class ExploreController < ApplicationController
   end
 
   def all
-    @projects = Project.all.order(created_at: :desc)
+    @projects = Project.default_order.page( params[:page] )
   end
 
   def categories

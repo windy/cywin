@@ -29,5 +29,5 @@
                 .team
                   p.description
                     | #{project.description}
-        .load-more
-          button.small Load More
+        .paginate
+          = paginate @projects
