@@ -8,26 +8,29 @@
         = link_to explore_index_path do
           | 回到广场
           span <
-      .row.search.collapse
+      .row.search.collapse ng-controller='ProjectSearchController'
         .small-9.medium-6.large-4.columns
-          = text_field_tag 'search', nil, placeholder: '项目名称'
+          input type='text' id='search' placeholder='项目名称' ng-model='q' ng-init='q="#{params[:q]}"'
         .small-3.medium-1.large-1.end.columns
-          a.button.postfix href="#" 搜索
+          a.button.postfix ng-click='search()' 搜索
 
       .small-12.large-10.columns.projects
-        - @projects.each do |project|
-            .row.project
-              .small-3.medium-2.columns
-                = link_to project_path(project) do
-                  - image_tag project.logo.image_url
-              .small-9.medium-10.columns
-                .name-area
-                  h4.name
-                    = link_to project.name, project_path(project)
-                  p.sub-name
-                    | #{project.oneword}
-                .team
-                  p.description
-                    | #{project.description}
-        .paginate
-          = paginate @projects
+        - if @projects.blank?
+          p.no-content 没有搜索结果
+        - else
+          - @projects.each do |project|
+              .row.project
+                .small-3.medium-2.columns
+                  = link_to project_path(project) do
+                    - image_tag project.logo.image_url
+                .small-9.medium-10.columns
+                  .name-area
+                    h4.name
+                      = link_to project.name, project_path(project)
+                    p.sub-name
+                      | #{project.oneword}
+                  .team
+                    p.description
+                      | #{project.description}
+          .paginate
+            = paginate @projects, params: { q: params[:q] }

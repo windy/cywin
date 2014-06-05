@@ -1,5 +1,12 @@
 class Project < ActiveRecord::Base
+
+  searchable do
+    text :name, :oneword, :description
+  end
+
   paginates_per 10
+  PER_PAGE = 10
+
   my_const_set('STAGES', [ 'IDEA', 'DEVELOPING', 'ONLINE', 'GAINED' ])
     
   validates :name, presence: true, uniqueness: true
