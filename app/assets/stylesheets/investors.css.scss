@@ -1,3 +1,56 @@
-.investor {
-  background-color: white;
+.investors {
+
+  .head {
+    background-color: #28545E;
+    color: white;
+    h1 {
+      color: white;
+
+      a {
+        font-size: 1.2rem;
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  .investor {
+    margin: 1rem 0;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+
+    .name-area {
+      line-height: 2rem;
+      margin-bottom: 0.5rem;
+
+      .name {
+        display: inline;
+        a {
+          color: #333;
+        }
+      }
+
+      .title {
+        margin-left: 1rem;
+        color: #333;
+        display: inline;
+        a {
+          color: #333;
+        }
+      }
+    }
+
+    .content {
+      color: #999;
+
+      .industry-area {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+      }
+
+      .industry {
+        margin-left: 0.5rem;
+      }
+    }
+  }
 }

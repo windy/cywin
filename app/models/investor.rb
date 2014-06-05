@@ -1,4 +1,6 @@
 class Investor < ActiveRecord::Base
+  paginates_per 10
+
   my_const_set(:INVESTOR_TYPES, [ :PERSON, :ORGANIZATION ])
 
   # status 标志是否开始审核, 并同时创建审核单
@@ -32,6 +34,9 @@ class Investor < ActiveRecord::Base
   validates :company, presence: true
   validates :title, presence: true
   validates :description, presence: true, length: { minimum: 3 }
+
+  scope :default_order, -> { order(created_at: :desc) }
+  scope :passed, -> { where(status: 'passed') }
 
   mount_uploader :card, CardUploader
 
