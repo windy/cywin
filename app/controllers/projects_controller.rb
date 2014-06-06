@@ -122,6 +122,9 @@ class ProjectsController < ApplicationController
 
   def team
     @project = Project.find( params[:id] )
+    @owner = @project.owner
+    @owner_member = @project.member( @owner )
+    @members = @project.members_but( @owner )
   end
 
   def invest

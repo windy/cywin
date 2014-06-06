@@ -6,17 +6,17 @@
       a.active href='javascript:void(0)' 2. 团队信息
     li
       a href='javascript:void(0)' 3. 创业需求
-.row.stage1
+.row.stage1.team-content
   .small-12.columns
     .owner
       .person.ng-cloak ng-init= 'owner_edited = false' 
         .row
-          .small-4.large-3.columns
+          .small-4.medium-3.columns
             img ng-src=' {{ owner.avatar }} ' alt='owner'
             input id='owner-avatar' type='file' ng-file-select='upload_avatar($files)'
             small.error ng-show=' avatar_error '
               | {{ avatar_error }}
-          .small-8.large-9.columns
+          .small-8.medium-9.columns
             div ng-hide=' owner_edited '
               .name
                 a ng-href='/users/{{ owner.user_id }}'
@@ -26,22 +26,22 @@
               .description
                 |{{ owner.description }}
               .edit
-                a ng-click='owner_edited = true' 编辑
+                a ng-click='open_owner_edited()' 编辑
             form ng-show=' owner_edited ' ng-submit="update_owner()"
               h6 编辑个人信息
               .row
                 .small-12.medium-8.columns
                   label for='owner_name' 真实姓名
-                  input id='owner_name' type='text' placeholder='真实姓名' ng-model = 'owner.name'
+                  input id='owner_name' type='text' placeholder='真实姓名' ng-model = 'owner_edit.name'
               .row
                 .small-12.medium-8.columns
                   label for='owner_title' 职位
-                  input id='owner_title' type='text' placeholder='你在团队的职位' ng-model = 'owner.title'
+                  input id='owner_title' type='text' placeholder='你在团队的职位' ng-model = 'owner_edit.title'
               .row
                 .small-12.medium-8.columns
                   label for='owner_description' 更多详细信息
-                  textarea id='owner_description' ng-model = 'owner.description' placeholder=''
-                    |{{owner.description}}
+                  textarea id='owner_description' ng-model = 'owner_edit.description' placeholder=''
+                    |{{owner_edit.description}}
               .row
                 .small-12.medium-8.columns
                   p.alert
@@ -55,13 +55,12 @@
         .small-12.columns
           h3.title 我们的故事
           .edit
-            a ng-hide='team_edited' ng-click=' team_edited = true ' 编辑
+            a ng-hide='team_edited' ng-click='open_team_story_edited()' 编辑
       .team-story-wrapper.description ng-hide= 'team_edited'
         |{{ team_story }}
       .team-story-edit ng-show = 'team_edited'
         form ng-submit='update_team_story()'
-          textarea placeholder='我的团队故事' ng-model='team_story'
-            |{{ team_story }}
+          textarea placeholder='我的团队故事' ng-model='team_story_edit'
           .control-actions
             button.small 确认
             a.cancel ng-click= 'cancel_team_edit()' 取消
@@ -108,21 +107,19 @@
         .small-12.columns
           form
             .row
-              .small-12.medium-6.columns
+              .small-12.medium-6.columns.team_ul
+                script type='text/ng-template' id='autocompleteMember.html'
+                  a ng-class='{disabled: match.model.joined }'
+                    .row
+                      .small-3.medium-3.large-2.columns
+                        img ng-src= ' {{ match.model.avatar }} '
+                      .small-9.medium-9.large-10.columns
+                        h6.title
+                          |{{ match.model.name }} 
+                          .joined ng-show= 'match.model.joined' 已加入
+                          .unconfirmed ng-hide='match.model.confirmed' 邮件未确认
                 label for='invite_user' 添加或者邀请成员
-                input id='invite_user' type='text' placeholder='用户名 or 邮箱' ng-model='invite_user' ng-keyup=' autocomplete_search_with_timeout() '
-                p.no-result ng-show='autocomplete_users.length == 0' 没有结果
-                ul.autocomplete-wrapper
-                  li ng-class= '{ disabled: autocomplete_user.joined }' ng-repeat= 'autocomplete_user in autocomplete_users'
-                    a ng-click='add_member(autocomplete_user)'
-                      .row
-                        .small-3.medium-3.large-2.columns
-                          img ng-src= ' {{ autocomplete_user.avatar }} '
-                        .small-9.medium-9.large-10.columns
-                          h6.title
-                            |{{ autocomplete_user.name }} 
-                            .joined ng-show= 'autocomplete_user.joined' 已加入
-                            .unconfirmed ng-hide='autocomplete_user.confirmed' 邮件未确认
+                input id='invite_user' type='text' placeholder='用户名或者邮箱' ng-model='invite_user' typeahead='member.name for member in autocomplete_member($viewValue)' typeahead-template-url='autocompleteMember.html' typeahead-on-select='add_member($item)'
                 .control-actions ng-hide='autocomplete_invite'
                   button.small ng-click= 'members_edited = false' 确认
                   a.cancel ng-click='members_edited = false' 取消
