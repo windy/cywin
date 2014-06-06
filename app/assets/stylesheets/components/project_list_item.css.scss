@@ -14,5 +14,22 @@
 
   .sub-name {
     display: inline;
+    color: #666;
+    font-size: 95%;
+  }
+
+  .info {
+    color: #666;
+    font-size: 95%;
+
+    i[class^=fi-] {
+      margin-right: 0.5rem;
+      margin-left: 0.5rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+    }
   }
 }
