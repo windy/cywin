@@ -1,9 +1,8 @@
-@app.controller 'ProjectCreateTeamController', [ '$scope', '$http', '$cookieStore', '$location', '$routeParams', '$upload', '$timeout', ($scope, $http, $cookieStore, $location, $routeParams, $upload, $timeout)->
+@app.controller 'ProjectCreateTeamController', [ '$scope', '$http', '$location', '$routeParams', '$upload', '$timeout', ($scope, $http, $location, $routeParams, $upload, $timeout)->
 
   $scope.project_id = $routeParams.id
   $scope.invite_user = ''
   $scope.autocomplete_invite = false
-  $scope.autocomplete_timeout = null
 
   $http.get('/projects/' + $scope.project_id + '/members/owner').success (res)->
     $scope.owner = res.data
@@ -14,24 +13,29 @@
   $http.get('/projects/' + $scope.project_id + '/members').success (res)->
     $scope.members = res.data
 
+  $scope.open_owner_edited = ()->
+    $scope.owner_edited = true
+    $scope.owner_edit = angular.copy($scope.owner)
+
   $scope.update_owner = ()->
     $http
       url: '/projects/' + $scope.project_id + '/members/' + $scope.owner.user_id
       method: 'PATCH'
       data:
-        name: $scope.owner.name
-        title: $scope.owner.title
-        description: $scope.owner.description
+        name: $scope.owner_edit.name
+        title: $scope.owner_edit.title
+        description: $scope.owner_edit.description
     .success (res)->
       if res.success
+        $scope.owner.name = $scope.owner_edit.name
+        $scope.owner.title = $scope.owner_edit.title
+        $scope.owner.description = $scope.owner_edit.description
         $scope.owner_edited = false
       else
         $scope.owner_edit_error = res.message
 
   $scope.cancel_owner_edit = ()->
-    $http.get('/projects/' + $scope.project_id + '/members/owner').success (res)->
-      $scope.owner = res.data
-      $scope.owner_edited = false
+    $scope.owner_edited = false
 
   $scope.upload_avatar = ($files)->
     $scope.avatar_error = null
@@ -50,51 +54,48 @@
       .error ()->
         console.log '上传失败'
 
+  $scope.open_team_story_edited = ()->
+    $scope.team_story_edit = $scope.team_story
+    $scope.team_edited = true
+
   $scope.update_team_story = ()->
     $http
       url: '/projects/' + $scope.project_id + '/members/update_team_story'
       method: 'POST'
       data:
-        team_story: $scope.team_story
+        team_story: $scope.team_story_edit
     .success (res)->
+      $scope.team_story = $scope.team_story_edit
       $scope.team_edited = false
 
   $scope.cancel_team_edit = ()->
-    $http.get('/projects/' + $scope.project_id + '/members/team_story').success (res)->
-      $scope.team_story = res.team_story
-      $scope.team_edited = false
+    $scope.team_edited = false
 
-  $scope.autocomplete_search_with_timeout = ()->
-    if $scope.autocomplete_timeout
-      $timeout.cancel( $scope.autocomplete_timeout )
-    $scope.autocomplete_timeout = $timeout( $scope.autocomplete_search, 500 )
-
-  $scope.autocomplete_search = ()->
-    $scope.autocomplete_users = null
-    $scope.autocomplete_invite = false
-    return unless $scope.invite_user.length > 1
+  $scope.autocomplete_member = (viewValue)->
     $http
       url: '/projects/' + $scope.project_id + '/members/autocomplete'
       method: 'GET'
       params:
-        search: $scope.invite_user
-    .success (res)->
+        search: viewValue
+    .then (res)->
+      res = res.data
       # email邀请
       if res.email
         if res.success
-          $scope.autocomplete_users = res.data
+          return res.data
         else
           $scope.autocomplete_invite = true
           $scope.autocomplete_invite_name = res.name
+          return []
       else
       # 普通用户名
         if res.success
-          $scope.autocomplete_users = res.data
+          return res.data
         else
-          $scope.autocomplete_users = []
+          return []
 
   $scope.add_member = (autocomplete_user)->
-    return if autocomplete_user.joined
+    return false if autocomplete_user.joined
     $http
       url: '/projects/' + $scope.project_id + '/members'
       method: 'POST'

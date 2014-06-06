@@ -1,0 +1,13 @@
+.team_ul {
+  .f-dropdown {
+    max-width: 400px;
+
+    .disabled * {
+      color: #999;
+    }
+
+    .title {
+      border: none;
+    }
+  }
+}
