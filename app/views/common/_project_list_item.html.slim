@@ -1,0 +1,13 @@
+.row.project
+  .small-3.medium-2.columns
+    = link_to project_path(project) do
+      - image_tag project.logo.image_url
+  .small-9.medium-10.columns
+    .name-area
+      h4.name
+        = link_to project.name, project_path(project)
+      p.sub-name
+        | #{project.oneword}
+    .team
+      p.description
+        | #{project.description}

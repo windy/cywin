@@ -19,19 +19,6 @@
         - if @projects.blank?
           p.no-content 没有搜索结果
         - else
-          - @projects.each do |project|
-              .row.project
-                .small-3.medium-2.columns
-                  = link_to project_path(project) do
-                    - image_tag project.logo.image_url
-                .small-9.medium-10.columns
-                  .name-area
-                    h4.name
-                      = link_to project.name, project_path(project)
-                    p.sub-name
-                      | #{project.oneword}
-                  .team
-                    p.description
-                      | #{project.description}
+          = render partial: 'common/project_list_item', collection: @projects, as: :project
           .paginate
             = paginate @projects, params: { q: params[:q] }
