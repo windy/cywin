@@ -1,0 +1,18 @@
+.project-list-item {
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  padding: 1rem 0;
+  .name {
+    display: inline;
+    margin-right: 1rem;
+    font-size: 1rem;
+    a {
+      color: #FF2D2D;
+    }
+  }
+
+  .sub-name {
+    display: inline;
+  }
+}
