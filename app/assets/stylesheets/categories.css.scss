@@ -1,3 +1,23 @@
 .categories {
   min-height: 20rem;
 }
+
+.category-content > .head {
+  background-color: #78C14E;
+  color: white;
+  h1 {
+    color: white;
+  }
+}
+
+.category-projects {
+  border-top: 1px solid #ddd;
+
+  .no-content {
+    padding-top: 1rem;
+  }
+
+  .pagination {
+    margin-top: 2rem;
+  }
+}

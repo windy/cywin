@@ -4,7 +4,9 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
+    @category = Category.find( params[:id] )
+    @projects_count = @category.projects.size
+    @projects = @category.projects.page( params[:page] )
   end
 
   def autocomplete

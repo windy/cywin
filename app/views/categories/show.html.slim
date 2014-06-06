@@ -1,11 +1,17 @@
 - content_for(:title) do
   | #{@category.name} - 分类
 
-.category-content.top-blank
+.category-content
+  .head.top-blank
+    .row
+      .small-12.columns
+        h1 #{@category.name}
+        p 共 #{@projects_count} 个项目
   .row
-    .small-12.large-10.large-centered.columns
-      .refine-projects-content
-        .row
-          .small-12.large-10.large-centered.columns
-            = render 'refine/refine_project'
-            = render 'refine/refine_project'
+    .small-12.large-10.columns.category-projects
+      - if @projects.blank?
+        p.no-content 此分类下暂无项目
+        = link_to '返回所有分类', categories_path
+      - else
+        = render partial: 'common/project_list_item', collection: @projects, as: :project
+      = paginate @projects
