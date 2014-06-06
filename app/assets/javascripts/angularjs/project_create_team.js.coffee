@@ -4,14 +4,20 @@
   $scope.invite_user = ''
   $scope.autocomplete_invite = false
 
-  $http.get('/projects/' + $scope.project_id + '/members/owner').success (res)->
-    $scope.owner = res.data
+  $scope.init = (project_id)->
+    $scope.project_id = project_id
+    $scope.init_data()
 
-  $http.get('/projects/' + $scope.project_id + '/members/team_story').success (res)->
-    $scope.team_story = res.team_story
+  $scope.init_data = ()->
+    $http.get('/projects/' + $scope.project_id + '/members/owner').success (res)->
+      $scope.owner = res.data
+    $http.get('/projects/' + $scope.project_id + '/members/team_story').success (res)->
+      $scope.team_story = res.team_story
+    $http.get('/projects/' + $scope.project_id + '/members').success (res)->
+      $scope.members = res.data
 
-  $http.get('/projects/' + $scope.project_id + '/members').success (res)->
-    $scope.members = res.data
+  if $routeParams.id
+    $scope.init_data()
 
   $scope.open_owner_edited = ()->
     $scope.owner_edited = true
