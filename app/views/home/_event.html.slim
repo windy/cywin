@@ -74,7 +74,7 @@
           = link_to event.user.name, user_path(event.user)
           | 追加投资给项目
           = link_to event.project.name, project_path(event.project)
-          | , 目前投资额:
+          | , 目前他的投资:
           = link_to number_with_delimiter(event.data[:money]), project_path(event.project)
           span.created-at #{time_ago_in_words(event.created_at)}前
 - if event.action == Event::MONEY_REQUIRE_CREATE
