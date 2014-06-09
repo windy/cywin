@@ -12,10 +12,16 @@ class Message < ActiveRecord::Base
   belongs_to :target, :polymorphic => true
 
   scope :default_order, -> { order('created_at DESC') }
-  scope :untreat, -> { where(status: nil) }
+  scope :untreat, -> { where(status: nil).where(must_action: true) }
+  scope :treated, -> { where('status not ?', nil) }
+  scope :unread, -> { where(is_read: nil) }
 
   def is_read?
     !! is_read
+  end
+
+  def is_new?
+    is_read? && ( DateTime.now - read_at ).to_f < 5
   end
 
   def is_treat?
@@ -29,4 +35,21 @@ class Message < ActiveRecord::Base
   def rejected?
     status == 'rejected'
   end
+
+  def done
+    self.status = 'done'
+    self.save!
+  end
+
+  def reject
+    self.status = 'rejected'
+    self.save!
+  end
+
+  def mark_as_read
+    self.is_read = true
+    self.read_at = DateTime.now
+    self.save!
+  end
+
 end

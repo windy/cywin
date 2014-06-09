@@ -3,12 +3,12 @@
     p.head 一共有 #{@count} 条消息, #{@waiting_count} 条未处理.
     dl.sub-nav
       dt 过滤条件
-      dd.active 
-        a href='#' 全部
-      dd 
-        a href='#' 已处理
-      dd 
-        a href='#' 未处理
+      dd class="#{:active if params[:cond].blank? }"
+        = link_to '全部', messages_path
+      dd class="#{:active if params[:cond] == 'treated' }"
+        = link_to '已处理', messages_path(cond: :treated)
+      dd class="#{:active if params[:cond] == 'untreat' }"
+        = link_to '未处理', messages_path(cond: :untreat)
 
     .messages-content
       - if @messages.blank?
@@ -30,7 +30,7 @@
               - if message.is_read?
                 span.label.secondary 已查阅
               - else
-                span.label.secondary 未查阅
+                span.label.secondary 新
               span
                 - case message.action
                 - when Message::LEADER_INVITE
