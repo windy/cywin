@@ -123,7 +123,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :messages
+  resources :messages, only: [:index] do
+    collection do
+      get :count
+    end
+  end
 
   namespace :admin do
     resources :users

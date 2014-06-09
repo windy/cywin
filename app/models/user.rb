@@ -68,4 +68,8 @@ class User < ActiveRecord::Base
     "暂无描述"
   end
 
+  def mark_all_as_read
+    self.messages.unread.update_all(is_read: true, read_at: DateTime.now)
+  end
+
 end

@@ -1,1 +1,1 @@
-= link_to current_user.messages.size, messages_path, class: 'messagebox'
+= link_to '0', messages_path, class: 'messagebox',  'ng-controller' => 'MessageController', 'ng-class' => '{ unread: !is_empty() }', 'ng-bind' => 'message_count'
