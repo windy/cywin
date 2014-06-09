@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
   end
 
   def count
-    current_user.messages.untreat.size
+    render json: { count: current_user.messages.untreat.size }
   end
 
   after_action :mark_all_as_read
