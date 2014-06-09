@@ -1,6 +1,5 @@
 @app.controller 'MoneyRequireAdminController', [ '$scope', '$http', '$timeout', ($scope, $http, $timeout)->
   
-  # 存储当前项目正在融资的需求, 如无, 则为 {}
   $scope.loading = true
   
   $scope.init = (project_id)->

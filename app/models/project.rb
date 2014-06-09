@@ -31,6 +31,9 @@ class Project < ActiveRecord::Base
 
   has_and_belongs_to_many :categories
   has_many :screenshots
+
+  # events
+  has_many :events
   def categories_name 
     self.categories.collect { |c| c.name }.join(',')
   end

@@ -63,6 +63,13 @@ class MoneyRequire < ActiveRecord::Base
       money_require.save!
       money_require.add_leader_confirm_notify
 
+      # 将消息标记为已处理
+      Message.where(
+        action: Message::LEADER_INVITE,
+        target_type: :MoneyRequire,
+        target_id: money_require.id,
+      ).first.done
+
       Event.create(
         user: money_require.project.owner,
         project_id: money_require.project_id,
