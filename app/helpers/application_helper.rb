@@ -32,4 +32,9 @@ module ApplicationHelper
   def format_start_end_time(s, e)
     "( #{format_date(s)} - #{format_date(e)} )"
   end
+
+  def human_boolean(bool)
+    bool ? '是' : '否'
+  end
+
 end
