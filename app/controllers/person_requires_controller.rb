@@ -5,11 +5,11 @@ class PersonRequiresController < ApplicationController
   end
 
   def index
-    person_requires = @project.person_requires
-    if person_requires.empty?
+    @person_requires = @project.person_requires
+    if @person_requires.blank?
       render_fail
     else
-      render_success( nil, data: person_requires_json(person_requires) )
+      render 'index'
     end
   end
 
@@ -37,22 +37,4 @@ class PersonRequiresController < ApplicationController
     params.permit(:title, :description, :pay, :option, :stock, :remote, :part)
   end
 
-  def person_requires_json(person_requires)
-    person_requires.collect do |p|
-      person_require_json(p)
-    end
-  end
-
-  def person_require_json(person_require)
-    {
-      id: person_require.id,
-      title: person_require.title,
-      description: person_require.title,
-      pay: person_require.pay,
-      option: person_require.option,
-      stock: person_require.stock,
-      remote: person_require.remote,
-      part: person_require.part,
-    }
-  end
 end

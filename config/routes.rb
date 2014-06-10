@@ -67,7 +67,13 @@ Rails.application.routes.draw do
   end
 
   resources :syndicates
-  resources :jobs, only: [:index]
+
+  resources :jobs, only: [:index] do
+    collection do
+      get :search
+    end
+  end
+
   resources :logos, only: [:create]
   resources :screenshots, only: [:create]
   resources :projects do
