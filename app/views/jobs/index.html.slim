@@ -17,7 +17,7 @@
               a.button.postfix ng-click='search()' 工作搜索
 
         - if @person_requires.blank?
-          p.no-content 暂无任何工作需求, 请稍后再试
+          p.no-content 未查询到相关工作需求, 请尝试更换关键字
         - else
           = render partial: "person_requires", locals: { person_requires: @person_requires }
-        = paginate @person_requires
+        = paginate @person_requires,params: { q: params[:q] }

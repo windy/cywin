@@ -1,6 +1,12 @@
 class PersonRequire < ActiveRecord::Base
 
-  paginates_per 10
+  searchable do
+    text :title, :description
+    string :status
+  end
+
+  PER_PAGE = 10
+  paginates_per PER_PAGE
 
   belongs_to :project
   
