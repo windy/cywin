@@ -1,7 +1,7 @@
 class JobsController < ApplicationController
 
   def index
-    @projects = Project.all
+    @person_requires = PersonRequire.includes(:project).page(params[:page])
   end
 
   def search

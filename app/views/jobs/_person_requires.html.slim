@@ -1,0 +1,27 @@
+- person_requires.each do |person_require|
+  - project = person_require.project
+  .row.job-project
+    .small-4.medium-3.large-2.columns
+      = image_tag(project.logo.image_url)
+    .small-8.medium-9.large-10.columns
+      .name-area
+        h5.name
+          = link_to project.name, project
+        p.sub-name
+          | #{project.oneword}
+      .job-content
+        p 我们正在招聘 #{ person_require.title }
+      .job-info
+        span.info.address 
+          span.fi-marker
+          | #{project.cities_name}
+        span.info.industry 
+          span.fi-thumbnails
+          | #{project.categories_name}
+        - if person_require.remote
+          span.info.remote 
+            span.fi-cloud
+            | 可远程
+        span.info.interest 
+          span.fi-heart
+          | 8 个感兴趣

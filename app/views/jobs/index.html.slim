@@ -1,3 +1,5 @@
+- content_for(:title) do
+  | 参与创业
 .job-show
   .head.top-blank
     .row
@@ -14,4 +16,8 @@
             .small-3.medium-1.large-1.end.columns
               a.button.postfix ng-click='search()' 工作搜索
 
-        = render partial: "projects", locals: { projects: @projects }
+        - if @person_requires.blank?
+          p.no-content 暂无任何工作需求, 请稍后再试
+        - else
+          = render partial: "person_requires", locals: { person_requires: @person_requires }
+        = paginate @person_requires

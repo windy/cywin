@@ -1,4 +1,7 @@
 class PersonRequire < ActiveRecord::Base
+
+  paginates_per 10
+
   belongs_to :project
   
   validates :title, presence: true
