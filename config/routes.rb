@@ -96,6 +96,14 @@ Rails.application.routes.draw do
     end
 
     resources :person_requires do
+      collection do
+        get :admin
+      end
+
+      member do
+        patch :close
+        patch :open
+      end
     end
   end
   resources :investors do
@@ -105,6 +113,7 @@ Rails.application.routes.draw do
       get :stage2
       post :stage2
     end
+
     collection do
       get :autocomplete
     end

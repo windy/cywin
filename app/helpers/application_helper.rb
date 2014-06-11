@@ -37,4 +37,12 @@ module ApplicationHelper
     bool ? '是' : '否'
   end
 
+  def human_person_require_status(person_require)
+    if person_require.opened?
+      '正在招聘'
+    else
+      '已关闭'
+    end
+  end
+
 end

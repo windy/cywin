@@ -53,31 +53,9 @@
         .job
           h3.title 招人情况
           h4 正在招人
-          ul.small-block-grid-1.large-block-grid-2
-            - @project.person_requires.each do |person_require|
-              li
-                .job-box
-                    table
-                      tr
-                        td 职位
-                        td #{person_require.title}
-                      tr
-                        td 负责内容
-                        td.description #{person_require.description}
-                      tr
-                        td 报酬
-                        td 月薪: ¥ #{person_require.pay}
-                      tr
-                        td 
-                        td 期权: #{person_require.option}%
-                      tr
-                        td 
-                        td 股权: #{person_require.stock}%
-                      tr
-                        td 可选程
-                        td #{human_boolean(person_require.remote)}
-                      tr
-                        td 可兼职
-                        td #{human_boolean(person_require.part)}
-                    .job-interest
-                      button.small 我感兴趣
+          - person_requires = @project.person_requires.default_order.opened
+          - if person_requires.blank?
+            p.jobs.no-content 暂无需求
+          - else
+            ul.small-block-grid-1.large-block-grid-2
+              = render partial: 'person_require', collection: person_requires
