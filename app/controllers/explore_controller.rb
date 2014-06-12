@@ -1,4 +1,5 @@
 class ExploreController < ApplicationController
+
   def index
     @recommend_projects = Recommend.order(created_at: :desc).limit(6)
     @categories = Category.limit(6)
@@ -23,4 +24,5 @@ class ExploreController < ApplicationController
 
   def trend
   end
+
 end
