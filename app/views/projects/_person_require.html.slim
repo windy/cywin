@@ -23,4 +23,8 @@ li
           td 可兼职
           td #{human_boolean(person_require.part)}
       .job-interest
-        button.small 我感兴趣
+        - if ! person_require.users.include?(current_user)
+          button.small ng-hide='interest_person_requires["#{person_require.id}"]' ng-click='interest(#{person_require.id})'我感兴趣
+          button.small ng-show='interest_person_requires["#{person_require.id}"]' disabled=true 已投简历
+        - else
+          button.small disabled=true 已投简历

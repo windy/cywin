@@ -103,6 +103,7 @@ Rails.application.routes.draw do
       member do
         patch :close
         patch :open
+        post :interest
       end
     end
   end

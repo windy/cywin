@@ -50,12 +50,4 @@
                           .description #{m.description}
               .more-info
                 = link_to '查看更多团队故事...', team_project_path(@project)
-        .job
-          h3.title 招人情况
-          h4 正在招人
-          - person_requires = @project.person_requires.default_order.opened
-          - if person_requires.blank?
-            p.jobs.no-content 暂无需求
-          - else
-            ul.small-block-grid-1.large-block-grid-2
-              = render partial: 'person_require', collection: person_requires
+        = render 'job'

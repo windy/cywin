@@ -9,6 +9,8 @@ class PersonRequire < ActiveRecord::Base
   paginates_per PER_PAGE
 
   belongs_to :project
+
+  has_and_belongs_to_many :users
   
   validates :title, presence: true
   validates :description, presence: true

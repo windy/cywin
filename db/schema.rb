@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611020258) do
+ActiveRecord::Schema.define(version: 20140612073440) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -189,6 +189,12 @@ ActiveRecord::Schema.define(version: 20140611020258) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status",      default: "opened"
+  end
+
+  create_table "person_requires_users", force: true do |t|
+    t.integer "person_require_id"
+    t.integer "user_id"
+    t.text    "note"
   end
 
   create_table "projects", force: true do |t|

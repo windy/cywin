@@ -88,8 +88,15 @@ class PersonRequiresController < ApplicationController
     end
   end
 
-  def destory
-    authorize! :update, @project
+  def interest
+    @person_require = @project.person_requires.find( params[:id] )
+    current_user.person_requires << (@person_require)
+
+    if current_user.save
+      render_success
+    else
+      render_fail
+    end
   end
 
   private
