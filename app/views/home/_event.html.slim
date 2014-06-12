@@ -148,3 +148,4 @@
         .head2
           | 月薪 #{number_to_currency(event.target.pay)} - 期权 #{event.target.option}% - 股票 #{event.target.stock}% #{ ' - 可远程' if event.target.remote }#{ ' - 可兼职' if event.target.part }
         = render partial: 'home/event_project_content', locals: { event: event }
+        = render partial: 'home/event_person_require_foot', locals: { project: event.project, person_requires: event.project.person_requires }
