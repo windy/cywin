@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+
   def index
     if current_user
       @events = Event.default_order.limit(Event::PER_PAGE).related(current_user.id)
@@ -11,4 +12,5 @@ class HomeController < ApplicationController
 
   def welcome
   end
+
 end
