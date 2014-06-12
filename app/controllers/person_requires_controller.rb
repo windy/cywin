@@ -91,8 +91,9 @@ class PersonRequiresController < ApplicationController
   def interest
     @person_require = @project.person_requires.find( params[:id] )
     current_user.person_requires << (@person_require)
+    p = PersonRequiresUser.new(user: current_user, person_require: @person_require)
 
-    if current_user.save
+    if p.save
       render_success
     else
       render_fail

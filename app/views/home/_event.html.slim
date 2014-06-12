@@ -149,3 +149,19 @@
           | 月薪 #{number_to_currency(event.target.pay)} - 期权 #{event.target.option}% - 股票 #{event.target.stock}% #{ ' - 可远程' if event.target.remote }#{ ' - 可兼职' if event.target.part }
         = render partial: 'home/event_project_content', locals: { event: event }
         = render partial: 'home/event_person_require_foot', locals: { project: event.project, person_requires: event.project.person_requires }
+- if event.action == Event::INTEREST_WORK
+  /! interest work
+  .box
+    .row.collapse
+      .small-0.medium-1.columns.type
+        span.fi-torso-business
+      .small-12.medium-11.columns.content-wrapper
+        .head
+          = link_to event.user.name, event.user
+          span
+            | 对项目
+          = link_to event.project.name, event.project
+          | 的工作
+          = link_to event.target.person_require.title, event.project
+          | 感兴趣
+          span.created-at #{time_ago_in_words(event.created_at)}前

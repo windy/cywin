@@ -77,7 +77,7 @@ Rails.application.routes.draw do
 
   resources :logos, only: [:create]
   resources :screenshots, only: [:create]
-  resources :projects do
+  resources :projects, except: [:index] do
     member do
       post :publish
       post :invite

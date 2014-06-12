@@ -25,7 +25,7 @@ module Cywin
     # generators
     config.generators.assets = false
     config.generators.helper = false
-    config.active_record.observers = :project_observer, :star_observer, :fun_observer, :member_observer, :investment_observer, :person_require_observer
+    config.active_record.observers = :project_observer, :star_observer, :fun_observer, :member_observer, :investment_observer, :person_require_observer, :person_requires_user_observer
 
     config.generators do |g|
       g.test_framework :rspec,
