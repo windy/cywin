@@ -4,6 +4,8 @@ class CreateTablePersonRequiresUsers < ActiveRecord::Migration
       t.belongs_to :person_require
       t.belongs_to :user
       t.text :note
+
+      t.timestamps
     end
   end
 end

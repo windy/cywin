@@ -68,6 +68,7 @@ Rails.application.routes.draw do
 
   resources :syndicates
 
+  resources :interest_users, only: [:index]
   resources :jobs, only: [:index] do
     collection do
       get :search

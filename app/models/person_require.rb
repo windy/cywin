@@ -11,6 +11,7 @@ class PersonRequire < ActiveRecord::Base
   belongs_to :project
 
   has_and_belongs_to_many :users
+  has_many :person_requires_users
   
   validates :title, presence: true
   validates :description, presence: true
