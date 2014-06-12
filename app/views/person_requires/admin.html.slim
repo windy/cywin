@@ -1,0 +1,41 @@
+- content_for(:title) do
+  | 工作管理 - #{@project.name}
+
+= render 'common/flash'
+
+.row.top-blank
+  .small-12.columns
+    .back-link
+      = link_to edit_project_path(@project) do
+        | 回到项目
+        span <
+
+.row
+  .small-12.columns
+    p
+      = link_to '新建招聘', new_project_person_require_path(@project)
+    table
+      thead
+        tr
+          th 职位
+          th 要求
+          th 发布时间
+          th 状态
+          th 感兴趣的人
+          th 操作
+      tbody
+        - @person_requires.each do |person_require|
+          tr class="#{:job_closed if person_require.closed?}"
+            td #{person_require.title}
+            td.description #{person_require.description}
+            td #{format_date(person_require.created_at)}
+            td #{human_person_require_status(person_require)}
+            td
+              = link_to person_require.users.size, interest_users_path(person_require_id: person_require.id)
+              |   人感兴趣
+            td
+              = link_to '编辑', edit_project_person_require_path(@project, person_require)
+              - if person_require.opened?
+                = link_to '关闭', close_project_person_require_path(@project, person_require), method: 'PATCH', 'data-confirm'=> '确认关闭?'
+              - elsif person_require.closed?
+                = link_to '打开', open_project_person_require_path(@project, person_require), method: 'PATCH', 'data-confirm'=> '确认打开?'

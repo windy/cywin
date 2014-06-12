@@ -1,5 +1,5 @@
 - content_for(:title) do 
-  | 项目一
+  | #{@project.name}
 .project-show.top-blank
   = render 'head'
   .row.operate ng-controller='StarsController' ng-init='init(#{@project.id}, #{current_user.star?(@project)})'
@@ -50,34 +50,4 @@
                           .description #{m.description}
               .more-info
                 = link_to '查看更多团队故事...', team_project_path(@project)
-        .job
-          h3.title 招人情况
-          h4 正在招人
-          .row
-            - 3.times do 
-              .small-12.large-6.columns
-                .job-box
-                  table
-                    tr
-                      td 职位
-                      td 软件开发工程师
-                    tr
-                      td 负责内容
-                      td 开发软件
-                    tr
-                      td 报酬
-                      td 月薪: 20k - 30k
-                    tr
-                      td 
-                      td 期权: 30%
-                    tr
-                      td 
-                      td 股权: 1%
-                    tr
-                      td 可选程
-                      td 是
-                    tr
-                      td 可兼职
-                      td 是
-                  .job-interest
-                    button.small 我感兴趣
+        = render 'job'

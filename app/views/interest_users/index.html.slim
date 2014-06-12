@@ -1,0 +1,37 @@
+- content_for(:title) do
+  | 人 - #{@person_require.title}
+
+.row.top-blank
+  .small-12.columns
+    .back-link
+      = link_to admin_project_person_requires_path(@project) do
+        | 回到工作管理
+        span <
+
+.row
+  .small-12.columns
+    - if @person_requires_users.blank?
+      p
+        | 暂无对工作职位 #{@person_require.title} 感兴趣的人
+      p
+        = link_to '立刻返回', admin_project_person_requires_path(@project)
+    - else
+      p
+        | 对工作职位 #{@person_require.title} 感兴趣的人
+      table
+        thead
+          tr
+            th 姓名
+            th 投递时间
+            th 备注
+            th 操作
+        tbody    
+          - @person_requires_users.each do |p|
+            - user = p.user
+            tr
+              td
+                = link_to user.name, user, target: '_blank'
+              td #{format_time(p.created_at)}
+              td #{p.note.presence || '暂无'}
+              td
+                = mail_to user.email, '发送邮件'

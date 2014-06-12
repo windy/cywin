@@ -67,10 +67,17 @@ Rails.application.routes.draw do
   end
 
   resources :syndicates
-  resources :jobs, only: [:index]
+
+  resources :interest_users, only: [:index]
+  resources :jobs, only: [:index] do
+    collection do
+      get :search
+    end
+  end
+
   resources :logos, only: [:create]
   resources :screenshots, only: [:create]
-  resources :projects do
+  resources :projects, except: [:index] do
     member do
       post :publish
       post :invite
@@ -90,6 +97,15 @@ Rails.application.routes.draw do
     end
 
     resources :person_requires do
+      collection do
+        get :admin
+      end
+
+      member do
+        patch :close
+        patch :open
+        post :interest
+      end
     end
   end
   resources :investors do
@@ -99,6 +115,7 @@ Rails.application.routes.draw do
       get :stage2
       post :stage2
     end
+
     collection do
       get :autocomplete
     end

@@ -4,8 +4,8 @@ class Project < ActiveRecord::Base
     text :name, :oneword, :description
   end
 
-  paginates_per 10
   PER_PAGE = 10
+  paginates_per PER_PAGE
 
   my_const_set('STAGES', [ 'IDEA', 'DEVELOPING', 'ONLINE', 'GAINED' ])
     

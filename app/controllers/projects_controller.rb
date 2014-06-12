@@ -1,10 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :team, :invest]
 
-  def index
-    @projects = Project.published
-  end
-
   def new
     authorize! :create, Project
     @project = Project.new

@@ -1,3 +1,5 @@
+- content_for(:title) do
+  | 参与创业
 .job-show
   .head.top-blank
     .row
@@ -7,10 +9,15 @@
   .content
     .row
       .small-12.columns
-        .row.search.collapse
-          .small-9.medium-6.large-4.columns
-            = text_field_tag 'search', nil, placeholder: '关键字'
-          .small-3.medium-1.large-1.end.columns
-            a.button.postfix href="#" 工作搜索
+        form ng-submit='search()' ng-controller='JobSearchController'
+          .row.search.collapse
+            .small-9.medium-6.large-4.columns
+              input type='text' ng-model='q' ng-init='q="#{params[:q]}"' placeholder='输入工作职位: 如 Ruby on Rails 开发'
+            .small-3.medium-1.large-1.end.columns
+              a.button.postfix ng-click='search()' 工作搜索
 
-        = render partial: "projects", locals: { projects: @projects }
+        - if @person_requires.blank?
+          p.no-content 未查询到相关工作需求, 请尝试更换关键字
+        - else
+          = render partial: "person_requires", locals: { person_requires: @person_requires }
+        = paginate @person_requires,params: { q: params[:q] }

@@ -235,9 +235,12 @@
         .small-12.columns
           .data-content
             h3.title 其他数据
+            p.no-content 暂无数据
       .invest-content ng-controller='MoneyRequireController' ng-init= 'init(#{@project.id}, {})'
-        .edit
-          = link_to '管理', admin_money_requires_path( project_id: @project.id )
+        .row
+          .small-12.columns
+            .edit
+              = link_to '管理', admin_money_requires_path( project_id: @project.id )
         h3.title 投资情况
         .money-require ng-show='opened'
           moneyrequire require='opened' title='"当前轮次"'
@@ -251,6 +254,4 @@
           .small-12.columns
             h4.title 历史投资
             p.no-invest-content 无历史投资记录
-      .row
-        .small-12.columns 
-          h3.title 招人需求
+      = render 'job'
