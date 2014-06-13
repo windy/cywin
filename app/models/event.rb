@@ -68,4 +68,6 @@ class Event < ActiveRecord::Base
     star_project_ids = Star.where(user_id: user_id).collect(&:project_id)
     where('user_id in (?) or project_id in (?)', fun_ids, star_project_ids)
   end
+
+  scope :a_week, -> { where('created_at > ?', 1.weeks.ago) }
 end
