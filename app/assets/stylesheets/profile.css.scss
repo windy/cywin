@@ -45,4 +45,28 @@
     }
   }
 
+  .investments {
+    margin-top: 1rem;
+    color: #444;
+
+    .investment, .investment-history {
+      padding: 1rem 0;
+    }
+
+    a {
+      margin: 0 0.5rem;
+    }
+    
+    .money {
+      margin: 0 0.5rem;
+      color: #bd260d;
+      font-weight: 200;
+    }
+
+    .time {
+      margin-left: 0.5rem;
+      color: #999;
+    }
+  }
+
 }

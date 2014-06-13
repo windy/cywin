@@ -20,6 +20,8 @@ class Investment < ActiveRecord::Base
     end
   end
 
+  scope :default_order, -> { order(created_at: :desc)  }
+
   after_save do |m|
     if m.money_require_id.present?
       if m.money_require.progress >= 1
