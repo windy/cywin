@@ -3,3 +3,9 @@
 
 .profile.top-blank
   = render partial: 'users/head', locals: { type: :fun }
+
+  .row
+    .small-12.columns.funs
+      ul.small-block-grid-4.medium-block-grid-6.large-block-grid-8
+        = render partial: 'users/funs/fun', collection: @funs
+      = paginate @funs

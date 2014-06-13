@@ -1,5 +1,5 @@
 .profile {
-  background-color: white;
+
   .edit {
     position: absolute;
     right: 1rem;
@@ -24,6 +24,24 @@
       .active {
         border-bottom: 2px solid #d26911;
       }
+    }
+  }
+
+  .no-content {
+    color: #999;
+    margin-top: 1rem;
+  }
+
+  .funs {
+    margin-top: 1rem;
+
+    .fun {
+      padding: 1.2rem;
+    }
+
+    .name {
+      text-align: center;
+      margin-top: 0.3rem;
     }
   }
 
