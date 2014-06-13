@@ -69,4 +69,21 @@
     }
   }
 
+  .projects {
+    margin-top: 1rem;
+    color: #444;
+
+    .project {
+      padding: 1rem 0;
+    }
+
+    a {
+      margin: 0 0.5rem;
+    }
+    
+    .time {
+      margin-left: 0.5rem;
+      color: #999;
+    }
+  }
 }

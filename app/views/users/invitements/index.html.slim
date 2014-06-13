@@ -6,25 +6,29 @@
 
   .row
     .small-12.columns
-      .investments
-        - @investments.each do | investment|
-          - if investment.money_require.present? 
-            - project = investment.money_require.project
-            /* 在本平台的投资*/
-            .investment
-              | 投资了
-              span.money
-                | #{number_to_currency(investment.money)}
-              | 给项目
-              = link_to project.name, project
-              span.time
-                | #{time_ago_in_words(investment.created_at)}前
-          - else
-            .investment-history
-              | 投资了
-              span.money
-                | #{number_to_currency(investment.money)}
-              | 给项目 #{investment.name}
-              span.time
-                /*FIXME 日期不正确, 需要添加额外的字段*/
-                | #{time_ago_in_words(investment.created_at)}前
+      - if @investments.blank?
+        p.no-content
+          | 暂无投资信息
+      - else
+        .investments
+          - @investments.each do | investment|
+            - if investment.money_require.present? 
+              - project = investment.money_require.project
+              /* 在本平台的投资*/
+              .investment
+                | 投资了
+                span.money
+                  | #{number_to_currency(investment.money)}
+                | 给项目
+                = link_to project.name, project
+                span.time
+                  | #{time_ago_in_words(investment.created_at)}前
+            - else
+              .investment-history
+                | 投资了
+                span.money
+                  | #{number_to_currency(investment.money)}
+                | 给项目 #{investment.name}
+                span.time
+                  /*FIXME 日期不正确, 需要添加额外的字段*/
+                  | #{time_ago_in_words(investment.created_at)}前

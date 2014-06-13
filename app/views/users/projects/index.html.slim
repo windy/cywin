@@ -3,3 +3,24 @@
 
 .profile.top-blank
   = render partial: 'users/head', locals: { type: :project }
+
+  .row
+    .small-12.columns
+      - if @members.blank?
+        p.no-content
+          | 暂无项目
+        - if current_user == @user
+          p
+            = link_to '立刻创建一个新项目', new_project_path
+      - else
+        .projects
+          - @members.each do |m|
+            - project = m.project
+            .project
+              - if m.role == Member::FOUNDER
+                | 创建了 
+              - elsif m.role == Member::MEMBER
+                | 加入了
+              | 项目
+              = link_to project.name, project
+              span.time #{time_ago_in_words(m.created_at)}前
