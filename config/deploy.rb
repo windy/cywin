@@ -3,6 +3,7 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'
 require 'yaml'
+require 'mina_sidekiq/tasks'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -43,6 +44,7 @@ end
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
 task :setup => :environment do
+  queue! %[mkdir -p "#{deploy_to}/shared/pids/"]
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
 
@@ -64,6 +66,7 @@ task :deploy => :environment do
   deploy do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
+    invoke :'sidekiq:quiet'
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
@@ -72,6 +75,7 @@ task :deploy => :environment do
 
     to :launch do
       invoke :'unicorn:restart'
+      invoke :'sidekiq:restart'
     end
   end
 end
@@ -82,16 +86,12 @@ namespace :unicorn do
     cd #{app_path} && bundle exec unicorn -c config/unicorn/#{branch}.rb -E #{rails_env} -D
   }
 
-#                                                                    Start task
-# ------------------------------------------------------------------------------
   desc "Start unicorn"
   task :start => :environment do
     queue 'echo "-----> Start Unicorn"'
     queue! start_unicorn
   end
 
-#                                                                     Stop task
-# ------------------------------------------------------------------------------
   desc "Stop unicorn"
   task :stop do
     queue 'echo "-----> Stop Unicorn"'
@@ -102,19 +102,9 @@ namespace :unicorn do
     }
   end
 
-#                                                                  Restart task
-# ------------------------------------------------------------------------------
   desc "Restart unicorn using 'upgrade'"
   task :restart => :environment do
     invoke 'unicorn:stop'
     invoke 'unicorn:start'
   end
 end
-
-# For help in making your deploy script, see the Mina documentation:
-#
-#  - http://nadarei.co/mina
-#  - http://nadarei.co/mina/tasks
-#  - http://nadarei.co/mina/settings
-#  - http://nadarei.co/mina/helpers
-
