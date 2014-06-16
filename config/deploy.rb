@@ -22,6 +22,7 @@ end
 server =  ENV['MINA_ENV']  || 'staging'
 puts "deploying with ENV: #{server}"
 load_config(server)
+set :app_path, "#{deploy_to}/#{current_path}"
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
