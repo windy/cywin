@@ -1,42 +1,41 @@
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
-# require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
-# require 'mina/rvm'    # for rvm support. (http://rvm.io)
+require 'mina/rbenv'
+require 'yaml'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
 #   deploy_to    - Path to deploy into.
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
+#
+def load_config(server)
+  thirdpillar_config =YAML.load(File.open('config/mina.yml'))
+  puts "———-> configuring #{server} server"
+  set :domain, thirdpillar_config[server]['domain'] #retriving the domain value for current server
+  set :deploy_to, thirdpillar_config[server]['deploy_to'] #retriving the deploy_to value for current server
+  set :repository, thirdpillar_config[server]['repository']
+  set :branch, thirdpillar_config[server]['branch']
+end
 
-set :domain, 'yafeilee.me'
-set :deploy_to, '/home/ruby/cywin'
-set :repository, 'git@github.com:windy/cywin.git'
-set :branch, 'staging'
-set :app_path, "#{deploy_to}/#{current_path}"
-
-#set :rvm_path, '/usr/local/rvm/script/rvm'
+server =  ENV['MINA_ENV']  || 'staging'
+puts "deploying with ENV: #{server}"
+load_config(server)
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
 set :shared_paths, ['config/database.yml', 'config/application.yml', 'config/service.yml', 'log', 'tmp', 'public/uploads']
 
-# Optional settings:
 set :user, 'ruby'    # Username in the server to SSH to.
-#   set :port, '30000'     # SSH port number.
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
 task :environment do
   # If you're using rbenv, use this to load the rbenv environment.
   # Be sure to commit your .rbenv-version to your repository.
-  # invoke :'rbenv:load'
-
-  queue! %[source /usr/local/rvm/scripts/rvm]
-  # For those using RVM, use this to load an RVM version@gemset.
-  queue! %[rvm use 2.0.0]
-  #invoke :'rvm:use[ruby-2.0.0-p247@default]'
+  invoke :'rbenv:load'
+  queue! 'export RUBYTAOBAO=1'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -79,7 +78,7 @@ end
 namespace :unicorn do
   set :unicorn_pid, "#{app_path}/tmp/pids/unicorn_cywin.pid"
   set :start_unicorn, %{
-    cd #{app_path} && bundle exec unicorn -c config/unicorn/#{rails_env}.rb -E #{rails_env} -D
+    cd #{app_path} && bundle exec unicorn -c config/unicorn/#{branch}.rb -E #{rails_env} -D
   }
 
 #                                                                    Start task
