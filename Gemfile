@@ -56,6 +56,10 @@ gem 'rails-i18n', '~> 4.0.0'
 # web server
 gem 'unicorn'
 
+# deploy
+gem 'mina', require: false
+gem 'mina-sidekiq', require: false
+
 group :development do
   gem 'spring'
   gem 'quiet_assets'
