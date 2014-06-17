@@ -1,4 +1,4 @@
-@app.controller 'ProjectCreateRequireController', [ '$scope', '$http', '$cookieStore', '$routeParams', '$location', '$window', ($scope, $http, $cookieStore, $routeParams, $location, $window)->
+@app.controller 'ProjectCreateRequireController', [ '$scope', '$http', '$routeParams', '$location', '$window', ($scope, $http, $routeParams, $location, $window)->
 
   $scope.project_id = $routeParams.id
   $scope.money_require_flag = true
