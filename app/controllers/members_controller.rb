@@ -80,11 +80,7 @@ class MembersController < ApplicationController
       end
     else
       searched = User.where("name like ?", "%#{search}%").limit(5)
-      if searched.empty?
-        render_fail
-      else
-        render_success( nil, data: users_json(searched) )
-      end
+      render_success( nil, data: users_json(searched) )
     end
   end
 

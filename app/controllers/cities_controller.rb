@@ -10,11 +10,7 @@ class CitiesController < ApplicationController
       render_success( nil, data: cities_json(searched) )
     else
       searched = City.where("name like ?", "%#{search}%").limit(max)
-      if searched.empty?
-        render_fail
-      else
-        render_success( nil, data: cities_json(searched) )
-      end
+      render_success( nil, data: cities_json(searched) )
     end
   end
 

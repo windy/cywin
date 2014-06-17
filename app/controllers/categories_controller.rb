@@ -17,11 +17,7 @@ class CategoriesController < ApplicationController
       render_success( nil, data: categories_json(searched) )
     else
       searched = Category.where("name like ?", "%#{search}%").limit(max)
-      if searched.empty?
-        render_fail
-      else
-        render_success( nil, data: categories_json(searched) )
-      end
+      render_success( nil, data: categories_json(searched) )
     end
   end
 
