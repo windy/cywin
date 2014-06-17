@@ -1,4 +1,4 @@
-@app.controller 'ProjectCreateBasicController', [ '$scope', '$http', '$cookieStore', '$location', '$routeParams', '$upload', '$timeout', ($scope, $http, $cookieStore, $location, $routeParams, $upload, $timeout)->
+@app.controller 'ProjectCreateBasicController', [ '$scope', '$http', '$location', '$routeParams', '$upload', '$timeout', ($scope, $http, $location, $routeParams, $upload, $timeout)->
 
   $scope.project_id = $routeParams.id
   $scope.project = {}

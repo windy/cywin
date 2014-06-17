@@ -1,6 +1,6 @@
 #= require angular-file-upload-shim
 #= require angular
-#= require angular-cookies
+#= require angular-cookie
 #= require angular-resource
 #= require angular-route
 #= require angular-sanitize
@@ -9,7 +9,7 @@
 #= require_self
 #= require_tree ./angularjs
 
-@app = angular.module('app', ['ngCookies', 'ngSanitize', 'ngRoute', 'angularFileUpload', 'mm.foundation'])
+@app = angular.module('app', ['ngSanitize', 'ngRoute', 'angularFileUpload', 'mm.foundation', 'ipCookie'])
 
 @app.config ["$httpProvider", '$routeProvider', ($httpProvider, $routeProvider) ->
     # 配置 json 与 csrf
@@ -30,4 +30,3 @@
     .otherwise
       redirectTo: '/project/basic'
 ]
-
