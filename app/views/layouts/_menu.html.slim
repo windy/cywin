@@ -36,5 +36,4 @@ li
       i.fi-address-book
     | 参与创业 
 li
-  form ng-submit='search($event)' ng-controller='AllSearchController'
-    input.search type='text' ng-model='q' ng-init='q="#{@q}"' ng-click='$event.stopPropagation()' placeholder='搜索项目, 人'
+  = render 'layouts/search_input'
