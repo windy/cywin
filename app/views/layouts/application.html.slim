@@ -45,7 +45,8 @@ html
                 = link_to '登录', new_user_session_path, class: 'login-button'
             ul.left
               li.has-form
-                = text_field_tag 'search', nil, placeholder: '搜索项目, 人'
+                form ng-submit='search($event)' ng-controller='AllSearchController'
+                  input.search type='text' ng-model='q' placeholder='搜索项目, 人'
       .main-container
         = yield
       = render 'layouts/foot'
