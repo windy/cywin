@@ -1,23 +1,8 @@
-@app.controller 'MessageController', [ '$scope', '$http', '$timeout', ($scope, $http, $timeout)->
-  
-  $scope.message_count = 0
+@app.controller 'MessageController', [ '$scope', '$rootScope', '$http', '$timeout', 'message', ($scope, $rootScope, $http, $timeout, message)->
 
-  get_message_count = ()->
-    $http
-      url: '/messages/count'
-      method: 'GET'
-    .then (res)->
-      $scope.message_count = res.data.count
-
-  loop_get_message_count = ()->
-    $timeout ()->
-      get_message_count()
-      loop_get_message_count()
-    , 5000
-
-  get_message_count()
-  loop_get_message_count()
+  $scope.message_count = ()->
+    $rootScope.message_count
 
   $scope.is_empty = ()->
-    $scope.message_count == 0
+    $rootScope.message_count == 0
 ]
