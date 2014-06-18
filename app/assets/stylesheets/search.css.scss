@@ -1,0 +1,26 @@
+.search {
+  em {
+    font-style: normal;
+    margin: 0 0.5rem;
+    color: red;
+    font-weight: 200;
+  }
+
+  .projects, .jobs {
+    border-top: 1px solid #ddd;
+    margin-bottom: 1.5rem;
+  }
+  .projects {
+    border-top: 1px solid #ddd;
+    margin-bottom: 1.5rem;
+  }
+
+  .more {
+    display: inline-block;
+    margin-top: 1rem;
+  }
+
+  .no-content {
+    color: #999;
+  }
+}

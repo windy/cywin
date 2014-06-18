@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+
+  searchable do
+    text :name, :description
+  end
+
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
