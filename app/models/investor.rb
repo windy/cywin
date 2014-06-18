@@ -1,6 +1,15 @@
 class Investor < ActiveRecord::Base
   paginates_per 10
 
+  searchable do
+    text :name do
+      user.name
+    end
+
+    text :description
+    string :status
+  end
+
   my_const_set(:INVESTOR_TYPES, [ :PERSON, :ORGANIZATION ])
 
   # status 标志是否开始审核, 并同时创建审核单

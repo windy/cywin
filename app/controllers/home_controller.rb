@@ -20,9 +20,10 @@ class HomeController < ApplicationController
       paginate page: 1, per_page: 5
     end.results
 
-    @users = User.search do
+    @investors = Investor.search do
       fulltext "*#{params[:q]}*"
       paginate page: 1, per_page: 5
+      with(:status, 'passed')
     end.results
 
     @person_requires = PersonRequire.search do

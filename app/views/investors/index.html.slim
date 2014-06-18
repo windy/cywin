@@ -9,5 +9,14 @@
         p 关注优秀的投资人, 跟投项目, 学习投资理念
   .row
     .small-12.columns
-      = render partial: 'investor', collection: @investors
-      = paginate @investors
+      form ng-submit='search()' ng-controller='InvestorSearchController'
+        .row.search.collapse
+          .small-9.medium-6.large-4.columns
+            input type='text' ng-model='q' ng-init='q="#{params[:q]}"' placeholder='输入投资人信息, 如: 张三'
+          .small-3.medium-1.large-1.end.columns
+            a.button.postfix ng-click='search()' 投资人搜索
+      - if @investors.blank?
+        p.no-content 没有搜索结果
+      - else
+        = render partial: 'investor', collection: @investors
+        = paginate @investors
