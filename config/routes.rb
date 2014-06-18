@@ -161,10 +161,11 @@ Rails.application.routes.draw do
     root :to=> "dashboard#index"
   end
   root :to => "home#index"
-  resources :home do
+  resources :home, only: [] do
     collection do
       get :index
       get :welcome
+      get :search
     end
   end
   resources :avatars, only: [:create]
