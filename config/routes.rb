@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :talks, only: [:create]
+
   resource :activity, only: [:show]
   resources :about do
     collection do
