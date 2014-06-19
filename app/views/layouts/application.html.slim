@@ -45,7 +45,7 @@ html
                 = link_to '登录', new_user_session_path, class: 'login-button'
             ul.left
               li.has-form
-                = text_field_tag 'search', nil, placeholder: '搜索项目, 人'
+                = render 'layouts/search_input'
       .main-container
         = yield
       = render 'layouts/foot'

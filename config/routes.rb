@@ -115,6 +115,9 @@ Rails.application.routes.draw do
       get :stage2
       post :stage2
     end
+    collection do
+      get :search
+    end
   end
 
   resources :money_requires do

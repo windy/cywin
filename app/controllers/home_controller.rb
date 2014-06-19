@@ -14,6 +14,23 @@ class HomeController < ApplicationController
   end
 
   def search
+    @q = params[:q]
+    @projects = Project.search do
+      fulltext "*#{params[:q]}*"
+      paginate page: 1, per_page: 5
+    end.results
+
+    @investors = Investor.search do
+      fulltext "*#{params[:q]}*"
+      paginate page: 1, per_page: 5
+      with(:status, 'passed')
+    end.results
+
+    @person_requires = PersonRequire.search do
+      fulltext "*#{params[:q]}*"
+      paginate page: 1, per_page: 5
+      with(:status, 'opened')
+    end.results
   end
 
 end

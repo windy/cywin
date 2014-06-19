@@ -1,0 +1,37 @@
+- content_for(:title) do
+  | #{@q} - 搜索
+.search.top-blank
+  .row
+    .small-12.medium-10.medium-centered.columns
+      p 
+        | 搜索
+        em #{@q}
+        | 的结果如下:
+      ul
+        li
+          p 项目:
+          - if @projects.blank?
+            p.no-content 没有搜索结果
+          - else
+            .row
+              .small-12.columns.projects
+                = render partial: 'common/project_list_item', collection: @projects, as: :project
+                = link_to '搜索更多项目...', search_explore_index_path(q: params[:q]), class: 'more' 
+        li
+          p 投资人:
+          - if @investors.blank?
+            p.no-content 没有搜索结果
+          - else
+            .row
+              .small-12.columns.investors
+                = render partial: 'investors/investor', collection: @investors
+                = link_to '搜索更多投资人...', search_investors_path(q: params[:q]), class: 'more' 
+        li
+          p 工作:
+          - if @person_requires.blank?
+            p.no-content 没有搜索结果
+          - else
+            .row
+              .small-12.columns.jobs
+                = render partial: "jobs/person_requires", locals: { person_requires: @person_requires }
+                = link_to '搜索更多工作...', search_jobs_path(q: params[:q]), class: 'more' 

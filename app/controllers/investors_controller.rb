@@ -6,6 +6,15 @@ class InvestorsController < ApplicationController
     @investors = Investor.passed.default_order.page(params[:page])
   end
 
+  def search
+    @investors = Investor.search do
+      fulltext "*#{params[:q]}*"
+      paginate page: params[:page], per_page: PersonRequire::PER_PAGE
+      with(:status, 'passed')
+    end.results
+    render :index
+  end
+
   def new
     @investor = current_user.investor || Investor.new
   end
