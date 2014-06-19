@@ -14,7 +14,7 @@
           - if current_user == @user
             .edit
               = link_to '编辑', settings_profile_path
-    - unless current_user == @user
+    - if current_user && current_user != @user
       ul.small-block-grid-2.list.ng-cloak ng-controller='FunsController' ng-init='init(#{@user.id}, #{current_user.fun?(@user)})'
         li 
           a ng-hide='loading || is_fun' ng-click='add_fun()' 关注

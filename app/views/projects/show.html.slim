@@ -2,14 +2,7 @@
   | #{@project.name}
 .project-show.top-blank
   = render 'head'
-  - if current_user
-    .row.operate
-      .small-6.columns ng-controller='StarsController' ng-init='init(#{@project.id}, #{current_user.try(:star?, @project)})'
-        a ng-click='add_star()' ng-hide='is_starred || loading' 关注
-        a ng-click='remove_star()' ng-show='is_starred && ! loading' 取消关注
-        a ng-show='loading' loading
-      .small-6.columns ng-controller='TalksController' ng-init='init(#{@project.id})'
-        a ng-click='talk()' 约谈
+  = render 'star'
   = render partial: 'show_tab', locals: { type: 'basic' }
   .row.content
     .small-12.columns
