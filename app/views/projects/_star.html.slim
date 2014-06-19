@@ -1,7 +1,24 @@
-.row.operate ng-controller='StarsController' ng-init='init(#{@project.id}, #{current_user.star?(@project)})'
-  .small-6.columns
-    a ng-click='add_star()' ng-hide='is_starred || loading' 关注
-    a ng-click='remove_star()' ng-show='is_starred && ! loading' 取消关注
-    a ng-show='loading' loading
-  .small-6.columns
-    = link_to '约谈', '#'
+- if current_user
+  .row.operate
+    .small-6.columns ng-controller='StarsController' ng-init='init(#{@project.id}, #{current_user.try(:star?, @project)})'
+      a ng-click='add_star()' ng-hide='is_starred || loading' 关注
+      a ng-click='remove_star()' ng-show='is_starred && ! loading' 取消关注
+      a ng-show='loading' loading
+    .small-6.columns ng-controller='TalksController' ng-init='init(#{@project.id})'
+      a ng-click='open_talk("project_talk")' 约谈
+      script type='text/ng-template' id='talk.html'
+        .row.talk-modal
+          a.close-reveal-modal ng-click="cancel()" ×
+          .small-12.columns
+            h3 约谈项目创始人
+            hr
+            .row
+              .small-12.medium-4.columns
+                select ng-model='hash.type' ng-options='type.name for type in types' disabled=''
+            p.notice
+              | 平台将发送以下内容给对方的注册邮箱, 随后, 你们可以通过邮件私下进行交谈.
+            h5.title 约谈内容:
+            .talk-content ng-bind-html='talk_content'
+            hr
+            button ng-click='talk()' 发送
+            a.back ng-click='cancel()' 取消
