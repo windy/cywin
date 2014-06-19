@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
     render json: { count: current_user.messages.untreat.size }
   end
 
-  after_action :mark_all_as_read
+  after_action :mark_all_as_read, only: :index
 
   private
   def mark_all_as_read
