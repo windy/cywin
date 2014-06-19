@@ -1,0 +1,9 @@
+- flash.each do |key, value|
+  - if key.to_s == 'notice'
+    - key = 'success'
+  - else key.to_s == 'error'
+    - key = 'warning'
+  
+  .alert-box data-alert='' class="#{key}"
+    | #{value}
+    a.close href='#' &times;

@@ -1,7 +1,5 @@
 - content_for(:title) do
   | 登录
-- if flash[:notice]
-  .alert-box data-alert='' #{flash[:notice]}
 .user-new.top-blank
   .row
     .small-12.large-10.large-centered.columns
@@ -13,8 +11,6 @@
           .small-12.medium-8.large-7.columns
             = f.text_field 'email', placeholder: '邮箱地址'
             = f.password_field 'password', placeholder: '密码'
-            p.alert
-              | #{flash[:alert]}
             = f.submit '登录', class: 'button'
             = link_to '没有账号, 注册?', new_user_registration_path, class: 'login-link'
 

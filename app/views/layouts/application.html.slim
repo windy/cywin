@@ -19,6 +19,7 @@ html
           = render 'layouts/navigation'
           section.main-section
             .main-container
+              = render 'layouts/flashes'
               = render 'layouts/email_tip'
               = yield
             = render 'layouts/foot'
@@ -47,6 +48,8 @@ html
               li.has-form
                 = render 'layouts/search_input'
       .main-container
+        = render 'layouts/flashes'
+        = render 'layouts/email_tip'
         = yield
       = render 'layouts/foot'
       
