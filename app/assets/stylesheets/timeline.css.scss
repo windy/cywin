@@ -63,11 +63,18 @@
     .content {
       padding-bottom: 1rem;
       margin-bottom: 1rem;
+
+      .title-wrapper {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
       .title {
-        display: inline-block;
+        display: inline;
       }
       .sub-title {
-        display: inline-block;
+        display: inline;
         color: #888;
         padding-left: 1rem;
         font-size: 90%;
