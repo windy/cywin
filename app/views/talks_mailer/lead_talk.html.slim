@@ -1,5 +1,9 @@
-p 领投约谈
-
+p
+  | 你好, 我是 #{@user.name}, 我对你的项目 
+  = link_to "#{@project.name} ", @project
+  | 的融资领投事宜很感兴趣, 想与你聊聊, 我的邮箱是: #{@user.email}.
+p
+  | 你可以直接回复本邮件与我联系.
 p
   | PS: 你可以通过创业赢的账号链接查看我的信息: 
   = link_to "#{@user.name} 的主页", user_path(@user)

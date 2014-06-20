@@ -4,8 +4,8 @@
       a ng-click='add_star()' ng-hide='is_starred || loading' 关注
       a ng-click='remove_star()' ng-show='is_starred && ! loading' 取消关注
       a ng-show='loading' loading
-    .small-6.columns ng-controller='TalksController' ng-init='init(#{@project.id})'
-      a ng-click='open_talk("project_talk")' 约谈
+    .small-6.columns ng-controller='TalksController' ng-init='init(false)'
+      a ng-click='open_talk("project_talk", #{@project.id})' 约谈
       script type='text/ng-template' id='talk.html'
         .row.talk-modal
           a.close-reveal-modal ng-click="cancel()" ×

@@ -5,6 +5,7 @@ class TalksMailerPreview < ActionMailer::Preview
   end
 
   def lead_talk
+    TalksMailer.lead_talk(User.first, MoneyRequire.first)
   end
 
   def work_talk
