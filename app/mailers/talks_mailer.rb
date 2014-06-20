@@ -10,11 +10,12 @@ class TalksMailer < ActionMailer::Base
     mail from: @user.email, to: @project.owner.email, subject: '有人对你的项目发起了融资约谈邀请'
   end
 
-  def lead_talk(user_id, project_id)
+  def lead_talk(user_id, money_require_id)
     @user = User.find(user_id)
-    @project = Project.find(project_id)
+    @money_require = MoneyRequire.find(money_require_id)
+    @project = @money_require.project
 
-    mail from: @user.email, to: @project.owner.email, subject: '有人对你的项目发起了领投约谈邀请'
+    mail from: @user.email, to: @project.owner.email, subject: '有人想领投你的项目'
   end
 
   def work_talk(user_id, project_id)

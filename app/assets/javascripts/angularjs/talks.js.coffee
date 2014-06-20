@@ -1,20 +1,7 @@
 @app.controller 'TalksController', [ '$scope', '$http', '$modal', ($scope, $http, $modal)->
 
-  $scope.init = (project_id, is_talked)->
-    $scope.project_id = project_id
+  $scope.init = (is_talked)->
     $scope.is_talked = is_talked
-
-  $scope.project_talk = ()->
-    $http
-      url: '/talks'
-      method: 'POST'
-      data:
-        type: 'project_talk'
-        project_id: $scope.project_id
-    .success (res)->
-      if res.success
-        # OK
-        return 'ok'
 
   $scope.open_talk = (type, target_id)->
     modal = $modal.open
@@ -24,7 +11,7 @@
         type: ->
           type
         target_id: ->
-          $scope.project_id
+          target_id
     
     modal.result.then (is_talked)->
       $scope.is_talked = is_talked

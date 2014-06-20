@@ -9,6 +9,8 @@ class TalksController < ApplicationController
       @project = Project.find(params[:target_id])
       render 'talks_mailer/project_talk', layout: false
     when 'lead_talk'
+      @money_require = MoneyRequire.find(params[:target_id])
+      @project = @money_require.project
       render 'talks_mailer/lead_talk', layout: false
     when 'work_talk'
       render 'talks_mailer/work_talk', layout: false
@@ -24,7 +26,8 @@ class TalksController < ApplicationController
       @project = Project.find(params[:target_id])
       @talk.target = @project
     when 'lead_talk'
-      #TODO
+      @money_require = MoneyRequire.find(params[:target_id])
+      @talk.target = @money_require
     when 'work_talk'
       #TODO
     else
