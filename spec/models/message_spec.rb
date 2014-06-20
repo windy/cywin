@@ -15,4 +15,11 @@ describe Message do
     expect(message).to be_is_read
   end
 
+  it "#treated" do
+    @user = create(:user)
+    message = create(:message_must_action, user: @user)
+    expect(@user.messages.untreat.size).to eq(1)
+    expect { message.done }.to change { @user.messages.treated.size }.by(1)
+  end
+
 end

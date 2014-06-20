@@ -13,7 +13,7 @@ class Message < ActiveRecord::Base
 
   scope :default_order, -> { order('created_at DESC') }
   scope :untreat, -> { where(status: nil).where(must_action: true) }
-  scope :treated, -> { where('status not ?', nil) }
+  scope :treated, -> { where.not(status: nil) }
   scope :unread, -> { where(is_read: nil) }
 
   def is_read?
