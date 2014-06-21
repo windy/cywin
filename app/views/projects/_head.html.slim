@@ -1,12 +1,12 @@
 .row.head
-  .small-6.large-2.columns
+  .small-4.medium-3.large-2.columns
     = image_tag @project.logo.image_url
-  .small-6.large-10.columns
+  .small-8.medium-9.large-10.columns
     .name-area
       h4.name
         = link_to @project.name, @project
       p.sub-name
-        | #{@project.description}
+        | #{@project.oneword}
       p.info
         i.fi-home
         span.city
