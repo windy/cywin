@@ -2,6 +2,17 @@
   | #{@project.name}
 .project-show.top-blank
   = render 'head'
+  /! JiaThis Button BEGIN
+  .row
+    .small-12.columns
+      .jiathis_style_24x24.right
+        a.jiathis_button_tsina
+        a.jiathis_button_weixin
+        a.jiathis_button_douban
+        /! a.jiathis_button_tqq
+        /! a href="http://www.jiathis.com/share?uid=1938659" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"
+
+  /!-- JiaThis Button END 
   = render 'star'
   = render partial: 'show_tab', locals: { type: 'basic' }
   .row.content
@@ -45,3 +56,12 @@
               .more-info
                 = link_to '查看更多团队故事...', team_project_path(@project)
         = render 'job'
+javascript:
+  var jiathis_config={
+    data_track_clickback:true,
+    summary:"#{@project.description}",
+    title: "#{@project.fullname} 这个创业赢上的项目非常不错",
+    shortUrl:false,
+    hideMore:false
+  }
+script type='text/javascript' src="http://v3.jiathis.com/code/jia.js?uid=1938659" charset="utf-8"
