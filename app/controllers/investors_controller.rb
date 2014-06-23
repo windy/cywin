@@ -27,10 +27,7 @@ class InvestorsController < ApplicationController
   end
 
   def idea
-    if current_user.investor.blank?
-      redirect_to root_path
-      return
-    end
+    authorize! :update, Investor
     @investor = current_user.investor
     @investidea = current_user.investor.investidea || current_user.investor.build_investidea
     if @investidea.new_record?
@@ -39,22 +36,29 @@ class InvestorsController < ApplicationController
   end
 
   def prove
-    if current_user.investor.blank?
-      redirect_to root_path
-      return
-    end
+    authorize! :update, Investor
     @investor = current_user.investor
   end
 
   def info
+    authorize! :update, Investor
+    @investor = current_user.investor
+  end
+
+  # 提交审核
+  def submit
+    authorize! :update, Investor
+    @investor = current_user.investor
+    if @investor.submit
+      render_success
+    else
+      render_fail
+    end
   end
 
   def create
+    authorize! :update, Investor
     @investor = current_user.investor
-    if @investor.blank?
-      render_fail
-      return
-    end
 
     # 名字使用统一的用户名
     current_user.name = params[:name]
@@ -71,12 +75,8 @@ class InvestorsController < ApplicationController
   end
 
   private
-    def investor_params
-      params.permit(:phone, :investor_type, :company, :title, :description )
-    end
+  def investor_params
+    params.permit(:phone, :investor_type, :company, :title, :description )
+  end
 
-    def investidea_params
-      params.require(:investor).require(:investidea).permit(:coin_type, :min, :max, :industry, :give, :idea)
-    end
-    
 end

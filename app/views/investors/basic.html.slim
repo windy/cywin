@@ -20,6 +20,8 @@
             span.radio
               input type='radio' ng-model='investor.investor_type' id="investor_type_value_#{type}" value="#{type}"
               label for='investor_type_value_#{type}' #{t('investor.investor_types.'+ type)}
+          small.error.ng-cloak ng-show='errors.investor_type'
+            | {{ errors.investor_type }}
       .row
         .small-12.medium-6.columns
           input type='text' placeholder='所在公司' ng-model='investor.company' ng-class='{ error: errors.company }'

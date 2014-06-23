@@ -122,10 +122,12 @@ Rails.application.routes.draw do
       get :idea
       get :prove
       get :info
+      post :submit
     end
   end
 
   resources :investideas, only: [:index, :create]
+  resources :cards, only: [:index, :create]
 
   resources :money_requires do
     member do

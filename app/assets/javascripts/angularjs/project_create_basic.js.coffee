@@ -50,7 +50,7 @@
   $scope.upload_logo = ($files)->
     $scope.logo_error = null
     for file in $files
-      $scope.upload = $upload.upload
+      $upload.upload
         url: '/logos'
         method: 'POST'
         file: file
