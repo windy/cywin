@@ -1,6 +1,0 @@
-div.row.project
-  = render partial: "header", locals: { stage: :stage2 }
-  h1 身份验证
-  = simple_form_for @investor, url: stage2_investor_url(@investor.id), method: 'post' do |f|
-    = render partial: "common/input_preview", locals: { model: @investor, column_name: :card, f: f, options: { required: true } }
-    = f.button :submit, "完成"

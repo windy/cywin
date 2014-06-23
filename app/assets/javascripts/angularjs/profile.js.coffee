@@ -3,7 +3,7 @@
   $scope.upload_avatar = ($files)->
     $scope.avatar_error = null
     for file in $files
-      $scope.upload = $upload.upload
+      $upload.upload
         url: '/avatars'
         method: 'POST'
         data:

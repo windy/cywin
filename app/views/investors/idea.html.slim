@@ -1,0 +1,50 @@
+- content_for(:title) do
+  | 投资理念 - 申请投资人
+.row.top-blank ng-controller='InvestorIdeaController'
+  .small-12.columns
+    = render partial: "header", locals: { stage: :idea }
+    h3.title 投资理念
+    form
+      .row
+        .small-12.medium-6.columns
+          label.radio_buttons 货币类型
+          - Investidea::COIN_TYPES.each do |type|
+            span.radio
+              input type='radio' ng-model='investidea.coin_type' id="coin_type_value_#{type}" value="#{type}"
+              label for='coin_type_value_#{type}' #{t('investidea.coin_types.'+ type)}
+          small.error.ng-cloak ng-show='errors.coin_type'
+            | {{ errors.coin_type }}
+      .row
+        .small-12.medium-6.columns
+          .row.collapse
+            .small-5.columns
+              input type='text' placeholder='最小投资额' ng-model='investidea.min' ng-class='{ error: errors.min }'
+              small.error.ng-cloak ng-show='errors.min'
+                | {{ errors.min }}
+            .small-2.columns
+              span.postfix
+                | --
+            .small-5.columns
+              input type='text' placeholder='最大投资额' ng-model='investidea.max' ng-class='{ error: errors.max }'
+              small.error.ng-cloak ng-show='errors.max'
+                | {{ errors.max }}
+      .row
+        .small-12.medium-6.columns
+          input type='text' placeholder='关注行业: 如互联网, 多个以逗号分开' ng-model='investidea.industry' ng-class='{ error: errors.industry }'
+          small.error.ng-cloak ng-show='errors.industry'
+            | {{ errors.industry }}
+      .row
+        .small-12.medium-6.columns
+          input type='text' placeholder='可为项目提供: 如导师, 场地' ng-model='investidea.give' ng-class='{ error: errors.give }'
+          small.error.ng-cloak ng-show='errors.give'
+            | {{ errors.give }}
+      .row
+        .small-12.medium-6.columns
+          input type='text' placeholder='投资理念: 喜欢什么样的项目' ng-model='investidea.idea' ng-class='{ error: errors.idea }'
+          small.error.ng-cloak ng-show='errors.idea'
+            | {{ errors.idea }}
+      .row
+        .small-12.medium-6.columns
+          .control-actions
+            button ng-click='submit()' 下一步
+            a.back ng-click='prev()' 返回上一步

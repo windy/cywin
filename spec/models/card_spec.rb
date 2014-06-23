@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe Talk do
+describe Card do
 end

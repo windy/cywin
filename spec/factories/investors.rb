@@ -8,7 +8,6 @@ FactoryGirl.define do
     company "company"
     title "CTO"
     description "爱好者"
-    card { fixture_file_upload( File.join(Rails.root, "spec/fixtures/logo.png"), "image/png" ) }
 
     trait :applied do
       status 'applied'

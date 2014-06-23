@@ -41,7 +41,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :activity, only: [:show]
   resources :about do
     collection do
       get :index
@@ -73,6 +72,7 @@ Rails.application.routes.draw do
   end
 
   resources :syndicates
+  resources :investments, only: [:index, :create]
 
   resources :interest_users, only: [:index]
   resources :jobs, only: [:index] do
@@ -114,17 +114,20 @@ Rails.application.routes.draw do
       end
     end
   end
+
   resources :investors do
-    member do
-      get :stage1
-      post :stage1
-      get :stage2
-      post :stage2
-    end
     collection do
       get :search
+      get :basic
+      get :idea
+      get :prove
+      get :info
+      post :submit
     end
   end
+
+  resources :investideas, only: [:index, :create]
+  resources :cards, only: [:index, :create]
 
   resources :money_requires do
     member do

@@ -1,8 +1,8 @@
 .head
   ul.small-block-grid-1.medium-block-grid-3.list
     li
-      = link_to "基本信息","javascript:void(0)", class: active_for(stage, :stage0)
+      a class="#{active_for(stage, :basic)}" 基本信息
     li
-      = link_to "投资理念","javascript:void(0)", class: active_for(stage, :stage1)
+      a class="#{active_for(stage, :idea)}" 投资理念
     li
-      = link_to "创业需求","javascript:void(0)", class: active_for(stage, :stage2)
+      a class="#{active_for(stage, :prove)}" 身份验证

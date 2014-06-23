@@ -37,7 +37,6 @@ class Investor < ActiveRecord::Base
 
   # basic info validates
 
-  validates :name, presence: true
   validates :phone, presence: true
   validates :investor_type, presence: true, inclusion: INVESTOR_TYPES
   validates :company, presence: true
@@ -47,15 +46,7 @@ class Investor < ActiveRecord::Base
   scope :default_order, -> { order(created_at: :desc) }
   scope :passed, -> { where(status: 'passed') }
 
-  mount_uploader :card, CardUploader
-
-  def validate_and_submit
-    if self.card.blank?
-      self.errors.add(:card, "身份证明信息不能为空") 
-      return false
-    end
-    submit
-  end
+  has_one :card
 
   def pass_with_audit(note = nil)
     investor_audit = InvestorAudit.new

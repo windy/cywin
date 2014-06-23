@@ -2,8 +2,14 @@ class Investment < ActiveRecord::Base
   belongs_to :user
   belongs_to :money_require
 
+  scope :selfcreate, -> { where(money_require_id: nil) }
+
+  validates :name, presence: true, unless: ->(m) { m.money_require_id.present? }
+  validates :address, presence: true, unless: ->(m) { m.money_require_id.present? }
+  validates :description, presence: true, unless: ->(m) { m.money_require_id.present? }
+
   # 只有一份投资
-  validates :money_require_id, uniqueness: { scope: :user_id, message: '不能重复投资' }
+  validates :money_require_id, uniqueness: { scope: :user_id, message: '不能重复投资' }, if: ->(m) { m.money_require_id.present? }
 
   validates :money, presence: true, numericality: { greater_than: 0, only_integer: true }, if: Proc.new { |m| m.money_require_id.present? }
 
