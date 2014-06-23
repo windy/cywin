@@ -1,10 +1,10 @@
 - content_for(:title) do
   | 申请投资人
-.row.top-blank
+.row.top-blank ng-controller='InvestorBasicController'
   .small-12.columns
     = render partial: "header", locals: { stage: :basic }
     h3.title 基本信息
-    form ng-controller='InvestorBasicController' ng-submit='submit()'
+    form
       .row
         .small-12.medium-6.columns
           input type='text' placeholder='你的真实姓名' ng-model='investor.name' ng-class='{ error: errors.name }'
@@ -35,11 +35,39 @@
           textarea placeholder='个人简介' ng-model='investor.description' ng-class='{ error: errors.description }'
           small.error.ng-cloak ng-show='errors.description'
             | {{ errors.description }}
-      h4.title 过往投资案例
-      ng-form
-        input type='text' ng-model='investment.name' placeholder='项目名称' 
-        input type='text' ng-model='investment.address' placeholder='项目地址'
-        textarea ng-model='investment.description' placeholder='简单介绍这个项目的情况'
-        button.small 添加
-      hr
-      button ng-click='submit()' 下一步
+    h4.title 过往投资案例
+    ul.small-block-grid-1.medium-block-grid-2
+      li ng-repeat='im in investments'
+        table
+          tbody
+            tr
+              td 项目名称
+              td
+                | {{ im.name }}
+            tr
+              td 项目地址
+              td
+                | {{ im.address }}
+            tr
+              td.description 投资描述
+              td
+                | {{ im.description }}
+    p
+      a ng-click='investment_added = true' 添加一个案例
+    .row
+      .small-12.medium-6.columns
+        form ng-show='investment_added'
+          input type='text' ng-model='investment.name' placeholder='项目名称' ng-class='{ error: investment_errors.name }'
+          small.error.ng-cloak ng-show='investment_errors.name'
+            | {{ investment_errors.name }}
+          input type='text' ng-model='investment.address' placeholder='项目地址' ng-class='{ error: investment_errors.address }'
+          small.error.ng-cloak ng-show='investment_errors.address'
+            | {{ investment_errors.address }}
+          textarea ng-model='investment.description' placeholder='简单介绍这个项目的投资运作情况' ng-class='{ error: investment_errors.description }'
+          small.error.ng-cloak ng-show='investment_errors.description'
+            | {{ investment_errors.description }}
+          .control-actions
+            button.small ng-click='investment_create()' 添加
+            a.back ng-click='investment_added = false' 取消
+    hr
+    button ng-click='submit()' 下一步

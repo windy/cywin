@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'investments/index'
-
-  get 'investments/create'
-
   namespace :settings do
     resource :profile, only: [:show, :update]
     resource :password, only: [:show, :update]
@@ -45,7 +41,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :activity, only: [:show]
   resources :about do
     collection do
       get :index
@@ -77,6 +72,7 @@ Rails.application.routes.draw do
   end
 
   resources :syndicates
+  resources :investments, only: [:index, :create]
 
   resources :interest_users, only: [:index]
   resources :jobs, only: [:index] do
@@ -118,6 +114,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
   resources :investors do
     collection do
       get :search
@@ -127,6 +124,8 @@ Rails.application.routes.draw do
       get :info
     end
   end
+
+  resources :investideas, only: [:index, :create]
 
   resources :money_requires do
     member do

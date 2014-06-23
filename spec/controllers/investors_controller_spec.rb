@@ -4,12 +4,13 @@ describe InvestorsController do
   login_user
   describe "GET basic" do
     it "assigns a new investor as @investor" do
+
+      expect(@user.investor).to be_nil 
       get :basic
-      assigns(:investor).should be_a_new(Investor)
-      expect(current_user.investor).not_to be_new_record
+      expect(@user.reload.investor).not_to be_new_record
     end
 
-    it "GET new without login" do
+    it "GET basic without login" do
       sign_out :user
       get :basic
       response.should be_redirect

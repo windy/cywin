@@ -34,6 +34,10 @@ class Ability
       can [:update], User do |s|
         s.id == user.id
       end
+
+      if user.investor.present?
+        can [:update], Investor
+      end
     end
 
     # guest
