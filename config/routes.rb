@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'investments/index'
+
+  get 'investments/create'
+
   namespace :settings do
     resource :profile, only: [:show, :update]
     resource :password, only: [:show, :update]
@@ -115,14 +119,12 @@ Rails.application.routes.draw do
     end
   end
   resources :investors do
-    member do
-      get :stage1
-      post :stage1
-      get :stage2
-      post :stage2
-    end
     collection do
       get :search
+      get :basic
+      get :idea
+      get :prove
+      get :info
     end
   end
 

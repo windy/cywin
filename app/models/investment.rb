@@ -2,6 +2,8 @@ class Investment < ActiveRecord::Base
   belongs_to :user
   belongs_to :money_require
 
+  scope :selfcreate, -> { where(money_require_id: nil) }
+
   # 只有一份投资
   validates :money_require_id, uniqueness: { scope: :user_id, message: '不能重复投资' }
 

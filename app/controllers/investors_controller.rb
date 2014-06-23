@@ -15,8 +15,39 @@ class InvestorsController < ApplicationController
     render :index
   end
 
-  def new
-    @investor = current_user.investor || Investor.new
+  def basic
+    @investor = current_user.investor || current_user.build_investor
+    if @investor.new_record?
+      @investor.save(validate: false)
+    end
+
+    respond_to do |format|
+      format.json { render 'basic' }
+      format.html { render 'basic' }
+    end
+  end
+
+  def idea
+    if current_user.investor.blank?
+      redirect_to root_path
+      return
+    end
+    @investor = current_user.investor
+    @investidea = current_user.investor.investidea || current_user.investor.build_investidea
+    if @investidea.new_record?
+      @investidea.save(validate: false)
+    end
+  end
+
+  def prove
+    if current_user.investor.blank?
+      redirect_to root_path
+      return
+    end
+    @investor = current_user.investor
+  end
+
+  def info
   end
 
   def stage1
@@ -50,21 +81,24 @@ class InvestorsController < ApplicationController
     end
   end
 
-  def update
-    if @investor.update( investor_params )
-      redirect_to stage1_investor_path(@investor.id)
-    else
-      render :new
-    end
-  end
-
   def create
-    @investor = Investor.new( investor_params )
-    @investor.user_id = current_user.id
-    if @investor.save
-      redirect_to stage1_investor_path(@investor.id)
+    @investor = current_user.investor
+    if @investor.blank?
+      render_fail
+      return
+    end
+
+    # 名字使用统一的用户名
+    current_user.name = params[:name]
+    unless current_user.save
+      render_fail(nil, current_user)
+      return
+    end
+
+    if @investor.update( investor_params )
+      render_success
     else
-      render :new
+      render_fail(nil, @investor)
     end
   end
 
@@ -74,7 +108,7 @@ class InvestorsController < ApplicationController
     end
 
     def investor_params
-      params.require(:investor).permit(:name, :phone, :investor_type, :company, :title, :description )
+      params.permit(:phone, :investor_type, :company, :title, :description )
     end
 
     def investment_params
