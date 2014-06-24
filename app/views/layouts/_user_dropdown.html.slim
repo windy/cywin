@@ -24,6 +24,9 @@
           = link_to '我的主页', user_path(current_user)
         li
           = link_to '设置',  settings_profile_path
+        - if current_user.has_role?(:admin)
+          li
+            = link_to '后台管理',  admin_root_path
         li
           = link_to '注销', destroy_user_session_path, method: 'DELETE'
 .user-dropdown-exit-link ng-show= 'dropdown_open' ng-click=' dropdown_open = false'
