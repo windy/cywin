@@ -57,6 +57,13 @@ class InvestorsController < ApplicationController
     end
   end
 
+  def show
+    @investor = Investor.find(params[:id])
+    @user = @investor.user
+    @investments = @user.investments.selfcreate
+    @investidea = @investor.investidea
+  end
+
   def create
     authorize! :update, Investor
     @investor = current_user.investor

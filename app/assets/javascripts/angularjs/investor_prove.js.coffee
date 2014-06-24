@@ -31,7 +31,7 @@
       method: 'POST'
     .success (res)->
       if res.success
-        $window.location.href = '/'
+        $window.location.href = '/investors/info'
       else
         $window.location.href = '/'
 
