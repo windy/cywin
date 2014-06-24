@@ -45,4 +45,28 @@ module ApplicationHelper
     end
   end
 
+  def human_investor_status(investor)
+    case investor.status
+    when 'drafted'
+      '草稿'
+    when 'applied'
+      '已提交待审批'
+    when 'passed'
+      '已通过'
+    when 'rejected'
+      '已被拒绝'
+    end
+  end
+
+  def human_investor_audit_status(ia)
+    case ia.status
+    when 'applied'
+      '已提交待审批'
+    when 'passed'
+      '已通过'
+    when 'rejected'
+      '已被拒绝'
+    end
+  end
+
 end

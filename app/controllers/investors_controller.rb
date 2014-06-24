@@ -43,17 +43,25 @@ class InvestorsController < ApplicationController
   def info
     authorize! :update, Investor
     @investor = current_user.investor
+    @investor_audits = @investor.investor_audits.default_order
   end
 
   # 提交审核
   def submit
     authorize! :update, Investor
     @investor = current_user.investor
-    if @investor.submit
+    if @investor.submit_with_audit
       render_success
     else
       render_fail
     end
+  end
+
+  def show
+    @investor = Investor.find(params[:id])
+    @user = @investor.user
+    @investments = @user.investments.selfcreate
+    @investidea = @investor.investidea
   end
 
   def create

@@ -15,9 +15,16 @@
       input type='file' id='card_upload' ng-file-select='upload($files)'
       small.error.ng-cloak ng-show=' card_error ' {{ card_error }}
 
+      p.investor-info-query
+        | 当前申请表状态:
+        em
+          | #{human_investor_status(@investor)}
+
       .row
         .small-12.medium-6.columns.ng-cloak
           .control-actions
+            button ng-show='#{@investor.status == "passed"}' disabled='' 你的申请已经通过了
             button ng-show='#{@investor.status == "applied"}' disabled='' 已经提交, 请耐心等待
             button ng-show='#{@investor.status == "drafted"}' ng-disabled='! can_submit' ng-click='submit()' 提交审核
+            button ng-show='#{@investor.status == "rejected"}' ng-disabled='! can_submit' ng-click='submit()' 再次提交审核
             a.back ng-click='prev()' 上一步

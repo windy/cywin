@@ -17,18 +17,45 @@ class Investor < ActiveRecord::Base
     event :submit do
       transition [:drafted, :rejected] => :applied
     end
+
+    after_transition on: :submit do |investor, transition|
+      #Event.create(
+        #user: investor.user,
+        #action: Event::APPLY_INVESTOR,
+        #target: investor,
+      #)
+    end
     
     event :reject do
       transition :applied => :rejected
     end
 
+    after_transition on: :reject do |investor, transition|
+      #Event.create(
+        #user: investor.user,
+        #action: Event::APPLY_INVESTOR_FAIL,
+        #target: investor,
+      #)
+      investor.user.remove_role(:investor)
+    end
+
     event :pass do
       transition :applied => :passed
+    end
+
+    after_transition on: :pass do |investor, transition|
+      Event.create(
+        user: investor.user,
+        action: Event::APPLY_INVESTOR_SUCCESS,
+        target: investor,
+      )
+      investor.user.add_role(:investor)
     end
   end
 
   belongs_to :user
   has_one :investidea
+  has_many :investor_audits
 
   # 领投人信息
   has_many :money_require, through: :leader_id
@@ -48,6 +75,15 @@ class Investor < ActiveRecord::Base
 
   has_one :card
 
+  def submit_with_audit(note = nil)
+    investor_audit = InvestorAudit.new
+    investor_audit.note = note
+    investor_audit.status = InvestorAudit::APPLIED
+    investor_audit.investor = self
+    investor_audit.save!
+    self.submit!
+  end
+
   def pass_with_audit(note = nil)
     investor_audit = InvestorAudit.new
     investor_audit.note = note
@@ -55,7 +91,6 @@ class Investor < ActiveRecord::Base
     investor_audit.investor = self
     investor_audit.save!
     self.pass!
-    self.user.add_role(:investor)
   end
 
   def reject_with_audit(note = nil)
@@ -65,6 +100,5 @@ class Investor < ActiveRecord::Base
     investor_audit.investor = self
     investor_audit.save!
     self.reject!
-    self.user.remove_role(:investor)
   end
 end

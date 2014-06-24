@@ -1,0 +1,30 @@
+- content_for(:title) do
+  | 进度 - 申请投资人
+
+.row.investor-info-query.top-blank
+  .small-12.columns
+    h3 申请投资人进度查询 
+    hr
+    p
+      | 申请表ID:
+      em
+        | #{@investor.id}
+    p
+      | 当前进度:
+      em
+        | #{human_investor_status(@investor)}
+    hr
+    h4 审批历史
+    table
+      thead
+        tr
+          th 事件
+          th 时间
+          th 备注
+      tbody
+        - @investor_audits.each do |ia|
+          tr
+            td #{human_investor_audit_status(ia)}
+            td #{format_time(ia.created_at)}
+            td #{ia.note}
+    = link_to '返回查看申请表', basic_investors_path, class: 'button'
