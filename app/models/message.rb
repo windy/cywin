@@ -15,6 +15,7 @@ class Message < ActiveRecord::Base
   scope :untreat, -> { where(status: nil).where(must_action: true) }
   scope :treated, -> { where.not(status: nil) }
   scope :unread, -> { where(is_read: nil) }
+  scope :unread_or_must_action, -> { where("is_read IS NULL OR (status IS NULL AND must_action = 't')") }
 
   def is_read?
     !! is_read
