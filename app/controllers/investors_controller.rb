@@ -70,6 +70,7 @@ class InvestorsController < ApplicationController
 
     # 名字使用统一的用户名
     current_user.name = params[:name]
+    current_user.description = params[:description]
     unless current_user.save
       render_fail(nil, current_user)
       return
@@ -84,7 +85,7 @@ class InvestorsController < ApplicationController
 
   private
   def investor_params
-    params.permit(:phone, :investor_type, :company, :title, :description )
+    params.permit(:phone, :investor_type, :company, :title)
   end
 
 end
