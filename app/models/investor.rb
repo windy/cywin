@@ -6,7 +6,9 @@ class Investor < ActiveRecord::Base
       user.name
     end
 
-    text :description
+    text :description do
+      user.description
+    end
     string :status
   end
 
@@ -80,12 +82,15 @@ class Investor < ActiveRecord::Base
   validates :investor_type, presence: true, inclusion: INVESTOR_TYPES
   validates :company, presence: true
   validates :title, presence: true
-  validates :description, presence: true, length: { minimum: 3 }
 
   scope :default_order, -> { order(created_at: :desc) }
   scope :passed, -> { where(status: 'passed') }
 
   has_one :card
+
+  def description
+    self.user.description
+  end
 
   def submit_with_audit(note = nil)
     investor_audit = InvestorAudit.new

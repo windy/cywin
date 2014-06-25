@@ -71,11 +71,6 @@ class User < ActiveRecord::Base
     self.avatar.image_url
   end
 
-  #TODO 目前在领投人使用
-  def description
-    "暂无描述"
-  end
-
   def mark_all_as_read
     self.messages.unread.update_all(is_read: true, read_at: DateTime.now)
   end

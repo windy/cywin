@@ -3,11 +3,9 @@
 FactoryGirl.define do
   factory :investor do
     investor_type Investor::PERSON
-    name "投资人名字"
     phone "15911112222"
     company "company"
     title "CTO"
-    description "爱好者"
 
     trait :applied do
       status 'applied'
