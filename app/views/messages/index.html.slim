@@ -45,6 +45,14 @@
                   | 已经确认了你的项目
                   = link_to message.project.name, message.project
                   | 领投邀请, 请知悉.
+                - when Message::APPLY_INVESTOR_SUCCESS
+                  | 你的投资人
+                  = link_to '申请表', info_investors_path
+                  | 已经通过, 请知悉.
+                - when Message::APPLY_INVESTOR_FAIL
+                  | 你的投资人
+                  = link_to '申请表', info_investors_path
+                  | 没有通过, 请点击链接查看详细原因.
               span.time
                 | #{time_ago_in_words(message.created_at)}前
       

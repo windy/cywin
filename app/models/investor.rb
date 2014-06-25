@@ -37,6 +37,12 @@ class Investor < ActiveRecord::Base
         #target: investor,
       #)
       investor.user.remove_role(:investor)
+      Message.create(
+        user_id: investor.user.id,
+        action: Message::APPLY_INVESTOR_FAIL,
+        must_action: false,
+        target: investor,
+      )
     end
 
     event :pass do
@@ -50,6 +56,12 @@ class Investor < ActiveRecord::Base
         target: investor,
       )
       investor.user.add_role(:investor)
+      Message.create(
+        user_id: investor.user.id,
+        action: Message::APPLY_INVESTOR_SUCCESS,
+        must_action: false,
+        target: investor,
+      )
     end
   end
 
