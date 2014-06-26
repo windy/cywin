@@ -7,13 +7,21 @@
       / 广场
       .square
         h2 推荐
-        ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.recommend-projects
-          - 6.times do
-            .small-12.large-4.columns.recommend-project
-              = link_to root_path do
-                - image_tag 'j/jingpin3.jpg'
-              p
-                | 精品3 - 热爱你的生活
+        - if @recommends.blank?
+          p.no-content 暂无编辑推荐
+        - else
+          ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.recommend-projects
+            li.recommend-project
+              - @recommends.each do |recommend|
+                - project = recommend.project
+                p
+                  = link_to project
+                    - image_tag project.screenshot_cover_try_image_url
+                p
+                  = link_to project do
+                    span #{project.name}
+                    | - 
+                    span #{project.oneword}
         h2 分类
         ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.square-categories.list
           - @categories.each do |c|
@@ -23,11 +31,13 @@
             = link_to '查看所有分类', categories_explore_index_path
         h2 最新项目
         ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.square-projects
-          - @newest_projects.each do |p|
+          - @newest_projects.each do |project|
             li.recommend-project
-              = link_to root_path do
-                - image_tag 'j/jingpin2.jpg'
               p
-                | #{p.fullname}
+                = link_to project do
+                  - image_tag project.screenshot_cover_try_image_url
+              p
+                = link_to project do
+                  | #{project.fullname}
           .small-12.columns.all-projects
             = link_to '查看所有项目', all_explore_index_path

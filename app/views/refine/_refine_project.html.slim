@@ -1,8 +1,7 @@
 .project
   - project = recommend.project
   = link_to project do
-    - #TODO 找一个缺省的封面
-    - image_tag project.screenshot_cover.try(:image_url) || 'j/jingpin1.jpg'
+    - image_tag project.screenshot_cover_try_image_url
   p.summary
     span #{project.name}
     |  - 
