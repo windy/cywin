@@ -19,9 +19,11 @@
     padding-top: 2rem;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+    margin-left: 0;
+    margin-right: 0;
     .list {
       text-align: center;
-      padding-bottom: 0;
+      padding: 0;
       a {
         color: #333;
         font-size: 1.2rem;
@@ -38,10 +40,6 @@
   .content {
     margin-top: 2rem;
     
-    .image {
-      margin-bottom: 2rem;
-    }
-
     .title {
       border-bottom: 1px solid #ddd;
       padding-bottom: 0.5rem;
