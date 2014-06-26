@@ -6,11 +6,13 @@ class HomeController < ApplicationController
       @start_with = @events[-1].try(:created_at).to_i
       render 'login'
     else
+      @recommends = Recommend.all.default_order.includes(:project).limit(3)
       render 'nologin'
     end
   end
 
   def welcome
+    @recommends = Recommend.all.default_order.includes(:project).limit(3)
   end
 
   def search

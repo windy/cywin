@@ -18,30 +18,4 @@
   .row
     .small-12.large-10.large-centered.columns
       h1 精品创业项目
-      = render 'refine/refine_project'
-      .project
-        = link_to "#" do
-          - image_tag 'j/jingpin2.jpg'
-        p
-          span 露薇
-          |  - 
-          span 职业女性纤体午晚餐速递及基于商圈的纯女性社交APP
-        p
-          span 约谈: 3
-          span 投资: 5
-          span 讨论: 10
-        p
-          = link_to '了解更多...', "#"
-      .project
-        = link_to "#" do
-          - image_tag 'j/jingpin3.jpg'
-        p
-          span 露薇
-          |  - 
-          span 职业女性纤体午晚餐速递及基于商圈的纯女性社交APP
-        p
-          span 约谈: 3
-          span 投资: 5
-          span 讨论: 10
-        p
-          = link_to '了解更多...', "#"
+      = render partial: 'refine/refine_project', collection: @recommends, as: :recommend
