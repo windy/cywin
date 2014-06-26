@@ -27,6 +27,7 @@
         $scope.error_message = res.message
         $scope.errors = res.errors
         $scope.logo_error = res.logo_error
+        $scope.screenshot_error = res.screenshot_error
         $timeout ()->
           $scope.error_message = null
         ,5000
@@ -43,6 +44,8 @@
       else
         $scope.error_message = res.message
         $scope.errors = res.errors
+        $scope.logo_error = res.logo_error
+        $scope.screenshot_error = res.screenshot_error
         $timeout ()->
           $scope.error_message = null
         ,5000
@@ -60,6 +63,22 @@
           $scope.project.logo_id = res.id
         else
           $scope.logo_error = res.message
+      .error ()->
+        console.log '上传失败'
+
+  $scope.upload_screenshot = ($files)->
+    $scope.screenshot_error = null
+    for file in $files
+      $upload.upload
+        url: '/screenshots'
+        method: 'POST'
+        file: file
+      .success (res)->
+        if res.success
+          $scope.project.screenshot_url = res.data.image_url
+          $scope.project.screenshot_id = res.data.id
+        else
+          $scope.screenshot_error = res.message
       .error ()->
         console.log '上传失败'
   
