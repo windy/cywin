@@ -21,7 +21,7 @@ gem 'rolify'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'therubyracer', :platform=>:ruby
-gem "foundation-rails", "~> 5.2.2.0"
+gem "foundation-rails", ">= 5.0"
 gem 'settingslogic'
 gem 'foundation-icons-sass-rails'
 gem 'kaminari', github: 'amatsuda/kaminari'

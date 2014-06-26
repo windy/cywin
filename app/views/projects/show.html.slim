@@ -19,11 +19,12 @@
     .small-12.columns
       .basic-content
         - if @project.screenshots.present?
-          ul.image data-orbit=""
+          h3.title 产品截图
+          ul.image.clearing-thumbs.small-block-grid-4 data-clearing=""
             - @project.screenshots.each do |s|
               li
-                = image_tag s.image_url
-                .orbit-caption #{s.name}
+                = link_to s.image.url do
+                  - image_tag s.image.small.url
         h3.title 基本介绍
         p.description #{@project.description}
 

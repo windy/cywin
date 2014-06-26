@@ -2,7 +2,7 @@
 
   $scope.init = (id)->
     $scope.project_id = id
-    $http.get('/projects/' + id).success (res)->
+    $http.get('/projects/' + id + '.json').success (res)->
       $scope.project = res
 
   $scope.open_head_edit = ()->

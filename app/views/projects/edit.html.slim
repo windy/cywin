@@ -81,11 +81,11 @@
         .small-12.columns
           h3.title 产品截图
           .image-content ng-hide='screenshot_edited'
-            ul.image#image-show data-orbit=""
+            ul.image.clearing-thumbs#image-show.small-block-grid-4
               li ng-repeat="screenshot in project.screenshots"
-                img ng-src="{{ screenshot.image_url }}"
-                .orbit-caption
-                  | {{ screenshot.name }}
+                /*a ng-href="{{ screenshot.image_url }}"*/
+                a
+                  img ng-src="{{ screenshot.small_url }}"
           .edit
             a ng-click='open_screenshot_edit()' 编辑
           .image-content ng-show='screenshot_edited'
