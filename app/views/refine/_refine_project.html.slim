@@ -1,13 +1,15 @@
 .project
-  = link_to "#" do
-    - image_tag 'j/jingpin1.jpg'
+  - project = recommend.project
+  = link_to project do
+    - #TODO 找一个缺省的封面
+    - image_tag project.screenshot_cover.try(:image_url) || 'j/jingpin1.jpg'
   p.summary
-    span 露薇
+    span #{project.name}
     |  - 
-    span 职业女性纤体午晚餐速递及基于商圈的纯女性社交APP
+    span #{project.oneword}
   p.info
-    span 约谈: 3
-    span 投资: 5
-    span 讨论: 10
+    span 关注: #{project.star_count}
+    span 约谈: #{project.talk_count}
+    span 投资: #{project.investment_count}
   p
-    = link_to '了解更多...', "#"
+    = link_to '了解更多...', project

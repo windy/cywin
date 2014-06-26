@@ -134,4 +134,22 @@ class Project < ActiveRecord::Base
   def fullname
     "#{self.name} ( #{self.oneword} )"
   end
+
+  def talk_count
+    Talk.where(target_type: :Project, target_id: self.id).count
+  end
+  
+  def investment_count
+    o = opened_money_require
+    if o.present?
+      o.investments.count
+    else
+      0
+    end
+  end
+
+  def star_count
+    Star.where(project_id: self.id).count
+  end
+
 end

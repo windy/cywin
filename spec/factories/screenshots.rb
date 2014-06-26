@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :screenshot do
-    image "MyString"
+    image { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'logo.png')) }
   end
 end
