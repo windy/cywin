@@ -7,8 +7,4 @@
   .refine-projects-content
     .row
       .small-12.large-10.large-centered.columns
-        = render 'refine_project'
-        = render 'refine_project'
-        = render 'refine_project'
-        .load-more
-          button.small Load More
+        = render partial: 'refine_project', collection: @recommends, as: :recommend
