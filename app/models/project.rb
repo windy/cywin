@@ -36,6 +36,11 @@ class Project < ActiveRecord::Base
     self.screenshots.first
   end
 
+  def screenshot_cover_try_image_url
+    #TODO 找一个缺省的封面
+    self.screenshot_cover.try(:image_url) || 'j/jingpin1.jpg'
+  end
+
   # events
   has_many :events
   def categories_name 

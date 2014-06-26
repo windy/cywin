@@ -1,9 +1,9 @@
 class ExploreController < ApplicationController
 
   def index
-    @recommend_projects = Recommend.order(created_at: :desc).limit(6)
+    @recommends = Recommend.default_order.includes(:project).limit(6)
     @categories = Category.limit(6)
-    @newest_projects = Project.order(created_at: :desc).limit(6)
+    @newest_projects = Project.default_order.limit(6)
   end
 
   def all
