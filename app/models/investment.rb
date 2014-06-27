@@ -35,5 +35,7 @@ class Investment < ActiveRecord::Base
       end
     end
   end
+
+  scope :most_a_week, ->(t=6) { group(:money_require_id).order("COUNT(*) DESC").having("created_at > ?", 1.week.ago).limit(t).count }
  
 end

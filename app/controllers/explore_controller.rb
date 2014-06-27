@@ -23,6 +23,9 @@ class ExploreController < ApplicationController
   end
 
   def trend
+    @stars_most_a_week = Star.most_a_week
+    @investments_most_a_week = Investment.most_a_week
+    @talks_most_a_week = Talk.most_a_week
   end
 
 end
