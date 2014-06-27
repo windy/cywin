@@ -13,7 +13,7 @@
     $http
       url: '/users'
       method: 'POST'
-      data:
+      params:
         'user[name]': $scope.name
         'user[email]': $scope.email
         'user[password]': $scope.password
