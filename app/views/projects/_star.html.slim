@@ -1,5 +1,5 @@
 - if current_user
-  .row.operate
+  .row.operate.ng-cloak
     .small-6.columns ng-controller='StarsController' ng-init='init(#{@project.id}, #{current_user.try(:star?, @project)})'
       a ng-click='add_star()' ng-hide='is_starred || loading' 关注
       a ng-click='remove_star()' ng-show='is_starred && ! loading' 取消关注

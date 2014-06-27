@@ -5,34 +5,60 @@
     .small-12.columns
       = render partial: 'head', locals: { type: 'trend' }
       .trend
-        h2 一周关注最多
-        .attend-most
-          .recommend-projects
-            .row
-              - 6.times do
-                .small-12.medium-6.large-4.columns.recommend-project
-                  = link_to root_path do
-                    - image_tag 'j/jingpin2.jpg'
+        h3 一周关注最多
+        .star-most
+          - if @stars_most_a_week.blank?
+            p.no-content 本周暂无新的关注
+          - else
+            ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.recommend-projects
+              - @stars_most_a_week.each do |project_id, count|
+                - project = Project.find(project_id)
+                li.recommend-project
                   p
-                    | 精品3 - 热爱你的生活
-        h2 一周内融资最多
+                    = link_to project
+                      - image_tag project.screenshot_cover_try_image_url
+                  p
+                    = link_to project do
+                      span #{project.name}
+                      | - 
+                      span #{project.oneword}
+                  p.new-stars
+                    | 本周新增关注: #{count}
+        h3 一周内融资最多
         .invest-most
-          .recommend-projects
-            .row
-              - 6.times do
-                .small-12.medium-6.large-4.columns.recommend-project
-                  = link_to root_path do
-                    - image_tag 'j/jingpin2.jpg'
+          - if @investments_most_a_week.blank?
+            p.no-content 本周暂无新的融资
+          - else
+            ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.recommend-projects
+              - @investments_most_a_week.each do |money_require_id, count|
+                - project = MoneyRequire.find(money_require_id).project
+                li.recommend-project
                   p
-                    | 精品3 - 热爱你的生活
-        h2 一周内评论最多
-        .invest-most
-          .recommend-projects
-            .row
-              - 6.times do
-                .small-12.medium-6.large-4.columns.recommend-project
-                  = link_to root_path do
-                    - image_tag 'j/jingpin3.jpg'
+                    = link_to project
+                      - image_tag project.screenshot_cover_try_image_url
                   p
-                    | 精品3 - 热爱你的生活
-
+                    = link_to project do
+                      span #{project.name}
+                      | - 
+                      span #{project.oneword}
+                  p.new-invests
+                    | 本周新增融资人数: #{count}
+        h3 一周内约谈最多
+        .talk-most
+          - if @talks_most_a_week.blank?
+            p.no-content 本周暂无新的约谈
+          - else
+            ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.recommend-projects
+              - @talks_most_a_week.each do |project_id, count|
+                - project = Project.find(project_id)
+                li.recommend-project
+                  p
+                    = link_to project
+                      - image_tag project.screenshot_cover_try_image_url
+                  p
+                    = link_to project do
+                      span #{project.name}
+                      | - 
+                      span #{project.oneword}
+                  p.new-talks
+                    | 本周新增约谈: #{count}
