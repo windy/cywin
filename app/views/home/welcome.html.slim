@@ -15,4 +15,4 @@
       .refine-projects-content
         .row
           .small-12.large-10.large-centered.columns
-            = render 'refine/refine_project'
+            = render partial: 'refine/refine_project', collection: @recommends, as: :recommend
