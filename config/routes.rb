@@ -117,6 +117,7 @@ Rails.application.routes.draw do
 
   resources :investors do
     collection do
+      get :autocomplete
       get :search
       get :basic
       get :idea

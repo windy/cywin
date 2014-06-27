@@ -5,6 +5,18 @@ class InvestorsController < ApplicationController
     @investors = Investor.passed.default_order.page(params[:page])
   end
 
+  def autocomplete
+    if params[:search].blank?
+      @users = []
+    else
+      @users = User.joins(:roles).where('roles.name' => :investor).where('users.name like ?', "%#{params[:search]}%").limit(5)
+    end
+
+    respond_to do |format|
+      format.json
+    end
+  end
+
   def search
     @investors = Investor.search do
       fulltext "*#{params[:q]}*"
