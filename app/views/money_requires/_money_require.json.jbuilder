@@ -56,7 +56,7 @@ else
 
   if money_require.leader_user
     json.leader do
-      json.extract! money_require.leader_user, :name, :id
+      json.extract! money_require.leader_user, :name, :id, :description
       json.avatar money_require.leader_user.avatar_url
       json.me money_require.leader_user == current_user
     end
