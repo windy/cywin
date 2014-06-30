@@ -25,7 +25,7 @@ class MoneyRequire < ActiveRecord::Base
     end
   end
 
-  # ready -> leader_needed -> leader_need_confirmed -> opened -> closed
+  # ready -> leader_needed / preheated -> leader_need_confirmed -> opened -> closed
   state_machine :status, initial: :ready do
     event :preheat do
       transition ready: :leader_needed

@@ -9,8 +9,9 @@
           = link_to investor.user.name, user_path(investor.user)
         .title #{investor.title}
       .content
-        .description
-          | #{investor.description}
+        - if investor.description.present?
+          .description
+            | #{investor.description}
         .industry-area
           | 投资领域:
           span.industry

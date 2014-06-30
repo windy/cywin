@@ -9,7 +9,11 @@ class InvestorsController < ApplicationController
     if params[:search].blank?
       @users = []
     else
-      @users = User.joins(:roles).where('roles.name' => :investor).where('users.name like ?', "%#{params[:search]}%").limit(5)
+      if params[:search].include?("@")
+        @users = User.joins(:roles).where('roles.name' => :investor).where(email: params[:search])
+      else
+        @users = User.joins(:roles).where('roles.name' => :investor).where('users.name like ?', "%#{params[:search]}%").limit(5)
+      end
     end
 
     respond_to do |format|
