@@ -24,6 +24,22 @@ describe MoneyRequiresController do
     end
   end
 
+  describe "更新融资功能" do
+    it "普通状态可以更新" do
+      @money_require = create(:money_require, project: @project)
+      @money_require.preheat!
+      post 'update', ActionController::Parameters.new( money: 10000, id: @money_require.id)
+      check_json(response.body, :success, true)
+    end
+
+    it "已经融资的无法更新" do
+      @money_require = create(:money_require, project: @project)
+      @money_require.quickly_turn_on!(1)
+      post 'update', ActionController::Parameters.new( money: 10000, id: @money_require.id)
+      expect(response).to be_redirect
+    end
+  end
+
   describe "添加领投人" do
     before do
       @money_require = build(:money_require)
@@ -49,8 +65,7 @@ describe MoneyRequiresController do
       it "money_require 状态不对" do
         @money_require.quickly_turn_on!(1)
         post 'add_leader', ActionController::Parameters.new( id: @money_require.id, money_require: { leader_id: 1 })
-        check_json(response.body, :success, false)
-        expect( assigns(:money_require).errors[:status] ).not_to be_empty
+        expect( response ).to be_redirect
       end
     end
   end

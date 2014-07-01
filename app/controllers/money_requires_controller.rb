@@ -99,7 +99,7 @@ class MoneyRequiresController < ApplicationController
     @money_require = MoneyRequire.find( params[:id] )
     authorize! :update, @money_require
     if @money_require.update( money_require_params )
-      @money_require.preheat!
+      @money_require.preheat! if @money_require.can_preheat?
       render_success
     else
       render_fail(nil, @money_require)
