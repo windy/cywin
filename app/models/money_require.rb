@@ -203,4 +203,8 @@ class MoneyRequire < ActiveRecord::Base
     )
   end
 
+  def can_edit?
+    self.status != 'opened' and self.status != 'closed'
+  end
+
 end

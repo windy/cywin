@@ -53,7 +53,7 @@
                           .name 
                             = link_to m.user.name, user_path(m.user)
                           .job-title #{m.title}
-                          .description #{m.description}
+                          .description #{m.description || m.user.description}
               .more-info
                 = link_to '查看更多团队故事...', team_project_path(@project)
         = render 'job'

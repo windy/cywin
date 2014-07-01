@@ -47,6 +47,7 @@
     .success (res)->
       if res.success
         $scope.init_money_require()
+        $scope.opened_menu = false
       else
         $scope.money_require.errors = res.errors
 
