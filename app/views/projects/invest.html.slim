@@ -47,13 +47,18 @@
         .history ng-repeat='history in histories'
           moneyrequire require='history' title='"历史投资"'
       h4.title 已关注
-      ul.small-block-grid-1.large-block-grid-2
-        - 3.times do |i|
-          li
-            .row.invest-leader
-              .small-4.large-3.columns
-                = image_tag 'm/u1.png'
-              .small-8.large-9.columns
-                .name 
-                  = link_to "粉丝#{i+1}", user_path(3)
-                .description 我是大粉丝
+      .row
+        .small-12.columns
+          - if @star_users.blank?
+            p.no-content 暂无人关注
+          - else
+            ul.small-block-grid-1.medium-block-grid-2
+              - @star_users.each do |user|
+                li
+                  .row.invest-leader
+                    .small-4.large-3.columns
+                      = image_tag user.avatar_url
+                    .small-8.large-9.columns
+                      .name 
+                        = link_to user.name, user
+                      .description =user.description
