@@ -139,6 +139,7 @@ class ProjectsController < ApplicationController
 
   def invest
     @project = Project.find( params[:id] )
+    @star_users = @project.star_users
     @money_require = @project.opened_money_require
   end
 

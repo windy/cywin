@@ -15,7 +15,7 @@
               .name 
                 = link_to @owner.name, user_path(@owner)
               .job-title #{@owner_member.title}
-              .description #{@owner_member.description}
+              .description #{@owner_member.description || @owner_member.user.description}
       .story
         h3.title 我们的故事
         .team-story.description
@@ -33,4 +33,4 @@
                     .name 
                       = link_to m.user.name, user_path(m.user)
                     .job-title #{m.title}
-                    .description #{m.description}
+                    .description #{m.description || m.user.description}
