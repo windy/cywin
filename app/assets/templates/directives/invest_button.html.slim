@@ -29,7 +29,7 @@ script type='text/ng-template' id='syndicate.html'
       hr
       form ng-submit='syndicate()'
 
-        p ng-show='behave() == "leader_confirm"'
+        div ng-show='behave() == "leader_confirm"'
           h4 融资信息确认
           .row
             .small-3.medium-2.columns
@@ -71,7 +71,7 @@ script type='text/ng-template' id='syndicate.html'
             .small-9.small-offset-3.medium-10.medium-offset-2.columns
               p.alert 以上信息如与你线下谈的不一致, 请不要确认投资, 马上与创始人确认.
 
-        h4 同意并启动第一笔投资
+        h4 同意并启动一笔投资
         p.alert ng-show='hash.already_message'
           | {{ hash.already_message }}
         p.min-money
