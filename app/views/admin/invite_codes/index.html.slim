@@ -1,0 +1,25 @@
+.row.top-blank
+  .small-12.columns
+    p
+      = link_to '生成新邀请码', new_admin_invite_code_path
+    p
+      table
+        tbody
+          tr
+            td 已有邀请码
+            td #{@count}
+          tr
+            td 已被使用
+            td #{@used_count}
+    table
+      thead
+        tr
+          th 邀请码
+          th 已被使用
+          th 生成时间
+      tbody
+        - @invite_codes.each do |ic|
+          tr
+            td #{sprintf("%06d", ic.code)}
+            td #{human_boolean(ic.used)}
+            td #{time_ago_in_words(ic.created_at)}前

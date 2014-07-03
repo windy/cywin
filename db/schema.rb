@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625072602) do
+ActiveRecord::Schema.define(version: 20140702073339) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -127,6 +127,13 @@ ActiveRecord::Schema.define(version: 20140625072602) do
     t.string   "investor_type"
     t.string   "status",        default: "drafted"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invite_codes", force: true do |t|
+    t.integer  "code"
+    t.boolean  "used",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

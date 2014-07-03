@@ -15,6 +15,8 @@ nav.top-bar(data-options="is_hover:false" data-topbar)
         = link_to "投资人申批", admin_investors_path
       li class=active_for('admin/recommends', params[:controller])
         = link_to "精品管理", admin_recommends_path
+      li class=active_for('admin/invite_codes', params[:controller])
+        = link_to "邀请码管理", admin_invite_codes_path
     ul.right
       li
         = link_to "返回前台", root_path
