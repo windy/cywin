@@ -15,8 +15,7 @@
           li
             = link_to '关注你喜欢的投资人', investors_path
       - else
-        - @events.each do |event|
-          = render partial: 'event', locals: { event: event }
+        = render partial: 'event', collection: @events
         .event.ng-cloak ng-repeat= 'event in events' ng-bind-html='event'
         .no-content ng-show='no_content_flag' 没有更多内容
         .load-more
