@@ -23,4 +23,12 @@ class InviteCode < ActiveRecord::Base
     end
     return true
   end
+
+  def self.validate_code(code)
+    !! InviteCode.where(used: false).where(code: code).first
+  end
+
+  def self.mark_used(code)
+    InviteCode.where(code: code).update_all(used: true)
+  end
 end

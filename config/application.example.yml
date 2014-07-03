@@ -10,3 +10,5 @@ ROLES: [admin, investor, leader]
 SECRET_KEY_BASE: ''
 # sidekiq namespace
 SIDEKIQ_NAMESPACE: cywin
+# built-in test enable 1 / disable 0
+BIT: 0

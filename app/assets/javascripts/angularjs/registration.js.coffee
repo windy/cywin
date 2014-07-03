@@ -7,6 +7,8 @@
     $scope.name = user.name
     $scope.email = user.email
     $scope.password = user.password
+    $scope.password_confirm = user.password
+    $scope.code = user.code
     ipCookie.remove('register_users', {path: '/'})
   
   $scope.submit = ()->
@@ -17,6 +19,7 @@
         'user[name]': $scope.name
         'user[email]': $scope.email
         'user[password]': $scope.password
+        'code': $scope.code
     .success (res)->
       if res.success
         $window.location.href = '/home/welcome'

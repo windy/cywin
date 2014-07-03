@@ -11,6 +11,8 @@
             = text_field_tag 'name', nil, placeholder: '你的真实姓名', 'ng-model'=> 'name'
             = text_field_tag 'email', nil, placeholder: '你的邮箱', 'ng-model'=> 'email'
             = password_field_tag 'password', nil, placeholder:  '输入一个密码', 'ng-model'=> 'password'
+            - if bit_enable?
+              = text_field_tag 'code', nil, placeholder:  '内测中, 需要一个邀请码', 'ng-model'=> 'code'
             button 注册
             = link_to '已有账号, 登录?', new_user_session_path, class: 'login-link blank-link'
 

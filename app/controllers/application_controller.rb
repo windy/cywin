@@ -43,5 +43,12 @@ class ApplicationController < ActionController::Base
       model.errors[column_name].first
     end
   end
+  
+  private
+  def bit_enable?
+    ENV['BIT'].to_i == 1
+  end
+
+  helper_method :bit_enable?
 
 end
