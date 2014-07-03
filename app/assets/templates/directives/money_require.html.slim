@@ -9,7 +9,7 @@
         .sub-title
           | 融资规模
         h5.sub-content 
-          | {{ require.money | currency }}
+          | {{ require.money | nfcurrency }}
     li
       .box
         .sub-title
@@ -47,7 +47,7 @@
         .sub-title
           | 融资进度
         h5.sub-content
-          | {{ require.syndicate_money | currency }}
+          | {{ require.syndicate_money | nfcurrency }}
       .box ng-show = 'require.success != null'
         .sub-title
           | 融资成败

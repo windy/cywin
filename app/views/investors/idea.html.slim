@@ -22,7 +22,7 @@
               small.error.ng-cloak ng-show='errors.min'
                 | {{ errors.min }}
               p
-                | {{ investidea.min | currency }}
+                | {{ investidea.min | nfcurrency }}
             .small-2.columns
               span.postfix
                 | --
@@ -31,7 +31,7 @@
               small.error.ng-cloak ng-show='errors.max'
                 | {{ errors.max }}
               p
-                | {{ investidea.max | currency }}
+                | {{ investidea.max | nfcurrency }}
       .row
         .small-12.medium-6.columns
           input type='text' placeholder='关注行业: 如互联网, 多个以逗号分开' ng-model='investidea.industry' ng-class='{ error: errors.industry }'

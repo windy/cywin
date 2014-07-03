@@ -16,7 +16,7 @@
   .add-button ng-show='opened.syndicate.behave =="add"' 
     button disabled=true
       | 我已投资了: 
-      | {{ opened.syndicate.already_money | currency }}
+      | {{ opened.syndicate.already_money | nfcurrency }}
     button ng-click='open_syndicate()' 追加投资
 
 script type='text/ng-template' id='syndicate.html'
@@ -74,9 +74,9 @@ script type='text/ng-template' id='syndicate.html'
         h4 同意并启动一笔投资
         p.alert ng-show='hash.already_message'
           | {{ hash.already_message }}
-          | {{ hash.already_money | currency }}
+          | {{ hash.already_money | nfcurrency }}
         p.min-money
-          | 该项目的最低投资额为: {{ hash.min_money | currency }}
+          | 该项目的最低投资额为: {{ hash.min_money | nfcurrency }}
         .row.collapse
           .small-1.columns
             span.prefix ¥
@@ -88,7 +88,7 @@ script type='text/ng-template' id='syndicate.html'
           /*TODO money 显示*/
           | 你总的投资额将为:
           span 
-            | {{ cal_total_money() || "0" | currency }}
+            | {{ cal_total_money() || "0" | nfcurrency }}
         .row ng-show='behave() == "leader_confirm"'
           .small-12.medium-10.end.columns
             textarea ng-class='{ error: errors.leader_word }' placeholder='告诉潜在投资人为什么要投资这个项目' ng-model='hash.leader_word'
