@@ -55,12 +55,12 @@
         p
           .row.collapse
             .small-5.columns
-              input type='text' readonly='' value="#{@investidea.min}"
+              input type='text' readonly='' value="¥ #{number_with_delimiter(@investidea.min)}"
             .small-2.columns
               span.postfix
                 | --
             .small-5.columns
-              input type='text' readonly='' value="#{@investidea.max}"
+              input type='text' readonly='' value="¥ #{number_with_delimiter(@investidea.max)}"
     label 关注行业
     p
       = @investidea.industry

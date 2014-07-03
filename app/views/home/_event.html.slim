@@ -59,7 +59,7 @@
         .head
           = link_to event.user.name, user_path(event.user)
           | 投资了
-          = link_to number_with_delimiter(event.data[:money]), project_path(event.project)
+          = link_to "¥ #{number_with_delimiter(event.data[:money])}", project_path(event.project)
           | 给项目
           = link_to event.project.name, project_path(event.project)
           span.created-at #{time_ago_in_words(event.created_at)}前
@@ -75,7 +75,7 @@
           | 追加投资给项目
           = link_to event.project.name, project_path(event.project)
           | , 目前他的投资:
-          = link_to number_with_delimiter(event.data[:money]), project_path(event.project)
+          = link_to "¥ #{number_with_delimiter(event.data[:money])}", project_path(event.project)
           span.created-at #{time_ago_in_words(event.created_at)}前
 - if event.action == Event::MONEY_REQUIRE_CREATE
   /! money require create
@@ -93,7 +93,7 @@
         = render partial: 'home/event_project_content', locals: { event: event }
         .foot
           p 
-            | 计划融资 #{number_with_delimiter(event.target.money)}
+            | 计划融资 ¥ #{number_with_delimiter(event.target.money)}
             span.detail
               = link_to '更多...', project_path(event.project)
 - if event.action == Event::MONEY_REQUIRE_LEADER
@@ -127,7 +127,7 @@
         = render partial: 'home/event_project_content', locals: { event: event }
         .foot
           span
-            | 计划融资 #{number_with_delimiter(event.target.money)}, 
+            | 计划融资 ¥ #{number_with_delimiter(event.target.money)}, 
             | 领投人
           = link_to event.target.leader.name, user_path(event.target.leader)
           = link_to '更多...', project_path(event.project)

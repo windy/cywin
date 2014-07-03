@@ -37,7 +37,7 @@
                   a ng-href="/users/{{ investment.user.id }}"
                     | {{ investment.user.name }}
                 .money
-                  | ¥ {{ investment.money }}
+                  | {{ investment.money | nfcurrency }}
                 .time
                   | 投资于 
                   | {{ investment.created_at }}

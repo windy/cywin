@@ -21,6 +21,8 @@
               input type='text' placeholder='最小投资额' ng-model='investidea.min' ng-class='{ error: errors.min }'
               small.error.ng-cloak ng-show='errors.min'
                 | {{ errors.min }}
+              p
+                | {{ investidea.min | nfcurrency }}
             .small-2.columns
               span.postfix
                 | --
@@ -28,6 +30,8 @@
               input type='text' placeholder='最大投资额' ng-model='investidea.max' ng-class='{ error: errors.max }'
               small.error.ng-cloak ng-show='errors.max'
                 | {{ errors.max }}
+              p
+                | {{ investidea.max | nfcurrency }}
       .row
         .small-12.medium-6.columns
           input type='text' placeholder='关注行业: 如互联网, 多个以逗号分开' ng-model='investidea.industry' ng-class='{ error: errors.industry }'
