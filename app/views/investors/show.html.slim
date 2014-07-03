@@ -75,6 +75,11 @@
       .small-12.medium-8.columns
         p
           = image_tag @investor.card.image_url
+    h3 银行流水
+    .row
+      .small-12.medium-8.columns
+        p
+          = image_tag @investor.bank_statement.image_url
     label 当前状态
     p
       = human_investor_status(@investor)

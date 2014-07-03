@@ -1,13 +1,19 @@
 @app.controller 'InvestorProveController', ['$scope', '$http', '$upload', '$window', ($scope, $http, $upload, $window)->
 
-  $scope.can_submit = false
+  $scope.can_submit = ()->
+    $scope.card_url && $scope.bank_statement_url
 
   $http
     url: '/cards'
   .success (res)->
     unless res == 'null'
       $scope.card_url = res.url
-      $scope.can_submit = true
+
+  $http
+    url: '/bank_statements'
+  .success (res)->
+    unless res == 'null'
+      $scope.bank_statement_url = res.url
 
   $scope.upload = ($files)->
     $scope.card_error = null
@@ -18,10 +24,24 @@
         file: file
       .success (res)->
         if res.success
-          $scope.can_submit = true
           $scope.card_url = res.url
         else
           $scope.card_error = res.message
+      .error ()->
+        console.log '上传失败'
+
+  $scope.upload_bank_statement = ($files)->
+    $scope.card_error = null
+    for file in $files
+      $upload.upload
+        url: '/bank_statements'
+        method: 'POST'
+        file: file
+      .success (res)->
+        if res.success
+          $scope.bank_statement_url = res.url
+        else
+          $scope.bank_statement_error = res.message
       .error ()->
         console.log '上传失败'
 

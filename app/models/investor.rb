@@ -87,6 +87,7 @@ class Investor < ActiveRecord::Base
   scope :passed, -> { where(status: 'passed') }
 
   has_one :card
+  has_one :bank_statement
 
   def description
     self.user.description

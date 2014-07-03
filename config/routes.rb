@@ -129,6 +129,7 @@ Rails.application.routes.draw do
 
   resources :investideas, only: [:index, :create]
   resources :cards, only: [:index, :create]
+  resources :bank_statements, only: [:index, :create]
 
   resources :money_requires do
     member do
