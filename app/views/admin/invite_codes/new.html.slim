@@ -1,0 +1,9 @@
+.row.top-blank
+  .small-12.columns
+    h3 批量生成邀请码
+    = form_tag(admin_invite_codes_path) do
+      .row
+        .small-12.medium-6.columns
+          = label_tag 'n', '数量'
+          = text_field_tag 'n', nil, placeholder: '生成数量, 不超过 2000'
+          = submit_tag '开始生成', class: 'button small'

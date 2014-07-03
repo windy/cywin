@@ -171,6 +171,7 @@ Rails.application.routes.draw do
       end
     end
     resources :recommends
+    resources :invite_codes
     root :to=> "dashboard#index"
   end
   root :to => "home#index"
