@@ -49,8 +49,7 @@
                 tr
                   td 报酬
                   td
-                    | ¥ 
-                    |{{ person_require.pay }}
+                    |{{ person_require.pay | nfcurrency }}
                 tr
                   td 期权
                   td

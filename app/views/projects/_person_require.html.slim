@@ -9,7 +9,7 @@ li
           td.description #{person_require.description}
         tr
           td 报酬
-          td 月薪: ¥ #{person_require.pay}
+          td 月薪: ¥ #{number_with_delimiter(person_require.pay)}
         tr
           td 
           td 期权: #{person_require.option}%
