@@ -13,6 +13,8 @@
       | 当前进度:
       em
         | #{human_investor_status(@investor)}
+      - unless @investor.passed?
+        = link_to '继续编辑', basic_investors_path
     hr
     h4 审批历史
     table

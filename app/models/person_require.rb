@@ -16,8 +16,8 @@ class PersonRequire < ActiveRecord::Base
   validates :title, presence: true
   validates :description, presence: true
   validates :pay, presence: true, numericality: { greater_than: 0, only_integer: true }
-  validates :stock, presence: true, numericality: { greater_than: 0, less_than: 100, only_integer: true }
-  validates :option, presence: true, numericality: { greater_than: 0, less_than: 100, only_integer: true }
+  validates :stock, presence: true, numericality: { greater_than_or_equal_to: 0, less_than: 100, only_integer: true }
+  validates :option, presence: true, numericality: { greater_than_or_equal_to: 0, less_than: 100, only_integer: true }
   
   scope :default_order, -> { order(created_at: :desc) }
   scope :opened, -> { where(status: 'opened') }

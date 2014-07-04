@@ -58,7 +58,7 @@
         label for='maxnp' 限制最大人数
         .row.collapse
           .small-12.medium-3.columns
-            input type='text' id='maxnp' ng-model='money_require.maxnp' ng-class='{ error: money_require.errors.maxnp }' placeholder='建议: 20-50 人'
+            input type='text' id='maxnp' ng-model='money_require.maxnp' ng-class='{ error: money_require.errors.maxnp }' placeholder='建议: #{MoneyRequire::NP_MIN} - #{MoneyRequire::NP_MAX} 人'
             small.error ng-show='money_require.errors.maxnp' {{ money_require.errors.maxnp }}
           .small-1.large-1.end.columns
             span.postfix 人
@@ -105,7 +105,7 @@
                 label for='maxnp' 限制最大人数
                 .row.collapse
                   .small-12.medium-3.columns
-                    input type='text' id='maxnp' ng-model='money_require.maxnp' ng-class='{ error: money_require.errors.maxnp }' placeholder='建议: 20-50 人'
+                    input type='text' id='maxnp' ng-model='money_require.maxnp' ng-class='{ error: money_require.errors.maxnp }' placeholder='建议: #{MoneyRequire::NP_MIN} - #{MoneyRequire::NP_MAX} 人'
                     small.error ng-show='money_require.errors.maxnp' {{ money_require.errors.maxnp }}
                   .small-1.large-1.end.columns
                     span.postfix 人
