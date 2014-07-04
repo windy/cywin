@@ -9,6 +9,9 @@
             = link_to @user.name, user_path(@user)
           .job-title 
             = @user.try(:title)
+          - if @user.resume_link.present?
+            .resume-link
+              = link_to @user.resume_link, @user.resume_link, target: '_blank'
           .description
             - if @user.description.blank?
               | 暂无描述
