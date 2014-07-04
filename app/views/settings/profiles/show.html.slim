@@ -14,5 +14,6 @@
       small.error ng-show=' avatar_error '
         | {{ avatar_error }}
       input type='hidden' ng-model='user_id' ng-init='user_id = #{@user.id}'
+      = f.input :resume_link, placeholder: '建议使用 LinkedIn 公开地址'
       = f.input :description
       = f.button :submit, '提交', class: 'small'

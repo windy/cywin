@@ -27,6 +27,7 @@
         email: "登录邮箱"
         name: "真实姓名"
         avatar: "个人头像"
+        resume_link: "简历链接"
         description: "个人介绍"
         password: "密码"
         current_password: '当前密码'
