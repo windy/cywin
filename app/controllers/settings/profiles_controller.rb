@@ -3,7 +3,7 @@ class Settings::ProfilesController < Settings::ApplicationController
   end
 
   def update
-    if @user.update( params.require(:user).permit(:name, :description, :resume_link) )
+    if @user.update( params.require(:user).permit(:publish_email, :name, :description, :resume_link) )
       flash[:notice] = '更新成功'
       redirect_to settings_profile_path
     else

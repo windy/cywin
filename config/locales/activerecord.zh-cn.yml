@@ -25,6 +25,7 @@
     attributes:
       user:
         email: "登录邮箱"
+        publish_email: "公开邮箱"
         name: "真实姓名"
         avatar: "个人头像"
         resume_link: "简历链接"

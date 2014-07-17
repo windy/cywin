@@ -7,6 +7,7 @@
   .small-12.medium-9.columns
     = simple_form_for(@user, url: settings_profile_path, method: :PUT) do |f|
       = f.input :email, disabled: true
+      = f.input :publish_email
       = f.input :name, required: false
       = f.label :avatar
       img ng-src='{{ avatar }}' ng-init='avatar = "#{@user.avatar_url}" '

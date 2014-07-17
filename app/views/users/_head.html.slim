@@ -7,10 +7,15 @@
         .small-8.medium-9.columns
           .name
             = link_to @user.name, user_path(@user)
+          - if @user.publish_email?
+            .email
+              | 公开邮箱: 
+              = mail_to @user.email 
           .job-title 
             = @user.try(:title)
           - if @user.resume_link.present?
             .resume-link
+              | 个人简历: 
               = link_to @user.resume_link, @user.resume_link, target: '_blank'
           .description
             - if @user.description.blank?
