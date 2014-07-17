@@ -1,7 +1,19 @@
 - content_for(:title) do
   | 编辑项目
 
-.project-edit.top-blank ng-controller="ProjectEditController" ng-init="init(#{@project.id})"
+.project-edit ng-controller="ProjectEditController" ng-init="init(#{@project.id})"
+  .row
+    .small-12.columns
+      .tips
+        p 你需要继续完善你的项目, 然后发布你的融资或招人需求
+        ul
+          li 请尽可能多的完善产品截图, 团队, 及运营数据
+          li 
+            | 然后你可以发布 
+            = link_to '融资需求', admin_money_requires_path(project_id: @project.id)
+          li 
+            | 或者发布 
+            = link_to '招人需求', admin_project_person_requires_path(project_id: @project.id)
   .row.head.ng-cloak
     .small-6.large-2.columns
       img ng-src='{{ project.logo_url }}'
