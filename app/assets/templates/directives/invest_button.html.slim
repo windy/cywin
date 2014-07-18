@@ -1,6 +1,6 @@
 .invest-button.ng-cloak
   .ready ng-show='opened.syndicate.behave == "ready"'
-    button 约谈
+    button ng-controller='TalksController' ng-init='init(false)' ng-click='open_talk("project_talk", opened.project_id)' 投资约谈
   .need-login-button ng-show='opened.syndicate.behave == "need_login"'
     button disabled=true 需要登录才能投资和领投
     a.button href='/users/sign_in' 马上登录
