@@ -6,6 +6,7 @@ class Message < ActiveRecord::Base
     :LEADER_CONFIRM,
     :APPLY_INVESTOR_SUCCESS,
     :APPLY_INVESTOR_FAIL,
+    :TALK,
   ])
   belongs_to :user
   belongs_to :project
