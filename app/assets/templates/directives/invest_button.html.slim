@@ -95,5 +95,10 @@ script type='text/ng-template' id='syndicate.html'
 
         p.alert ng-show='errors.money_require_id'
           | {{ errors.money_require_id }}
-        button
-          | {{ hash.submit }}
+        ul.button-group
+          li
+            button
+              | {{ hash.submit }}
+          li ng-show='behave() == "leader_confirm"'
+            button.secondary ng-click='leader_reject()'
+              | 以上信息不正确或我不认识创始人, 我要拒绝

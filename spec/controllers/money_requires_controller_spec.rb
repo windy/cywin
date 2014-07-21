@@ -99,6 +99,20 @@ describe MoneyRequiresController do
       post 'leader_confirm', ActionController::Parameters.new( id: @money_require.id )
       check_json(response.body, :success, false)
     end
+
+    it "拒绝" do
+      xhr :post, 'leader_reject', id: @money_require.id
+      check_json(response.body, :success, true)
+    end
+
+    it "拒绝时状态失败" do
+      # 调整为打开中
+      @money_require.status = 'opened'
+      @money_require.save!
+
+      post 'leader_reject', ActionController::Parameters.new( id: @money_require.id )
+      check_json(response.body, :success, false)
+    end
   end
 
 

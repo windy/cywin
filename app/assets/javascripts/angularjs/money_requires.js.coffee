@@ -75,6 +75,17 @@
         already_money: $scope.opened.syndicate.already_money
       }
 
+  $scope.leader_reject = ()->
+    $http
+     url: '/money_requires/' + $scope.opened.id + '/leader_reject'
+     method: 'POST'
+    .success (res)->
+      if res.success
+        new_opened = res.data
+        $modalInstance.close(new_opened)
+      else
+        alert('拒绝失败')
+
   $scope.syndicate = ()->
     if $scope.behave() == 'leader_confirm'
       $http
