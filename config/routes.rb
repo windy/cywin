@@ -135,6 +135,8 @@ Rails.application.routes.draw do
     member do
       post :add_leader
       patch :add_leader
+      post :leader_reject
+      patch :leader_reject
       post :leader_confirm
       patch :leader_confirm
       post :close

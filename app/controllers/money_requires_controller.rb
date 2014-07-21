@@ -1,5 +1,5 @@
 class MoneyRequiresController < ApplicationController
-  before_action :set_money_require, only: [ :add_leader, :leader_confirm, :close ]
+  before_action :set_money_require, only: [ :add_leader, :leader_confirm, :leader_reject, :close ]
   before_action :authenticate_user!, only: [ :admin ]
 
   def admin
@@ -70,6 +70,15 @@ class MoneyRequiresController < ApplicationController
       render partial: 'money_require', locals: { money_require: @money_require }
     else
       render_fail(@money_require.errors.full_messages.to_s)
+    end
+  end
+
+  def leader_reject
+    authorize! :leader_confirm, @money_require
+    if @money_require.leader_reject
+      render "syndicates/create"
+    else
+      render_fail('拒绝失败', @money_require)
     end
   end
 
