@@ -90,6 +90,13 @@ class MoneyRequire < ActiveRecord::Base
     end
 
     after_transition on: :leader_reject do |money_require, transition|
+      money_require.add_leader_reject_notify
+      # 将消息标记为已处理
+      Message.where(
+        action: Message::LEADER_INVITE,
+        target_type: :MoneyRequire,
+        target_id: money_require.id,
+      ).last.reject
     end
 
     state :leader_need_confirmed, :opened do
@@ -211,6 +218,17 @@ class MoneyRequire < ActiveRecord::Base
       user_id: self.owner.id,
       project_id: self.project.id,
       action: Message::LEADER_CONFIRM,
+      must_action: false,
+      target_type: :MoneyRequire,
+      target_id: self.id,
+    )
+  end
+
+  def add_leader_reject_notify
+    Message.create!(
+      user_id: self.owner.id,
+      project_id: self.project.id,
+      action: Message::LEADER_REJECT,
       must_action: false,
       target_type: :MoneyRequire,
       target_id: self.id,

@@ -4,6 +4,7 @@ class Message < ActiveRecord::Base
   [
     :LEADER_INVITE,
     :LEADER_CONFIRM,
+    :LEADER_REJECT,
     :APPLY_INVESTOR_SUCCESS,
     :APPLY_INVESTOR_FAIL,
     :TALK,

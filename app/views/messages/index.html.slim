@@ -45,6 +45,11 @@
                   | 已经确认了你的项目
                   = link_to message.project.name, message.project
                   | 领投邀请, 请知悉.
+                - when Message::LEADER_REJECT
+                  = link_to message.target.leader.name, message.target.leader
+                  | 已经拒绝了你的项目
+                  = link_to message.project.name, message.project
+                  | 领投邀请, 请重新邀请新的领投人.
                 - when Message::APPLY_INVESTOR_SUCCESS
                   | 你的投资人
                   = link_to '申请表', info_investors_path
