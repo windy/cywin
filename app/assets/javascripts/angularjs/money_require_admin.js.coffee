@@ -19,7 +19,7 @@
         $scope.money_require = res
 
   $scope.prevalue = ()->
-    $scope.money_require?.money / $scope.money_require?.share * 100
+    $scope.money_require?.money * (100 - $scope.money_require?.share ) / $scope.money_require?.share
 
   $scope.create_or_update = ()->
     $scope.money_require.errors = null
