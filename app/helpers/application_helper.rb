@@ -22,7 +22,7 @@ module ApplicationHelper
   def format_status(status)
       case status
       when 'ready' then '未开始'
-      when 'leader_needed' then '预热中( 寻找领投人 )'
+      when 'leader_needed' then '预热中'
       when 'leader_need_confirmed' then '领投确认中'
       when 'opened' then '融资中'
       when 'closed' then '已结束'
