@@ -32,6 +32,16 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_many :screenshots
 
+  # 虚拟状态字段
+  # 在融资需求的基础上添加发布状态
+  def vstatus
+    if m = self.opened_money_require
+      return m.status
+    else
+      return nil
+    end
+  end
+
   def screenshot_cover
     self.screenshots.first
   end

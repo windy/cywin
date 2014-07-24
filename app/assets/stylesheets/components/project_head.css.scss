@@ -1,3 +1,5 @@
+@import 'variables';
+
 .project-show, .project-edit {
   .head {
     margin-bottom: 1rem;
@@ -18,6 +20,30 @@
           margin-left: 0;
         }
 
+      }
+    }
+
+    .name-area {
+      position: relative;
+      .status-box {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+      }
+
+      .status {
+        background: #f0ad4e;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        display: inline;
+        @media #{$medium-up} {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+        opacity: 0.8;
       }
     }
   }
