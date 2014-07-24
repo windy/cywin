@@ -118,8 +118,10 @@
                   .small-1.large-1.end.columns
                     span.postfix 人
                 button.ng-cloak ng-show='money_require.id' 更新
+      hr
+      h4 我已经线下谈好领投人, 现在确认
       p.alert
-        | 注意: 一旦邀请, 无法修改, 请确认后再键入.
+        | 注意: 一旦邀请, 无法修改, 请务必线下确认后再键入.
       form ng-submit='add_leader()'
         .leader
           person ng-show='selected_leader()' user='autocomplete_user'
@@ -136,7 +138,7 @@
                       |{{ match.model.name }} 
             p.alert ng-show='leader_error_message'
               | {{ leader_error_message }}
-            button ng-disabled= '! selected_leader()' 邀请领投人
+            button ng-disabled= '! selected_leader()' 确认领投人
   .row.ng-cloak ng-show='money_require.status == "leader_need_confirmed"'
     .small-12.large-10.large-centered.columns
       h4 等待领投人确认
