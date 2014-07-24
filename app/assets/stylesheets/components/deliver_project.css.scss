@@ -1,0 +1,24 @@
+.delivering-project {
+  cursor: pointer;
+  text-align: center;
+  opacity: 0.8;
+
+  .fi-check {
+    margin-right: 0.2rem;
+  }
+
+  &.select {
+    color: red;
+    opacity: 1;
+  }
+}
+
+.deliver-project-modal {
+  .no-content {
+    color: #666;
+  }
+
+  .back {
+    margin-left: 0.5rem;
+  }
+}

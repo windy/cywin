@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       resource :activities, only: :show
     end
   end
+  
+  resources :delivering_projects, only: [:index, :update]
 
   resources :stars, only: [:create] do 
     collection do

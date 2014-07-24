@@ -8,6 +8,7 @@ class Message < ActiveRecord::Base
     :APPLY_INVESTOR_SUCCESS,
     :APPLY_INVESTOR_FAIL,
     :TALK,
+    :DELIVER_PROJECT,
   ])
   belongs_to :user
   belongs_to :project

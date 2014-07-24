@@ -64,6 +64,12 @@
                   | 向你的项目
                   = link_to message.project.name, message.project
                   | 发起了约谈邀请, 请到你的注册邮箱回复.
+                - when Message::DELIVER_PROJECT
+                  - user = message.project.owner
+                  = link_to user.name, user
+                  | 推荐了他的项目
+                  = link_to message.project.name, message.project
+                  | 给你, 可以去看看.
               span.time
                 | #{time_ago_in_words(message.created_at)}前
       
