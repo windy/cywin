@@ -17,6 +17,10 @@
     margin-bottom: 2rem;
     border-bottom: 1px dashed #AAA;
     padding-bottom: 1rem;
+
+    img {
+      width: 80%;
+    }
     
     .summary {
       padding-top: 1rem;
@@ -28,6 +32,43 @@
       margin-bottom: 0.5rem;
       span {
         margin-left: 0.5rem;
+      }
+    }
+  }
+}
+
+.start-projects-content, .start-investors-content, .start-jobs-content{
+  h2 {
+    text-align: center;
+    margin: 2rem;
+  }
+
+  .box {
+    margin: 1rem;
+    padding: 1rem 2rem;
+    border: 1px solid #ddd;
+
+    .head {
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1rem;
+
+      .subtitle {
+        margin: 1rem 0;
+        color: #999;
+        font-size: 95%;
+      }
+    }
+
+    .content {
+      font-size: 95%;
+      line-height: 2;
+      .type {
+        color: #999;
+      }
+      .item {
+        color: #666;
+        font-weight: 200;
       }
     }
   }

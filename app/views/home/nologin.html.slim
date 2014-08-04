@@ -1,6 +1,6 @@
 .start-content.top-blank
   .row
-    .small-12.large-10.large-centered.columns
+    .small-12.columns
       form ng-submit='submit()' ng-controller='HomeController'
         .row
           .small-12.large-6.columns
@@ -16,8 +16,132 @@
             button 注册
             = link_to '已有账号, 登录?', new_user_session_path, class: 'login-link blank-link'
 
-.refine-projects-content
+.start-projects-content
   .row
-    .small-12.large-10.large-centered.columns
-      h1 精品创业项目
-      = render partial: 'refine/refine_project', collection: @recommends, as: :recommend
+    .small-12.columns
+      h2 正在融资的项目
+      ul.small-block-grid-1.medium-block-grid-3
+        - 3.times do
+          li 
+            .box
+              .head
+                .row
+                  .small-5.columns
+                    = image_tag 'xingbake.jpg'
+                  .small-7.columns
+                    h5 星克巴
+                .subtitle 一个咖啡馆
+              .content
+                .tag
+                  .row
+                    .small-4.columns
+                      .type
+                        | 创始人
+                    .small-8.columns
+                      .item.right
+                        | YafeiLee
+                .tag
+                  .row
+                    .small-4.columns
+                      .type
+                        | 创始人 
+                    .small-8.columns
+                      .item.right
+                        | YafeiLee
+                .tag
+                  .row
+                    .small-4.columns
+                      .type
+                        | 创始人
+                    .small-8.columns
+                      .item.right
+                        | YafeiLee
+      .text-center
+        = link_to '查看所有项目', all_explore_index_path
+hr
+.start-investors-content
+  .row
+    .small-12.columns
+      h2 热门投资人
+      ul.small-block-grid-1.medium-block-grid-3
+        - 3.times do
+          li
+            .box
+              .head
+                .row
+                  .small-5.columns
+                    = image_tag 'm/u1.png'
+                  .small-7.columns
+                    h6 李亚飞
+                    p.subtitle 一个天才
+              .content
+                .tag
+                  .row
+                    .small-4.columns
+                      .type
+                        | 创始人
+                    .small-8.columns
+                      .item.right
+                        | YafeiLee
+                .tag
+                  .row
+                    .small-4.columns
+                      .type
+                        | 创始人 
+                    .small-8.columns
+                      .item.right
+                        | YafeiLee
+                .tag
+                  .row
+                    .small-4.columns
+                      .type
+                        | 创始人
+                    .small-8.columns
+                      .item.right
+                        | YafeiLee
+      .text-center
+        = link_to '查看所有投资人', investors_path
+hr
+.start-jobs-content
+  .row
+    .small-12.columns
+      h2 参与创业
+      ul.small-block-grid-1.medium-block-grid-3
+        - 3.times do
+          li 
+            .box
+              .head
+                .row
+                  .small-5.columns
+                    = image_tag 'xingbake.jpg'
+                  .small-7.columns
+                    h5 星克巴
+                .subtitle 一个咖啡馆
+              .content
+                .tag
+                  .row
+                    .small-4.columns
+                      .type
+                        | 薪水
+                    .small-8.columns
+                      .item.right
+                        | 8k ~ 10k
+                .tag
+                  .row
+                    .small-4.columns
+                      .type
+                        | 职位
+                    .small-8.columns
+                      .item.right
+                        | 软件工程师
+                .tag
+                  .row
+                    .small-4.columns
+                      .type
+                        | 期权
+                    .small-8.columns
+                      .item.right
+                        | 5%
+      .text-center
+        = link_to '查看所有工作', jobs_path
+hr
