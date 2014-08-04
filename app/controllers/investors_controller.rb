@@ -1,5 +1,5 @@
 class InvestorsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
 
   def index
     @investors = Investor.passed.default_order.page(params[:page])
