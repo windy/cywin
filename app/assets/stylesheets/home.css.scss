@@ -43,6 +43,10 @@
     margin: 2rem;
   }
 
+  .project img {
+    border-radius: 10rem;
+  }
+
   .box {
     margin: 1rem;
     padding: 1rem 2rem;
@@ -63,6 +67,7 @@
     .content {
       font-size: 95%;
       line-height: 2;
+      height: 5rem;
       .type {
         color: #999;
       }

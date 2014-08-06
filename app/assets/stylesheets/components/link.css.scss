@@ -1,3 +1,14 @@
 .margin-link {
   margin-left: 0.5rem;
 }
+
+.margin-link-wrapper {
+  a:first {
+    margin-left: 0;
+  }
+
+  a {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
