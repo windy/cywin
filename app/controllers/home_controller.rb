@@ -7,7 +7,7 @@ class HomeController < ApplicationController
       render 'login'
     else
       @recommends = Recommend.all.default_order.includes(:project).limit(3)
-      @investors = Investor.all.limit(3)
+      @investors = Investor.default_order.passed.limit(3)
       @person_requires = PersonRequire.all.limit(3)
       render 'nologin'
     end
