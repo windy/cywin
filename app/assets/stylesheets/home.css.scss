@@ -77,6 +77,10 @@
         margin: 1rem 0;
         color: #999;
         font-size: 95%;
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
