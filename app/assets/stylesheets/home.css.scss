@@ -43,6 +43,26 @@
     margin: 2rem;
   }
 
+  .project img {
+    border-radius: 10rem;
+  }
+
+  .head {
+    min-height: 6.5rem;
+  }
+
+  .investor .content {
+    text-align: center;
+    .tag {
+      color: #999;
+      font-size: 95%;
+    }
+
+    .investments * {
+      color: #666;
+    }
+  }
+
   .box {
     margin: 1rem;
     padding: 1rem 2rem;
@@ -63,12 +83,17 @@
     .content {
       font-size: 95%;
       line-height: 2;
+      height: 5rem;
       .type {
         color: #999;
       }
       .item {
         color: #666;
-        font-weight: 200;
+        white-space: nowrap;
+        width: 100%;
+        text-align: right;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }

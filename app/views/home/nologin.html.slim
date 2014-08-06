@@ -19,43 +19,85 @@
 .start-projects-content
   .row
     .small-12.columns
-      h2 正在融资的项目
-      ul.small-block-grid-1.medium-block-grid-3
-        - 3.times do
-          li 
-            .box
-              .head
-                .row
-                  .small-5.columns
-                    = image_tag 'xingbake.jpg'
-                  .small-7.columns
-                    h5 星克巴
-                .subtitle 一个咖啡馆
-              .content
-                .tag
+      h2 热门项目
+      ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
+        - 3.times do |i|
+          - recommend = @recommends[i]
+          - project = @recommends[i].project
+          - if project.present?
+            li 
+              .box.project
+                .head
                   .row
-                    .small-4.columns
-                      .type
-                        | 创始人
-                    .small-8.columns
-                      .item.right
-                        | YafeiLee
-                .tag
+                    .small-4.medium-5.columns
+                      = link_to project do
+                        - image_tag project.logo.image_url
+                    .small-8.medium-7.columns
+                      = link_to project do
+                        h5 #{project.name}
+                  .subtitle #{project.oneword}
+                .content
+                  .tag
+                    .row
+                      .small-5.columns
+                        .type
+                          | 创始人
+                      .small-7.columns
+                        .item.right
+                          = link_to project.owner.name, project.owner
+                  .tag
+                    .row
+                      .small-5.columns
+                        .type
+                          | 团队
+                      .small-7.columns
+                        .item.right.margin-link-wrapper
+                          = link_to project.members.size, team_project_path(project)
+                          | 人
+                  - if (leader = project.opened_money_require.leader).present?
+                    .tag
+                      .row
+                        .small-4.columns
+                          .type
+                            | 领投人
+                        .small-8.columns
+                          .item.right
+                            = link_to leader.name, leader
+          - else
+            li 
+              .box
+                .head
                   .row
-                    .small-4.columns
-                      .type
-                        | 创始人 
-                    .small-8.columns
-                      .item.right
-                        | YafeiLee
-                .tag
-                  .row
-                    .small-4.columns
-                      .type
-                        | 创始人
-                    .small-8.columns
-                      .item.right
-                        | YafeiLee
+                    .small-5.columns
+                      = image_tag 'xingbake.jpg'
+                    .small-7.columns
+                      h5 空缺中
+                  .subtitle  -
+                .content
+                  .tag
+                    .row
+                      .small-4.columns
+                        .type
+                          | 创始人
+                      .small-8.columns
+                        .item.right
+                          | 无
+                  .tag
+                    .row
+                      .small-4.columns
+                        .type
+                          | 团队
+                      .small-8.columns
+                        .item.right
+                          | 无
+                  .tag
+                    .row
+                      .small-4.columns
+                        .type
+                          | 领投人
+                      .small-8.columns
+                        .item.right
+                          | 无
       .text-center
         = link_to '查看所有项目', all_explore_index_path
 hr
@@ -63,42 +105,52 @@ hr
   .row
     .small-12.columns
       h2 热门投资人
-      ul.small-block-grid-1.medium-block-grid-3
-        - 3.times do
-          li
-            .box
-              .head
-                .row
-                  .small-5.columns
-                    = image_tag 'm/u1.png'
-                  .small-7.columns
-                    h6 李亚飞
-                    p.subtitle 一个天才
-              .content
-                .tag
+      ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
+        - 3.times do |i|
+          - investor = @investors[i]
+          - if investor.present?
+            - user = investor.user
+            li
+              .box.investor
+                .head
                   .row
-                    .small-4.columns
-                      .type
-                        | 创始人
-                    .small-8.columns
-                      .item.right
-                        | YafeiLee
-                .tag
+                    .small-4.medium-5.columns
+                      = link_to user do
+                        - image_tag user.avatar_url
+                    .small-8.medium-7.columns
+                      = link_to user do
+                        h6 #{user.name}
+                      p.subtitle #{user.description}
+                .content
+                  .tag
+                    | 过往投资项目
+                  .investments
+                    - investments = user.investments.default_order.limit(2)
+                    - if investments.blank?
+                      .investment
+                        | 无
+                    - else
+                      - investments.each do |investment|
+                        .investment
+                          - if investment.money_require.present?
+                            = link_to investment.money_require.project.name, investment.money_require.project
+                          - else
+                            | #{investment.name}
+          - else
+            li
+              .box.investor
+                .head
                   .row
-                    .small-4.columns
-                      .type
-                        | 创始人 
-                    .small-8.columns
-                      .item.right
-                        | YafeiLee
-                .tag
-                  .row
-                    .small-4.columns
-                      .type
-                        | 创始人
-                    .small-8.columns
-                      .item.right
-                        | YafeiLee
+                    .small-4.medium-5.columns
+                      = image_tag 'default.png'
+                    .small-8.medium-7.columns
+                      h6 空缺中
+                .content
+                  .tag
+                    | 过往投资项目
+                  .investments
+                    .investment
+                      | 无
       .text-center
         = link_to '查看所有投资人', investors_path
 hr
@@ -106,42 +158,81 @@ hr
   .row
     .small-12.columns
       h2 参与创业
-      ul.small-block-grid-1.medium-block-grid-3
-        - 3.times do
-          li 
-            .box
-              .head
-                .row
-                  .small-5.columns
-                    = image_tag 'xingbake.jpg'
-                  .small-7.columns
-                    h5 星克巴
-                .subtitle 一个咖啡馆
-              .content
-                .tag
+      ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
+        - 3.times do |i|
+          - person_require = @person_requires[i]
+          - if person_require.present?
+            - project = person_require.project
+            li 
+              .box.job
+                .head
                   .row
-                    .small-4.columns
-                      .type
-                        | 薪水
-                    .small-8.columns
-                      .item.right
-                        | 8k ~ 10k
-                .tag
+                    .small-4.medium-5.columns
+                      = link_to project do
+                        - image_tag project.logo.image_url
+                    .small-8.medium-7.columns
+                      = link_to project do
+                        h5 #{project.name}
+                  .subtitle #{project.oneword}
+                .content
+                  .tag
+                    .row
+                      .small-4.columns
+                        .type
+                          | 薪水
+                      .small-8.columns
+                        .item.right.ng-cloak
+                          | {{ #{person_require.pay} | nfcurrency }}
+                  .tag
+                    .row
+                      .small-4.columns
+                        .type
+                          | 职位
+                      .small-8.columns
+                        .item.right
+                          | #{person_require.title}
+                  .tag
+                    .row
+                      .small-4.columns
+                        .type
+                          | 期权
+                      .small-8.columns
+                        .item.right
+                          | #{person_require.option} %
+          - else
+            li 
+              .box.job
+                .head
                   .row
-                    .small-4.columns
-                      .type
-                        | 职位
-                    .small-8.columns
-                      .item.right
-                        | 软件工程师
-                .tag
-                  .row
-                    .small-4.columns
-                      .type
-                        | 期权
-                    .small-8.columns
-                      .item.right
-                        | 5%
-      .text-center
+                    .small-5.columns
+                      = image_tag 'xingbake.jpg'
+                    .small-7.columns
+                      h5 空缺中
+                  .subtitle -
+                .content
+                  .tag
+                    .row
+                      .small-4.columns
+                        .type
+                          | 薪水
+                      .small-8.columns
+                        .item.right.ng-cloak
+                          | -
+                  .tag
+                    .row
+                      .small-4.columns
+                        .type
+                          | 职位
+                      .small-8.columns
+                        .item
+                          | -
+                  .tag
+                    .row
+                      .small-4.columns
+                        .type
+                          | 期权
+                      .small-8.columns
+                        .item
+                          | -
+      p.text-center
         = link_to '查看所有工作', jobs_path
-hr

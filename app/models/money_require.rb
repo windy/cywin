@@ -90,6 +90,7 @@ class MoneyRequire < ActiveRecord::Base
     end
 
     after_transition on: :leader_reject do |money_require, transition|
+      money_require.leader_id = nil
       money_require.add_leader_reject_notify
       # 将消息标记为已处理
       Message.where(
