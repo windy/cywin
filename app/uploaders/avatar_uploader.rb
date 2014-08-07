@@ -9,7 +9,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    ActionController::Base.helpers.asset_path([version_name, "default.png"].compact.join('_'))
+    ActionController::Base.helpers.asset_path([version_name, "default-people.jpg"].compact.join('_'))
   end
 
   process :resize_to_fill => [200, 200]
