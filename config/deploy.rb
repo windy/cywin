@@ -83,7 +83,7 @@ end
 namespace :unicorn do
   set :unicorn_pid, "#{app_path}/tmp/pids/unicorn_cywin.pid"
   set :start_unicorn, %{
-    cd #{app_path} && bundle exec unicorn -c config/unicorn/#{branch}.rb -E #{rails_env} -D
+    cd #{app_path} && bundle exec unicorn -c config/unicorn/#{server}.rb -E #{rails_env} -D
   }
 
   desc "Start unicorn"
