@@ -24,7 +24,7 @@
       ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
         - 3.times do |i|
           - recommend = @recommends[i]
-          - if ! recommend.present?
+          - if recommend.present?
             - project = @recommends[i].project
             li 
               .box.project
