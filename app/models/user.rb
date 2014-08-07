@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+
+  searchable do
+    text :name, :description
+  end
+
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -15,6 +20,7 @@ class User < ActiveRecord::Base
   has_one :investor
   has_many :investments
   has_and_belongs_to_many :projects, join_table: :members
+  has_many :members
   # 关注功能
   has_many :stars
   # 粉丝功能
@@ -22,6 +28,8 @@ class User < ActiveRecord::Base
   has_many :messages
 
   has_many :events
+
+  has_and_belongs_to_many :person_requires
 
   def add_star(project)
     unless self.stars.where(project_id: project.id).first
@@ -63,9 +71,8 @@ class User < ActiveRecord::Base
     self.avatar.image_url
   end
 
-  #TODO 目前在领投人使用
-  def description
-    "暂无描述"
+  def mark_all_as_read
+    self.messages.unread.update_all(is_read: true, read_at: DateTime.now)
   end
 
 end

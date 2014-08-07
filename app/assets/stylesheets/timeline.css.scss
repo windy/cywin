@@ -33,12 +33,20 @@
     }
 
     .content-wrapper {
+      line-height: 1.5rem;
 
       .created-at {
-        float: right;
         color: #999;
         font-size: 90%;
+        @media #{$medium-up} {
+          float: right;
+        }
+
+        @media #{$small-only} {
+          margin-left: 0.5rem;
+        }
       }
+
     }
 
     .head, .foot {
@@ -53,14 +61,29 @@
 
     }
 
+    .head2 {
+      font-size: 90%;
+      color: #444;
+      margin-bottom: 1.5rem;
+      margin-top: -1rem;
+    }
+
     .content {
       padding-bottom: 1rem;
       margin-bottom: 1rem;
+
+      .title-wrapper {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 0.5rem;
+      }
+
       .title {
-        display: inline-block;
+        display: inline;
       }
       .sub-title {
-        display: inline-block;
+        display: inline;
         color: #888;
         padding-left: 1rem;
         font-size: 90%;

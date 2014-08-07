@@ -1,19 +1,14 @@
-# Add account credentials and API keys here.
-# See http://railsapps.github.io/rails-environment-variables.html
-# This file should be listed in .gitignore to keep your settings secret!
-# Each entry sets a local environment variable and overrides ENV variables in the Unix shell.
-# For example, setting:
-# GMAIL_USERNAME: Your_Gmail_Username
-# makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
-
-# Add application configuration variables here, as shown below.
-#
-SENDGRID_USERNAME: Your_Username
-SENDGRID_PASSWORD: Your_Password
-ADMIN_NAME: First User
-ADMIN_EMAIL: user@example.com
-ADMIN_PASSWORD: changeme
+MAIL_USERNAME: ''
+MAIL_PASSWORD: ''
+DOMAIN_NAME: ''
+ADMIN_NAME: admin
+ADMIN_EMAIL: admin@cywin.cn
+ADMIN_PASSWORD: admin
 ROLES: [admin, investor, leader]
 
 # SECRET_KEY_BASE
-SECRET_KEY_BASE: ba7e7502e0faedd10709b616dec2db58f6eea1d5f3335f7592ceb420699409af510c4f77071df440c4cc6ed51e2b8b6fc29194ae11dbd03a8a63ce81d42f3d3f
+SECRET_KEY_BASE: ''
+# sidekiq namespace
+SIDEKIQ_NAMESPACE: cywin
+# built-in test enable 1 / disable 0
+BIT: 0

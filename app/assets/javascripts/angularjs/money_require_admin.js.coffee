@@ -1,6 +1,5 @@
 @app.controller 'MoneyRequireAdminController', [ '$scope', '$http', '$timeout', ($scope, $http, $timeout)->
   
-  # 存储当前项目正在融资的需求, 如无, 则为 {}
   $scope.loading = true
   
   $scope.init = (project_id)->
@@ -18,6 +17,9 @@
         $scope.money_require = {}
       else
         $scope.money_require = res
+
+  $scope.prevalue = ()->
+    $scope.money_require?.money * (100 - $scope.money_require?.share ) / $scope.money_require?.share
 
   $scope.create_or_update = ()->
     $scope.money_require.errors = null
@@ -48,6 +50,7 @@
     .success (res)->
       if res.success
         $scope.init_money_require()
+        $scope.opened_menu = false
       else
         $scope.money_require.errors = res.errors
 

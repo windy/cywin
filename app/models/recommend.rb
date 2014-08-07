@@ -8,4 +8,5 @@ class Recommend < ActiveRecord::Base
   end
 
   default_scope -> { where(deleted: false) }
+  scope :default_order, -> { order(created_at: :desc) }
 end

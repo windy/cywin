@@ -28,11 +28,15 @@ class Ability
 
       can [:update], MoneyRequire do |money_require|
         project = money_require.project
-        project.owner.try(:id) == user.id
+        project.owner.try(:id) == user.id && money_require.can_edit?
       end
 
       can [:update], User do |s|
         s.id == user.id
+      end
+
+      if user.investor.present?
+        can [:update], Investor
       end
     end
 

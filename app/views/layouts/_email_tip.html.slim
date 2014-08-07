@@ -1,4 +1,4 @@
-- unless current_user.try(:confirmed?)
+- if current_user && ! current_user.try(:confirmed?)
   .alert-box data-alert=''
-    | 请确认你的注册邮箱, 有一重要消息我们将即刻通知到你
+    | 请确认你的注册邮箱, 一有重要消息我们将即刻通知到你
     a href='#' class='close' &times;

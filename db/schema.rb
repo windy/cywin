@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529083039) do
+ActiveRecord::Schema.define(version: 20140717082431) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -25,6 +25,20 @@ ActiveRecord::Schema.define(version: 20140529083039) do
   create_table "avatars", force: true do |t|
     t.string   "image"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bank_statements", force: true do |t|
+    t.integer  "investor_id"
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cards", force: true do |t|
+    t.integer  "investor_id"
+    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -113,15 +127,20 @@ ActiveRecord::Schema.define(version: 20140529083039) do
   end
 
   create_table "investors", force: true do |t|
-    t.string   "name"
     t.string   "phone"
     t.string   "company"
     t.string   "title"
     t.text     "description"
     t.string   "investor_type"
-    t.string   "card"
     t.string   "status",        default: "drafted"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invite_codes", force: true do |t|
+    t.integer  "code"
+    t.boolean  "used",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -157,6 +176,7 @@ ActiveRecord::Schema.define(version: 20140529083039) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_read"
+    t.datetime "read_at"
   end
 
   create_table "money_requires", force: true do |t|
@@ -172,7 +192,7 @@ ActiveRecord::Schema.define(version: 20140529083039) do
     t.datetime "opened_at"
     t.datetime "closed_at"
     t.boolean  "success"
-    t.integer  "maxnp",       default: 50
+    t.integer  "maxnp",       default: 30
     t.text     "leader_word"
   end
 
@@ -185,6 +205,15 @@ ActiveRecord::Schema.define(version: 20140529083039) do
     t.integer  "project_id"
     t.boolean  "remote",      default: false
     t.boolean  "part",        default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status",      default: "opened"
+  end
+
+  create_table "person_requires_users", force: true do |t|
+    t.integer  "person_require_id"
+    t.integer  "user_id"
+    t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -236,14 +265,22 @@ ActiveRecord::Schema.define(version: 20140529083039) do
     t.datetime "updated_at"
   end
 
+  create_table "talks", force: true do |t|
+    t.string   "target_type"
+    t.integer  "target_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
+    t.string   "email",                  default: "",    null: false
     t.string   "name"
     t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -261,6 +298,9 @@ ActiveRecord::Schema.define(version: 20140529083039) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.text     "description"
+    t.string   "resume_link"
+    t.boolean  "publish_email",          default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

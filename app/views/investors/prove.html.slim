@@ -1,0 +1,38 @@
+- content_for(:title) do
+  | 身份验证 - 申请投资人
+
+.row.top-blank ng-controller='InvestorProveController'
+  .small-12.columns
+    = render partial: "header", locals: { stage: :prove }
+    h3 身份验证
+    
+    form
+      .row
+        .small-12.medium-8.columns
+          .image-wrapper
+            img ng-src='{{ card_url }}'
+      label for='card_upload' 上传你的身份证明
+      input type='file' id='card_upload' ng-file-select='upload($files)'
+      small.error.ng-cloak ng-show=' card_error ' {{ card_error }}
+
+      .row
+        .small-12.medium-8.columns
+          .image-wrapper
+            img ng-src='{{ bank_statement_url }}'
+      label for='bank_statement_upload' 上传你的银行流水
+      input type='file' id='bank_statement_upload' ng-file-select='upload_bank_statement($files)'
+      small.error.ng-cloak ng-show='bank_statement_error' {{ bank_statement_error }}
+
+      p.investor-info-query
+        | 当前申请表状态:
+        em
+          | #{human_investor_status(@investor)}
+
+      .row
+        .small-12.medium-6.columns.ng-cloak
+          .control-actions
+            button ng-show='#{@investor.status == "passed"}' disabled='' 你的申请已经通过了
+            button ng-show='#{@investor.status == "applied"}' disabled='' 已经提交, 请耐心等待
+            button ng-show='#{@investor.status == "drafted"}' ng-disabled='! can_submit()' ng-click='submit()' 提交审核
+            button ng-show='#{@investor.status == "rejected"}' ng-disabled='! can_submit()' ng-click='submit()' 再次提交审核
+            a.back ng-click='prev()' 上一步

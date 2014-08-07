@@ -3,25 +3,34 @@
     .person
       .row
         .small-4.medium-3.columns
-          = image_tag @user.avatar.image_url
+          = image_tag @user.avatar_url
         .small-8.medium-9.columns
           .name
             = link_to @user.name, user_path(@user)
+          - if @user.publish_email?
+            .email
+              | 公开邮箱: 
+              = mail_to @user.email 
           .job-title 
             = @user.try(:title)
-          .description 
-            = @user.description
+          - if @user.resume_link.present?
+            .resume-link
+              | 个人简历: 
+              = link_to @user.resume_link, @user.resume_link, target: '_blank'
+          .description
+            - if @user.description.blank?
+              | 暂无描述
+            - else
+              = @user.description
           - if current_user == @user
             .edit
               = link_to '编辑', settings_profile_path
-    - unless current_user == @user
-      ul.small-block-grid-2.list.ng-cloak ng-controller='FunsController' ng-init='init(#{@user.id}, #{current_user.fun?(@user)})'
+    - if current_user && current_user != @user
+      ul.small-block-grid-1.operate.ng-cloak ng-controller='FunsController' ng-init='init(#{@user.id}, #{current_user.fun?(@user)})'
         li 
           a ng-hide='loading || is_fun' ng-click='add_fun()' 关注
           a ng-show='!loading && is_fun' ng-click='remove_fun()' 取消关注
-          a ng-show='loading' ng-click='add_fun()' loading
-        li
-          a href='#' 约谈
+          a ng-show='loading' loading
     ul.small-block-grid-4.tab-content
       li.list
         = link_to '最近动态', user_path(@user), class: active_for(type, :activity)

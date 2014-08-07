@@ -145,7 +145,19 @@ $top-nologin-height: 80px;
       display: inline;
       border: 1px solid #ddd;
       color: #aaa;
+
+      &.unread {
+        background-color:#e79385 !important; 
+        //background: linear-gradient( #e79385, #C43C35) !important;
+        color:#fff; 
+        border-color:#e79385 !important; 
+      }
     }
+
+    li:hover > .messagebox.unread {
+      color: #ddd !important;
+    }
+
     .user-link {
       padding: 1rem !important;
       display: inline;
@@ -167,6 +179,30 @@ $top-nologin-height: 80px;
   .nav-big-wrapper {
     display: none;
   }
+
+  .messagebox {
+    border: 1px solid #646464;
+    padding: 0.5rem;
+    margin-right: 0.6667rem;
+    color: #AAA;
+
+    &:hover {
+      color: white;
+    }
+
+    &.unread {
+      background-color:#d71900; 
+      background: -webkit-linear-gradient( #d71900, #C43C35);
+      background: linear-gradient( #d71900, #C43C35);
+      color:#fff; 
+      border-color:#af2525; 
+    }
+
+    &.unread:hover {
+      color: #ccc;
+    }
+  }
+
 }
 
 .main-container {

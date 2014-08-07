@@ -2,29 +2,18 @@
   padding-top: 1.5rem;
   background-color: white;
 
+  .no-content {
+    margin-top: 1rem;
+    color: #666;
+  }
+
   .projects {
     border-top: 1px solid #ddd;
-    .load-more {
+
+    .paginate {
       margin-top: 2rem;
     }
+
   }
 
-  .project {
-    border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-left: 1px solid #ddd;
-    padding: 1rem 0;
-    .name {
-      display: inline;
-      margin-right: 1rem;
-      font-size: 1rem;
-      a {
-        color: #FF2D2D;
-      }
-    }
-
-    .sub-name {
-      display: inline;
-    }
-  }
 }

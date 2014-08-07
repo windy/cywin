@@ -1,0 +1,30 @@
+li
+  .job-box
+      table
+        tr
+          td 职位
+          td #{person_require.title}
+        tr
+          td 负责内容
+          td.description #{person_require.description}
+        tr
+          td 报酬
+          td 月薪: ¥ #{number_with_delimiter(person_require.pay)}
+        tr
+          td 
+          td 期权: #{person_require.option}%
+        tr
+          td 
+          td 股权: #{person_require.stock}%
+        tr
+          td 可选程
+          td #{human_boolean(person_require.remote)}
+        tr
+          td 可兼职
+          td #{human_boolean(person_require.part)}
+      .job-interest
+        - if ! person_require.users.include?(current_user)
+          button.small ng-hide='interest_person_requires["#{person_require.id}"]' ng-click='interest(#{person_require.id})'我感兴趣
+          button.small ng-show='interest_person_requires["#{person_require.id}"]' disabled=true 已投简历
+        - else
+          button.small disabled=true 已投简历

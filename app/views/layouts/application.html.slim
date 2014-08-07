@@ -12,6 +12,11 @@ html
     = javascript_include_tag "vendor/modernizr"
     = javascript_include_tag "application"
     = csrf_meta_tags
+    link href="/favicon.ico" rel="shortcut icon"
+    link href="/icons/57x57.jpg" rel="apple-touch-icon-precomposed" sizes="57x57"
+    link href="/icons/72x72.jpg" rel="apple-touch-icon-precomposed" sizes="72x72"
+    link href="/icons/114x114.jpg" rel="apple-touch-icon-precomposed" sizes="114x114"
+    link href="/icons/144x144.jpg" rel="apple-touch-icon-precomposed" sizes="144x144"
   body ng-app="app"
     - if current_user
       .off-canvas-wrap
@@ -19,6 +24,7 @@ html
           = render 'layouts/navigation'
           section.main-section
             .main-container
+              = render 'layouts/flashes'
               = render 'layouts/email_tip'
               = yield
             = render 'layouts/foot'
@@ -45,8 +51,10 @@ html
                 = link_to '登录', new_user_session_path, class: 'login-button'
             ul.left
               li.has-form
-                = text_field_tag 'search', nil, placeholder: '搜索项目, 人'
+                = render 'layouts/search_input'
       .main-container
+        = render 'layouts/flashes'
+        = render 'layouts/email_tip'
         = yield
       = render 'layouts/foot'
       

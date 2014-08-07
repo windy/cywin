@@ -1,10 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :team, :invest]
 
-  def index
-    @projects = Project.published
-  end
-
   def new
     authorize! :create, Project
     @project = Project.new
@@ -38,10 +34,17 @@ class ProjectsController < ApplicationController
       @project.cities << city
     end
 
-    if logo_params[:logo_id]
-      @project.logo = Logo.find( logo_params[:logo_id] )
+    if params[:logo_id].present?
+      @project.logo = Logo.find( params[:logo_id] )
     else
-      render_fail('创建失败', logo_error: '必须上传图片') 
+      render_fail('创建失败', logo_error: '必须上传 Logo') 
+      return
+    end
+
+    if params[:screenshot_id].present?
+      @project.screenshots << Screenshot.find( params[:screenshot_id] )
+    else
+      render_fail('创建失败', screenshot_error: '必须上传截图') 
       return
     end
 
@@ -80,8 +83,8 @@ class ProjectsController < ApplicationController
     @project = Project.find( params[:id] )
     authorize! :update, @project
 
-    if logo_params[:logo_id]
-      logo = Logo.find( logo_params[:logo_id] )
+    if params[:logo_id]
+      logo = Logo.find( params[:logo_id] )
       @project.logo = logo
     end
 
@@ -105,6 +108,13 @@ class ProjectsController < ApplicationController
       @project.cities << city
     end
 
+    if params[:screenshot_id].present?
+      @project.screenshots << Screenshot.find( params[:screenshot_id] )
+    else
+      render_fail('创建失败', screenshot_error: '必须上传截图') 
+      return
+    end
+
     if @project.update( project_params )
       render_success
     else
@@ -122,10 +132,14 @@ class ProjectsController < ApplicationController
 
   def team
     @project = Project.find( params[:id] )
+    @owner = @project.owner
+    @owner_member = @project.member( @owner )
+    @members = @project.members_but( @owner )
   end
 
   def invest
     @project = Project.find( params[:id] )
+    @star_users = @project.star_users
     @money_require = @project.opened_money_require
   end
 

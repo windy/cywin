@@ -1,4 +1,4 @@
-module ControllerDevise
+#module ControllerDevise
   def login_user
     before do
       single_login_user
@@ -24,4 +24,4 @@ module ControllerDevise
     @user2 = FactoryGirl.create(:zhang)
     sign_in @user2
   end
-end
+#end

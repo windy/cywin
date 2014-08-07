@@ -1,0 +1,85 @@
+- content_for(:title) do
+  | 查看投资人信息 - #{@investor.user.name}
+
+.row.top-blank
+  .small-12.columns
+    h3 基本信息
+    .row
+      .small-4.medium-3.columns
+        label 头像
+        p
+          = image_tag @user.avatar_url
+    .row
+      .small-12.columns
+        label 姓名
+        p
+          = link_to @user.name, @user
+        label 身份类型
+        p
+          = t('investor.investor_types.' + @investor.investor_type)
+        label 公司
+        p
+          = @investor.company
+        label 职位
+        p
+          = @investor.title
+        label 个人描述
+        p.description
+          = @investor.description
+        label 以往投资案例
+        - if @investments.blank?
+          p.no-content 无以往投资案例
+        - else
+          ul.small-block-grid-1.medium-block-grid-2
+            - @investments.each do |investment|
+              li
+                table
+                  tbody
+                    tr
+                      td 项目名称
+                      td #{investment.name}
+                    tr
+                      td 项目地址
+                      td #{ investment.address }
+                    tr
+                      td.description 投资描述
+                      td #{ investment.description }
+          
+    h3 投资理念
+    label 货币类型
+    p
+      = t('investidea.coin_types.'+ @investidea.coin_type)
+    label 投资额范围
+    .row
+      .small-12.medium-6.columns
+        p
+          .row.collapse
+            .small-5.columns
+              input type='text' readonly='' value="¥ #{number_with_delimiter(@investidea.min)}"
+            .small-2.columns
+              span.postfix
+                | --
+            .small-5.columns
+              input type='text' readonly='' value="¥ #{number_with_delimiter(@investidea.max)}"
+    label 关注行业
+    p
+      = @investidea.industry
+    label 可为项目提供
+    p
+      = @investidea.give
+    label 投资理念
+    p
+      = @investidea.idea
+    h3 身份验证
+    .row
+      .small-12.medium-8.columns
+        p
+          = image_tag @investor.card.image_url
+    h3 银行流水
+    .row
+      .small-12.medium-8.columns
+        p
+          = image_tag @investor.bank_statement.image_url
+    label 当前状态
+    p
+      = human_investor_status(@investor)

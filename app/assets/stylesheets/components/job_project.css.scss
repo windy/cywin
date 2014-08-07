@@ -1,0 +1,39 @@
+.job-project {
+  border-bottom: 1px solid #ddd;
+  margin: 1rem 0;
+  padding: 1rem 0;
+
+  .name {
+    display: inline;
+    margin-right: 1rem;
+    a {
+      color: #333;
+    }
+  }
+
+  .sub-name {
+    display: inline;
+    color: #888;
+    font-size: 90%;
+  }
+
+  .job-content {
+    color: #888;
+    padding-top: 1rem;
+  }
+
+  .job-info {
+    padding-top: 1rem;
+    color: #888;
+    font-size: 90%;
+
+    .info {
+      margin-right: 0.5rem;
+    }
+
+    span[class|=fi] {
+      margin-right: 0.2rem;
+    }
+
+  }
+}

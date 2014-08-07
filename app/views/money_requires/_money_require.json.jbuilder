@@ -1,7 +1,7 @@
 unless money_require
   json.null!
 else
-  json.extract! money_require, :id, :money, :share, :deadline, :status, :min_money
+  json.extract! money_require, :id, :money, :share, :deadline, :status, :min_money, :maxnp, :project_id
   json.format_status format_status(money_require.status)
   if money_require.opened_at.present?
     # 开始与结束时间
@@ -56,7 +56,7 @@ else
 
   if money_require.leader_user
     json.leader do
-      json.extract! money_require.leader_user, :name, :id
+      json.extract! money_require.leader_user, :name, :id, :description
       json.avatar money_require.leader_user.avatar_url
       json.me money_require.leader_user == current_user
     end

@@ -21,11 +21,13 @@ module Cywin
     config.i18n.enforce_available_locales = false
     config.i18n.default_locale = 'zh-CN'.to_sym
     config.action_controller.action_on_unpermitted_parameters = :log
+
+    config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
     
     # generators
     config.generators.assets = false
     config.generators.helper = false
-    config.active_record.observers = :project_observer, :star_observer, :fun_observer, :member_observer, :investment_observer
+    config.active_record.observers = :project_observer, :star_observer, :fun_observer, :member_observer, :investment_observer, :person_require_observer, :person_requires_user_observer, :talk_observer
 
     config.generators do |g|
       g.test_framework :rspec,

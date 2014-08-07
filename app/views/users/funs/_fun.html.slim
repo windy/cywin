@@ -1,0 +1,6 @@
+li.fun
+  .avatar
+    = link_to user_path(fun.user) do
+      - image_tag fun.user.avatar_url
+  .name
+    = link_to fun.user.name, fun.user

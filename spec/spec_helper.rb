@@ -37,15 +37,18 @@ RSpec.configure do |config|
     YAML.load(ENV['ROLES']).each do |role|
       Role.where(name: role).first_or_create
     end
+    # sunspot
+    ::Sunspot.session = ::Sunspot::Rails::StubSessionProxy.new(::Sunspot.session)
   end
 
   config.after(:each) do
     DatabaseCleaner.clean
+    ::Sunspot.session = ::Sunspot.session.original_session
   end
 
   # devise 
   config.include Devise::TestHelpers, type: :controller
-  config.extend ControllerDevise, type: :controller
-  config.include ControllerDevise, type: :controller
+  #config.extend ControllerDevise, type: :controller
+  #config.include ControllerDevise, type: :controller
 
 end

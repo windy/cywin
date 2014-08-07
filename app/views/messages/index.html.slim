@@ -3,12 +3,12 @@
     p.head 一共有 #{@count} 条消息, #{@waiting_count} 条未处理.
     dl.sub-nav
       dt 过滤条件
-      dd.active 
-        a href='#' 全部
-      dd 
-        a href='#' 已处理
-      dd 
-        a href='#' 未处理
+      dd class="#{:active if params[:cond].blank? }"
+        = link_to '全部', messages_path
+      dd class="#{:active if params[:cond] == 'treated' }"
+        = link_to '已处理', messages_path(cond: :treated)
+      dd class="#{:active if params[:cond] == 'untreat' }"
+        = link_to '未处理', messages_path(cond: :untreat)
 
     .messages-content
       - if @messages.blank?
@@ -30,7 +30,7 @@
               - if message.is_read?
                 span.label.secondary 已查阅
               - else
-                span.label.secondary 未查阅
+                span.label.secondary 新
               span
                 - case message.action
                 - when Message::LEADER_INVITE
@@ -45,6 +45,31 @@
                   | 已经确认了你的项目
                   = link_to message.project.name, message.project
                   | 领投邀请, 请知悉.
+                - when Message::LEADER_REJECT
+                  = link_to message.target.leader.name, message.target.leader
+                  | 已经拒绝了你的项目
+                  = link_to message.project.name, message.project
+                  | 领投邀请, 请重新邀请新的领投人.
+                - when Message::APPLY_INVESTOR_SUCCESS
+                  | 你的投资人
+                  = link_to '申请表', info_investors_path
+                  | 已经通过, 请知悉.
+                - when Message::APPLY_INVESTOR_FAIL
+                  | 你的投资人
+                  = link_to '申请表', info_investors_path
+                  | 没有通过, 请点击链接查看详细原因.
+                - when Message::TALK
+                  - user = message.target.user
+                  = link_to user.name, user
+                  | 向你的项目
+                  = link_to message.project.name, message.project
+                  | 发起了约谈邀请, 请到你的注册邮箱回复.
+                - when Message::DELIVER_PROJECT
+                  - user = message.project.owner
+                  = link_to user.name, user
+                  | 推荐了他的项目
+                  = link_to message.project.name, message.project
+                  | 给你, 可以去看看.
               span.time
                 | #{time_ago_in_words(message.created_at)}前
       

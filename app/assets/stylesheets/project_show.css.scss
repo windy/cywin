@@ -1,27 +1,15 @@
 .project-show {
   
-  .operate {
-    text-align: center;
-
-    a {
-      display: inline-block;
-      width: 100%;
-      border: 1px solid #ddd;
-      padding: 1rem 0;
-      margin: 1rem 0;
-      color: #333;
-      font-size: 1.5rem;
-    }
-  }
-
   .tab-content {
     margin-top: 2rem;
     padding-top: 2rem;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+    margin-left: 0;
+    margin-right: 0;
     .list {
       text-align: center;
-      padding-bottom: 0;
+      padding: 0;
       a {
         color: #333;
         font-size: 1.2rem;
@@ -38,10 +26,6 @@
   .content {
     margin-top: 2rem;
     
-    .image {
-      margin-bottom: 2rem;
-    }
-
     .title {
       border-bottom: 1px solid #ddd;
       padding-bottom: 0.5rem;
@@ -49,7 +33,9 @@
     }
 
     .team {
+
       margin-top: 2rem;
+
       .more-info {
         text-align: center;
         margin: 1rem 0;

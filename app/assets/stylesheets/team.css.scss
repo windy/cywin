@@ -21,3 +21,32 @@
     }
   }
 }
+
+.team-content {
+  #owner-avatar {
+    margin-top: 0.5rem;
+  }
+  .edit {
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    z-index: 2;
+  }
+
+  .cancel {
+    margin-left: 0.5rem;
+  }
+
+  .team-story-wrapper {
+    color: #888;
+    min-height: 6rem;
+  }
+
+  .members .person .name {
+    padding-bottom: 0;
+  }
+  
+  .invite-tips {
+    color: #888;
+  }
+}

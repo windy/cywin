@@ -24,7 +24,7 @@ li
   = link_to explore_index_path do
     - unless top
       i.fi-eye
-    | 探索
+    | 发现项目
 li
   = link_to investors_path do
     - unless top
@@ -36,4 +36,4 @@ li
       i.fi-address-book
     | 参与创业 
 li
-  = text_field_tag 'search', nil, placeholder: '搜索项目, 人', class: 'search'
+  = render 'layouts/search_input'

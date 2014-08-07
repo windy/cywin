@@ -26,10 +26,12 @@ zh-CN:
         description: '融资计划简述'
       person_require: &person_require
         title: '招聘职位'
-        pay: '薪资'
+        pay: '月薪资'
         stock: '股权'
         option: '期权'
-        description: '补充说明'
+        description: '职位说明'
+        remote: '是否允许远程办公'
+        part: '是否允许兼职'
       member:
         avatar: '上传头像'
         name: '姓名'

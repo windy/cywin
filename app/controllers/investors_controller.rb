@@ -1,90 +1,107 @@
 class InvestorsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_investor, only: [:stage1, :stage2, :update]
+  before_action :authenticate_user!, except: [:index]
 
   def index
     @investors = Investor.passed.default_order.page(params[:page])
-  end
-
-  def new
-    @investor = current_user.investor || Investor.new
-  end
-
-  def stage1
-    @investor.investidea || @investor.build_investidea
-    if request.post?
-      @investor.investidea.assign_attributes(investidea_params)
-      if @investor.investidea.save
-        redirect_to stage2_investor_path(@investor.id)
-      else
-        render :stage1
-        return
-      end
-    else
-      render :stage1
-      return
-    end
-  end
-
-  def stage2
-    if request.post?
-      if @investor.update( card_params ) &&  @investor.validate_and_submit
-        flash[:notice] = "创建申请成功"
-        redirect_to root_path
-      else
-        render :stage2
-        return
-      end
-    else
-      render :stage2
-      return
-    end
   end
 
   def autocomplete
     if params[:search].blank?
       @users = []
     else
-      @users = User.joins(:roles).where('roles.name' => :investor).where('users.name like ?', "%#{params[:search]}%").limit(5)
+      if params[:search].include?("@")
+        @users = User.joins(:roles).where('roles.name' => :investor).where(email: params[:search])
+      else
+        @users = User.joins(:roles).where('roles.name' => :investor).where('users.name like ?', "%#{params[:search]}%").limit(5)
+      end
+    end
+
+    respond_to do |format|
+      format.json
     end
   end
 
-  def update
-    if @investor.update( investor_params )
-      redirect_to stage1_investor_path(@investor.id)
-    else
-      render :new
+  def search
+    @investors = Investor.search do
+      fulltext "*#{params[:q]}*"
+      paginate page: params[:page], per_page: PersonRequire::PER_PAGE
+      with(:status, 'passed')
+    end.results
+    render :index
+  end
+
+  def basic
+    @investor = current_user.investor || current_user.build_investor
+    if @investor.new_record?
+      @investor.save(validate: false)
     end
+
+    respond_to do |format|
+      format.json { render 'basic' }
+      format.html { render 'basic' }
+    end
+  end
+
+  def idea
+    authorize! :update, Investor
+    @investor = current_user.investor
+    @investidea = current_user.investor.investidea || current_user.investor.build_investidea
+    if @investidea.new_record?
+      @investidea.save(validate: false)
+    end
+  end
+
+  def prove
+    authorize! :update, Investor
+    @investor = current_user.investor
+  end
+
+  def info
+    authorize! :update, Investor
+    @investor = current_user.investor
+    @investor_audits = @investor.investor_audits.default_order
+  end
+
+  # 提交审核
+  def submit
+    authorize! :update, Investor
+    @investor = current_user.investor
+    if @investor.submit_with_audit
+      render_success
+    else
+      render_fail
+    end
+  end
+
+  def show
+    @investor = Investor.find(params[:id])
+    @user = @investor.user
+    @investments = @user.investments.selfcreate
+    @investidea = @investor.investidea
   end
 
   def create
-    @investor = Investor.new( investor_params )
-    @investor.user_id = current_user.id
-    if @investor.save
-      redirect_to stage1_investor_path(@investor.id)
+    authorize! :update, Investor
+    @investor = current_user.investor
+
+    # 名字使用统一的用户名
+    current_user.name = params[:name]
+    current_user.description = params[:description]
+    unless current_user.save
+      render_fail(nil, current_user)
+      return
+    end
+
+    if @investor.update( investor_params )
+      render_success
     else
-      render :new
+      render_fail(nil, @investor)
     end
   end
 
   private
-    def set_investor
-      @investor = Investor.find(params[:id])
-    end
+  def investor_params
+    params.permit(:phone, :investor_type, :company, :title)
+  end
 
-    def investor_params
-      params.require(:investor).permit(:name, :phone, :investor_type, :company, :title, :description )
-    end
-
-    def investment_params
-      params.require(:investor).require(:investment).permit(:name, :address, :description)
-    end
-
-    def investidea_params
-      params.require(:investor).require(:investidea).permit(:coin_type, :min, :max, :industry, :give, :idea)
-    end
-    
-    def card_params
-      params.require(:investor).permit(:card) rescue {}
-    end
 end

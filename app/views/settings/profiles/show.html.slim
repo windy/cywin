@@ -1,14 +1,13 @@
 - content_for(:title) do
   | 个人设置
 
-= render 'common/flash'
-
 .profile-edit.row.top-blank ng-controller='ProfileController'
   .small-12.medium-3.columns
     = render 'settings/sidebar'
   .small-12.medium-9.columns
     = simple_form_for(@user, url: settings_profile_path, method: :PUT) do |f|
       = f.input :email, disabled: true
+      = f.input :publish_email
       = f.input :name, required: false
       = f.label :avatar
       img ng-src='{{ avatar }}' ng-init='avatar = "#{@user.avatar_url}" '
@@ -16,5 +15,6 @@
       small.error ng-show=' avatar_error '
         | {{ avatar_error }}
       input type='hidden' ng-model='user_id' ng-init='user_id = #{@user.id}'
+      = f.input :resume_link, placeholder: '建议使用 LinkedIn 公开地址'
       = f.input :description
       = f.button :submit, '提交', class: 'small'

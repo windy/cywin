@@ -3,7 +3,7 @@ tr
   td
     = link_to investor.user.name, user_path(investor.user.id)
   td
-    = link_to investor.name, investor_path(investor.id)
+    = link_to investor.user.name, investor_path(investor.id)
   td
     = time_ago_in_words( investor.updated_at )
   td 无

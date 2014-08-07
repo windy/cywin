@@ -1,25 +1,28 @@
-@app.controller 'RegistrationController', [ '$scope', '$http', '$cookieStore', '$cookies', ($scope, $http, $cookieStore, $cookies)->
+@app.controller 'RegistrationController', [ '$scope', '$http', '$window', 'ipCookie', ($scope, $http, $window, ipCookie)->
 
-  $scope.errors = $cookieStore.get('register_errors') || {}
-  $cookieStore.remove('register_errors')
+  $scope.errors = ipCookie('registerErrors') || {}
+  ipCookie.remove('registerErrors', { path: '/' })
 
-  if user = $cookieStore.get('register_users')
+  if user = ipCookie('register_users')
     $scope.name = user.name
     $scope.email = user.email
     $scope.password = user.password
-    $cookieStore.remove('register_users')
+    $scope.password_confirm = user.password
+    $scope.code = user.code
+    ipCookie.remove('register_users', {path: '/'})
   
   $scope.submit = ()->
     $http
       url: '/users'
       method: 'POST'
-      data:
+      params:
         'user[name]': $scope.name
         'user[email]': $scope.email
         'user[password]': $scope.password
+        'code': $scope.code
     .success (res)->
       if res.success
-        window.location.href = '/home/welcome'
+        $window.location.href = '/home/welcome'
       else
         $scope.errors = res.errors
     .error (res, status)->

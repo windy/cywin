@@ -1,19 +1,49 @@
+@import 'variables';
+
 .project-show, .project-edit {
   .head {
-    padding-bottom: 2rem;
+    margin-bottom: 1rem;
     .name a {
       color: #FF2D2D;
+    }
+
+    p {
+      margin-bottom: 1rem;
     }
     
     .info {
       i[class^=fi-] {
         margin-right: 0.5rem;
-        margin-left: 0.5rem;
+        margin-left: 1rem;
 
         &:first-child {
           margin-left: 0;
         }
 
+      }
+    }
+
+    .name-area {
+      position: relative;
+      .status-box {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+      }
+
+      .status {
+        background: #f0ad4e;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        display: inline;
+        @media #{$medium-up} {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+        opacity: 0.8;
       }
     }
   }

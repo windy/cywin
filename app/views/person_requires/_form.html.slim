@@ -1,0 +1,17 @@
+- if @person_require.new_record?
+  - url = project_person_requires_path(@project)
+- else
+  - url = project_person_require_path(@project, @person_require)
+= simple_form_for(@person_require, url: url) do |f|
+  = f.input :title
+  = f.input :description
+  = f.input :pay
+  = f.input :option
+  = f.input :stock
+  = f.input :remote
+  = f.input :part
+  .row
+    .small-12.medium-8.large-6.columns
+      .control-actions
+        = f.button :submit, '提交', class: 'small'
+        a.back href="#{admin_project_person_requires_path(@project)}" 返回

@@ -24,6 +24,16 @@ form.stage0.ng-cloak ng-submit='submit()'
       small.error.ng-cloak ng-show=' logo_error ' {{ logo_error }}
       input type='hidden' id='logo_id' ng-model=' project.logo_id '
   .row
+    .small-6.medium-6.columns
+      .image-wrapper
+        img ng-src=' {{ project.screenshot_url }} '
+  .row
+    .small-8.medium-6.end.columns
+      label for='screenshot' 产品截图
+      input id='screenshot' type='file' ng-file-select='upload_screenshot($files)'
+      small.error.ng-cloak ng-show=' screenshot_error ' {{ screenshot_error}}
+      input type='hidden' id='logo_id' ng-model=' project.screenshot_id '
+  .row
     .small-12.medium-8.columns
       label for='oneword' 一句话
       input id='oneword' type='text' placeholder='一句话说明, 将显示在项目副标题' ng-model='project.oneword' ng-class= '{ error: errors.oneword }'

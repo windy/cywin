@@ -1,10 +1,6 @@
 .project-show, .project-edit {
   .content {
-    margin-top: 2rem;
-    
-    .image {
-      margin-bottom: 2rem;
-    }
+    margin-top: 1rem;
 
     .title {
       border-bottom: 1px solid #ddd;
@@ -20,23 +16,5 @@
       }
     }
 
-    .job {
-
-      .job-box {
-        border: 1px solid #ddd;
-        padding: 1rem 0;
-        margin: 1rem;
-        table {
-          border: none;
-        }
-
-        .job-interest {
-          text-align: center;
-        }
-
-        &:hover {
-        }
-      }
-    }
   }//content
 }

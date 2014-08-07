@@ -1,3 +1,5 @@
+@import 'variables';
+
 .footer {
   background-color: #fff;
   padding-top: 2rem;
@@ -7,6 +9,15 @@
 
   .columns {
     margin-top: 1rem;
+  }
+
+  .checkin {
+    margin-top: 2rem;
+    color: #999;
+
+    @media #{$large-only} {
+      text-align: center;
+    }
   }
 
 }

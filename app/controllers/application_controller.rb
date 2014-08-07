@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_path, :alert => exception.message
+    redirect_to root_path, :alert => '你没有权限访问该页面'
   end
 
   def render_success(msg = nil, data = {})
@@ -43,5 +43,12 @@ class ApplicationController < ActionController::Base
       model.errors[column_name].first
     end
   end
+  
+  private
+  def bit_enable?
+    ENV['BIT'].to_i == 1
+  end
+
+  helper_method :bit_enable?
 
 end

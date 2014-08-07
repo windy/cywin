@@ -2,7 +2,7 @@
 
   $scope.init = (id)->
     $scope.project_id = id
-    $http.get('/projects/' + id).success (res)->
+    $http.get('/projects/' + id + '.json').success (res)->
       $scope.project = res
 
   $scope.open_head_edit = ()->
@@ -30,7 +30,7 @@
   $scope.upload_logo = ($files)->
     $scope.head_edit.logo_error = null
     for file in $files
-      $scope.upload = $upload.upload
+      $upload.upload
         url: '/logos'
         method: 'POST'
         file: file
@@ -89,7 +89,7 @@
   $scope.upload_screenshot = ($files)->
     $scope.screenshot_error = null
     for file in $files
-      $scope.upload = $upload.upload
+      $upload.upload
         url: '/screenshots'
         method: 'POST'
         file: file

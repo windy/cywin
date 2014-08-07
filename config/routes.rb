@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       resource :activities, only: :show
     end
   end
+  
+  resources :delivering_projects, only: [:index, :update]
 
   resources :stars, only: [:create] do 
     collection do
@@ -35,7 +37,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :activity, only: [:show]
+  resources :talks, only: [:create] do
+    collection do
+      get :talk_content
+    end
+  end
+
   resources :about do
     collection do
       get :index
@@ -56,18 +63,29 @@ Rails.application.routes.draw do
       get :autocomplete
     end
   end
+
   resources :explore do
     collection do
       get :all
       get :categories
       get :trend
+      get :search
     end
   end
+
   resources :syndicates
-  resources :jobs, only: [:index]
+  resources :investments, only: [:index, :create]
+
+  resources :interest_users, only: [:index]
+  resources :jobs, only: [:index] do
+    collection do
+      get :search
+    end
+  end
+
   resources :logos, only: [:create]
   resources :screenshots, only: [:create]
-  resources :projects do
+  resources :projects, except: [:index] do
     member do
       post :publish
       post :invite
@@ -87,24 +105,40 @@ Rails.application.routes.draw do
     end
 
     resources :person_requires do
+      collection do
+        get :admin
+      end
+
+      member do
+        patch :close
+        patch :open
+        post :interest
+      end
     end
   end
+
   resources :investors do
-    member do
-      get :stage1
-      post :stage1
-      get :stage2
-      post :stage2
-    end
     collection do
       get :autocomplete
+      get :search
+      get :basic
+      get :idea
+      get :prove
+      get :info
+      post :submit
     end
   end
+
+  resources :investideas, only: [:index, :create]
+  resources :cards, only: [:index, :create]
+  resources :bank_statements, only: [:index, :create]
 
   resources :money_requires do
     member do
       post :add_leader
       patch :add_leader
+      post :leader_reject
+      patch :leader_reject
       post :leader_confirm
       patch :leader_confirm
       post :close
@@ -120,7 +154,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :messages
+  resources :messages, only: [:index] do
+    collection do
+      get :count
+    end
+  end
 
   namespace :admin do
     resources :users
@@ -138,13 +176,15 @@ Rails.application.routes.draw do
       end
     end
     resources :recommends
+    resources :invite_codes
     root :to=> "dashboard#index"
   end
   root :to => "home#index"
-  resources :home do
+  resources :home, only: [] do
     collection do
       get :index
       get :welcome
+      get :search
     end
   end
   resources :avatars, only: [:create]

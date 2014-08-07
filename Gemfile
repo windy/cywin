@@ -1,5 +1,5 @@
 if ENV['RUBYTAOBAO']
-  puts "use taobao source"
+  #puts "use taobao source"
   source 'http://ruby.taobao.org'
 else
   source 'https://rubygems.org'
@@ -21,10 +21,13 @@ gem 'rolify'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'therubyracer', :platform=>:ruby
-gem "foundation-rails", "~> 5.2.2.0"
+gem "foundation-rails", ">= 5.0"
 gem 'settingslogic'
 gem 'foundation-icons-sass-rails'
 gem 'kaminari', github: 'amatsuda/kaminari'
+gem 'progress_bar'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 #background cron
 gem 'sidekiq'
@@ -53,6 +56,10 @@ gem 'rails-i18n', '~> 4.0.0'
 # web server
 gem 'unicorn'
 
+# deploy
+gem 'mina', require: false
+gem 'mina-sidekiq', require: false
+
 group :development do
   gem 'spring'
   gem 'quiet_assets'
@@ -66,7 +73,7 @@ end
 
 group :development, :test do
   gem 'factory_girl_rails'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '2.14.2'
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'sqlite3'

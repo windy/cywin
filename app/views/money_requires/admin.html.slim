@@ -18,7 +18,7 @@
               | 1. 融资预热
           li
             a ng-class='{ active: money_require.status == "leader_needed" }'
-              | 2. 寻找领投人
+              | 2. 预热中
           li
             a ng-class='{ active: money_require.status == "leader_need_confirmed" }'
               | 3. 领投人确认
@@ -48,6 +48,10 @@
             small.error ng-show='money_require.errors.share' {{ money_require.errors.share }}
           .small-1.large-1.end.columns
             span.postfix %
+        label for='prevalue' 融资前估值( 自动计算 )
+        .row.collapse
+          .small-11.medium-8.large-6.end.columns
+            input type='text' id='money' ng-value='prevalue() | nfcurrency' disabled='' 
         label for='deadline' 融资周期
         .row.collapse
           .small-11.medium-3.columns
@@ -58,20 +62,66 @@
         label for='maxnp' 限制最大人数
         .row.collapse
           .small-12.medium-3.columns
-            input type='text' id='maxnp' ng-model='money_require.maxnp' ng-class='{ error: money_require.errors.maxnp }' placeholder='建议: 20-50 人'
+            input type='text' id='maxnp' ng-model='money_require.maxnp' ng-class='{ error: money_require.errors.maxnp }' placeholder='建议: #{MoneyRequire::NP_MIN} - #{MoneyRequire::NP_MAX} 人'
             small.error ng-show='money_require.errors.maxnp' {{ money_require.errors.maxnp }}
           .small-1.large-1.end.columns
             span.postfix 人
-
-
+        p.alert 以上填入你的期望值, 在融资开始前均可以修改.
         button.ng-cloak ng-hide='money_require.id' 创建并预热
         button.ng-cloak ng-show='money_require.id'  开始预热
   .row.ng-cloak ng-show='money_require.status == "leader_needed"'
     .small-12.large-10.large-centered.columns
+      h4.title 融资预热中, 你可以:
       p
-        | 通过线上或线下寻找合适的领投人, 当找到后请在以下邀请他(她)成为项目的领投人.
+        ul
+          li
+            p
+              | 预热融资, 联系平台上优秀的 
+              = link_to '投资人', investors_path, target: '_blank'
+          li
+            p 找到领投人, 键入他的平台名字或邮箱确认融资条款
+          li.ng-cloak
+            | 我要 
+            a ng-click='opened_menu = !opened_menu' ng-init='opened_menu = false' 调整融资
+            p
+              form ng-submit= 'create_or_update()' ng-show='opened_menu'
+                label for="money" 计划融资
+                .row.collapse
+                  .small-1.columns
+                    span.prefix ¥
+                  .small-11.medium-8.large-6.end.columns
+                    input type='text' id='money' ng-model='money_require.money' ng-class='{ error: money_require.errors.money }' placeholder="输入融资额度"
+                    small.error ng-show='money_require.errors.money' {{ money_require.errors.money }}
+                label for="share" 出让股份
+                .row.collapse
+                  .small-11.medium-3.columns
+                    input type='text' id='share' ng-model='money_require.share' ng-class='{ error: money_require.errors.share }' placeholder='建议: 5%-20%'
+                    small.error ng-show='money_require.errors.share' {{ money_require.errors.share }}
+                  .small-1.large-1.end.columns
+                    span.postfix %
+                label for='prevalue' 融资前估值( 自动计算 )
+                .row.collapse
+                  .small-11.medium-8.large-6.end.columns
+                    input type='text' id='money' ng-value='prevalue() | nfcurrency' disabled='' 
+                label for='deadline' 融资周期
+                .row.collapse
+                  .small-11.medium-3.columns
+                    input type='text' id='deadline' ng-model='money_require.deadline' ng-class='{ error: money_require.errors.deadline }' placeholder='建议: 30-60 天'
+                    small.error ng-show='money_require.errors.deadline' {{ money_require.errors.deadline }}
+                  .small-1.large-1.end.columns
+                    span.postfix 天
+                label for='maxnp' 限制最大人数
+                .row.collapse
+                  .small-12.medium-3.columns
+                    input type='text' id='maxnp' ng-model='money_require.maxnp' ng-class='{ error: money_require.errors.maxnp }' placeholder='建议: #{MoneyRequire::NP_MIN} - #{MoneyRequire::NP_MAX} 人'
+                    small.error ng-show='money_require.errors.maxnp' {{ money_require.errors.maxnp }}
+                  .small-1.large-1.end.columns
+                    span.postfix 人
+                button.ng-cloak ng-show='money_require.id' 更新
+      hr
+      h4 我已经线下谈好领投人, 现在确认
       p.alert
-        | 注意: 一旦邀请, 无法修改.
+        | 注意: 一旦邀请, 无法修改, 请务必线下确认后再键入.
       form ng-submit='add_leader()'
         .leader
           person ng-show='selected_leader()' user='autocomplete_user'
@@ -88,18 +138,22 @@
                       |{{ match.model.name }} 
             p.alert ng-show='leader_error_message'
               | {{ leader_error_message }}
-            button ng-disabled= '! selected_leader()' 邀请领投人
+            button ng-disabled= '! selected_leader()' 确认领投人
   .row.ng-cloak ng-show='money_require.status == "leader_need_confirmed"'
     .small-12.large-10.large-centered.columns
-      h4 等待领投人确认...
+      h4 等待领投人确认
       p 请领投人确认
-      p.alert 我们已经通过系统消息告之对方, 请尽快让其确认, 确认后融资流程正式开始
+      p.alert 我们已经通过系统消息告之对方, 请尽快让其登录平台, 确认后融资流程正式开始
       person user='money_require.leader'
   .row.ng-cloak ng-show='money_require.status == "opened"'
     .small-12.large-10.large-centered.columns
       .money_require
         moneyrequire require='money_require' title='"目前融资进度"'
-      h4 融资事件
+      .invest
+        h4.title 融资事件
+      .timeline.simple
+        - @project.events.default_order.each do |event|
+          = render partial: 'home/event', locals: { event: event }
   .row.ng-cloak ng-show='money_require.status == "closed"'
     .small-12.large-10.large-centered.columns
       moneyrequire require='money_require' title='"融资已完成"'

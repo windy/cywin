@@ -1,4 +1,12 @@
 class Project < ActiveRecord::Base
+
+  searchable do
+    text :name, :oneword, :description
+  end
+
+  PER_PAGE = 10
+  paginates_per PER_PAGE
+
   my_const_set('STAGES', [ 'IDEA', 'DEVELOPING', 'ONLINE', 'GAINED' ])
     
   validates :name, presence: true, uniqueness: true
@@ -23,6 +31,28 @@ class Project < ActiveRecord::Base
 
   has_and_belongs_to_many :categories
   has_many :screenshots
+
+  # 虚拟状态字段
+  # 在融资需求的基础上添加发布状态
+  def vstatus
+    if m = self.opened_money_require
+      return m.status
+    else
+      return nil
+    end
+  end
+
+  def screenshot_cover
+    self.screenshots.first
+  end
+
+  def screenshot_cover_try_image_url
+    #TODO 找一个缺省的封面
+    self.screenshot_cover.try(:image_url) || 'j/jingpin1.jpg'
+  end
+
+  # events
+  has_many :events
   def categories_name 
     self.categories.collect { |c| c.name }.join(',')
   end
@@ -33,6 +63,7 @@ class Project < ActiveRecord::Base
   end
 
   scope :published, -> { where(published: true) }
+  scope :default_order, -> { order(created_at: :desc) }
 
   def add_owner( owner )
     add_user(owner, role: Member::FOUNDER, priv: 'owner')
@@ -118,4 +149,22 @@ class Project < ActiveRecord::Base
   def fullname
     "#{self.name} ( #{self.oneword} )"
   end
+
+  def talk_count
+    Talk.where(target_type: :Project, target_id: self.id).count
+  end
+  
+  def investment_count
+    o = opened_money_require
+    if o.present?
+      o.investments.count
+    else
+      0
+    end
+  end
+
+  def star_count
+    Star.where(project_id: self.id).count
+  end
+
 end

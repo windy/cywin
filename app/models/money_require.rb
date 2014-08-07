@@ -1,10 +1,12 @@
 class MoneyRequire < ActiveRecord::Base
+  NP_MIN = 1
+  NP_MAX = 30
   validates :money, presence: true, numericality: { greater_than_or_equal_to: 1000, only_integer: true }
   validates :share, presence: true, numericality: { greater_than: 0, less_than: 100, only_integer: true }
 
   validates :deadline, presence: true, numericality: { greater_than_or_equal_to: 30, only_integer: true }
 
-  validates :maxnp, numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 50, only_integer: true }
+  validates :maxnp, numericality: { greater_than_or_equal_to: MoneyRequire::NP_MIN, less_than_or_equal_to: MoneyRequire::NP_MAX, only_integer: true }
 
   belongs_to :project
   validates :project_id, presence: true
@@ -25,7 +27,12 @@ class MoneyRequire < ActiveRecord::Base
     end
   end
 
-  # ready -> leader_needed -> leader_need_confirmed -> opened -> closed
+  # confirmed:
+  # ready -> leader_needed / preheated -> leader_need_confirmed -> opened -> closed
+  # rejected: 
+  # ready -> leader_needed / preheated -> leader_need_confirmed
+  #                     ^______________________|
+  #
   state_machine :status, initial: :ready do
     event :preheat do
       transition ready: :leader_needed
@@ -63,12 +70,34 @@ class MoneyRequire < ActiveRecord::Base
       money_require.save!
       money_require.add_leader_confirm_notify
 
+      # 将消息标记为已处理
+      Message.where(
+        action: Message::LEADER_INVITE,
+        target_type: :MoneyRequire,
+        target_id: money_require.id,
+      ).first.done
+
       Event.create(
         user: money_require.project.owner,
         project_id: money_require.project_id,
         action: Event::MONEY_REQUIRE_OPENED,
         target: money_require,
       )
+    end
+
+    event :leader_reject do
+      transition leader_need_confirmed: :leader_needed
+    end
+
+    after_transition on: :leader_reject do |money_require, transition|
+      money_require.leader_id = nil
+      money_require.add_leader_reject_notify
+      # 将消息标记为已处理
+      Message.where(
+        action: Message::LEADER_INVITE,
+        target_type: :MoneyRequire,
+        target_id: money_require.id,
+      ).last.reject
     end
 
     state :leader_need_confirmed, :opened do
@@ -194,6 +223,21 @@ class MoneyRequire < ActiveRecord::Base
       target_type: :MoneyRequire,
       target_id: self.id,
     )
+  end
+
+  def add_leader_reject_notify
+    Message.create!(
+      user_id: self.owner.id,
+      project_id: self.project.id,
+      action: Message::LEADER_REJECT,
+      must_action: false,
+      target_type: :MoneyRequire,
+      target_id: self.id,
+    )
+  end
+
+  def can_edit?
+    self.status != 'opened' and self.status != 'closed'
   end
 
 end

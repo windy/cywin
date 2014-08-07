@@ -1,7 +1,7 @@
 .row
   .small-12.medium-10.medium-centered.columns.top-blank
     .row
-      .small-12.medium-8.large-7.columns
+      .small-12.columns
         h2
           | 修改我的密码
         = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
