@@ -1,4 +1,4 @@
-@app.controller 'MoneyRequireAdminController', [ '$scope', '$http', '$timeout', ($scope, $http, $timeout)->
+@app.controller 'MoneyRequireAdminController', [ '$scope', '$http', '$modal', ($scope, $http, $modal)->
   
   $scope.loading = true
   
@@ -54,7 +54,60 @@
       else
         $scope.money_require.errors = res.errors
 
-    
+  $scope.open_leader_confirm_modal = ()->
+    $modal.open
+      templateUrl: 'leader_confirm_modal.html'
+      controller: 'LeaderConfirmModalController',
+      resolve:
+        project_id: ->
+          $scope.project_id
+        money_require: ->
+          $scope.money_require
+
+]
+
+@app.controller 'LeaderConfirmModalController', ['$scope', '$modalInstance', '$http', 'project_id', 'money_require', ($scope, $modalInstance, $http, project_id, money_require)->
+
+  $scope.project_id = project_id
+  $scope.money_require = money_require
+  $scope.hash = {}
+
+  $scope.create_or_update = ()->
+    $scope.money_require.errors = null
+    if $scope.money_require.id
+      $scope.update()
+    else
+      $scope.create()
+
+  $scope.create = ()->
+    $scope.money_require.project_id = $scope.project_id
+    $http
+      url: '/money_requires'
+      method: 'POST'
+      data:
+        $scope.money_require
+    .success (res)->
+      if res.success
+        $scope.init_money_require()
+      else
+        $scope.money_require.errors = res.errors
+
+  $scope.update = ()->
+    $http
+      url: '/money_requires/' + $scope.money_require.id
+      method: 'PATCH'
+      data:
+        $scope.money_require
+    .success (res)->
+      if res.success
+        $scope.init_money_require()
+        $scope.opened_menu = false
+      else
+        $scope.money_require.errors = res.errors
+
+  $scope.prevalue = ()->
+    $scope.money_require?.money * (100 - $scope.money_require?.share ) / $scope.money_require?.share
+
   $scope.autocomplete_search = (val)->
     $http
       url: '/investors/autocomplete.json'
@@ -64,17 +117,20 @@
       res.data
 
   $scope.selected_leader = ()->
-    typeof($scope.autocomplete_user) == "object"
+    typeof($scope.hash.autocomplete_user) == "object"
 
   $scope.add_leader = ()->
     $http
       url: '/money_requires/' + $scope.money_require.id + '/add_leader'
       method: 'PATCH'
       data:
-        leader_id: $scope.autocomplete_user.id
+        leader_id: $scope.hash.autocomplete_user.id
     .success (res)->
       if res.success == false
         $scope.leader_error_message = res.message
       else
         $scope.money_require = res
+
+  $scope.cancel = ()->
+    $modalInstance.dismiss('cancel')
 ]
