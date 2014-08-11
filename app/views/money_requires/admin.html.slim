@@ -168,6 +168,13 @@
                     button.ng-cloak ng-show='money_require.id' 更新
               li 
                 h4 法律条款
+                ul
+                  - LawIterm.project_law_iterms(@project.id).each_with_index do |law_iterm, i|
+                    li
+                      a ng-click='law_iterm_#{i} = ! law_iterm_#{i}' ng-init='law_iterm_#{i} = false' #{law_iterm.title}
+                      p.description ng-show='law_iterm_#{i}'
+                        | #{law_iterm.description}
+                  
               li
                 h4 领投人条款
             

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717082431) do
+ActiveRecord::Schema.define(version: 20140811071753) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -141,6 +141,15 @@ ActiveRecord::Schema.define(version: 20140717082431) do
   create_table "invite_codes", force: true do |t|
     t.integer  "code"
     t.boolean  "used",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "law_iterms", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "project_id"
+    t.boolean  "public",      default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

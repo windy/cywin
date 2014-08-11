@@ -13,6 +13,8 @@ class MoneyRequire < ActiveRecord::Base
 
   has_many :investments
 
+  has_many :law_iterms
+
   belongs_to :leader, class_name: User
 
   # 不能同时有两个融资需求打开
