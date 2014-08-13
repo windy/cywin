@@ -13,7 +13,7 @@ class MoneyRequire < ActiveRecord::Base
 
   has_many :investments
 
-  has_many :law_iterms
+  has_and_belongs_to_many :law_iterms
 
   belongs_to :leader, class_name: User
 

@@ -165,30 +165,46 @@
                         small.error ng-show='money_require.errors.maxnp' {{ money_require.errors.maxnp }}
                       .small-1.large-1.end.columns
                         span.postfix 人
-                    button.ng-cloak ng-show='money_require.id' 更新
+                    p.ng-cloak.success
+                      | {{ money_require_success }}
+                    button.ng-cloak ng-show='money_require.id' 更新融资
               li 
                 h4 法律条款
-                ul
+                ul.no-bullet.ng-cloak
                   - LawIterm.project_law_iterms(@project.id).each_with_index do |law_iterm, i|
-                    li
+                    li.margin-link-wrapper
+                      span
+                        input type='checkbox' ng-click='toggleLawIterm(#{law_iterm.id})' ng-checked="law_iterm_ids.indexOf(#{law_iterm.id}) != -1"
                       a ng-click='law_iterm_#{i} = ! law_iterm_#{i}' ng-init='law_iterm_#{i} = false' #{law_iterm.title}
                       p.description ng-show='law_iterm_#{i}'
                         | #{law_iterm.description}
+                p.alert
+                  | {{ law_iterms_error }}
+                p.success
+                  | {{ law_iterms_success }}
+                button.ng-cloak ng-click='update_law_iterms()' 更新条款
                   
               li
                 h4 领投人条款
-            
-            p.alert
-              | 注意: 一旦邀请, 无法修改, 请务必线下确认后再键入.
-            form ng-submit='add_leader()'
-              .leader
-                person ng-show='selected_leader()' user='hash.autocomplete_user'
-              .row
-                .small-12.medium-6.end.columns
-                  input type='text' id='leader' placeholder='投资人姓名 or 邮箱' ng-model='hash.autocomplete_user' typeahead="user as user.name for user in autocomplete_search($viewValue)" typeahead-template-url="leader_select.html"
-                  p.alert ng-show='leader_error_message'
-                    | {{ leader_error_message }}
-                  button ng-disabled= '! selected_leader()' 确认领投人
+                label for='carry' Carry收益
+                .row.collapse
+                  .small-4.columns
+                    input id='carry' type='text' placeholder='建议 5% - 20%' ng-model='money_require.carry' ng-class='{ error: carry_error_message }'
+                    small.error ng-show='carry_error_message'
+                      | {{ carry_error_message }}
+                  .small-1.end.columns
+                    span.postfix %
+                p.alert
+                  | 注意: 一旦邀请, 无法修改, 请务必线下确认后再键入.
+                form ng-submit='add_leader()'
+                  .leader
+                    person ng-show='selected_leader()' user='hash.autocomplete_user'
+                  .row
+                    .small-12.medium-6.end.columns
+                      input type='text' id='leader' placeholder='投资人姓名 or 邮箱' ng-model='hash.autocomplete_user' typeahead="user as user.name for user in autocomplete_search($viewValue)" typeahead-template-url="leader_select.html"
+                      p.alert ng-show='leader_error_message'
+                        | {{ leader_error_message }}
+                      button ng-disabled= '! selected_leader()' 确认领投人
       script type='text/ng-template' id='leader_select.html'
         a ng-class='{ disabled: match.model.joined }'
           .row
