@@ -10,7 +10,7 @@ class LawItermsController < ApplicationController
 
   def create
     authorize! :update, @money_require
-    law_iterms = params[:ids].collect { |id| LawIterm.find(id) }
+    law_iterms = params[:ids].to_a.collect { |id| LawIterm.find(id) }
     @money_require.law_iterms = law_iterms
     if @money_require.save
       render_success
