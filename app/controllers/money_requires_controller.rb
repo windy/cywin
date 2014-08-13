@@ -65,11 +65,19 @@ class MoneyRequiresController < ApplicationController
   # 添加一个领投人, 并等待确认
   def add_leader
     authorize! :update, @money_require
+    carry = params[:carry].to_i
+    if carry < 5 || carry > 20
+      render_fail(nil, carry_error: 'Carry 只能是 5% - 20% 之间')
+      return
+    end
+    @money_require.carry = carry
+    @money_require.save!
+
     leader_id = params[:leader_id]
     if @money_require.add_leader_and_wait_confirm(leader_id)
       render partial: 'money_require', locals: { money_require: @money_require }
     else
-      render_fail(@money_require.errors.full_messages.to_s)
+      render_fail(nil, leader_error: @money_require.errors.full_messages.to_s)
     end
   end
 

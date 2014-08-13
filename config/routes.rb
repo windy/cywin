@@ -160,6 +160,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :law_iterms
+
   namespace :admin do
     resources :users
     resources :projects
@@ -177,6 +179,7 @@ Rails.application.routes.draw do
     end
     resources :recommends
     resources :invite_codes
+    resources :law_iterms
     root :to=> "dashboard#index"
   end
   root :to => "home#index"

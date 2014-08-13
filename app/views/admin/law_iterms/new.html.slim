@@ -1,0 +1,7 @@
+.row
+  .small-12.columns.top-blank
+    = simple_form_for @law_iterm, url: admin_law_iterms_path do |f|
+      = f.input :title
+      = f.input :description
+      = f.input :public
+      = f.button :submit

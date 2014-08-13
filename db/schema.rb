@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717082431) do
+ActiveRecord::Schema.define(version: 20140812071007) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -145,6 +145,20 @@ ActiveRecord::Schema.define(version: 20140717082431) do
     t.datetime "updated_at"
   end
 
+  create_table "law_iterms", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "project_id"
+    t.boolean  "public",      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "law_iterms_money_requires", force: true do |t|
+    t.integer "law_iterm_id"
+    t.integer "money_require_id"
+  end
+
   create_table "logos", force: true do |t|
     t.integer  "project_id"
     t.string   "image"
@@ -194,6 +208,7 @@ ActiveRecord::Schema.define(version: 20140717082431) do
     t.boolean  "success"
     t.integer  "maxnp",       default: 30
     t.text     "leader_word"
+    t.integer  "carry"
   end
 
   create_table "person_requires", force: true do |t|

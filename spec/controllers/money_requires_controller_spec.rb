@@ -50,21 +50,21 @@ describe MoneyRequiresController do
 
     describe "正确添加" do
       it "成功" do
-        post 'add_leader', ActionController::Parameters.new( leader_id: @leader.id, id: @money_require.id, format: 'json' )
+        post 'add_leader', ActionController::Parameters.new( carry: 5, leader_id: @leader.id, id: @money_require.id, format: 'json' )
         expect( assigns(:money_require).status ).to eq('leader_need_confirmed')
       end
     end
 
     describe "错误添加" do
       it "leader_id 未传入" do
-        post 'add_leader', ActionController::Parameters.new( id: @money_require.id, money_require: { leader_id: nil} )
+        post 'add_leader', ActionController::Parameters.new( carry: 5, id: @money_require.id, money_require: { leader_id: nil} )
         check_json(response.body, :success, false)
         expect( assigns(:money_require).errors[:leader_id] ).not_to be_empty
       end
 
       it "money_require 状态不对" do
         @money_require.quickly_turn_on!(1)
-        post 'add_leader', ActionController::Parameters.new( id: @money_require.id, money_require: { leader_id: 1 })
+        post 'add_leader', ActionController::Parameters.new( carry: 5, id: @money_require.id, money_require: { leader_id: 1 })
         expect( response ).to be_redirect
       end
     end
