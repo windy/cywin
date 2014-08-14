@@ -178,6 +178,28 @@
                       a ng-click='law_iterm_#{i} = ! law_iterm_#{i}' ng-init='law_iterm_#{i} = false' #{law_iterm.title}
                       p.description ng-show='law_iterm_#{i}'
                         | #{law_iterm.description}
+                  li.margin-link-wrapper ng-repeat='law_iterm in new_law_iterms'
+                    span
+                      input type='checkbox' ng-click='toggleLawIterm(law_iterm.id)' ng-checked="law_iterm_ids.indexOf(law_iterm.id) != -1"
+                    a ng-click='law_iterm_i = ! law_iterm_i' ng-init='law_iterm_i = false' 
+                      | {{ law_iterm.title }}
+                    p.description ng-show='law_iterm_i'
+                      | {{ law_iterm.description }}
+                      
+                p
+                  a ng-click='hash.new_law_iterm_flag = ! hash.new_law_iterm_flag' 我要添加新的条款
+                .row
+                  .small-12.medium-6.columns
+                    form ng-submit='submit_new_law_iterm()' ng-show='hash.new_law_iterm_flag'
+                      input type='text' ng-model='hash.new_law_iterm.title' placeholder='条款标题' ng-class='{ error: hash.new_law_iterm.errors.title }'
+                      small.error.ng-cloak ng-show='hash.new_law_iterm.errors.title'
+                        | {{ hash.new_law_iterm.errors.title }}
+                      textarea ng-model='hash.new_law_iterm.description' placeholder='条款说明' ng-class='{ error: hash.new_law_iterm.errors.description }'
+                      small.error.ng-cloak ng-show='hash.new_law_iterm.errors.description'
+                        | {{ hash.new_law_iterm.errors.description }}
+                      .control-actions
+                        button.small 提交
+                        a.back ng-click='hash.new_law_iterm_flag = false' 取消
                 p.alert
                   | {{ law_iterms_error }}
                 p.success

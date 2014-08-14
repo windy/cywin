@@ -74,6 +74,7 @@
   $scope.project_id = project_id
   $scope.money_require = money_require
   $scope.hash = {}
+  $scope.hash.new_law_iterm = {}
 
   $scope.create_or_update = ()->
     $scope.update()
@@ -151,6 +152,24 @@
       else
         $scope.money_require = res
         $modalInstance.close($scope.money_require)
+
+  $scope.new_law_iterms = []
+  $scope.submit_new_law_iterm = ()->
+    $http
+      url: '/law_iterms/diy'
+      method: 'POST'
+      data:
+        title: $scope.hash.new_law_iterm.title
+        description: $scope.hash.new_law_iterm.description
+        money_require_id: $scope.money_require.id
+    .success (res)->
+      if res.success
+        $scope.hash.new_law_iterm_flag = false
+        $scope.toggleLawIterm(res.data.id)
+        $scope.new_law_iterms.push(res.data)
+      else
+        $scope.hash.new_law_iterm.errors = res.errors
+    
 
   $scope.cancel = ()->
     $modalInstance.dismiss('cancel')
