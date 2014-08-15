@@ -24,6 +24,7 @@ gem 'therubyracer', :platform=>:ruby
 gem "foundation-rails", ">= 5.0"
 gem 'settingslogic'
 gem 'foundation-icons-sass-rails'
+gem 'underscore-rails'
 gem 'kaminari', github: 'amatsuda/kaminari'
 gem 'progress_bar'
 gem 'sunspot_rails'

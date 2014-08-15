@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require underscore
 //= require angularjs
 //= require foundation/foundation
 //= require foundation/foundation.topbar

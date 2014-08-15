@@ -1,0 +1,15 @@
+.row
+  .small-12.columns.top-blank
+    p
+      = link_to '新建条目', new_admin_law_iterm_path
+    table
+      thead
+        tr
+          th 标题
+          th 内容
+          th 公开
+          th 所属项目
+          th 创建时间
+          th 操作
+      tbody
+        = render partial: 'law_iterm', collection: @law_iterms

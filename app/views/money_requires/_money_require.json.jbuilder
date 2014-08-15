@@ -1,7 +1,7 @@
 unless money_require
   json.null!
 else
-  json.extract! money_require, :id, :money, :share, :deadline, :status, :min_money, :maxnp, :project_id
+  json.extract! money_require, :id, :money, :share, :deadline, :status, :min_money, :maxnp, :carry, :project_id
   json.format_status format_status(money_require.status)
   if money_require.opened_at.present?
     # 开始与结束时间

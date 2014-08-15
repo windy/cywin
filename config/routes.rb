@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :delivering_projects, only: [:index, :update]
+  resources :delivering_projects, only: [:index, :create]
 
   resources :stars, only: [:create] do 
     collection do
@@ -160,6 +160,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :law_iterms do
+    collection do
+      post :diy
+    end
+  end
+
   namespace :admin do
     resources :users
     resources :projects
@@ -177,6 +183,7 @@ Rails.application.routes.draw do
     end
     resources :recommends
     resources :invite_codes
+    resources :law_iterms
     root :to=> "dashboard#index"
   end
   root :to => "home#index"

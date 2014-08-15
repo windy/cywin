@@ -1,4 +1,4 @@
-@app.controller 'ProjectCreateBasicController', [ '$scope', '$http', '$location', '$routeParams', '$upload', '$timeout', ($scope, $http, $location, $routeParams, $upload, $timeout)->
+@app.controller 'ProjectCreateBasicController', [ '$scope', '$http', '$location', '$routeParams', '$upload', '$timeout', '$modal', ($scope, $http, $location, $routeParams, $upload, $timeout, $modal)->
 
   $scope.project_id = $routeParams.id
   $scope.project = {}
@@ -36,7 +36,7 @@
     $http
       url: '/projects/' + $scope.project_id
       method: 'PATCH'
-      params:
+      data:
         $scope.project
     .success (res)->
       if res.success
@@ -99,4 +99,64 @@
         search: viewValue
     .then (res)->
       res.data.data
+
+  $scope.select_industry = ()->
+    modal = $modal.open
+      templateUrl: 'select_industry.html'
+      controller: 'SelectIndustryModalController',
+      resolve:
+        industries: ->
+          $scope.project.industries
+    modal.result.then (industries)->
+      $scope.project.industries = industries
+
+  $scope.is_empty_industries = ()->
+    _.isEmpty($scope.project.industries)
+
+  $scope.revert_select = (industry)->
+    $scope.project.industries = _.without($scope.project.industries, industry)
+]
+
+@app.controller 'SelectIndustryModalController', ['$scope', '$http', '$modalInstance', ($scope, $http, $modalInstance)->
+  $scope.hash = {}
+  $scope.hash.categories = []
+  $scope.hash.industries = []
+  
+  $scope.init_industries = ()->
+    $http
+      url: '/categories.json'
+    .success (res)->
+      $scope.hash.categories = res
+      $scope.hash.head = _.first($scope.hash.categories)
+
+  $scope.select_head = (head)->
+    $scope.hash.head = head
+  
+  $scope.toggleIndustry = (industry, event)->
+    event.stopPropagation()
+    industries = $scope.hash.industries
+    found = _.find industries, (i)->
+      i.id == industry.id
+    if found
+      $scope.hash.industries = _.without(industries, found)
+    else
+      industries.push(industry)
+
+  $scope.submit_industry = ()->
+    $modalInstance.close($scope.hash.industries)
+
+  $scope.is_empty_industries = ()->
+    _.isEmpty($scope.hash.industries)
+    
+
+  $scope.revert_select = (industry)->
+    $scope.hash.industries = _.without($scope.hash.industries, industry)
+
+  $scope.is_selected_industry = (id)->
+    _.findWhere($scope.hash.industries, {id: id})
+
+  $scope.init_industries()
+
+  $scope.cancel = ()->
+    $modalInstance.dismiss('cancel')
 ]

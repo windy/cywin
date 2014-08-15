@@ -16,13 +16,15 @@ class ProjectsController < ApplicationController
     authorize! :create, Project
     @project = Project.new( project_params )
 
-    if params[:industry].blank?
-      @project.errors.add(:industry, '必须选择一个分类')
+    if params[:industries].blank?
+      @project.errors.add(:industries, '必须选择一个分类')
       render_fail('创建失败', @project)
       return
     else
-      category = Category.find_or_create_by(name: params[:industry])
-      @project.categories << category
+      params[:industries].to_a.each do |industry|
+        category = Category.find(industry[:id])
+        @project.categories << category
+      end
     end
     
     if params[:city].blank?
@@ -88,14 +90,16 @@ class ProjectsController < ApplicationController
       @project.logo = logo
     end
 
-    if params[:industry].blank?
-      @project.errors.add(:industry, '必须选择一个分类')
+    if params[:industries].blank?
+      @project.errors.add(:industries, '至少要选择一个分类')
       render_fail('创建失败', @project)
       return
     else
       @project.categories.delete_all
-      category = Category.find_or_create_by(name: params[:industry])
-      @project.categories << category
+      params[:industries].to_a.each do |industry|
+        category = Category.find(industry[:id])
+        @project.categories << category
+      end
     end
 
     if params[:city].blank?
