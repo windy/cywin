@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :delivering_projects, only: [:index, :update]
+  resources :delivering_projects, only: [:index, :create]
 
   resources :stars, only: [:create] do 
     collection do

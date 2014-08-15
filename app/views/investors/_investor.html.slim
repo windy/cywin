@@ -19,7 +19,7 @@
       .op ng-controller='DeliverProjectController'
         button.small ng-click='open_deliver_project_modal(#{investor.user_id})' 投递项目
         script type='text/ng-template' id='deliver_project_modal.html'
-          .row.deliver-project-modal
+          .row.deliver-project-modal.ng-cloak
             a.close-reveal-modal ng-click="cancel()" ×
             .small-12.columns
               h3
@@ -31,9 +31,9 @@
                 p 请选择投递项目
                 ul.small-block-grid-3.medium-block-grid-5
                   li ng-repeat=' project in delivering_projects '
-                    .delivering-project ng-class= '{ select: selected_project == project }' ng-click='select_project(project)'
+                    .delivering-project ng-class= '{ select: is_selected_project(project) }' ng-click='toggle_project(project)'
                       img ng-src=' {{ project.logo_url }}'
-                      span.fi-check ng-show=' selected_project == project '
+                      span.fi-check ng-show=' is_selected_project(project) '
                       | {{ project.name }}
               p.no-content ng-show=' is_delivering_projects_empty() '
                 | 你还没有项目, 不能投递, 点击
