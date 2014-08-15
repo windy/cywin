@@ -56,6 +56,7 @@ form.stage0.ng-cloak ng-submit='submit()'
               | {{ industry.name }}
             span.revert ng-click='revert_select(industry)'
               i.fi-x
+      small.error.ng-cloak ng-show=' errors.industries' {{ errors.industries }}
       script type='text/ng-template' id='select_industry.html'
         .row.select-industry-modal
           a.close-reveal-modal ng-click="cancel()" ×
