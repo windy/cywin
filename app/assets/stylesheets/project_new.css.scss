@@ -60,5 +60,31 @@
       }
     }
   }
-
 }
+
+.select-industry-modal {
+  .head, .categories {
+    overflow: auto;
+    max-height: 400px;
+
+    a:hover {
+      background-color: #DEF3FF;
+    }
+
+    a.cur {
+      background-color: #DEF3FF;
+    }
+
+    a {
+      display: block;
+      line-height: 2;
+    }
+  }
+  .categories {
+    .name {
+      margin-left: 0.5rem;
+    }
+
+  }
+}
+

@@ -105,8 +105,10 @@
       templateUrl: 'select_industry.html'
       controller: 'SelectIndustryModalController',
       resolve:
-        project_id: ->
-          $scope.project_id
+        industries: ->
+          $scope.project.industries
+    modal.result.then (industries)->
+      $scope.project.industries = industries
 ]
 
 @app.controller 'SelectIndustryModalController', ['$scope', '$http', '$modalInstance', ($scope, $http, $modalInstance)->
@@ -123,14 +125,28 @@
   $scope.select_head = (head)->
     $scope.hash.head = head
   
-  $scope.toggleIndustry = (id)->
-    if $scope.hash.industries.indexOf(id) == -1
-      $scope.hash.industries.push(id)
+  $scope.toggleIndustry = (industry, event)->
+    event.stopPropagation()
+    #if $scope.hash.industries.indexOf(id) == -1
+      #$scope.hash.industries.push(id)
+    #else
+      #$scope.hash.industries.splice($scope.hash.industries.indexOf(id), 1)
+    industries = $scope.hash.industries
+    found = _.find industries, (i)->
+      i.id == industry.id
+    if found
+      $scope.hash.industries = _.without(industries, found)
     else
-      $scope.hash.industries.splice($scope.hash.industries.indexOf(id), 1)
+      industries.push(industry)
+
+  $scope.submit_industry = ()->
+    $modalInstance.close($scope.hash.industries)
+
+  $scope.revert_select = (industry)->
+    $scope.hash.industries = _.without($scope.hash.industries, industry)
 
   $scope.is_selected_industry = (id)->
-    $scope.hash.industries.indexOf(id) != -1
+    _.findWhere($scope.hash.industries, {id: id})
 
   $scope.init_industries()
 

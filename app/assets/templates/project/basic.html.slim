@@ -47,26 +47,35 @@ form.stage0.ng-cloak ng-submit='submit()'
     .small-10.medium-4.columns
       label for='industry' 所属行业
       a ng-click='select_industry()' 点击选择
+      ul.no-bullet
+        li ng-repeat=' industry in project.industries '
+          | {{ industry.name }}
       script type='text/ng-template' id='select_industry.html'
         .row.select-industry-modal
           a.close-reveal-modal ng-click="cancel()" ×
           .small-12.columns
             h3 选择一个或多个行业
             .row
+              .small-12.columns
+                ul.no-bullet
+                  li ng-repeat=' industry in hash.industries '
+                    | {{ industry }}
+                    a ng-click='revert_select(industry)' x
+            .row
               .small-6.columns
                 h4 一级分类
-                ul
+                ul.head.no-bullet
                   li ng-repeat=' head in hash.categories '
-                    a ng-click='select_head(head)'
+                    a ng-click='select_head(head)' ng-class='{ cur: hash.head == head }'
                       | {{ head.k.name }}
               .small-6.columns
                 h4 二级分类
-                ul
+                ul.categories.no-bullet 
                   li ng-repeat=' industry in hash.head.v '
-                    a ng-click='toggleIndustry(industry.id)'
+                    a ng-click='toggleIndustry(industry, $event)'
                       span
-                        input type='checkbox' ng-checked='is_selected_industry(industry.id)'
-                      span
+                        input type='checkbox' ng-checked='is_selected_industry(industry.id)' ng-click='toggleIndustry(industry, $event)'
+                      span.name
                         | {{ industry.name }}
             .row
               .small-12.columns
