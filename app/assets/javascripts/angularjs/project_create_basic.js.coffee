@@ -36,7 +36,7 @@
     $http
       url: '/projects/' + $scope.project_id
       method: 'PATCH'
-      params:
+      data:
         $scope.project
     .success (res)->
       if res.success
@@ -109,6 +109,12 @@
           $scope.project.industries
     modal.result.then (industries)->
       $scope.project.industries = industries
+
+  $scope.is_empty_industries = ()->
+    _.isEmpty($scope.project.industries)
+
+  $scope.revert_select = (industry)->
+    $scope.project.industries = _.without($scope.project.industries, industry)
 ]
 
 @app.controller 'SelectIndustryModalController', ['$scope', '$http', '$modalInstance', ($scope, $http, $modalInstance)->
@@ -121,16 +127,13 @@
       url: '/categories.json'
     .success (res)->
       $scope.hash.categories = res
+      $scope.hash.head = _.first($scope.hash.categories)
 
   $scope.select_head = (head)->
     $scope.hash.head = head
   
   $scope.toggleIndustry = (industry, event)->
     event.stopPropagation()
-    #if $scope.hash.industries.indexOf(id) == -1
-      #$scope.hash.industries.push(id)
-    #else
-      #$scope.hash.industries.splice($scope.hash.industries.indexOf(id), 1)
     industries = $scope.hash.industries
     found = _.find industries, (i)->
       i.id == industry.id
@@ -141,6 +144,10 @@
 
   $scope.submit_industry = ()->
     $modalInstance.close($scope.hash.industries)
+
+  $scope.is_empty_industries = ()->
+    _.isEmpty($scope.hash.industries)
+    
 
   $scope.revert_select = (industry)->
     $scope.hash.industries = _.without($scope.hash.industries, industry)

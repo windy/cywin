@@ -46,31 +46,42 @@ form.stage0.ng-cloak ng-submit='submit()'
   .row
     .small-10.medium-4.columns
       label for='industry' 所属行业
-      a ng-click='select_industry()' 点击选择
-      ul.no-bullet
+      a.select-industry-link ng-click='select_industry()' 点击选择
+      ul.inline-list.select-industries
+        .no-content ng-show='is_empty_industries()'
+          | 选择的行业将会显示在这里
         li ng-repeat=' industry in project.industries '
-          | {{ industry.name }}
+          .content
+            span
+              | {{ industry.name }}
+            span.revert ng-click='revert_select(industry)'
+              i.fi-x
       script type='text/ng-template' id='select_industry.html'
         .row.select-industry-modal
           a.close-reveal-modal ng-click="cancel()" ×
           .small-12.columns
             h3 选择一个或多个行业
-            .row
+            .row.ng-cloak
               .small-12.columns
-                ul.no-bullet
+                ul.inline-list.select-industries
+                  .no-content ng-show='is_empty_industries(hash.industries)'
+                    | 选择的行业将会显示在这里
                   li ng-repeat=' industry in hash.industries '
-                    | {{ industry }}
-                    a ng-click='revert_select(industry)' x
+                    .content
+                      span
+                        | {{ industry.name }}
+                      span.revert ng-click='revert_select(industry)'
+                        i.fi-x
             .row
               .small-6.columns
                 h4 一级分类
-                ul.head.no-bullet
+                ul.head.no-bullet.ng-cloak
                   li ng-repeat=' head in hash.categories '
                     a ng-click='select_head(head)' ng-class='{ cur: hash.head == head }'
                       | {{ head.k.name }}
               .small-6.columns
                 h4 二级分类
-                ul.categories.no-bullet 
+                ul.categories.no-bullet.ng-cloak 
                   li ng-repeat=' industry in hash.head.v '
                     a ng-click='toggleIndustry(industry, $event)'
                       span
@@ -83,10 +94,6 @@ form.stage0.ng-cloak ng-submit='submit()'
                   button ng-click='submit_industry()' 确定
                   a.back ng-click='cancel()' 取消
 
-      /*input id='industry' type='text' ng-model='project.industry' typeahead="industry.name for industry in autocomplete_category($viewValue)" typeahead-loading="loadingIndustry" ng-class='{ error: errors.industry }' placeholder="请用中文输入"*/
-      /*i ng-show="loadingIndustry" class="glyphicon glyphicon-refresh"*/
-
-      /*small.error.ng-cloak ng-show=' errors.industry' {{ errors.industry }}*/
   .row
     .small-10.medium-4.columns
       label for='city' 城市
