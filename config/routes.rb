@@ -160,7 +160,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :law_iterms
+  resources :law_iterms do
+    collection do
+      post :diy
+    end
+  end
 
   namespace :admin do
     resources :users
