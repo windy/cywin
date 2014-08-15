@@ -1,4 +1,4 @@
-@app.controller 'ProjectCreateBasicController', [ '$scope', '$http', '$location', '$routeParams', '$upload', '$timeout', ($scope, $http, $location, $routeParams, $upload, $timeout)->
+@app.controller 'ProjectCreateBasicController', [ '$scope', '$http', '$location', '$routeParams', '$upload', '$timeout', '$modal', ($scope, $http, $location, $routeParams, $upload, $timeout, $modal)->
 
   $scope.project_id = $routeParams.id
   $scope.project = {}
@@ -99,4 +99,41 @@
         search: viewValue
     .then (res)->
       res.data.data
+
+  $scope.select_industry = ()->
+    modal = $modal.open
+      templateUrl: 'select_industry.html'
+      controller: 'SelectIndustryModalController',
+      resolve:
+        project_id: ->
+          $scope.project_id
+]
+
+@app.controller 'SelectIndustryModalController', ['$scope', '$http', '$modalInstance', ($scope, $http, $modalInstance)->
+  $scope.hash = {}
+  $scope.hash.categories = []
+  $scope.hash.industries = []
+  
+  $scope.init_industries = ()->
+    $http
+      url: '/categories.json'
+    .success (res)->
+      $scope.hash.categories = res
+
+  $scope.select_head = (head)->
+    $scope.hash.head = head
+  
+  $scope.toggleIndustry = (id)->
+    if $scope.hash.industries.indexOf(id) == -1
+      $scope.hash.industries.push(id)
+    else
+      $scope.hash.industries.splice($scope.hash.industries.indexOf(id), 1)
+
+  $scope.is_selected_industry = (id)->
+    $scope.hash.industries.indexOf(id) != -1
+
+  $scope.init_industries()
+
+  $scope.cancel = ()->
+    $modalInstance.dismiss('cancel')
 ]

@@ -19,7 +19,7 @@ form.stage0.ng-cloak ng-submit='submit()'
         img ng-src=' {{ project.logo_url }} '
   .row
     .small-8.medium-6.end.columns
-      label for='logo' Logo
+      label for='logo' Logo( 建议使用 200x200 尺寸大小 )
       input id='logo' type='file' ng-file-select='upload_logo($files)'
       small.error.ng-cloak ng-show=' logo_error ' {{ logo_error }}
       input type='hidden' id='logo_id' ng-model=' project.logo_id '
@@ -46,10 +46,38 @@ form.stage0.ng-cloak ng-submit='submit()'
   .row
     .small-10.medium-4.columns
       label for='industry' 所属行业
-      input id='industry' type='text' ng-model='project.industry' typeahead="industry.name for industry in autocomplete_category($viewValue)" typeahead-loading="loadingIndustry" ng-class='{ error: errors.industry }' placeholder="请用中文输入"
-      i ng-show="loadingIndustry" class="glyphicon glyphicon-refresh"
+      a ng-click='select_industry()' 点击选择
+      script type='text/ng-template' id='select_industry.html'
+        .row.select-industry-modal
+          a.close-reveal-modal ng-click="cancel()" ×
+          .small-12.columns
+            h3 选择一个或多个行业
+            .row
+              .small-6.columns
+                h4 一级分类
+                ul
+                  li ng-repeat=' head in hash.categories '
+                    a ng-click='select_head(head)'
+                      | {{ head.k.name }}
+              .small-6.columns
+                h4 二级分类
+                ul
+                  li ng-repeat=' industry in hash.head.v '
+                    a ng-click='toggleIndustry(industry.id)'
+                      span
+                        input type='checkbox' ng-checked='is_selected_industry(industry.id)'
+                      span
+                        | {{ industry.name }}
+            .row
+              .small-12.columns
+                .control-actions
+                  button ng-click='submit_industry()' 确定
+                  a.back ng-click='cancel()' 取消
 
-      small.error.ng-cloak ng-show=' errors.industry' {{ errors.industry }}
+      /*input id='industry' type='text' ng-model='project.industry' typeahead="industry.name for industry in autocomplete_category($viewValue)" typeahead-loading="loadingIndustry" ng-class='{ error: errors.industry }' placeholder="请用中文输入"*/
+      /*i ng-show="loadingIndustry" class="glyphicon glyphicon-refresh"*/
+
+      /*small.error.ng-cloak ng-show=' errors.industry' {{ errors.industry }}*/
   .row
     .small-10.medium-4.columns
       label for='city' 城市
