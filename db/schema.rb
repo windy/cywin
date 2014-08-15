@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140812071007) do
+ActiveRecord::Schema.define(version: 20140815055503) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",      null: false
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20140812071007) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "head_id"
   end
 
   create_table "categories_projects", id: false, force: true do |t|
@@ -93,6 +94,13 @@ ActiveRecord::Schema.define(version: 20140812071007) do
   create_table "funs", force: true do |t|
     t.integer "user_id"
     t.integer "interested_user_id"
+  end
+
+  create_table "heads", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "investideas", force: true do |t|

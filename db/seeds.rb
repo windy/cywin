@@ -26,8 +26,13 @@ user.add_role :admin
 #end
 
 puts 'DEFAULT categories'
-['互联网', '电子', '餐饮', '企业'].each do |name|
-  Category.find_or_create_by(name: name)
+YAML.load_file(File.join(Rails.root, 'config', 'default_categories.yml')).each do |head_name,categories|
+  h = Head.find_or_create_by(name: head_name)
+  categories.each do |category_name|
+    c = Category.find_or_create_by(name: category_name)
+    c.head = h
+    c.save!
+  end
 end
 
 puts 'DEFAULT cities'

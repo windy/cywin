@@ -1,6 +1,11 @@
 class CategoriesController < ApplicationController
   def index
+    @heads = Head.includes(:categories).all
     @categories = Category.all
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def show
