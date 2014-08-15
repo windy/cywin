@@ -6,11 +6,9 @@
     .name-area
       h4.name
         = link_to project.name, project_path(project)
-      p.sub-name
-        | #{project.oneword}
     .team
       p.description
-        | #{project.description}
+        | #{project.oneword}
     p.info
       i.fi-home
       span.city
