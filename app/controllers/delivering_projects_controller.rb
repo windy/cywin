@@ -5,15 +5,17 @@ class DeliveringProjectsController < ApplicationController
     @projects = current_user.projects
   end
 
-  def update 
-    @project = current_user.projects.find(params[:id])
+  def create
+    @projects = current_user.projects.where(id: params[:ids].to_a)
     @delivered_user = User.find(params[:user_id])
 
-    Message.create(
-      user: @delivered_user,
-      action: Message::DELIVER_PROJECT,
-      project: @project,
-    )
+    @projects.each do |project|
+      Message.create(
+        user: @delivered_user,
+        action: Message::DELIVER_PROJECT,
+        project: project,
+      )
+    end
 
     render_success
   end
