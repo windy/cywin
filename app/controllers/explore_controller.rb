@@ -13,10 +13,19 @@ class ExploreController < ApplicationController
 
   def search
     @heads = Head.all
+    category_ids = nil
+
+    if params[:head_id].present?
+      @head = Head.find(params[:head_id])
+      category_ids = @head.categories.collect(&:id)
+    end
+
     @projects = Project.search do
+      with(:category_ids, category_ids) if category_ids
       fulltext "*#{params[:q]}*"
       paginate page: params[:page], per_page: Project::PER_PAGE
     end.results
+    #binding.pry
     render :all
   end
 

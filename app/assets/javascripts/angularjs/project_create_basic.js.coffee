@@ -117,10 +117,10 @@
     $scope.project.industries = _.without($scope.project.industries, industry)
 ]
 
-@app.controller 'SelectIndustryModalController', ['$scope', '$http', '$modalInstance', ($scope, $http, $modalInstance)->
+@app.controller 'SelectIndustryModalController', ['$scope', '$http', '$modalInstance', 'industries', ($scope, $http, $modalInstance, industries)->
   $scope.hash = {}
   $scope.hash.categories = []
-  $scope.hash.industries = []
+  $scope.hash.industries = industries || []
   
   $scope.init_industries = ()->
     $http

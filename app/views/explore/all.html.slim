@@ -8,7 +8,7 @@
         = link_to explore_index_path do
           | 回到广场
           span <
-      form ng-submit='search()' ng-controller='ProjectSearchController'
+      form ng-submit='search()' ng-controller='ProjectSearchController' ng-init='head_id="#{params[:head_id]}"'
         .row
           .small-12.columns
             dl.sub-nav
