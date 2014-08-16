@@ -7,14 +7,28 @@ class ExploreController < ApplicationController
   end
 
   def all
+    @heads = Head.all
+    @cities = City.all
     @projects = Project.default_order.page( params[:page] )
   end
 
   def search
+    @heads = Head.all
+    @cities = City.all
+    category_ids = nil
+
+    if params[:head_id].present?
+      @head = Head.find(params[:head_id])
+      category_ids = @head.categories.collect(&:id)
+    end
+
     @projects = Project.search do
+      with(:category_ids, category_ids) if category_ids
+      with(:city_ids, [params[:city_id]]) if params[:city_id].present?
       fulltext "*#{params[:q]}*"
       paginate page: params[:page], per_page: Project::PER_PAGE
     end.results
+    #binding.pry
     render :all
   end
 

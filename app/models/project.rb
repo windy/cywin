@@ -2,6 +2,8 @@ class Project < ActiveRecord::Base
 
   searchable do
     text :name, :oneword, :description
+    integer :category_ids, multiple: true
+    integer :city_ids, multiple: true
   end
 
   PER_PAGE = 10
@@ -54,7 +56,7 @@ class Project < ActiveRecord::Base
   # events
   has_many :events
   def categories_name 
-    self.categories.collect { |c| c.name }.join(',')
+    self.categories.collect { |c| c.name }.join(', ')
   end
 
   has_and_belongs_to_many :cities
