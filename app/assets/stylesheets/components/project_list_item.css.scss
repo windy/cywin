@@ -32,4 +32,17 @@
 
     }
   }
+
+  .description {
+    color: #666;
+  }
+
+  .city, .category {
+    a {
+      color: #999;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }

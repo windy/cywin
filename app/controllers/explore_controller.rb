@@ -13,6 +13,7 @@ class ExploreController < ApplicationController
 
   def search
     @heads = Head.all
+    @cities = City.all
     category_ids = nil
 
     if params[:head_id].present?
@@ -22,6 +23,7 @@ class ExploreController < ApplicationController
 
     @projects = Project.search do
       with(:category_ids, category_ids) if category_ids
+      with(:city_ids, [params[:city_id]]) if params[:city_id].present?
       fulltext "*#{params[:q]}*"
       paginate page: params[:page], per_page: Project::PER_PAGE
     end.results

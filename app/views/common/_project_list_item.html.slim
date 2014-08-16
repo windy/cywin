@@ -12,7 +12,7 @@
     p.info
       i.fi-home
       span.city
-        | #{project.cities_name}
+        = raw project_cities_link(project)
       i.fi-list-thumbnails
       span.category
         = raw project_categories_link(project)
