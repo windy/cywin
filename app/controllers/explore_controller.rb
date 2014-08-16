@@ -7,10 +7,12 @@ class ExploreController < ApplicationController
   end
 
   def all
+    @heads = Head.all
     @projects = Project.default_order.page( params[:page] )
   end
 
   def search
+    @heads = Head.all
     @projects = Project.search do
       fulltext "*#{params[:q]}*"
       paginate page: params[:page], per_page: Project::PER_PAGE
