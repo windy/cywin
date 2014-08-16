@@ -27,7 +27,7 @@ set :app_path, "#{deploy_to}/#{current_path}"
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/database.yml', 'config/application.yml', 'config/service.yml', 'log', 'tmp', 'public/uploads']
+set :shared_paths, ['config/database.yml', 'config/application.yml', 'config/service.yml', 'config/sunspot.yml', 'log', 'tmp', 'public/uploads']
 
 set :user, 'ruby'    # Username in the server to SSH to.
 
