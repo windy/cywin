@@ -8,7 +8,16 @@
         = link_to explore_index_path do
           | 回到广场
           span <
-      form ng-submit='search()' ng-controller='ProjectSearchController'
+      form ng-submit='search()' ng-controller='ProjectSearchController' ng-init='head_id="#{params[:head_id]}"'
+        .row
+          .small-12.columns
+            dl.sub-nav
+              dt 行业:
+              dd class="#{active_for('', params[:head_id].to_s)}" ng-class="{ active: is_selected_head('') }"
+                a ng-click='select_head("")' 全部
+              - @heads.each do |head|
+                dd class="#{active_for(head.id.to_s, params[:head_id].to_s)}" ng-class="{ active: is_selected_head(#{head.id}) }"
+                  a ng-click='select_head(#{head.id})' #{head.name}
         .row.search.collapse
           .small-9.medium-6.large-4.columns
             input type='text' id='search' placeholder='项目名称' ng-model='q' ng-init='q="#{params[:q]}"'
