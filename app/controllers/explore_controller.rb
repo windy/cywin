@@ -8,6 +8,7 @@ class ExploreController < ApplicationController
 
   def all
     @heads = Head.all
+    @cities = City.all
     @projects = Project.default_order.page( params[:page] )
   end
 
