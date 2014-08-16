@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   searchable do
     text :name, :oneword, :description
     integer :category_ids, multiple: true
+    integer :city_ids, multiple: true
   end
 
   PER_PAGE = 10
