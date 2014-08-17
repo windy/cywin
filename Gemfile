@@ -70,6 +70,7 @@ group :development do
   gem 'guard-livereload', require: false
   gem 'rack-livereload'
   gem "spring-commands-rspec"
+  gem 'thin'
 end
 
 group :development, :test do
