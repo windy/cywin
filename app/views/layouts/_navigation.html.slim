@@ -1,29 +1,23 @@
-.nav-small-wrapper
-  nav.tab-bar
-    section.left-small
-      a.left-off-canvas-toggle.menu-icon href=""
-        span
-    h1.title.middle-text
-      = link_to Setting.site_name, root_path, class: 'title'
-      .top-right.right
-        = render 'layouts/messagebox'
-        = render 'layouts/user'
-  aslide.left-off-canvas-menu
-    ul.off-canvas-list
-      = render partial: 'layouts/menu', locals: { top: false }
-.nav-big-wrapper
-  nav.top-bar data-topbar=""
-    ul.title-area
-      li.name
-        h1
-          = link_to root_path, class: 'title' do
-            - image_tag 'logo.png'
-    section.top-bar-section
-      ul.left
-        = render partial: 'layouts/menu', locals: { top: true }
-      ul.right
-        li
-          = render 'layouts/messagebox'
-        li
-          = render 'layouts/user'
-= render 'layouts/user_dropdown'
+.row
+  .small-12.columns
+    nav.top-bar#cywin-topbar data-topbar=""
+      ul.title-area
+        li.name
+          h1
+            = link_to root_path, class: 'title' do
+              - image_tag 'logo.svg'
+      section.top-bar-section
+        ul.left
+          = render partial: 'layouts/menu', locals: { top: true }
+        ul.right
+          - if current_user
+            li
+              = render 'layouts/messagebox'
+            li
+              = render 'layouts/user'
+          - else
+            li
+              a 注册
+            li
+              a 登录
+    = render 'layouts/user_dropdown' if current_user

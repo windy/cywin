@@ -18,45 +18,10 @@ html
     link href="/icons/114x114.jpg" rel="apple-touch-icon-precomposed" sizes="114x114"
     link href="/icons/144x144.jpg" rel="apple-touch-icon-precomposed" sizes="144x144"
   body ng-app="app"
-    - if current_user
-      .off-canvas-wrap
-        .inner-wrap
-          = render 'layouts/navigation'
-          section.main-section
-            .main-container
-              = render 'layouts/flashes'
-              = render 'layouts/email_tip'
-              = yield
-            = render 'layouts/foot'
-          a.exit-off-canvas
-    - else
-      .top-nologin-nav-wrap
-        nav class="top-bar" data-topbar=""
-          ul.title-area
-            li.name
-              h1
-                = link_to Setting.site_name, root_path
-            li.toggle-topbar.menu-icon
-              a href='#'
-                span Menu
-          section.top-bar-section
-            ul.right
-              li
-                = link_to '发现', explore_index_path
-              li
-                = link_to '精品', refine_index_path
-              li
-                = link_to '投资人', investors_path
-              li
-                = link_to '参与创业', jobs_path
-              li
-                = link_to '登录', new_user_session_path, class: 'login-button'
-            ul.left
-              li.has-form
-                = render 'layouts/search_input'
+    = render 'layouts/navigation'
+    section.main-section
       .main-container
         = render 'layouts/flashes'
         = render 'layouts/email_tip'
         = yield
       = render 'layouts/foot'
-      
