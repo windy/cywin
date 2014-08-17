@@ -1,0 +1,37 @@
+.row.select-industry-modal
+  a.close-reveal-modal ng-click="cancel()" ×
+  .small-12.columns
+    h3 选择一个或多个行业
+    .row.ng-cloak
+      .small-12.columns
+        ul.inline-list.select-industries
+          .no-content ng-show='is_empty_industries(hash.industries)'
+            | 选择的行业将会显示在这里
+          li ng-repeat=' industry in hash.industries '
+            .content
+              span
+                | {{ industry.name }}
+              span.revert ng-click='revert_select(industry)'
+                i.fi-x
+    .row
+      .small-6.columns
+        h4 一级分类
+        ul.head.no-bullet.ng-cloak
+          li ng-repeat=' head in hash.categories '
+            a ng-click='select_head(head)' ng-class='{ cur: hash.head == head }'
+              | {{ head.k.name }}
+      .small-6.columns
+        h4 二级分类
+        ul.categories.no-bullet.ng-cloak 
+          li ng-repeat=' industry in hash.head.v '
+            a ng-click='toggleIndustry(industry, $event)'
+              span
+                input type='checkbox' ng-checked='is_selected_industry(industry.id)' ng-click='toggleIndustry(industry, $event)'
+              span.name
+                | {{ industry.name }}
+    .row
+      .small-12.columns
+        .control-actions
+          button ng-click='submit_industry()' 确定
+          a.back ng-click='cancel()' 取消
+
