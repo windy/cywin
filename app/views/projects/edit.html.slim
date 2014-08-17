@@ -14,7 +14,7 @@
           li 
             | 或者发布 
             = link_to '招人需求', admin_project_person_requires_path(project_id: @project.id)
-  .row.head.ng-cloak
+  .row.head.ng-cloak ng-hide='head_edited'
     .small-6.large-2.columns
       img ng-src='{{ project.logo_url }}'
     .small-6.large-10.columns
@@ -30,10 +30,10 @@
             | {{ project.city }}
           i.fi-list-thumbnails
           span.category
-            | {{ project.industry }}
+            | {{ industries_link(project.industries) }}
       .edit
         a ng-click='open_head_edit()' 编辑
-  .row ng-show='head_edited'
+  .row.ng-cloak ng-show='head_edited'
     .small-12.columns
       form ng-submit='head_edit_submit()'
         .row
@@ -59,10 +59,17 @@
         .row
           .small-10.medium-4.columns
             label for='industry' 所属行业
-            input id='industry' type='text' ng-model='head_edit.industry' typeahead="industry.name for industry in autocomplete_category($viewValue)" typeahead-loading="loadingIndustry" ng-class='{ error: head_edit.errors.industry }' placeholder="请用中文输入"
-            i ng-show="loadingIndustry" class="glyphicon glyphicon-refresh"
-
-            small.error.ng-cloak ng-show=' head_edit.errors.industry' {{ head_edit.errors.industry }}
+            a.select-industry-link ng-click='select_industry()' 点击选择
+            ul.inline-list.select-industries
+              .no-content ng-show='is_empty_industries()'
+                | 选择的行业将会显示在这里
+              li ng-repeat=' industry in head_edit.industries '
+                .content
+                  span
+                    | {{ industry.name }}
+                  span.revert ng-click='revert_select(industry)'
+                    i.fi-x
+            small.error.ng-cloak ng-show=' head_edit.errors.industries' {{ head_edit.errors.industries }}
         .row
           .small-10.medium-4.columns
             label for='city' 城市

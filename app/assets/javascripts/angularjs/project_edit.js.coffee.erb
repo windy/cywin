@@ -1,4 +1,6 @@
-@app.controller 'ProjectEditController', [ '$scope', '$http', '$upload', ($scope, $http, $upload)->
+@app.controller 'ProjectEditController', [ '$scope', '$http', '$upload', '$modal', ($scope, $http, $upload, $modal)->
+
+  $scope.head_edit = {}
 
   $scope.init = (id)->
     $scope.project_id = id
@@ -116,4 +118,25 @@
       if res.success
         $scope.project.screenshots = $scope.screenshots_edit
         $scope.screenshot_edited = false
+
+  $scope.select_industry = ()->
+    modal = $modal.open
+      templateUrl: '<%= asset_path("select_industry.html") %>'
+      controller: 'SelectIndustryModalController',
+      resolve:
+        industries: ->
+          $scope.head_edit.industries
+    modal.result.then (industries)->
+      $scope.head_edit.industries = industries
+
+  $scope.is_empty_industries = ()->
+    _.isEmpty($scope.head_edit.industries)
+
+  $scope.revert_select = (industry)->
+    $scope.head_edit.industries = _.without($scope.head_edit.industries, industry)
+
+  $scope.industries_link = (industries)->
+    names = _.map industries, (industry)->
+      industry.name
+    names.join(', ')
 ]
