@@ -1,0 +1,39 @@
+li 
+  .box.project
+    .head
+      .row
+        .small-4.medium-5.columns
+          = link_to project do
+            - image_tag project.logo.image_url
+        .small-8.medium-7.columns
+          = link_to project do
+            h5 #{project.name}
+      .subtitle #{project.oneword}
+    .content
+      .tag
+        .row
+          .small-5.columns
+            .type
+              | 创始人
+          .small-7.columns
+            .item.right
+              = link_to project.owner.name, project.owner
+      .tag
+        .row
+          .small-5.columns
+            .type
+              | 团队
+          .small-7.columns
+            .item.right.margin-link-wrapper
+              = link_to project.members.size, team_project_path(project)
+              | 人
+      - if (leader = project.opened_money_require.leader).present?
+        .tag
+          .row
+            .small-4.columns
+              .type
+                | 领投人
+            .small-8.columns
+              .item.right
+                = link_to leader.name, leader
+        = yield if block_given?

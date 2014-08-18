@@ -10,55 +10,37 @@
           - if @stars_most_a_week.blank?
             p.no-content 本周暂无新的关注
           - else
-            ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.recommend-projects
+            ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content
               - @stars_most_a_week.each do |project_id, count|
                 - project = Project.find(project_id)
-                li.recommend-project
-                  p
-                    = link_to project
-                      - image_tag project.screenshot_cover_try_image_url
-                  p
-                    = link_to project do
-                      span #{project.name}
-                      | - 
-                      span #{project.oneword}
-                  p.new-stars
-                    | 本周新增关注: #{count}
+                = render partial: 'common/project_block_item', locals: { project: project }
+                  /*.tag*/
+                    /*.row*/
+                      /*.small-4.columns*/
+                        /*.type*/
+                          /*| 新增关注*/
+                      /*.small-8.columns*/
+                        /*.item.right*/
+                          /*| #{count}*/
         h3 一周内融资最多
         .invest-most
           - if @investments_most_a_week.blank?
             p.no-content 本周暂无新的融资
           - else
-            ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.recommend-projects
+            ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content
               - @investments_most_a_week.each do |money_require_id, count|
                 - project = MoneyRequire.find(money_require_id).project
-                li.recommend-project
-                  p
-                    = link_to project
-                      - image_tag project.screenshot_cover_try_image_url
-                  p
-                    = link_to project do
-                      span #{project.name}
-                      | - 
-                      span #{project.oneword}
-                  p.new-invests
-                    | 本周新增融资人数: #{count}
+                = render partial: 'common/project_block_item', locals: { project: project }
+                  /*p.new-invests*/
+                    /*| 本周新增融资人数: #{count}*/
         h3 一周内约谈最多
         .talk-most
           - if @talks_most_a_week.blank?
             p.no-content 本周暂无新的约谈
           - else
-            ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.recommend-projects
+            ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content
               - @talks_most_a_week.each do |project_id, count|
                 - project = Project.find(project_id)
-                li.recommend-project
-                  p
-                    = link_to project
-                      - image_tag project.screenshot_cover_try_image_url
-                  p
-                    = link_to project do
-                      span #{project.name}
-                      | - 
-                      span #{project.oneword}
-                  p.new-talks
-                    | 本周新增约谈: #{count}
+                = render partial: 'common/project_block_item', locals: { project: project }
+                  /*p.new-talks*/
+                    /*| 本周新增约谈: #{count}*/
