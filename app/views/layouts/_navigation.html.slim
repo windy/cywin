@@ -8,16 +8,20 @@
               - image_tag 'logo.svg'
       section.top-bar-section
         ul.left
-          = render partial: 'layouts/menu', locals: { top: true }
-        ul.right
-          - if current_user
+          = render partial: 'layouts/menu'
+        - if current_user
+          ul.right.login
             li
               = render 'layouts/messagebox'
             li
               = render 'layouts/user'
-          - else
+        - else
+          ul.right.nologin
             li
-              a 注册
+              = link_to '登录', new_user_session_path
+            li.separation
+              a
+                | |
             li
-              a 登录
+              = link_to '注册', new_user_registration_path
     = render 'layouts/user_dropdown' if current_user
