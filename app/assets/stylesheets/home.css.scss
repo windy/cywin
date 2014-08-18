@@ -1,10 +1,24 @@
+@import 'variables';
 .start-content {
-  background-color: #202021;
+  background-color: #356480;
+  background-image: image-url('banner.jpg');
   color: #eee;
   padding-bottom: 1.875rem;
   
   .heading, .sub-heading {
     color: #eee;
+  }
+
+  .button {
+    margin-top: 1rem;
+    background-color: #eee;
+    border-color: #356480;
+    color: $primary-color;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    &:hover {
+      color: darken($primary-color, 10);
+    }
   }
 }
 
