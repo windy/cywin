@@ -4,43 +4,76 @@
   .row
     .small-12.columns
       = render partial: 'head', locals: { type: 'trend' }
-      .trend
-        h3 一周关注最多
-        .star-most
-          - if @stars_most_a_week.blank?
-            p.no-content 本周暂无新的关注
-          - else
-            ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content
-              - @stars_most_a_week.each do |project_id, count|
-                - project = Project.find(project_id)
-                = render partial: 'common/project_block_item', locals: { project: project }
-                  /*.tag*/
-                    /*.row*/
-                      /*.small-4.columns*/
-                        /*.type*/
-                          /*| 新增关注*/
-                      /*.small-8.columns*/
-                        /*.item.right*/
-                          /*| #{count}*/
-        h3 一周内融资最多
-        .invest-most
-          - if @investments_most_a_week.blank?
-            p.no-content 本周暂无新的融资
-          - else
-            ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content
-              - @investments_most_a_week.each do |money_require_id, count|
-                - project = MoneyRequire.find(money_require_id).project
-                = render partial: 'common/project_block_item', locals: { project: project }
-                  /*p.new-invests*/
-                    /*| 本周新增融资人数: #{count}*/
-        h3 一周内约谈最多
-        .talk-most
-          - if @talks_most_a_week.blank?
-            p.no-content 本周暂无新的约谈
-          - else
-            ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content
-              - @talks_most_a_week.each do |project_id, count|
-                - project = Project.find(project_id)
-                = render partial: 'common/project_block_item', locals: { project: project }
-                  /*p.new-talks*/
-                    /*| 本周新增约谈: #{count}*/
+      .row
+        .show-for-medium-up.small-0.medium-3.columns
+          ul.by-tabs
+            li.tab-title.active
+              a 按关注
+            li.tab-title
+              a 按融资量
+        .small-12.medium-9.columns
+          ul.by-tabs-2
+            li.tab-title.active
+              a 按周
+            li.tab-title
+              a 按月
+          .trend
+            table
+              thead
+                tr
+                  td.index
+                  td.project 项目
+                  td.commitment 融资额
+              tbody
+                tr
+                  td 1
+                  td xxx
+                  td $10000
+                tr
+                  td 1
+                  td xxx
+                  td $1000000000
+                tr
+                  td 1
+                  td xxx
+                  td $10000
+      /*.trend*/
+        /*h3 一周关注最多*/
+        /*.star-most*/
+          /*- if @stars_most_a_week.blank?*/
+            /*p.no-content 本周暂无新的关注*/
+          /*- else*/
+            /*ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content*/
+              /*- @stars_most_a_week.each do |project_id, count|*/
+                /*- project = Project.find(project_id)*/
+                /*= render partial: 'common/project_block_item', locals: { project: project }*/
+                  /*[>.tag<]*/
+                    /*[>.row<]*/
+                      /*[>.small-4.columns<]*/
+                        /*[>.type<]*/
+                          /*[>| 新增关注<]*/
+                      /*[>.small-8.columns<]*/
+                        /*[>.item.right<]*/
+                          /*[>| #{count}<]*/
+        /*h3 一周内融资最多*/
+        /*.invest-most*/
+          /*- if @investments_most_a_week.blank?*/
+            /*p.no-content 本周暂无新的融资*/
+          /*- else*/
+            /*ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content*/
+              /*- @investments_most_a_week.each do |money_require_id, count|*/
+                /*- project = MoneyRequire.find(money_require_id).project*/
+                /*= render partial: 'common/project_block_item', locals: { project: project }*/
+                  /*[>p.new-invests<]*/
+                    /*[>| 本周新增融资人数: #{count}<]*/
+        /*h3 一周内约谈最多*/
+        /*.talk-most*/
+          /*- if @talks_most_a_week.blank?*/
+            /*p.no-content 本周暂无新的约谈*/
+          /*- else*/
+            /*ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content*/
+              /*- @talks_most_a_week.each do |project_id, count|*/
+                /*- project = Project.find(project_id)*/
+                /*= render partial: 'common/project_block_item', locals: { project: project }*/
+                  /*[>p.new-talks<]*/
+                    /*[>| 本周新增约谈: #{count}<]*/
