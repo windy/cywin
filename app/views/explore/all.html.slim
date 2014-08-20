@@ -1,13 +1,10 @@
 - content_for(:title) do
   | 所有 - 发现
 
-.explore-all
+.explore.explore-all
   .row
     .small-12.columns
-      .back-link
-        = link_to explore_index_path do
-          | 回到广场
-          span <
+      = render partial: 'head', locals: { type: 'all' }
       form ng-submit='search()' ng-controller='ProjectSearchController' ng-init='head_id="#{params[:head_id]}"'
         .row
           .small-12.columns

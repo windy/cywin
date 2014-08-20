@@ -6,7 +6,6 @@
       = render partial: 'head', locals: { type: 'square' }
       / 广场
       .square
-        h2 推荐
         - if @recommends.blank?
           p.no-content 暂无编辑推荐
         - else
@@ -14,9 +13,6 @@
             - @recommends.each do |recommend|
               - project = recommend.project
               = render partial: 'common/project_block_item', locals: { project: project }
-        h2 最新项目
-        ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.square-projects.start-projects-content
-          - @newest_projects.each do |project|
-            = render partial: 'common/project_block_item', locals: { project: project }
+        .row
           .small-12.columns.all-projects
             = link_to '查看所有项目', all_explore_index_path

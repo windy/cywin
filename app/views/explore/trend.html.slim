@@ -7,73 +7,86 @@
       .row
         .show-for-medium-up.small-0.medium-3.columns
           ul.by-tabs
-            li.tab-title.active
-              a 按关注
-            li.tab-title
-              a 按融资量
+            li.tab-title class="#{active_for(@cond, :by_investments)}"
+              = link_to '按融资量', trend_explore_index_path(cond: :by_investments, how_much: @how_much)
+            li.tab-title class="#{active_for(@cond, :by_stars)}"
+              = link_to '按关注数', trend_explore_index_path(cond: :by_stars, how_much: @how_much)
+            li.tab-title class="#{active_for(@cond, :by_talks)}"
+              = link_to '按约谈数', trend_explore_index_path(cond: :by_talks, how_much: @how_much)
+            li.tab-title class="#{active_for(@cond, :by_times)}"
+              = link_to '按最近时间', trend_explore_index_path(cond: :by_times, how_much: @how_much)
         .small-12.medium-9.columns
           ul.by-tabs-2
-            li.tab-title.active
-              a 按周
-            li.tab-title
-              a 按月
+            li.tab-title class="#{active_for(@how_much, :most_a_week)}"
+              = link_to '按周', trend_explore_index_path(cond: @cond, how_much: :most_a_week)
+            li.tab-title class="#{active_for(@how_much, :most_a_month)}"
+              = link_to '按月', trend_explore_index_path(cond: @cond, how_much: :most_a_month)
           .trend
-            table
-              thead
-                tr
-                  td.index
-                  td.project 项目
-                  td.commitment 融资额
-              tbody
-                tr
-                  td 1
-                  td xxx
-                  td $10000
-                tr
-                  td 1
-                  td xxx
-                  td $1000000000
-                tr
-                  td 1
-                  td xxx
-                  td $10000
-      /*.trend*/
-        /*h3 一周关注最多*/
-        /*.star-most*/
-          /*- if @stars_most_a_week.blank?*/
-            /*p.no-content 本周暂无新的关注*/
-          /*- else*/
-            /*ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content*/
-              /*- @stars_most_a_week.each do |project_id, count|*/
-                /*- project = Project.find(project_id)*/
-                /*= render partial: 'common/project_block_item', locals: { project: project }*/
-                  /*[>.tag<]*/
-                    /*[>.row<]*/
-                      /*[>.small-4.columns<]*/
-                        /*[>.type<]*/
-                          /*[>| 新增关注<]*/
-                      /*[>.small-8.columns<]*/
-                        /*[>.item.right<]*/
-                          /*[>| #{count}<]*/
-        /*h3 一周内融资最多*/
-        /*.invest-most*/
-          /*- if @investments_most_a_week.blank?*/
-            /*p.no-content 本周暂无新的融资*/
-          /*- else*/
-            /*ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content*/
-              /*- @investments_most_a_week.each do |money_require_id, count|*/
-                /*- project = MoneyRequire.find(money_require_id).project*/
-                /*= render partial: 'common/project_block_item', locals: { project: project }*/
-                  /*[>p.new-invests<]*/
-                    /*[>| 本周新增融资人数: #{count}<]*/
-        /*h3 一周内约谈最多*/
-        /*.talk-most*/
-          /*- if @talks_most_a_week.blank?*/
-            /*p.no-content 本周暂无新的约谈*/
-          /*- else*/
-            /*ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content*/
-              /*- @talks_most_a_week.each do |project_id, count|*/
-                /*- project = Project.find(project_id)*/
-                /*= render partial: 'common/project_block_item', locals: { project: project }*/
-                  /*[>p.new-talks<]*/
-                    /*[>| 本周新增约谈: #{count}<]*/
+            - if @cond == :by_investments
+              table
+                thead
+                  tr
+                    td.index
+                    td.project 项目
+                    td.commitment 融资额
+                tbody
+                - i = 0
+                - @investments_most.each do |money_require_id, count|
+                  - i += 1
+                  - money_require = MoneyRequire.find(money_require_id)
+                  - project = money_require.project
+                  tr
+                    td #{i}
+                    td
+                      = render partial: 'project_td', locals: { project: project }
+                    td ¥ #{number_with_delimiter(money_require.money)}
+            - elsif @cond == :by_stars
+              table
+                thead
+                  tr
+                    td.index
+                    td.project 项目
+                    td.star 新增关注
+                tbody
+                - i = 0
+                - @stars_most.each do |project_id, count|
+                  - project = Project.find(project_id)
+                  - i += 1
+                  tr
+                    td #{i}
+                    td
+                      = render partial: 'project_td', locals: { project: project }
+                    td #{count}
+            - elsif @cond == :by_talks
+              table
+                thead
+                  tr
+                    td.index
+                    td.project 项目
+                    td.star 新增约谈
+                tbody
+                - i = 0
+                - @talks_most.each do |project_id, count|
+                  - project = Project.find(project_id)
+                  - i += 1
+                  tr
+                    td #{i}
+                    td
+                      = render partial: 'project_td', locals: { project: project }
+                    td #{count}
+            - elsif @cond == :by_times
+              table
+                thead
+                  tr
+                    td.index
+                    td.project 项目
+                    td.star 创建时间
+                tbody
+                - i = 0
+                - @projects_most.each do |project|
+                  - i += 1
+                  tr
+                    td #{i}
+                    td
+                      = render partial: 'project_td', locals: { project: project }
+                    td #{time_ago_in_words(project.created_at)}
