@@ -169,7 +169,7 @@ class Project < ActiveRecord::Base
     Star.where(project_id: self.id).count
   end
 
-  scope :most_a_week, ->(t=6) { default_order.where('created_at > ?', 1.week.ago).limit(t) }
-  scope :most_a_month, ->(t=6) { default_order.where('created_at > ?', 1.month.ago).limit(t) }
+  scope :most_a_week, ->(t=6) { default_order.where('"created_at" > ?', 1.week.ago).limit(t) }
+  scope :most_a_month, ->(t=6) { default_order.where('"created_at" > ?', 1.month.ago).limit(t) }
 
 end
