@@ -40,6 +40,11 @@
 
 a.user-link {
   color: #F7F7F7;
+
+  & > img {
+    width: 1.725rem;
+    border-radius: 10rem;
+  }
 }
 .user-dropdown {
   background-color: #FAFAFA;
@@ -97,4 +102,22 @@ a.user-link {
   right: 0;
   bottom: 0;
   z-index: 1;
+}
+
+.messagebox {
+  position: relative;
+  .fa {
+    color: $primary-color;
+  }
+
+  span {
+    position: absolute;
+    right: 0.5rem;
+    top: -0.5rem;
+    font-size: 0.625rem;
+  }
+}
+
+.alert-box {
+  margin-bottom: 0;
 }

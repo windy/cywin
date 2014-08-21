@@ -99,6 +99,8 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    font-awesome-rails (4.1.0.0)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.4)
     foundation-icons-sass-rails (3.0.0)
       railties (>= 3.1.1)
@@ -349,6 +351,7 @@ DEPENDENCIES
   devise_invitable
   factory_girl_rails
   figaro
+  font-awesome-rails
   foundation-icons-sass-rails
   foundation-rails (>= 5.0)
   guard
