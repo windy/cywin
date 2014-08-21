@@ -6,6 +6,9 @@
           h1
             = link_to root_path, class: 'title' do
               - image_tag 'logo.svg'
+        li.toggle-topbar.menu-icon
+          a 
+            span Menu
       section.top-bar-section
         ul.left
           = render partial: 'layouts/menu'

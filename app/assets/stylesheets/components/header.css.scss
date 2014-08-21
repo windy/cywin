@@ -17,6 +17,17 @@
   .search {
     border-radius: 10rem;
   }
+
+  @media #{$small-only} {
+    .separation {
+      display: none;
+    }
+
+    .search {
+      border-radius: 0;
+    }
+  }
+
 }
 .main-container {
   background-color: #fff;
@@ -31,7 +42,7 @@ a.user-link {
   color: #F7F7F7;
 }
 .user-dropdown {
-  background-color: #F7F7F7;
+  background-color: #FAFAFA;
   border: 1px solid #ccc;
   color: #333;
   position: absolute;
@@ -51,7 +62,7 @@ a.user-link {
   }
 
   a {
-    color: #555;
+    color: #777;
     font-size: 0.875rem;
     &:hover {
       color: $secondary-color;
