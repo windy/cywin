@@ -1,6 +1,9 @@
-.topbar-hr{
+@import 'variables';
+
+.topbar-hr {
   margin: 0;
 }
+
 #cywin-topbar {
   a.title {
     padding-left: 0;
@@ -17,4 +20,70 @@
 }
 .main-container {
   background-color: #fff;
+}
+
+// 用户菜单
+.user-link-wrapper {
+  position: relative;
+}
+
+a.user-link {
+  color: #F7F7F7;
+}
+.user-dropdown {
+  background-color: #F7F7F7;
+  border: 1px solid #ccc;
+  color: #333;
+  position: absolute;
+  top: 3.2rem;
+  z-index: 9999;
+  right: 1.875rem;
+  padding: 0 1rem;
+  white-space: nowrap;
+
+  .title {
+    color: #888;
+    line-height: 1.2;
+  }
+
+  h6 {
+    font-size: 0.875rem;
+  }
+
+  a {
+    color: #555;
+    font-size: 0.875rem;
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+
+  li {
+    list-style-type: none;
+    padding: 0.1rem 0;
+    ul {
+      margin: 0;
+      padding: 1rem 2rem;
+    }
+  }
+
+  li:first-child:before {
+    left: 100%;
+    margin-left: -21px;
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border: 5px solid transparent;
+    border-bottom-color: #d2d3d5;
+    top: -10px;
+  }
+}
+.user-dropdown-exit-link {
+  position: fixed;
+  top: 3.5rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
 }
