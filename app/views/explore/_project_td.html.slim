@@ -1,0 +1,9 @@
+.row.project-td
+  .small-4.medium-2.columns
+    = link_to project do
+      - image_tag project.logo.image_url
+  .small-8.medium-10.columns
+    h6.title
+      = link_to project.name, project
+    .sub-title
+      | #{project.oneword}

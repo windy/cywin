@@ -37,5 +37,7 @@ class Investment < ActiveRecord::Base
   end
 
   scope :most_a_week, ->(t=6) { group(:money_require_id).order("COUNT(*) DESC").where.not(money_require_id: nil).having("'created_at' > ?", 1.week.ago).limit(t).count }
+
+  scope :most_a_month, ->(t=6) { group(:money_require_id).order("COUNT(*) DESC").where.not(money_require_id: nil).having("'created_at' > ?", 1.month.ago).limit(t).count }
  
 end

@@ -1,17 +1,17 @@
-.trend {
-  h1, h2, h3 {
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 2rem;
+.project-td {
+  img {
+    border-radius: 10rem;
   }
 
-  .recommend-project {
-    text-align: center;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
+  .title a {
+    color: #333;
+    font-weight: 600;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
-  .new-stars, .new-invests, .new-talks {
-    margin-top: -1rem;
-    color: #999;
+  .sub-title {
+    color: #666;
   }
 }

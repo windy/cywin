@@ -1,9 +1,7 @@
 class ExploreController < ApplicationController
 
   def index
-    @recommends = Recommend.default_order.includes(:project).limit(6)
-    @categories = Category.limit(6)
-    @newest_projects = Project.default_order.limit(6)
+    @recommends = Recommend.default_order.includes(:project).limit(9)
   end
 
   def all
@@ -28,7 +26,6 @@ class ExploreController < ApplicationController
       fulltext "*#{params[:q]}*"
       paginate page: params[:page], per_page: Project::PER_PAGE
     end.results
-    #binding.pry
     render :all
   end
 
@@ -37,9 +34,34 @@ class ExploreController < ApplicationController
   end
 
   def trend
-    @stars_most_a_week = Star.most_a_week
-    @investments_most_a_week = Investment.most_a_week
-    @talks_most_a_week = Talk.most_a_week
+    @how_much = case params[:how_much]
+    when "most_a_week"
+      :most_a_week
+    when "most_a_month"
+      :most_a_month
+    else
+      :most_a_week
+    end
+
+    count = 20
+
+    @cond = case params[:cond]
+    when "by_investments"
+      @investments_most = Investment.send(@how_much, count)
+      :by_investments
+    when "by_stars"
+      @stars_most = Star.send(@how_much, count)
+      :by_stars
+    when "by_times"
+      @projects_most = Project.send(@how_much, count)
+      :by_times
+    when "by_talks"
+      @talks_most = Talk.send(@how_much, count)
+      :by_talks
+    else
+      @investments_most = Investment.most_a_week
+      :by_investments
+    end
   end
 
 end
