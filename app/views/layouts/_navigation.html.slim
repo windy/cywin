@@ -2,16 +2,17 @@
   .small-12.columns
     nav.top-bar#cywin-topbar data-topbar=""
       ul.title-area
+        li.toggle-topbar.menu-icon
+          a 
+            span
         li.name
           h1
             = link_to root_path, class: 'title' do
               - image_tag 'logo.svg'
-        li.toggle-topbar.menu-icon
-          a 
-            span Menu
       section.top-bar-section
         ul.left
           = render partial: 'layouts/menu'
+      section.top-bar-section.right-top-bar-section
         - if current_user
           ul.right.login
             li

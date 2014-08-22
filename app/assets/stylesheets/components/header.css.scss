@@ -26,8 +26,35 @@
     .search {
       border-radius: 0;
     }
-  }
 
+    // 移动端导航处理
+    .toggle-topbar {
+      right: auto;
+      left: 0;
+    }
+
+    .toggle-topbar a {
+      padding: 0 20px;
+    }
+
+    .title-area {
+      .title {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .right-top-bar-section {
+      position: absolute;
+      right: 0;
+      top: 0;
+      left: auto !important;
+
+      ul li {
+        float: left;
+      }
+    }
+  }
 }
 .main-container {
   background-color: #fff;
@@ -54,6 +81,11 @@ a.user-link {
   top: 3.2rem;
   z-index: 9999;
   right: 1.875rem;
+
+  @media #{$small-only} {
+    right: 0.5rem;
+  }
+
   padding: 0 1rem;
   white-space: nowrap;
 
@@ -115,6 +147,11 @@ a.user-link {
     right: 0.5rem;
     top: -0.5rem;
     font-size: 0.625rem;
+
+    @media #{$small-only} {
+      right: -0.3rem;
+      top: 0.1rem;
+    }
   }
 }
 
