@@ -1,23 +1,42 @@
 @import 'variables';
 
 .footer {
-  background-color: #fff;
   padding-top: 2rem;
   padding-bottom: 2rem;
   border-top: 1px solid #eee;
-  font-size: 92.5%;
 
-  .columns {
-    margin-top: 1rem;
+  .inline-list li a {
+    color: #666;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @media #{$small-only} {
+    .inline-list li {
+      float: none;
+      line-height: 1.8;
+
+      a {
+        display: inline;
+      }
+    }
+  }
+
+  .inline-list {
+    @media #{$medium-up} {
+      float: left;
+    }
+  }
+
+  .copyright {
+    @media #{$medium-up} {
+      float: right;
+    }
   }
 
   .checkin {
-    margin-top: 2rem;
     color: #999;
-
-    @media #{$large-only} {
-      text-align: center;
-    }
   }
 
 }
