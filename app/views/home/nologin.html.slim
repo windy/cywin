@@ -30,10 +30,10 @@
               .box.project
                 .head
                   .row
-                    .small-4.medium-5.columns
+                    .small-5.columns
                       = link_to project do
                         - image_tag project.logo.image_url
-                    .small-8.medium-7.columns
+                    .small-7.columns
                       = link_to project do
                         h5 #{project.name}
                   .subtitle #{project.oneword}
@@ -58,10 +58,10 @@
                   - if (leader = project.opened_money_require.leader).present?
                     .tag
                       .row
-                        .small-4.columns
+                        .small-5.columns
                           .type
                             | 领投人
-                        .small-8.columns
+                        .small-7.columns
                           .item.right
                             = link_to leader.name, leader
           - else
@@ -77,26 +77,26 @@
                 .content
                   .tag
                     .row
-                      .small-4.columns
+                      .small-5.columns
                         .type
                           | 创始人
-                      .small-8.columns
+                      .small-7.columns
                         .item.right
                           | 无
                   .tag
                     .row
-                      .small-4.columns
+                      .small-5.columns
                         .type
                           | 团队
-                      .small-8.columns
+                      .small-7.columns
                         .item.right
                           | 无
                   .tag
                     .row
-                      .small-4.columns
+                      .small-5.columns
                         .type
                           | 领投人
-                      .small-8.columns
+                      .small-7.columns
                         .item.right
                           | 无
       .text-center
@@ -115,10 +115,10 @@ hr
               .box.investor
                 .head
                   .row
-                    .small-4.medium-5.columns
+                    .small-5.columns
                       = link_to user do
                         - image_tag user.avatar_url
-                    .small-8.medium-7.columns
+                    .small-7.columns
                       = link_to user do
                         h6 #{user.name}
                       p.subtitle #{user.description}
@@ -142,9 +142,9 @@ hr
               .box.investor
                 .head
                   .row
-                    .small-4.medium-5.columns
+                    .small-5.columns
                       = image_tag 'default-people.jpg'
-                    .small-8.medium-7.columns
+                    .small-7.columns
                       h6 空缺中
                 .content
                   .tag
@@ -168,10 +168,10 @@ hr
               .box.job
                 .head
                   .row
-                    .small-4.medium-5.columns
+                    .small-5.columns
                       = link_to project do
                         - image_tag project.logo.image_url
-                    .small-8.medium-7.columns
+                    .small-7.columns
                       = link_to project do
                         h5 #{project.name}
                   .subtitle #{project.oneword}
