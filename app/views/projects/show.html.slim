@@ -2,13 +2,12 @@
   | #{@project.name}
 .project-show.top-blank
   .row
-    .small-12.medium-3.columns
+    .small-12.medium-4.large-3.columns
       = render 'head'
-    .small-12.medium-9.columns
       /! JiaThis Button BEGIN
       .row
         .small-12.columns
-          .jiathis_style_24x24.right
+          .jiathis_style_24x24
             a.jiathis_button_tsina
             a.jiathis_button_weixin
             a.jiathis_button_douban
@@ -16,9 +15,13 @@
             /! a href="http://www.jiathis.com/share?uid=1938659" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"
 
       /!-- JiaThis Button END 
-      = render partial: 'show_tab', locals: { type: 'basic' }
+    .small-12.medium-8.large-9.columns
       .row.content
         .small-12.columns
+          .box
+            h5.title 基本介绍
+            p.description #{@project.description}
+          = render partial: 'show_tab', locals: { type: 'basic' }
           .basic-content
             - if @project.screenshots.present?
               h3.title 产品截图
