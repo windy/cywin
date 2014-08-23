@@ -13,14 +13,14 @@
       .link
         i.fa.fa-link
         span
-          | www.baidu.com
+          = link_to 'www.baidu.com', 'http://www.baidu.com', target: '_blank'
       .address
         i.fa.fa-map-marker
         span
-          | 深圳
+          = raw project_cities_link(@project)
       .category
         i.fa.fa-list
         span.category
-          | #{@project.categories_name}
+          = raw project_categories_link(@project)
     /*.status*/
       /*| #{format_status(@project.vstatus)}*/

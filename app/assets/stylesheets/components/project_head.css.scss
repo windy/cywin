@@ -29,6 +29,14 @@
     .info {
       color: #666;
 
+      a {
+        color: #666;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
       div {
         margin-bottom: 0.5rem;
       }
