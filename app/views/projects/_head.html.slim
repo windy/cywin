@@ -1,18 +1,26 @@
-.row.head
-  .small-4.medium-3.large-2.columns
+.head
+  .logo
     = image_tag @project.logo.image_url
-  .small-8.medium-9.large-10.columns
-    .name-area
-      h4.name
-        = link_to @project.name, @project
-      p.sub-name
-        | #{@project.oneword}
-      p.info
-        i.fi-home
-        span.city
-          | #{@project.cities_name}
-        i.fi-list-thumbnails
+  .name-area
+    h4.name
+      = link_to @project.name, @project
+    .sub-name
+      | #{@project.oneword}
+      | 说的好说的好说的好说的好说的好说的好说的好
+  = render 'star'
+  hr
+    .info
+      .link
+        i.fa.fa-link
+        span
+          | www.baidu.com
+      .address
+        i.fa.fa-map-marker
+        span
+          | 深圳
+      .category
+        i.fa.fa-list
         span.category
           | #{@project.categories_name}
-      .status
-        | #{format_status(@project.vstatus)}
+    /*.status*/
+      /*| #{format_status(@project.vstatus)}*/

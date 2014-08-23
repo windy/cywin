@@ -2,25 +2,47 @@
 
 .project-show, .project-edit {
   .head {
-    margin-bottom: 1rem;
-    .name a {
-      color: #FF2D2D;
+
+    .logo {
+      width: 50%;
+      margin: auto;
+
+      img {
+        border-radius: 10rem;
+      }
     }
 
-    p {
+    .name {
+      text-align: center;
+      a {
+        color: #444;
+        font-weight: 500;
+      }
+    }
+
+    .sub-name {
+      text-align: center;
+      color: #999;
       margin-bottom: 1rem;
     }
-    
+
     .info {
-      i[class^=fi-] {
+      color: #666;
+
+      div {
+        margin-bottom: 0.5rem;
+      }
+
+      i.fa {
         margin-right: 0.5rem;
         margin-left: 1rem;
+        width: 1rem;
 
         &:first-child {
           margin-left: 0;
         }
-
       }
+
     }
 
     .name-area {

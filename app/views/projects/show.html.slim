@@ -1,68 +1,70 @@
 - content_for(:title) do 
   | #{@project.name}
 .project-show.top-blank
-  = render 'head'
-  /! JiaThis Button BEGIN
   .row
-    .small-12.columns
-      .jiathis_style_24x24.right
-        a.jiathis_button_tsina
-        a.jiathis_button_weixin
-        a.jiathis_button_douban
-        /! a.jiathis_button_tqq
-        /! a href="http://www.jiathis.com/share?uid=1938659" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"
+    .small-12.medium-3.columns
+      = render 'head'
+    .small-12.medium-9.columns
+      /! JiaThis Button BEGIN
+      .row
+        .small-12.columns
+          .jiathis_style_24x24.right
+            a.jiathis_button_tsina
+            a.jiathis_button_weixin
+            a.jiathis_button_douban
+            /! a.jiathis_button_tqq
+            /! a href="http://www.jiathis.com/share?uid=1938659" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"
 
-  /!-- JiaThis Button END 
-  = render 'star'
-  = render partial: 'show_tab', locals: { type: 'basic' }
-  .row.content
-    .small-12.columns
-      .basic-content
-        - if @project.screenshots.present?
-          h3.title 产品截图
-          ul.image.clearing-thumbs.small-block-grid-4 data-clearing=""
-            - @project.screenshots.each do |s|
-              li
-                = link_to s.image.url do
-                  - image_tag s.image.small.url
-        h3.title 基本介绍
-        p.description #{@project.description}
-
-        .invest-content ng-controller='MoneyRequireController' ng-init='init(#{@project.id}, {})'
-          h3.title 投资情况
-          moneyrequire require='opened' title='"当前轮次"'
-          .more-info
-            = link_to '更多投资信息...', invest_project_path(@project)
-          investbutton require='opened'
-          .history ng-repeat='history in histories'
-            moneyrequire require='history' title='"历史投资"'
-
-
-        .team
-          h3.title 团队情况
-          .row
-            .small-12.columns
-              ul.small-block-grid-1.medium-block-grid-2
-                - @project.members.each do |m|
+      /!-- JiaThis Button END 
+      = render partial: 'show_tab', locals: { type: 'basic' }
+      .row.content
+        .small-12.columns
+          .basic-content
+            - if @project.screenshots.present?
+              h3.title 产品截图
+              ul.image.clearing-thumbs.small-block-grid-4 data-clearing=""
+                - @project.screenshots.each do |s|
                   li
-                    .person
-                      .row
-                        .small-4.medium-3.columns
-                          = image_tag m.user.avatar_url
-                        .small-8.medium-9.columns
-                          .name 
-                            = link_to m.user.name, user_path(m.user)
-                          .job-title #{m.title}
-                          .description #{m.description || m.user.description}
+                    = link_to s.image.url do
+                      - image_tag s.image.small.url
+            h3.title 基本介绍
+            p.description #{@project.description}
+
+            .invest-content ng-controller='MoneyRequireController' ng-init='init(#{@project.id}, {})'
+              h3.title 投资情况
+              moneyrequire require='opened' title='"当前轮次"'
               .more-info
-                = link_to '查看更多团队故事...', team_project_path(@project)
-        = render 'job'
-javascript:
-  var jiathis_config={
-    data_track_clickback:true,
-    summary:"#{@project.description}",
-    title: "#{@project.fullname} 这个创业赢上的项目非常不错",
-    shortUrl:false,
-    hideMore:false
-  }
-script type='text/javascript' src="http://v3.jiathis.com/code/jia.js?uid=1938659" charset="utf-8"
+                = link_to '更多投资信息...', invest_project_path(@project)
+              investbutton require='opened'
+              .history ng-repeat='history in histories'
+                moneyrequire require='history' title='"历史投资"'
+
+
+            .team
+              h3.title 团队情况
+              .row
+                .small-12.columns
+                  ul.small-block-grid-1.medium-block-grid-2
+                    - @project.members.each do |m|
+                      li
+                        .person
+                          .row
+                            .small-4.medium-3.columns
+                              = image_tag m.user.avatar_url
+                            .small-8.medium-9.columns
+                              .name 
+                                = link_to m.user.name, user_path(m.user)
+                              .job-title #{m.title}
+                              .description #{m.description || m.user.description}
+                  .more-info
+                    = link_to '查看更多团队故事...', team_project_path(@project)
+            = render 'job'
+    javascript:
+      var jiathis_config={
+        data_track_clickback:true,
+        summary:"#{@project.description}",
+        title: "#{@project.fullname} 这个创业赢上的项目非常不错",
+        shortUrl:false,
+        hideMore:false
+      }
+    script type='text/javascript' src="http://v3.jiathis.com/code/jia.js?uid=1938659" charset="utf-8"
