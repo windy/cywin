@@ -6,14 +6,13 @@
       = link_to @project.name, @project
     .sub-name
       | #{@project.oneword}
-      | 说的好说的好说的好说的好说的好说的好说的好
   = render 'star'
   hr
     .info
       .link
         i.fa.fa-link
         span
-          = link_to 'www.baidu.com', 'http://www.baidu.com', target: '_blank'
+          = link_to @project.link, "http://#{@project.link}", target: '_blank'
       .address
         i.fa.fa-map-marker
         span

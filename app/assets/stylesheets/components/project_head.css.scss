@@ -78,3 +78,52 @@
     }
   }
 }
+
+.project-edit {
+  .head-edit {
+
+    .name {
+      a {
+        color: #444;
+        font-weight: 500;
+      }
+    }
+
+    .sub-name {
+      color: #999;
+      margin-bottom: 1rem;
+    }
+
+    .info {
+      color: #666;
+
+      a {
+        color: #666;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      div {
+        margin-bottom: 0.5rem;
+      }
+
+      i.fa {
+        margin-right: 0.5rem;
+        margin-left: 1rem;
+        width: 1rem;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+
+    }
+
+  }
+}
+
+.logo img {
+  border-radius: 10rem;
+}
