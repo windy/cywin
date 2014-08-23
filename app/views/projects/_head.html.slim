@@ -9,10 +9,11 @@
   = render 'star'
   hr
     .info
-      .link
-        i.fa.fa-link
-        span
-          = link_to @project.link, "http://#{@project.link}", target: '_blank'
+      - if @project.link.present?
+        .link
+          i.fa.fa-link
+          span
+            = link_to @project.link, "http://#{@project.link}", target: '_blank'
       .address
         i.fa.fa-map-marker
         span
