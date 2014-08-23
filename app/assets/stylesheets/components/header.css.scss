@@ -71,6 +71,11 @@ a.user-link {
   & > img {
     width: 1.725rem;
     border-radius: 10rem;
+    margin-bottom: 0.5rem;
+    @media #{$small-only} {
+      margin-top: -0.625rem;
+      margin-bottom: 0;
+    }
   }
 }
 .user-dropdown {
