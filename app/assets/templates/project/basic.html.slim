@@ -15,7 +15,7 @@ form.stage0.ng-cloak ng-submit='submit()'
       small.error.ng-cloak ng-show=' errors.name ' {{ errors.name }}
   .row
     .small-4.medium-2.columns
-      .image-wrapper
+      .logo
         img ng-src=' {{ project.logo_url }} '
   .row
     .small-8.medium-6.end.columns
@@ -40,11 +40,20 @@ form.stage0.ng-cloak ng-submit='submit()'
       small.error.ng-cloak ng-show=' errors.oneword' {{ errors.oneword }}
   .row
     .small-12.medium-8.columns
+      label for='link' 链接( 可选 )
+      .row.collapse
+        .small-3.medium-2.columns
+          span.prefix http://
+        .small-9.medium-10.columns
+          input id='link' type='text' placeholder='项目网站链接' ng-model='project.link' ng-class= '{ error: errors.link }'
+          small.error.ng-cloak ng-show=' errors.link' {{ errors.link }}
+  .row
+    .small-12.medium-8.columns
       label for='description' 产品介绍
       textarea id='description' placeholder='完整描述你的产品' ng-model='project.description' ng-class= '{ error: errors.description }'
       small.error.ng-cloak ng-show=' errors.description' {{ errors.description }}
   .row
-    .small-10.medium-4.columns
+    .small-12.medium-8.columns
       label for='industry' 所属行业
       a.select-industry-link ng-click='select_industry()' 点击选择
       ul.inline-list.select-industries

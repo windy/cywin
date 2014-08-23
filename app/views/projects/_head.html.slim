@@ -12,7 +12,7 @@
       .link
         i.fa.fa-link
         span
-          = link_to 'www.baidu.com', 'http://www.baidu.com', target: '_blank'
+          = link_to 'www.baidu.com', "http://#{@project.link}", target: '_blank'
       .address
         i.fa.fa-map-marker
         span
