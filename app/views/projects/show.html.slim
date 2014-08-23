@@ -7,7 +7,7 @@
       /! JiaThis Button BEGIN
       .row
         .small-12.columns
-          .jiathis_style_24x24
+          .jiathis_style_24x24.share-link
             a.jiathis_button_tsina
             a.jiathis_button_weixin
             a.jiathis_button_douban
@@ -18,7 +18,9 @@
     .small-12.medium-8.large-9.columns
       .row.content
         .small-12.columns
-          .box
+          .box.status-wrapper
+            .status-link
+              .status #{format_status(@project.vstatus)}
             h5.title 基本介绍
             p.description #{@project.description}
           = render partial: 'show_tab', locals: { type: 'basic' }

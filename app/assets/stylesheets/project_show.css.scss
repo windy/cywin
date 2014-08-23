@@ -20,6 +20,37 @@
       padding: 0.5rem 1rem;
     }
   }
+
+  .status-wrapper {
+    position: relative;
+  }
+  .status-link {
+    position: absolute;
+    right: -26px;
+    top: -6px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 0;
+    height: 0;
+    z-index: 1;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 40px solid #00C4A4;
+
+    .status {
+      position: absolute;
+      left: -38px;
+      bottom: -33px;
+      width: 78px;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+      font-size: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
   
   .tab-content {
     margin-top: 2rem;
