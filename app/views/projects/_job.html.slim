@@ -1,13 +1,11 @@
 .job ng-controller='JobController' ng-init='init(#{@project.id})'
-  .row
-    .small-12.columns 
-      h3.title 招人需求
-      - if params[:action] == 'edit'
-        .edit
-          = link_to '管理', admin_project_person_requires_path(project_id: @project.id)
-      - person_requires = @project.person_requires.default_order.opened
-      - if person_requires.blank?
-        p.jobs.no-content 暂无需求
-      - else
-        ul.small-block-grid-1.large-block-grid-2
-          = render partial: 'person_require', collection: person_requires
+  h5.title 招聘职位
+  - if params[:action] == 'edit'
+    .edit
+      = link_to '管理', admin_project_person_requires_path(project_id: @project.id)
+  - person_requires = @project.person_requires.default_order.opened
+  - if person_requires.blank?
+    p.jobs.no-content 暂无需求
+  - else
+    ul.small-block-grid-1.large-block-grid-2
+      = render partial: 'person_require', collection: person_requires
