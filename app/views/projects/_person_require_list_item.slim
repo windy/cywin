@@ -1,0 +1,29 @@
+li.job-list
+  a.job-title-wrapper ng-class='{ toggle: job_toggle_#{person_require.id} }' ng-click='job_toggle_#{person_require.id} = ! job_toggle_#{person_require.id} '
+    span.job-title
+      | #{person_require.title}
+    span.flag ng-hide='job_toggle_#{person_require.id}'
+      span.fa.fa-chevron-right
+    span.flag ng-show='job_toggle_#{person_require.id}'
+      span.fa.fa-chevron-down
+    span.job-pay
+      | ¥ #{number_with_delimiter(person_require.pay)}
+  .job-item ng-show='job_toggle_#{person_require.id}'
+    .description #{person_require.description}
+    .labels
+      span.label
+        | ¥ #{number_with_delimiter(person_require.pay)}
+      - if person_require.remote
+        span.label 可远程办公
+      - if person_require.part
+        span.label 可兼职
+      - if person_require.option != 0
+        span.label #{person_require.option}% 期权
+      - if person_require.stock != 0
+        span.label #{person_require.stock}% 股权
+    .job-interest
+      - if ! person_require.users.include?(current_user)
+        button.small ng-hide='interest_person_requires["#{person_require.id}"]' ng-click='interest(#{person_require.id})'我感兴趣
+        button.small ng-show='interest_person_requires["#{person_require.id}"]' disabled=true 已投简历
+      - else
+        button.small disabled=true 已投简历

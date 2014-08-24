@@ -7,5 +7,5 @@
   - if person_requires.blank?
     p.jobs.no-content 暂无需求
   - else
-    ul.small-block-grid-1.large-block-grid-2
-      = render partial: 'person_require', collection: person_requires
+    ul
+      = render partial: 'person_require_list_item', collection: person_requires, as: :person_require

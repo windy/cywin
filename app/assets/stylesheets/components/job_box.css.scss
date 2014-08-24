@@ -1,3 +1,4 @@
+@import 'variables';
 .job-box {
   border: 1px solid #ddd;
   padding: 1rem 0;
@@ -13,6 +14,52 @@
   &:hover {
   }
 
+}
+
+.job-list {
+  list-style: none;
+  margin-left: 0.5rem;
+  margin-right: 2rem;
+  
+  .job-title-wrapper {
+    display: block;
+    padding: 1rem 0;
+    color: #666;
+    font-weight: 500;
+    border-bottom: 1px dashed #666;
+
+    .job-pay, .flag {
+      float: right;
+    }
+
+    .job-pay {
+      margin-right: 1rem;
+    }
+  }
+
+  .job-title-wrapper.toggle {
+    color: $primary-color;
+    .job-title {
+      font-weight: 600;
+    }
+  }
+
+  .job-item {
+    padding: 1rem;
+    line-height: 2;
+    color: #666;
+
+    .labels {
+      padding-bottom: 1rem; 
+    }
+    .label {
+      margin-right: 0.5rem;
+    }
+  }
+  
+  .job-interest {
+    text-align: center;
+  }
 }
 
 .jobs.no-content {

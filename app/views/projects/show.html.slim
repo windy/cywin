@@ -37,7 +37,7 @@
             - if @project.screenshots.present?
               h5.title 产品介绍
               .content
-                ul.image.clearing-thumbs.small-block-grid-4 data-clearing=""
+                ul.image.clearing-thumbs.small-block-grid-3 data-clearing=""
                   - @project.screenshots.each do |s|
                     li
                       = link_to s.image.url do
