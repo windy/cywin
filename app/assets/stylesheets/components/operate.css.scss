@@ -1,8 +1,12 @@
 .operate {
   text-align: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
 
   li {
     padding-bottom: 0;
+    padding-right: 0.125rem !important;
+    padding-left: 0.125rem;
   }
 
   a {

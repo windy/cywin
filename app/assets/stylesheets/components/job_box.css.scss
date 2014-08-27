@@ -50,10 +50,15 @@
     color: #666;
 
     .labels {
-      padding-bottom: 1rem; 
+      padding-bottom: 1.325rem; 
+      margin-top: 1.325rem;
     }
     .label {
       margin-right: 0.5rem;
+      background-color: #eee;
+      color: #999;
+      font-size: 90%;
+      padding: 0.5rem 1rem;
     }
   }
   
