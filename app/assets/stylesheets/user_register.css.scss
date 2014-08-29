@@ -1,9 +1,23 @@
+@import 'variables';
 .user-new {
-  background-color: white;
+  background-color: $body-bg;
+
+  .title {
+    color: #555;
+    @media #{$medium-up} {
+      text-align: center;
+    }
+  }
+
+  .sub-title {
+    color: #999;
+    @media #{$medium-up} {
+      text-align: center;
+    }
+  }
 }
 
 .login-link {
-  margin-left: 1rem;
 }
 
 .blank-link {
@@ -14,5 +28,14 @@
 }
 
 .forgot-password {
-  margin-top: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+  a {
+    color: #999;
+    text-decoration: underline;
+    &:hover {
+      color: #666;
+    }
+  }
 }
