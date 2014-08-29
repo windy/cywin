@@ -2,32 +2,33 @@
   | 注册
 .user-new.top-blank
   .row
-    .small-12.large-10.large-centered.columns
+    .small-12.medium-5.medium-centered.columns
       form ng-controller='RegistrationController' ng-submit='submit()'
-        h1 加入#{Setting.site_name}
-        p 真正的互联网式的创业服务
+        h4.title 注册
+        p.sub-title 注册账号, 进入精彩的创业服务!
         .row
-          .small-12.medium-8.large-7.columns
+          .small-12.columns
             = text_field_tag 'name', nil, placeholder: '真实姓名', 'ng-model'=> 'name', 'ng-class'=> '{ error: errors.name }', 'ng-keyup'=> ' delete_error_on("name") '
             small.error.ng-cloak ng-show="errors.name" {{ errors.name }}
         .row
-          .small-12.medium-8.large-7.columns
+          .small-12.columns
             = text_field_tag 'email', nil, placeholder: '邮箱地址', 'ng-model'=> 'email', 'ng-class'=> '{ error: errors.email }', 'ng-blur'=> 'email_validate()'
             small.error.ng-cloak ng-show="errors.email" {{ errors.email }}
         .row
-          .small-12.medium-8.large-7.columns
+          .small-12.columns
             = password_field_tag 'password', nil, placeholder: '密码', 'ng-model'=> 'password', 'ng-class'=> '{ error: errors.password }', 'ng-keyup'=> ' delete_error_on("password") '
             small.error.ng-cloak ng-show="errors.password" {{ errors.password }}
         .row
-          .small-12.medium-8.large-7.columns
+          .small-12.columns
             = password_field_tag 'password_confirm', nil, placeholder: '再次确认密码', 'ng-model'=> 'password_confirm', 'ng-class'=> '{ error: errors.password_confirm }', 'ng-blur'=> 'password_confirm_validate()'
             small.error.ng-cloak ng-show="errors.password_confirm" {{ errors.password_confirm }}
         - if bit_enable?
           .row
-            .small-12.medium-8.large-7.columns
+            .small-12.columns
               = text_field_tag 'code', nil, placeholder: '邀请码', 'ng-model'=> 'code', 'ng-class'=> '{ error: errors.code }', 'ng-keyup'=> 'delete_error_on("code")'
               small.error.ng-cloak ng-show="errors.code" {{ errors.code }}
-        p.alert.ng-cloak
+        p.alert.ng-cloak ng-show='error_message'
           |{{ error_message }}
-        = submit_tag '马上注册', class: 'button', 'ng-disabled'=> '! submit_validate() '
-        = link_to '已有账号, 登录?', new_user_session_path, class: 'login-link'
+        = submit_tag '注册', class: 'button expand', 'ng-disabled'=> '! submit_validate() '
+        .forgot-password
+          = link_to '已有账号, 登录?', new_user_session_path, class: 'login-link'

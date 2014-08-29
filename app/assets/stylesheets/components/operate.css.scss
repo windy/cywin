@@ -1,13 +1,27 @@
 .operate {
   text-align: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+
+  li {
+    padding-bottom: 0;
+    padding-right: 0.125rem !important;
+    padding-left: 0.125rem;
+  }
 
   a {
     display: inline-block;
     width: 100%;
     border: 1px solid #ddd;
-    padding: 1rem 0;
-    margin: 1rem 0;
-    color: #333;
-    font-size: 1.5rem;
+    padding: 0.625rem 0;
+    margin: 0.5rem 0;
+    border-radius: 5rem;
+    color: #555;
+    background-color: #fff;
+
+    &:hover {
+      background-color: #eee;
+      color: #333;
+    }
   }
 }

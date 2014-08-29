@@ -1,7 +1,7 @@
+@import 'variables';
 // 投资信息
 .invest {
   position: relative;
-  margin-top: 2rem;
 
   .title {
     border-bottom: 1px solid #ddd;
@@ -10,17 +10,23 @@
   }
 
   .box {
-    background-color: #eee;
     padding: 1rem 1.5rem;
 
     .sub-title {
-      color: #888;
+      color: $primary-color;
       font-size: 0.9rem;
     }
 
     .sub-content {
-      font-weight: 700;
+      font-weight: 500;
+      color: $primary-color;
       font-size: 1.1rem;
+    }
+  }
+
+  .box2 {
+    .sub-title, .sub-content {
+      color: #00C4A3;
     }
   }
 

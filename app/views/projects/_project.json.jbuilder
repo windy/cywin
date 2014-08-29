@@ -1,4 +1,4 @@
-json.extract! @project, :name, :oneword, :description
+json.extract! @project, :name, :oneword, :link, :description
 json.industries do
   json.array! @project.categories do |category|
     json.extract! category, :id, :name, :head_id

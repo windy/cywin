@@ -1,9 +1,11 @@
 @import 'variables';
 .start-content {
+  padding-top: 5.325rem;
+  padding-bottom: 5.325rem;
   background-color: #356480;
   background-image: image-url('banner.jpg');
+  background-size: cover;
   color: #eee;
-  padding-bottom: 1.875rem;
   
   .heading, .sub-heading {
     color: #eee;
