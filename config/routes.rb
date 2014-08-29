@@ -50,6 +50,7 @@ Rails.application.routes.draw do
       get :service
       get :law
       get :job
+      get :venture
     end
   end
   resources :refine
