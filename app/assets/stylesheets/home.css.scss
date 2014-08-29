@@ -1,10 +1,26 @@
+@import 'variables';
 .start-content {
-  background-color: #202021;
+  padding-top: 5.325rem;
+  padding-bottom: 5.325rem;
+  background-color: #356480;
+  background-image: image-url('banner.jpg');
+  background-size: cover;
   color: #eee;
-  padding-bottom: 1.875rem;
   
   .heading, .sub-heading {
     color: #eee;
+  }
+
+  .button {
+    margin-top: 1rem;
+    background-color: #eee;
+    border-color: #356480;
+    color: $primary-color;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    &:hover {
+      color: darken($primary-color, 10);
+    }
   }
 }
 
@@ -40,7 +56,8 @@
 .start-projects-content, .start-investors-content, .start-jobs-content{
   h2 {
     text-align: center;
-    margin: 2rem;
+    margin: 1.5rem 0 1rem 0;
+    font-size: 1.2rem;
   }
 
   .project img, .job img {
@@ -49,6 +66,9 @@
 
   .head {
     min-height: 6.5rem;
+    h5 {
+      font-size: 1.025rem;
+    }
   }
 
   .investor .content {
@@ -88,9 +108,15 @@
       font-size: 95%;
       line-height: 2;
       height: 5rem;
+
       .type {
+        width: 100%;
         color: #999;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
+
       .item {
         color: #666;
         white-space: nowrap;

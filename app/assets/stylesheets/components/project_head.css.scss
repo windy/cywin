@@ -2,25 +2,56 @@
 
 .project-show, .project-edit {
   .head {
-    margin-bottom: 1rem;
-    .name a {
-      color: #FF2D2D;
+
+    .logo {
+      width: 50%;
+      margin: auto;
+
+      img {
+        border-radius: 10rem;
+      }
     }
 
-    p {
+    .name {
+      text-align: center;
+      a {
+        color: #444;
+        font-weight: 500;
+      }
+    }
+
+    .sub-name {
+      text-align: center;
+      color: #999;
       margin-bottom: 1rem;
     }
-    
+
     .info {
-      i[class^=fi-] {
+      color: #666;
+      line-height: 1.5;
+
+      a {
+        color: #666;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      div {
+        margin-bottom: 0.5rem;
+      }
+
+      i.fa {
         margin-right: 0.5rem;
         margin-left: 1rem;
+        width: 1rem;
 
         &:first-child {
           margin-left: 0;
         }
-
       }
+
     }
 
     .name-area {
@@ -44,6 +75,77 @@
           right: 0;
         }
         opacity: 0.8;
+      }
+    }
+  }
+}
+
+.project-edit {
+  .head-edit {
+
+    .name {
+      a {
+        color: #444;
+        font-weight: 500;
+      }
+    }
+
+    .sub-name {
+      color: #999;
+      margin-bottom: 1rem;
+    }
+
+    .info {
+      color: #666;
+
+      a {
+        color: #666;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      div {
+        margin-bottom: 0.5rem;
+      }
+
+      i.fa {
+        margin-right: 0.5rem;
+        margin-left: 1rem;
+        width: 1rem;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+
+    }
+
+  }
+}
+
+.logo img {
+  border-radius: 10rem;
+}
+
+.share-link {
+  margin-bottom: 3rem;
+  .text {
+    float: left;
+    margin-top: 6px;
+    color: #999;
+    font-size: 95%;
+    margin-right: 1rem;
+  }
+  a .jiathis_txt{
+    background: none !important;
+    margin-left: -15px;
+
+    .fa {
+      color: #999;
+      &:hover {
+        color: $primary-color;
       }
     }
   }

@@ -149,7 +149,7 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.permit(:name, :oneword, :description)
+    params.permit(:name, :oneword, :link, :description)
   end
 
   def logo_params

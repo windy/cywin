@@ -1,21 +1,21 @@
-.start-content.top-blank
+.start-content
   .row
     .small-12.columns
-      form ng-submit='submit()' ng-controller='HomeController'
-        .row
-          .small-12.large-6.columns
-            p
-              h2.heading  欢迎来到创业赢
-            h4.sub-heading 在这里，以最简单的方式，快速探索你需要的创业元素
+      /*form ng-submit='submit()' ng-controller='HomeController'*/
+      .row
+        .small-12.large-8.columns
+          h2.heading  欢迎来到创业赢
+          h4.sub-heading 在这里，以最简单的方式，快速探索你需要的创业元素
+          = link_to '申请内测', new_user_registration_path, class: 'button'
 
-          .small-12.medium-8.large-6.end.columns
-            = text_field_tag 'name', nil, placeholder: '你的真实姓名', 'ng-model'=> 'name'
-            = text_field_tag 'email', nil, placeholder: '你的邮箱', 'ng-model'=> 'email'
-            = password_field_tag 'password', nil, placeholder:  '输入一个密码', 'ng-model'=> 'password'
-            - if bit_enable?
-              = text_field_tag 'code', nil, placeholder:  '内测中, 需要一个邀请码', 'ng-model'=> 'code'
-            button 注册
-            = link_to '已有账号, 登录?', new_user_session_path, class: 'login-link blank-link'
+          /*.small-12.medium-8.large-6.end.columns*/
+            /*= text_field_tag 'name', nil, placeholder: '你的真实姓名', 'ng-model'=> 'name'*/
+            /*= text_field_tag 'email', nil, placeholder: '你的邮箱', 'ng-model'=> 'email'*/
+            /*= password_field_tag 'password', nil, placeholder:  '输入一个密码', 'ng-model'=> 'password'*/
+            /*- if bit_enable?*/
+              /*= text_field_tag 'code', nil, placeholder:  '内测中, 需要一个邀请码', 'ng-model'=> 'code'*/
+            /*button 注册*/
+            /*= link_to '已有账号, 登录?', new_user_session_path, class: 'login-link blank-link'*/
 
 .start-projects-content
   .row
@@ -30,10 +30,10 @@
               .box.project
                 .head
                   .row
-                    .small-4.medium-5.columns
+                    .small-5.columns
                       = link_to project do
                         - image_tag project.logo.image_url
-                    .small-8.medium-7.columns
+                    .small-7.columns
                       = link_to project do
                         h5 #{project.name}
                   .subtitle #{project.oneword}
@@ -58,10 +58,10 @@
                   - if (leader = project.opened_money_require.leader).present?
                     .tag
                       .row
-                        .small-4.columns
+                        .small-5.columns
                           .type
                             | 领投人
-                        .small-8.columns
+                        .small-7.columns
                           .item.right
                             = link_to leader.name, leader
           - else
@@ -77,26 +77,26 @@
                 .content
                   .tag
                     .row
-                      .small-4.columns
+                      .small-5.columns
                         .type
                           | 创始人
-                      .small-8.columns
+                      .small-7.columns
                         .item.right
                           | 无
                   .tag
                     .row
-                      .small-4.columns
+                      .small-5.columns
                         .type
                           | 团队
-                      .small-8.columns
+                      .small-7.columns
                         .item.right
                           | 无
                   .tag
                     .row
-                      .small-4.columns
+                      .small-5.columns
                         .type
                           | 领投人
-                      .small-8.columns
+                      .small-7.columns
                         .item.right
                           | 无
       .text-center
@@ -115,10 +115,10 @@ hr
               .box.investor
                 .head
                   .row
-                    .small-4.medium-5.columns
+                    .small-5.columns
                       = link_to user do
                         - image_tag user.avatar_url
-                    .small-8.medium-7.columns
+                    .small-7.columns
                       = link_to user do
                         h6 #{user.name}
                       p.subtitle #{user.description}
@@ -142,9 +142,9 @@ hr
               .box.investor
                 .head
                   .row
-                    .small-4.medium-5.columns
+                    .small-5.columns
                       = image_tag 'default-people.jpg'
-                    .small-8.medium-7.columns
+                    .small-7.columns
                       h6 空缺中
                 .content
                   .tag
@@ -168,10 +168,10 @@ hr
               .box.job
                 .head
                   .row
-                    .small-4.medium-5.columns
+                    .small-5.columns
                       = link_to project do
                         - image_tag project.logo.image_url
-                    .small-8.medium-7.columns
+                    .small-7.columns
                       = link_to project do
                         h5 #{project.name}
                   .subtitle #{project.oneword}

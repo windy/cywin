@@ -1,34 +1,11 @@
-- unless top
-  li
-    label Menu
-  li
-    = link_to root_path do
-      - unless top
-        i.fi-home
-      | 首页
-- unless top
-  li
-    = link_to categories_path do
-      - unless top
-        i.fi-thumbnails
-      | 分类
-- unless top
-  li
-    label Find
 li
   = link_to explore_index_path do
-    - unless top
-      i.fi-eye
     | 发现项目
 li
   = link_to investors_path do
-    - unless top
-      i.fi-torsos-all
     | 投资人
 li
   = link_to jobs_path do
-    - unless top
-      i.fi-address-book
     | 参与创业 
-li
+li.has-form
   = render 'layouts/search_input'

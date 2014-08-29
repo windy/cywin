@@ -16,6 +16,22 @@ SimpleForm.setup do |config|
       end
     end
   end
+  
+  config.wrappers :foundation_no_style, class: :input, hint_class: :field_with_hint, error_class: :error do |b|
+    #b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+
+    b.wrapper :label_input, class: 'row' do |ba|
+      ba.wrapper class: 'small-12 columns' do |baa|
+        baa.use :input
+        baa.use :error, wrap_with: { tag: 'small', class: 'error' }
+      end
+    end
+  end
 
   # CSS class for buttons
   config.button_class = 'button'

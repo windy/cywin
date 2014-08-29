@@ -1,18 +1,24 @@
-.row.head
-  .small-4.medium-3.large-2.columns
+.head
+  .logo
     = image_tag @project.logo.image_url
-  .small-8.medium-9.large-10.columns
-    .name-area
-      h4.name
-        = link_to @project.name, @project
-      p.sub-name
-        | #{@project.oneword}
-      p.info
-        i.fi-home
-        span.city
-          | #{@project.cities_name}
-        i.fi-list-thumbnails
+  .name-area
+    h4.name
+      = link_to @project.name, @project
+    .sub-name
+      | #{@project.oneword}
+  = render 'star'
+  hr
+    .info
+      - if @project.link.present?
+        .link
+          i.fa.fa-link
+          span
+            = link_to @project.link, "http://#{@project.link}", target: '_blank'
+      .address
+        i.fa.fa-map-marker
+        span
+          = raw project_cities_link(@project)
+      .category
+        i.fa.fa-list
         span.category
-          | #{@project.categories_name}
-      .status
-        | #{format_status(@project.vstatus)}
+          = raw project_categories_link(@project)
