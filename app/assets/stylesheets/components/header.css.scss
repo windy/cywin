@@ -89,7 +89,7 @@ a.user-link {
   border: 1px solid #ccc;
   color: #333;
   position: absolute;
-  top: 3.2rem;
+  top: 4.2rem;
   z-index: 9999;
   right: 1.875rem;
 
@@ -101,7 +101,7 @@ a.user-link {
   white-space: nowrap;
 
   .title {
-    color: #888;
+    color: #999;
     line-height: 1.2;
   }
 
@@ -110,8 +110,8 @@ a.user-link {
   }
 
   a {
-    color: #777;
-    font-size: 0.875rem;
+    color: #666;
+    font-size: 0.925rem;
     &:hover {
       color: $secondary-color;
     }
@@ -161,7 +161,7 @@ a.user-link {
 
     @media #{$small-only} {
       right: -0.3rem;
-      top: 0.1rem;
+      top: 1.1rem;
     }
   }
 }
