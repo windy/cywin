@@ -16,6 +16,9 @@
 
   .search {
     border-radius: 10rem;
+    @media only screen and (min-width: #{lower-bound($medium-range)}) and (max-width: 780px)  {
+      display: none;
+    }
   }
 
   @media #{$small-only} {
@@ -52,6 +55,9 @@
 
       ul li {
         float: left;
+        a {
+          padding-top: 27px;
+        }
       }
     }
   }
