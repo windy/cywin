@@ -1,5 +1,5 @@
 class InvestorsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :search]
 
   def index
     @investor_types = Investor::INVESTOR_TYPES
