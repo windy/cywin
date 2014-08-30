@@ -8,6 +8,7 @@
         h4.name
           = link_to investor.user.name, user_path(investor.user)
         .title #{investor.title}
+        .type #{t('investor.investor_types.'+ investor.investor_type)}
       .content
         - if investor.description.present?
           .description

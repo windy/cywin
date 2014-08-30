@@ -9,6 +9,7 @@ class Investor < ActiveRecord::Base
     text :description do
       user.description
     end
+    string :investor_type
     string :status
   end
 
