@@ -16,4 +16,7 @@ class AboutController < ApplicationController
 
   def venture
   end
+
+  def guide
+  end
 end
