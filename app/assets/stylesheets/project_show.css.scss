@@ -1,6 +1,7 @@
+@import 'variables';
 .project-show {
 
-  background-color: #F3F8F9;
+  background-color: $my-body-bg;
 
   .box {
     background-color: #fff;
@@ -96,4 +97,19 @@
       }
     }
   }//content
+
+  .progress-wrapper {
+    .type {
+      color: #999;
+      margin-right: 0.5rem;
+      font-size: 0.875rem;
+    }
+    .progress-name {
+      color: $primary-color;
+    }
+
+    .progress-name.secondary {
+      color: $secondary-color;
+    }
+  }
 }

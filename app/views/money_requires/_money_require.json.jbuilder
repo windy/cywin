@@ -2,6 +2,7 @@ unless money_require
   json.null!
 else
   json.extract! money_require, :id, :money, :share, :deadline, :status, :min_money, :maxnp, :carry, :project_id
+  json.time_progress money_require.time_progress
   json.format_status format_status(money_require.status)
   if money_require.opened_at.present?
     # 开始与结束时间
@@ -12,9 +13,10 @@ else
   
   if money_require.opened?
     # 剩余天数
-    json.left money_require.left
     json.syndicate_money money_require.syndicate_money
   end
+  json.left money_require.left
+  json.syndicate_progress money_require.progress
 
   # 可投资信息
   json.syndicate do

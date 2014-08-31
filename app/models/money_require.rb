@@ -133,6 +133,16 @@ class MoneyRequire < ActiveRecord::Base
   def left
     if self.opened?
       (( self.deadline.days - ( Time.now - self.opened_at ) ) / 60 / 60 / 24 ).to_i
+    else
+      0
+    end
+  end
+
+  def time_progress
+    if self.opened?
+      1 - left.to_f / self.deadline
+    else
+      0
     end
   end
 

@@ -33,8 +33,6 @@
             .box
               .invest-content
                 moneyrequire require='opened' title='"融资情况"'
-                .more-info
-                  = link_to '更多投资信息...', invest_project_path(@project)
                 investbutton require='opened'
             .box.history ng-repeat='history in histories'
               moneyrequire require='history' title='"历史投资"'
