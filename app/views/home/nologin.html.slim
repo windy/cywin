@@ -53,7 +53,7 @@
                           | 团队
                       .small-7.columns
                         .item.right.margin-link-wrapper
-                          = link_to project.members.size, team_project_path(project)
+                          = link_to project.members.size, project_path(project)
                           | 人
                   - if (leader = project.opened_money_require.leader).present?
                     .tag
