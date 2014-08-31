@@ -1,4 +1,7 @@
 @import 'variables';
+.start-page {
+  background-color: $my-body-bg;
+}
 .start-content {
   padding-top: 5.325rem;
   padding-bottom: 5.325rem;
@@ -87,6 +90,7 @@
     margin: 1rem;
     padding: 1rem 2rem;
     border: 1px solid #ddd;
+    background-color: white;
 
     .head {
       margin-bottom: 1rem;

@@ -11,7 +11,9 @@
 @include exports("global") {}
 @import "foundation/components/global";
 
+// $body-bg: #F3F8F9;
 $body-font-family: "Helvetica Neue", "Helvetica", Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", sans-serif;
+$my-body-bg: #F3F8F9;
 // $experimental: true;
 
 // The default font-size is set to 100% of the browser style sheet (usually 16px)
@@ -45,7 +47,7 @@ $body-font-family: "Helvetica Neue", "Helvetica", Tahoma, Arial, STXihei, "华�
 // $font-weight-bold: bold !default
 
 // We use these to control various global styles
-$body-bg: #F3F8F9;
+//$body-bg: #F3F8F9;
 // $body-font-color: #222;
 // $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $body-font-weight: $font-weight-normal;
