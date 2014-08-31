@@ -1,10 +1,14 @@
+@import 'variables';
+
 .explore {
+  background-color: $my-body-bg;
 
   padding-top: 1.5rem;
 
   .explore-head {
 
-    .tabs li a {
+    .tabs {
+      background-color: #F2F3F4;
     }
     margin-bottom: 3rem;
     border-bottom: 1px solid #ddd;
@@ -15,6 +19,7 @@
 .by-tabs {
   margin-left: 0;
   border: 1px solid #ddd;
+  background-color: white;
 
   .tab-title {
     list-style: none;
@@ -26,7 +31,7 @@
       color: #666;
       border-bottom: 1px solid #eee;
       &:hover {
-        background-color: #eee;
+        background-color: #F2F3F4;
       } 
     }
 
@@ -40,6 +45,7 @@
 .by-tabs-2 {
   margin-left: 0;
   border: 1px solid #ddd;
+  background-color: white;
 
   .tab-title {
     list-style: none;
@@ -58,7 +64,7 @@
 
     &.active a {
       color: #333;
-      font-weight: 600;
+      font-weight: 700;
     }
   }
 }
