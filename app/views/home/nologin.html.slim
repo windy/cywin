@@ -1,61 +1,97 @@
-.start-content
-  .row
-    .small-12.columns
-      /*form ng-submit='submit()' ng-controller='HomeController'*/
-      .row
-        .small-12.large-8.columns
-          h2.heading  欢迎来到创业赢
-          h4.sub-heading 在这里，以最简单的方式，快速探索你需要的创业元素
-          = link_to '申请内测', new_user_registration_path, class: 'button'
+.start-page
+  .start-content
+    .row
+      .small-12.columns
+        /*form ng-submit='submit()' ng-controller='HomeController'*/
+        .row
+          .small-12.large-8.columns
+            h2.heading  欢迎来到创业赢
+            h4.sub-heading 在这里，以最简单的方式，快速探索你需要的创业元素
+            = link_to '申请内测', new_user_registration_path, class: 'button'
 
-          /*.small-12.medium-8.large-6.end.columns*/
-            /*= text_field_tag 'name', nil, placeholder: '你的真实姓名', 'ng-model'=> 'name'*/
-            /*= text_field_tag 'email', nil, placeholder: '你的邮箱', 'ng-model'=> 'email'*/
-            /*= password_field_tag 'password', nil, placeholder:  '输入一个密码', 'ng-model'=> 'password'*/
-            /*- if bit_enable?*/
-              /*= text_field_tag 'code', nil, placeholder:  '内测中, 需要一个邀请码', 'ng-model'=> 'code'*/
-            /*button 注册*/
-            /*= link_to '已有账号, 登录?', new_user_session_path, class: 'login-link blank-link'*/
+            /*.small-12.medium-8.large-6.end.columns*/
+              /*= text_field_tag 'name', nil, placeholder: '你的真实姓名', 'ng-model'=> 'name'*/
+              /*= text_field_tag 'email', nil, placeholder: '你的邮箱', 'ng-model'=> 'email'*/
+              /*= password_field_tag 'password', nil, placeholder:  '输入一个密码', 'ng-model'=> 'password'*/
+              /*- if bit_enable?*/
+                /*= text_field_tag 'code', nil, placeholder:  '内测中, 需要一个邀请码', 'ng-model'=> 'code'*/
+              /*button 注册*/
+              /*= link_to '已有账号, 登录?', new_user_session_path, class: 'login-link blank-link'*/
 
-.start-projects-content
-  .row
-    .small-12.columns
-      h2 热门项目
-      ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
-        - 3.times do |i|
-          - recommend = @recommends[i]
-          - if recommend.present?
-            - project = @recommends[i].project
-            li 
-              .box.project
-                .head
-                  .row
-                    .small-5.columns
-                      = link_to project do
-                        - image_tag project.logo.image_url
-                    .small-7.columns
-                      = link_to project do
-                        h5 #{project.name}
-                  .subtitle #{project.oneword}
-                .content
-                  .tag
+  .start-projects-content
+    .row
+      .small-12.columns
+        h2 热门项目
+        ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
+          - 3.times do |i|
+            - recommend = @recommends[i]
+            - if recommend.present?
+              - project = @recommends[i].project
+              li 
+                .box.project
+                  .head
                     .row
                       .small-5.columns
-                        .type
-                          | 创始人
+                        = link_to project do
+                          - image_tag project.logo.image_url
                       .small-7.columns
-                        .item.right
-                          = link_to project.owner.name, project.owner
-                  .tag
+                        = link_to project do
+                          h5 #{project.name}
+                    .subtitle #{project.oneword}
+                  .content
+                    .tag
+                      .row
+                        .small-5.columns
+                          .type
+                            | 创始人
+                        .small-7.columns
+                          .item.right
+                            = link_to project.owner.name, project.owner
+                    .tag
+                      .row
+                        .small-5.columns
+                          .type
+                            | 团队
+                        .small-7.columns
+                          .item.right.margin-link-wrapper
+                            = link_to project.members.size, project_path(project)
+                            | 人
+                    - if (leader = project.opened_money_require.leader).present?
+                      .tag
+                        .row
+                          .small-5.columns
+                            .type
+                              | 领投人
+                          .small-7.columns
+                            .item.right
+                              = link_to leader.name, leader
+            - else
+              li 
+                .box.project
+                  .head
                     .row
                       .small-5.columns
-                        .type
-                          | 团队
+                        = image_tag 'default-project.jpg'
                       .small-7.columns
-                        .item.right.margin-link-wrapper
-                          = link_to project.members.size, project_path(project)
-                          | 人
-                  - if (leader = project.opened_money_require.leader).present?
+                        h5 空缺中
+                    .subtitle  -
+                  .content
+                    .tag
+                      .row
+                        .small-5.columns
+                          .type
+                            | 创始人
+                        .small-7.columns
+                          .item.right
+                            | 无
+                    .tag
+                      .row
+                        .small-5.columns
+                          .type
+                            | 团队
+                        .small-7.columns
+                          .item.right
+                            | 无
                     .tag
                       .row
                         .small-5.columns
@@ -63,177 +99,142 @@
                             | 领投人
                         .small-7.columns
                           .item.right
-                            = link_to leader.name, leader
-          - else
-            li 
-              .box.project
-                .head
-                  .row
-                    .small-5.columns
-                      = image_tag 'default-project.jpg'
-                    .small-7.columns
-                      h5 空缺中
-                  .subtitle  -
-                .content
-                  .tag
+                            | 无
+        .text-center
+          = link_to '查看所有项目', all_explore_index_path
+  hr
+  .start-investors-content
+    .row
+      .small-12.columns
+        h2 热门投资人
+        ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
+          - 3.times do |i|
+            - investor = @investors[i]
+            - if investor.present?
+              - user = investor.user
+              li
+                .box.investor
+                  .head
                     .row
                       .small-5.columns
-                        .type
-                          | 创始人
+                        = link_to user do
+                          - image_tag user.avatar_url
                       .small-7.columns
-                        .item.right
+                        = link_to user do
+                          h6 #{user.name}
+                        p.subtitle #{user.description}
+                  .content
+                    .tag
+                      | 过往投资项目
+                    .investments
+                      - investments = user.investments.default_order.limit(2)
+                      - if investments.blank?
+                        .investment
                           | 无
-                  .tag
+                      - else
+                        - investments.each do |investment|
+                          .investment
+                            - if investment.money_require.present?
+                              = link_to investment.money_require.project.name, investment.money_require.project
+                            - else
+                              | #{investment.name}
+            - else
+              li
+                .box.investor
+                  .head
                     .row
                       .small-5.columns
-                        .type
-                          | 团队
+                        = image_tag 'default-people.jpg'
                       .small-7.columns
-                        .item.right
-                          | 无
-                  .tag
-                    .row
-                      .small-5.columns
-                        .type
-                          | 领投人
-                      .small-7.columns
-                        .item.right
-                          | 无
-      .text-center
-        = link_to '查看所有项目', all_explore_index_path
-hr
-.start-investors-content
-  .row
-    .small-12.columns
-      h2 热门投资人
-      ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
-        - 3.times do |i|
-          - investor = @investors[i]
-          - if investor.present?
-            - user = investor.user
-            li
-              .box.investor
-                .head
-                  .row
-                    .small-5.columns
-                      = link_to user do
-                        - image_tag user.avatar_url
-                    .small-7.columns
-                      = link_to user do
-                        h6 #{user.name}
-                      p.subtitle #{user.description}
-                .content
-                  .tag
-                    | 过往投资项目
-                  .investments
-                    - investments = user.investments.default_order.limit(2)
-                    - if investments.blank?
+                        h6 空缺中
+                  .content
+                    .tag
+                      | 过往投资项目
+                    .investments
                       .investment
                         | 无
-                    - else
-                      - investments.each do |investment|
-                        .investment
-                          - if investment.money_require.present?
-                            = link_to investment.money_require.project.name, investment.money_require.project
-                          - else
-                            | #{investment.name}
-          - else
-            li
-              .box.investor
-                .head
-                  .row
-                    .small-5.columns
-                      = image_tag 'default-people.jpg'
-                    .small-7.columns
-                      h6 空缺中
-                .content
-                  .tag
-                    | 过往投资项目
-                  .investments
-                    .investment
-                      | 无
-      .text-center
-        = link_to '查看所有投资人', investors_path
-hr
-.start-jobs-content
-  .row
-    .small-12.columns
-      h2 创业职位
-      ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
-        - 3.times do |i|
-          - person_require = @person_requires[i]
-          - if person_require.present?
-            - project = person_require.project
-            li 
-              .box.job
-                .head
-                  .row
-                    .small-5.columns
-                      = link_to project do
-                        - image_tag project.logo.image_url
-                    .small-7.columns
-                      = link_to project do
-                        h5 #{project.name}
-                  .subtitle #{project.oneword}
-                .content
-                  .tag
+        .text-center
+          = link_to '查看所有投资人', investors_path
+  hr
+  .start-jobs-content
+    .row
+      .small-12.columns
+        h2 创业职位
+        ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
+          - 3.times do |i|
+            - person_require = @person_requires[i]
+            - if person_require.present?
+              - project = person_require.project
+              li 
+                .box.job
+                  .head
                     .row
-                      .small-4.columns
-                        .type
-                          | 薪水
-                      .small-8.columns
-                        .item.right.ng-cloak
-                          | {{ #{person_require.pay} | nfcurrency }}
-                  .tag
+                      .small-5.columns
+                        = link_to project do
+                          - image_tag project.logo.image_url
+                      .small-7.columns
+                        = link_to project do
+                          h5 #{project.name}
+                    .subtitle #{project.oneword}
+                  .content
+                    .tag
+                      .row
+                        .small-4.columns
+                          .type
+                            | 薪水
+                        .small-8.columns
+                          .item.right.ng-cloak
+                            | {{ #{person_require.pay} | nfcurrency }}
+                    .tag
+                      .row
+                        .small-4.columns
+                          .type
+                            | 职位
+                        .small-8.columns
+                          .item.right
+                            | #{person_require.title}
+                    .tag
+                      .row
+                        .small-4.columns
+                          .type
+                            | 期权
+                        .small-8.columns
+                          .item.right
+                            | #{person_require.option} %
+            - else
+              li 
+                .box.job
+                  .head
                     .row
-                      .small-4.columns
-                        .type
-                          | 职位
-                      .small-8.columns
-                        .item.right
-                          | #{person_require.title}
-                  .tag
-                    .row
-                      .small-4.columns
-                        .type
-                          | 期权
-                      .small-8.columns
-                        .item.right
-                          | #{person_require.option} %
-          - else
-            li 
-              .box.job
-                .head
-                  .row
-                    .small-5.columns
-                      = image_tag 'default-project.jpg'
-                    .small-7.columns
-                      h5 空缺中
-                  .subtitle -
-                .content
-                  .tag
-                    .row
-                      .small-4.columns
-                        .type
-                          | 薪水
-                      .small-8.columns
-                        .item.right.ng-cloak
-                          | -
-                  .tag
-                    .row
-                      .small-4.columns
-                        .type
-                          | 职位
-                      .small-8.columns
-                        .item
-                          | -
-                  .tag
-                    .row
-                      .small-4.columns
-                        .type
-                          | 期权
-                      .small-8.columns
-                        .item
-                          | -
-      p.text-center
-        = link_to '查看所有职位', jobs_path
+                      .small-5.columns
+                        = image_tag 'default-project.jpg'
+                      .small-7.columns
+                        h5 空缺中
+                    .subtitle -
+                  .content
+                    .tag
+                      .row
+                        .small-4.columns
+                          .type
+                            | 薪水
+                        .small-8.columns
+                          .item.right.ng-cloak
+                            | -
+                    .tag
+                      .row
+                        .small-4.columns
+                          .type
+                            | 职位
+                        .small-8.columns
+                          .item
+                            | -
+                    .tag
+                      .row
+                        .small-4.columns
+                          .type
+                            | 期权
+                        .small-8.columns
+                          .item
+                            | -
+        p.text-center
+          = link_to '查看所有职位', jobs_path
