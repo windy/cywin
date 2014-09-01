@@ -9,8 +9,9 @@
     margin-bottom: 0.5rem;
   }
 
-  .box {
+  .content .box {
     padding: 1rem 1.5rem;
+    margin-bottom: 0;
 
     .sub-title {
       color: $primary-color;
@@ -24,7 +25,7 @@
     }
   }
 
-  .box2 {
+  .content .box2 {
     .sub-title, .sub-content {
       color: #00C4A3;
     }
@@ -39,9 +40,140 @@
     text-align: center;
   }
 
+  .detail {
+    border-top: 1px solid #ddd;
+
+    .followers {
+      padding: 1rem 1.625rem 0;
+      border-top: 1px solid #ddd;
+
+      .type {
+        display: inline-block;
+        width: 15%;
+        color: #999;
+        padding: 1.5rem 0;
+        vertical-align: top;
+      }
+
+      .item {
+        a {
+          color: #666;
+        }
+        padding: 1.5rem 0;
+        padding-left: 1rem;
+        display: inline-block;
+        width: 85%;
+
+        li {
+          text-align: center;
+        }
+
+        img {
+          width: 3rem;
+          border-radius: 50%;
+        }
+      }
+
+    }
+
+    .leader-info {
+      padding: 1rem 1.625rem;
+
+      .type {
+        display: inline-block;
+        width: 15%;
+        color: #999;
+        padding: 1.5rem 0;
+        vertical-align: top;
+      }
+
+      .item {
+        color: $primary-color;
+        font-weight: 700;
+        padding: 1.5rem 0;
+        padding-left: 1rem;
+        display: inline-block;
+        width: 85%;
+
+        a {
+          color: $primary-color;
+          font-weight: 700;
+          &:hover {
+            color: $secondary-color;
+            font-weight: 700;
+          }
+        }
+
+        img {
+          width: 2rem;
+          border-radius: 50%;
+          margin-right: 1rem;
+          vertical-align: bottom;
+        }
+
+        .law-iterms {
+          margin-left: 0;
+
+          .law-title {
+            display: block;
+            padding-bottom: 0.625rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #ddd;
+            &:hover {
+              .fa {
+                color: $secondary-color;
+              }
+            }
+
+            .fa {
+              float: right;
+              color: #ddd;
+            }
+          }
+
+          .law-description {
+            color: #999;
+            padding-left: 0;
+          }
+        }
+
+        .leader-word {
+          color: #999;
+          font-weight: normal;
+
+          .post-i, .created-at {
+            text-align: right;
+          }
+
+          .created-at {
+            font-size: 0.875rem;
+          }
+        }
+      }
+      
+    }
+
+  }
+
   .more-info {
     text-align: center;
-    margin: 1rem 0;
+
+    a {
+      border-top: 1px solid #ddd;
+      padding: 1rem 0;
+      color: #999;
+      display: block;
+
+      &:hover {
+        background-color: #fcfcfc;
+        color: $primary-color;
+      }
+
+      .fa {
+        margin-left: 0.625rem;
+      }
+    }
+
   }
 
   .invest-button {
@@ -49,15 +181,18 @@
   }
 
   .invest-button {
-    margin-top: 1rem;
-    padding-top: 1rem;
+    padding: 2rem 0;
     border-top: 1px solid #ddd;
     text-align: center;
 
-    button {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+    .invest-tips {
+      span {
+        color: #999;
+      }
+
+      .button, button {
+        margin-left: 0.5rem;
+      } 
     }
   }
 

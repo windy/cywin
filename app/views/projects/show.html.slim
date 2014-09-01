@@ -28,16 +28,7 @@
               .status #{format_status(@project.vstatus)}
             h5.title 项目简介
             p.description #{@project.description}
-          /*= render partial: 'show_tab', locals: { type: 'basic' }*/
-          .box-wrapper ng-controller='MoneyRequireController' ng-init='init(#{@project.id}, {})'
-            .box
-              .invest-content
-                moneyrequire require='opened' title='"融资情况"'
-                .more-info
-                  = link_to '更多投资信息...', invest_project_path(@project)
-                investbutton require='opened'
-            .box.history ng-repeat='history in histories'
-              moneyrequire require='history' title='"历史投资"'
+
           .box
             - if @project.screenshots.present?
               h5.title 产品介绍
@@ -47,6 +38,76 @@
                     li
                       = link_to s.image.url do
                         - image_tag s.image.small.url
+
+          .box-wrapper ng-controller='MoneyRequireController' ng-init='init(#{@project.id}, {})'
+            .box
+              .invest-content
+                moneyrequire require='opened' title='"融资情况"'
+                .detail.ng-cloak ng-show='detail_flag'
+                  .leader-info
+                    ul.no-bullet
+                      li
+                        .type
+                          | 领投人
+                        .item
+                          = image_tag 'default-people.jpg'
+                          a
+                            | 某某
+                      li
+                        .type
+                          | 领投Carry
+                        .item
+                          | 30%
+                      li
+                        .type
+                          | 投资条款
+                        .item
+                          ul.no-bullet.law-iterms
+                            - 3.times do
+                              li
+                                a.law-title ng-click='law_iterm_show = ! law_iterm_show'
+                                  span
+                                    | 反稀释
+                                  i.fa.fa-chevron-circle-right ng-hide='law_iterm_show'
+                                  i.fa.fa-chevron-circle-down ng-show='law_iterm_show'
+                                p.description.law-description ng-show='law_iterm_show'
+                                  | 这是xx条款
+                      li
+                        .type
+                          | 领投人的话
+                        .item
+                          .leader-word
+                            .pre-i
+                              i.fa.fa-quote-left
+                            .description
+                              | xxxxxxx
+                            .post-i
+                              i.fa.fa-quote-right
+                            .created-at
+                              | 2014 年 11 月 11 日
+
+                  .followers
+                    .type
+                      | 跟投人
+                    .item
+                      ul.small-block-grid-3.medium-block-grid-6
+                        - 6.times do
+                          li
+                            a
+                              = image_tag 'default-people.jpg'
+                              .money
+                                | 100,000
+
+                investbutton require='opened'
+                .more-info.ng-cloak
+                  a ng-hide='detail_flag' ng-click='detail_flag=true'
+                    | 查看详情
+                    i.fa.fa-angle-double-down
+                  a ng-show='detail_flag' ng-click='detail_flag=false'
+                    | 收起详情
+                    i.fa.fa-angle-double-up
+            .box.history ng-repeat='history in histories'
+              moneyrequire require='history' title='"历史投资"'
           .box.team
             h5.title 团队情况
             .content

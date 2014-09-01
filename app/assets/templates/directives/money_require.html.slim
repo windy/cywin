@@ -31,26 +31,24 @@
             | 融资状态
           h5.sub-content
             | {{ require.format_status }}
-      li
-        .box.box2 ng-show= 'require.left != null'
-          .sub-title
-            | 剩余天数
-          h5.sub-content
-            | {{ require.left }}
-        .box ng-show= 'require.cost != null'
-          .sub-title
-            | 融资完成时间
-          h5.sub-content
-            | {{ require.cost }}
-
-      li
-        .box.box2 ng-show = 'require.syndicate_money != null'
-          .sub-title
-            | 融资进度
-          h5.sub-content
-            | {{ require.syndicate_money | nfcurrency }}
-        .box ng-show = 'require.success != null'
-          .sub-title
-            | 融资成败
-          h5.sub-content
-            | {{ require.success ? '成功' : '失败' }}
+    .progress-wrapper
+      ul.small-block-grid-1.medium-block-grid-2
+        li
+          .progress
+            span.meter ng-style="{'width': require.syndicate_progress * 100 + '%'}"
+            /*span.meter ng-style="{'width': '0%'}"*/
+          .progress-name-wrapper
+            span.type
+              | 融资进度
+            span.progress-name
+              | {{ require.syndicate_progress * 100 + '%' }}
+        li
+          .progress.secondary
+            span.meter ng-style="{'width': require.time_progress * 100 + '%'}"
+          .progress-name-wrapper
+            span.type
+              | 剩余天数
+            span.progress-name.secondary
+              | {{ require.left }}
+              | /
+              | {{ require.deadline }}天
