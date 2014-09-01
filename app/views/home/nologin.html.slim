@@ -5,19 +5,10 @@
         /*form ng-submit='submit()' ng-controller='HomeController'*/
         .row
           .small-12.large-8.columns
-            h2.heading  欢迎来到创业赢
-            h4.sub-heading 在这里，以最简单的方式，快速探索你需要的创业元素
-            = link_to '申请内测', new_user_registration_path, class: 'button'
-
-            /*.small-12.medium-8.large-6.end.columns*/
-              /*= text_field_tag 'name', nil, placeholder: '你的真实姓名', 'ng-model'=> 'name'*/
-              /*= text_field_tag 'email', nil, placeholder: '你的邮箱', 'ng-model'=> 'email'*/
-              /*= password_field_tag 'password', nil, placeholder:  '输入一个密码', 'ng-model'=> 'password'*/
-              /*- if bit_enable?*/
-                /*= text_field_tag 'code', nil, placeholder:  '内测中, 需要一个邀请码', 'ng-model'=> 'code'*/
-              /*button 注册*/
-              /*= link_to '已有账号, 登录?', new_user_session_path, class: 'login-link blank-link'*/
-
+            h2.heading  全国首家免费创业众筹平台
+            h4.sub-heading 这里不光筹钱，还能筹人！
+            /*= link_to '申请内测', new_user_registration_path, class: 'button'*/
+            = link_to '发布项目', new_project_path, class: 'button'
   .start-projects-content
     .row
       .small-12.columns
