@@ -10,6 +10,18 @@
     padding-right: 30px;
   }
 
+  .logo-wrapper {
+    position: relative;
+    display: inline-block;
+
+    .bit {
+      font-size: 0.5rem;
+      position: absolute;
+      top: -16px;
+      right: -23px;
+    }
+  }
+
   .separation a {
     padding: 0;
   }

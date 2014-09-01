@@ -7,8 +7,12 @@
             span
         li.name
           h1
-            = link_to root_path, class: 'title' do
-              - image_tag 'logo.svg'
+            a.title href="#{root_path}"
+              .logo-wrapper
+                = image_tag 'logo.svg'
+                - if bit_enable?
+                  span.bit
+                    | 内测中
       section.top-bar-section
         ul.left
           = render partial: 'layouts/menu'
