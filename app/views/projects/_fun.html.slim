@@ -1,0 +1,18 @@
+.funs
+  - funs_size = @project.stars.size
+  .text-wrapper
+    span.text
+      | 粉丝
+    span.value
+      | #{funs_size}
+  - if funs_size > 0
+    ul.small-block-grid-8.medium-block-grid-5.fun-list
+      - @project.star_users(9).each do |user|
+        li.fun
+          = link_to user, title: user.name do
+            - image_tag user.avatar_url
+      - if funs_size > 9
+        li.fun.more.ng-cloak
+          a href='#' ng-mouseover='fun_more_hover=true'
+            = image_tag 'fun_more.svg', 'ng-mouseover'=> 'fun_more_hover=false', 'ng-hide'=>'fun_more_hover'
+            = image_tag 'fun_more_hover.svg', 'ng-mouseleave'=> 'fun_more_hover=false', 'ng-show'=>'fun_more_hover'

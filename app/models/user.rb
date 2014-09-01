@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :person_requires
 
+  scope :default_order, -> { order(created_at: :desc) }
+
   def add_star(project)
     unless self.stars.where(project_id: project.id).first
       star = Star.new(user: self, project: project)
