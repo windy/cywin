@@ -129,11 +129,21 @@
       .value {
         color: $primary-color;
       }
-      padding-bottom: 1rem;
+    }
+    .fun-list {
+      padding-top: 1rem;
     }
 
     img {
       border-radius: 50%;
+    }
+
+    .fun.more a {
+
+      &:hover {
+        color: white;
+      }
+
     }
 
   }
