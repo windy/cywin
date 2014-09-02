@@ -5,6 +5,11 @@
 
     .logo {
       width: 50%;
+
+      @media #{$small-only} {
+        width: 30%;
+      }
+
       margin: auto;
 
       img {
