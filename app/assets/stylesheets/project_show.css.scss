@@ -118,8 +118,25 @@
   }
   
   .funs {
+    color: #666;
+    line-height: 1.5;
+
+    .icon-wrapper {
+      margin-top: -1rem;
+    }
+
+    i.fa {
+      margin-right: 0.5rem;
+      margin-left: 1rem;
+      width: 1rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
 
     .text-wrapper {
+
       text-align: center;
       .text {
         color: #999;
