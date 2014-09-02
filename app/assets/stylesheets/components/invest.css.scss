@@ -71,6 +71,7 @@
         img {
           width: 3rem;
           border-radius: 50%;
+          margin-bottom: 1rem;
         }
       }
 
@@ -111,6 +112,11 @@
           vertical-align: bottom;
         }
 
+        .no-content {
+          color: #999;
+          font-weight: normal;
+        }
+
         .law-iterms {
           margin-left: 0;
 
@@ -131,9 +137,13 @@
             }
           }
 
+          .law-title.expand {
+            color: $secondary-color;
+          }
+
           .law-description {
             color: #999;
-            padding-left: 0;
+            padding: 0.5rem 0;
           }
         }
 
