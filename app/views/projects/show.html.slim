@@ -46,35 +46,36 @@
               .invest-content
                 moneyrequire require='opened' title='"融资情况"'
                 .detail.ng-cloak ng-show='detail_flag'
-                  .leader-info
+                  .leader-info ng-show='opened.leader'
                     ul.no-bullet
                       li
                         .type
                           | 领投人
                         .item
-                          = image_tag 'default-people.jpg'
-                          a
-                            | 某某
+                          img ng-src='{{ opened.leader.avatar }}'
+                          a ng-href='/users/{{ opened.leader.id}}'
+                            | {{ opened.leader.name }}
                       li
                         .type
                           | 领投Carry
                         .item
-                          | 30%
+                          | {{ opened.carry }}%
                       li
                         .type
                           | 投资条款
                         .item
-                          ul.no-bullet.law-iterms
-                            - 3.times do
-                              li
-                                a.law-title ng-click='law_iterm_show = ! law_iterm_show'
-                                  span
-                                    | 反稀释
-                                  i.fa.fa-chevron-circle-right ng-hide='law_iterm_show'
-                                  i.fa.fa-chevron-circle-down ng-show='law_iterm_show'
-                                p.description.law-description ng-show='law_iterm_show'
-                                  | 这是xx条款
-                      li
+                          .no-content ng-show='is_law_iterms_empty()'
+                            | 暂无条款
+                          ul.no-bullet.law-iterms.ng-cloak ng-init = 'law_iterm_show = []' ng-hide='is_law_iterms_empty()'
+                            li ng-repeat='law_iterm in opened.law_iterms'
+                              a.law-title ng-class="{ 'expand': law_iterm_show[law_iterm.id] }" ng-click='law_iterm_show[law_iterm.id] = ! law_iterm_show[law_iterm.id]'
+                                span
+                                  | {{ law_iterm.title }}
+                                i.fa.fa-chevron-circle-right ng-hide='law_iterm_show[law_iterm.id]'
+                                i.fa.fa-chevron-circle-down ng-show='law_iterm_show[law_iterm.id]'
+                              p.description.law-description ng-show='law_iterm_show[law_iterm.id]'
+                                | {{ law_iterm.description }}
+                      li ng-show=' opened.leader_word '
                         .type
                           | 领投人的话
                         .item
@@ -82,23 +83,29 @@
                             .pre-i
                               i.fa.fa-quote-left
                             .description
-                              | xxxxxxx
+                              | {{ opened.leader_word }}
                             .post-i
                               i.fa.fa-quote-right
                             .created-at
-                              | 2014 年 11 月 11 日
+                              | {{ opened.opened_at }}
 
                   .followers
                     .type
                       | 跟投人
                     .item
-                      ul.small-block-grid-3.medium-block-grid-6
-                        - 6.times do
-                          li
-                            a
-                              = image_tag 'default-people.jpg'
-                              .money
-                                | 100,000
+                      - opened = @project.opened_money_require
+                      - investments = opened && opened.investments.default_order.limit(6)
+                      - if investments.blank?
+                        | 暂无投资
+                      - else
+                        ul.small-block-grid-3.medium-block-grid-6
+                          - investments.each do |investment|
+                            - user = investment.user
+                            li
+                              a href="#{user_path(user)}" title="#{user.name}"
+                                = image_tag user.avatar_url
+                                .money
+                                  | ¥ #{number_with_delimiter(investment.money)}
 
                 investbutton require='opened'
                 .more-info.ng-cloak
