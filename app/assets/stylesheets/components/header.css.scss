@@ -14,14 +14,18 @@
     @media #{$small-only} {
       width: 50%;
     }
-    position: relative;
     display: inline-block;
+
+    .logo-wrapper-inner {
+      display: inline-block;
+      position: relative;
+    }
 
     .bit {
       font-size: 0.5rem;
       position: absolute;
-      top: -16px;
-      right: -23px;
+      top: -17px;
+      right: -17px;
     }
   }
 
