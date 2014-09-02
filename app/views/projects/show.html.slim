@@ -134,8 +134,9 @@
                           .description #{m.description || m.user.description}
             - if @project.team_story.present?
               hr
-                .description
-                  | #{@project.team_story}
+                .content
+                  .description
+                    | #{@project.team_story}
 
           .box
             = render 'job'
