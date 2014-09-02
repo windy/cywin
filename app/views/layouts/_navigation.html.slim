@@ -9,10 +9,10 @@
           h1
             a.title href="#{root_path}"
               .logo-wrapper
-                = image_tag 'logo.svg'
                 - if bit_enable?
-                  span.bit
-                    | 内测中
+                  = image_tag 'logo_neice.svg'
+                - else
+                  = image_tag 'logo_beta.svg'
       section.top-bar-section
         ul.left
           = render partial: 'layouts/menu'
