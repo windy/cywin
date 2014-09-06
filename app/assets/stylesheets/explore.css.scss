@@ -3,12 +3,24 @@
 .explore {
   background-color: $my-body-bg;
 
-  padding-top: 1.5rem;
-
   .explore-head {
+    background-color: #fff;
 
     .tabs {
-      //background-color: #F4F4F4;
+      .tab-title a {
+        color: #777;
+      }
+      .tab-title.active a {
+        color: $primary-color;
+        background-color: #fff;
+        border-bottom: 3px solid $primary-color;
+      }
+
+      .tab-title a:hover {
+        color: $primary-color;
+        font-weight: 500;
+        background-color: #fff;
+      }
     }
     margin-bottom: 3rem;
     border-bottom: 1px solid #ddd;
@@ -70,13 +82,33 @@
 }
 
 .trend {
+
+  table {
+    table-layout: fixed;
+    td {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+
   td.index {
     width: 10%;
   }
   td.project {
     width: 75%;
+    @media #{$small-only} {
+      width: 60%;
+    }
   }
   td.commitment {
     width: 15%;
+    @media #{$small-only} {
+      width: 30%;
+    }
+  }
+
+  td.data {
+    color: #666;
   }
 }

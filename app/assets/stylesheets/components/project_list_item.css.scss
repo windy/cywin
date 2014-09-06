@@ -3,6 +3,7 @@
   border-right: 1px solid #ddd;
   border-left: 1px solid #ddd;
   padding: 1rem 0;
+  background-color: white;
   img {
     border-radius: 10rem;
   }
@@ -11,7 +12,8 @@
     margin-right: 1rem;
     font-size: 1rem;
     a {
-      color: #FF2D2D;
+      color: #666;
+      font-weight: 600;
     }
   }
 
