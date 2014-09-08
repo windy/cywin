@@ -32,5 +32,6 @@
       - if @investors.blank?
         p.no-content 没有搜索结果
       - else
-        = render partial: 'investor', collection: @investors
-        = paginate @investors
+        .investors-wrapper
+          = render partial: 'investor', collection: @investors
+          = paginate @investors
