@@ -1,4 +1,6 @@
+@import 'variables';
 .investors {
+  background-color: $my-body-bg;
 
   .head {
     background-color: #28545E;
@@ -14,9 +16,31 @@
     }
   }
 
+  .sub-nav {
+    @media #{$small-only} {
+      display: none;
+    }
+  }
+  .search-form {
+    background-color: white;
+    padding: 3rem 2rem 2rem 2rem;
+    margin-bottom: 2rem;
+    @media #{$small-only} {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
   .investor {
-    margin: 1rem 0;
-    padding: 1rem 0;
+    background-color: white;
+    padding: 1rem;
+    padding-bottom: 0;
+    margin: 0;
+    border: 1px solid #fcfcfc;
+    
+    img {
+      border-radius: 50%;
+    }
 
     .name-area {
       line-height: 1.5rem;

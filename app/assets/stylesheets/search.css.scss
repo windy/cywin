@@ -1,4 +1,6 @@
-.search {
+@import 'variables';
+.search-page {
+  background-color: $my-body-bg;
   em {
     font-style: normal;
     margin: 0 0.5rem;
@@ -7,11 +9,7 @@
   }
 
   .projects, .jobs, .investors {
-    border-top: 1px solid #ddd;
-    margin-bottom: 1.5rem;
-  }
-  .projects {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #fcfcfc;
     margin-bottom: 1.5rem;
   }
 
