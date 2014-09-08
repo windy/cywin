@@ -1,4 +1,4 @@
-class Admin::LawItermsController < ApplicationController
+class Admin::LawItermsController < Admin::ApplicationController
   def index
     @law_iterms = LawIterm.all
   end
