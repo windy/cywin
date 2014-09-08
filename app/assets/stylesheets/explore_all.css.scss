@@ -8,11 +8,15 @@
   }
 
   #search {
-    margin-left: 1rem;
+    @media #{$medium-up} {
+      margin-left: 1rem;
+    }
   }
 
   #search-wrapper {
-    margin-top: 1rem;
+    @media #{$medium-up} {
+      margin-top: 1rem;
+    }
   }
 
   .search-form {
@@ -22,6 +26,9 @@
   }
 
   .industry, .city {
+    @media #{$small-only} {
+      display: none;
+    }
     .tag {
       display: inline-block;
       vertical-align: top;
@@ -34,6 +41,13 @@
     .sub-nav {
       display: inline-block;
       width: 90%;
+    }
+  }
+
+  .industry-for-small, .city-for-small {
+    display: none;
+    @media #{$small-only} {
+      display: block;
     }
   }
 

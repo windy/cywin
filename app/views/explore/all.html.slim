@@ -17,6 +17,11 @@
                 - @heads.each do |head|
                   dd class="#{active_for(head.id.to_s, params[:head_id].to_s)}" ng-class="{ active: is_selected_head(#{head.id}) }"
                     a ng-click='select_head(#{head.id})' #{head.name}
+            .industry-for-small
+              select ng-model='head_id' ng-change='select_head(head_id)'
+                option value='' 全部行业
+                - @heads.each do |head|
+                  option value='#{head.id}' #{head.name}
             .city
               .tag
                 | 城市:
@@ -26,6 +31,11 @@
                 - @cities.each do |city|
                   dd class="#{active_for(city.id.to_s, params[:city_id].to_s)}" ng-class="{ active: is_selected_city(#{city.id}) }"
                     a ng-click='select_city(#{city.id})' #{city.name}
+            .city-for-small
+              select ng-model='city_id' ng-change='select_city(city_id)'
+                option value='' 全部城市
+                - @cities.each do |city|
+                  option value='#{city.id}' #{city.name}
         .row#search-wrapper.collapse
           .small-9.medium-6.large-4.columns
             input type='text' id='search' placeholder='项目名称' ng-model='q' ng-init='q="#{params[:q]}"'
