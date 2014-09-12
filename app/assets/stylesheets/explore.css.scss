@@ -1,10 +1,26 @@
-.explore {
+@import 'variables';
 
-  padding-top: 1.5rem;
+.explore {
+  background-color: $my-body-bg;
 
   .explore-head {
+    background-color: #fff;
 
-    .tabs li a {
+    .tabs {
+      .tab-title a {
+        color: #777;
+      }
+      .tab-title.active a {
+        color: $primary-color;
+        background-color: #fff;
+        border-bottom: 3px solid $primary-color;
+      }
+
+      .tab-title a:hover {
+        color: $primary-color;
+        font-weight: 500;
+        background-color: #fff;
+      }
     }
     margin-bottom: 3rem;
     border-bottom: 1px solid #ddd;
@@ -15,6 +31,7 @@
 .by-tabs {
   margin-left: 0;
   border: 1px solid #ddd;
+  background-color: white;
 
   .tab-title {
     list-style: none;
@@ -26,7 +43,7 @@
       color: #666;
       border-bottom: 1px solid #eee;
       &:hover {
-        background-color: #eee;
+        background-color: #F2F3F4;
       } 
     }
 
@@ -40,6 +57,7 @@
 .by-tabs-2 {
   margin-left: 0;
   border: 1px solid #ddd;
+  background-color: white;
 
   .tab-title {
     list-style: none;
@@ -58,19 +76,39 @@
 
     &.active a {
       color: #333;
-      font-weight: 600;
+      font-weight: 700;
     }
   }
 }
 
 .trend {
+
+  table {
+    table-layout: fixed;
+    td {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+
   td.index {
     width: 10%;
   }
   td.project {
     width: 75%;
+    @media #{$small-only} {
+      width: 60%;
+    }
   }
   td.commitment {
     width: 15%;
+    @media #{$small-only} {
+      width: 30%;
+    }
+  }
+
+  td.data {
+    color: #666;
   }
 }

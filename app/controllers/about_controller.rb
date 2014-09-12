@@ -13,4 +13,10 @@ class AboutController < ApplicationController
 
   def job
   end
+
+  def venture
+  end
+
+  def guide
+  end
 end

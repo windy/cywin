@@ -1,8 +1,9 @@
-.investor-info-query {
-  em {
+.investor-info-query, .term-tips {
+  color: #999;
+  em{
     font-style: normal;
-    color: red;
-    margin-left: 0.5rem;
+    margin-left: 0.3rem;
     margin-right: 1rem;
+    color: red;
   }
 }

@@ -1,4 +1,57 @@
+@import 'variables';
 .project-show {
+
+  background-color: $my-body-bg;
+
+  .box {
+    background-color: #fff;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #d8d8d8;
+    margin-bottom: 1.25rem;
+    color: #666;
+
+    .title {
+      padding: 0.5rem 1.625rem;
+      color: #666;
+      font-weight: 600;
+    }
+
+    p, .content {
+      padding: 1.625rem 2.225rem;
+    }
+  }
+
+  .status-wrapper {
+    position: relative;
+  }
+  .status-link {
+    position: absolute;
+    right: -26px;
+    top: -6px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 0;
+    height: 0;
+    z-index: 1;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 40px solid #00C4A4;
+
+    .status {
+      position: absolute;
+      left: -38px;
+      bottom: -33px;
+      width: 78px;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+      font-size: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
   
   .tab-content {
     margin-top: 2rem;
@@ -24,23 +77,6 @@
   }
 
   .content {
-    margin-top: 2rem;
-    
-    .title {
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .team {
-
-      margin-top: 2rem;
-
-      .more-info {
-        text-align: center;
-        margin: 1rem 0;
-      }
-    }
 
     .job {
 
@@ -61,4 +97,71 @@
       }
     }
   }//content
+
+  .progress-wrapper {
+    .type {
+      color: #999;
+      margin-right: 0.5rem;
+      font-size: 0.875rem;
+    }
+    .progress-name {
+      color: $primary-color;
+    }
+
+    .progress-name.secondary {
+      color: $secondary-color;
+    }
+  }
+
+  .image {
+    margin-left: -0.625rem;
+  }
+  
+  .funs {
+    color: #666;
+    line-height: 1.5;
+
+    .icon-wrapper {
+      margin-top: -1rem;
+    }
+
+    i.fa {
+      margin-right: 0.5rem;
+      margin-left: 1rem;
+      width: 1rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    .text-wrapper {
+
+      text-align: center;
+      .text {
+        color: #999;
+        margin-right: 1rem;
+      }
+
+      .value {
+        color: $primary-color;
+      }
+    }
+    .fun-list {
+      padding-top: 1rem;
+    }
+
+    img {
+      border-radius: 50%;
+    }
+
+    .fun.more a {
+
+      &:hover {
+        color: white;
+      }
+
+    }
+
+  }
 }

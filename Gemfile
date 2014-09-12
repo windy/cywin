@@ -24,6 +24,7 @@ gem 'therubyracer', :platform=>:ruby
 gem "foundation-rails", ">= 5.0"
 gem 'settingslogic'
 gem 'foundation-icons-sass-rails'
+gem "font-awesome-rails"
 gem 'underscore-rails'
 gem 'kaminari', github: 'amatsuda/kaminari'
 gem 'progress_bar'
@@ -70,6 +71,7 @@ group :development do
   gem 'guard-livereload', require: false
   gem 'rack-livereload'
   gem "spring-commands-rspec"
+  gem 'thin'
 end
 
 group :development, :test do

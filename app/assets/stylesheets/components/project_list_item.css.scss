@@ -1,17 +1,19 @@
 .project-list-item {
-  border-bottom: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #fcfcfc;
+  border-left: 1px solid #fcfcfc;
   padding: 1rem 0;
-  img {
-    border-radius: 10rem;
-  }
+  background-color: white;
+  //img {
+    //border-radius: 10rem;
+  //}
   .name {
     display: inline;
     margin-right: 1rem;
     font-size: 1rem;
     a {
-      color: #FF2D2D;
+      color: #666;
+      font-weight: 600;
     }
   }
 
@@ -25,7 +27,7 @@
     color: #666;
     font-size: 95%;
 
-    i[class^=fi-] {
+    .fa {
       margin-right: 0.5rem;
       margin-left: 0.5rem;
 

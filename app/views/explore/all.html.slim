@@ -1,34 +1,48 @@
 - content_for(:title) do
   | 所有 - 发现
 
-.explore.explore-all
+.explore.explore-all.top-blank
   .row
     .small-12.columns
       = render partial: 'head', locals: { type: 'all' }
-      form ng-submit='search()' ng-controller='ProjectSearchController' ng-init='head_id="#{params[:head_id]}"'
+      form.search-form ng-submit='search()' ng-controller='ProjectSearchController' ng-init='head_id="#{params[:head_id]}"'
         .row
           .small-12.columns
-            dl.sub-nav
-              dt 行业:
-              dd class="#{active_for('', params[:head_id].to_s)}" ng-class="{ active: is_selected_head('') }"
-                a ng-click='select_head("")' 全部
-              - @heads.each do |head|
-                dd class="#{active_for(head.id.to_s, params[:head_id].to_s)}" ng-class="{ active: is_selected_head(#{head.id}) }"
-                  a ng-click='select_head(#{head.id})' #{head.name}
-            dl.sub-nav ng-init='city_id ="#{params[:city_id]}"'
-              dt 城市:
-              dd class="#{active_for('', params[:city_id].to_s)}" ng-class="{ active: is_selected_city('') }"
-                a ng-click='select_city("")' 全部
-              - @cities.each do |city|
-                dd class="#{active_for(city.id.to_s, params[:city_id].to_s)}" ng-class="{ active: is_selected_city(#{city.id}) }"
-                  a ng-click='select_city(#{city.id})' #{city.name}
-        .row.search.collapse
+            .industry
+              .tag
+                | 行业:
+              dl.sub-nav
+                dd class="#{active_for('', params[:head_id].to_s)}" ng-class="{ active: is_selected_head('') }"
+                  a ng-click='select_head("")' 全部
+                - @heads.each do |head|
+                  dd class="#{active_for(head.id.to_s, params[:head_id].to_s)}" ng-class="{ active: is_selected_head(#{head.id}) }"
+                    a ng-click='select_head(#{head.id})' #{head.name}
+            .industry-for-small
+              select ng-model='head_id' ng-change='select_head(head_id)'
+                option value='' 全部行业
+                - @heads.each do |head|
+                  option value='#{head.id}' #{head.name}
+            .city
+              .tag
+                | 城市:
+              dl.sub-nav ng-init='city_id ="#{params[:city_id]}"'
+                dd class="#{active_for('', params[:city_id].to_s)}" ng-class="{ active: is_selected_city('') }"
+                  a ng-click='select_city("")' 全部
+                - @cities.each do |city|
+                  dd class="#{active_for(city.id.to_s, params[:city_id].to_s)}" ng-class="{ active: is_selected_city(#{city.id}) }"
+                    a ng-click='select_city(#{city.id})' #{city.name}
+            .city-for-small
+              select ng-model='city_id' ng-change='select_city(city_id)'
+                option value='' 全部城市
+                - @cities.each do |city|
+                  option value='#{city.id}' #{city.name}
+        .row#search-wrapper.collapse
           .small-9.medium-6.large-4.columns
             input type='text' id='search' placeholder='项目名称' ng-model='q' ng-init='q="#{params[:q]}"'
           .small-3.medium-1.large-1.end.columns
             a.button.postfix ng-click='search()' 搜索
 
-      .small-12.large-10.columns.projects
+      .small-12.columns.projects
         - if @projects.blank?
           p.no-content 没有搜索结果
         - else

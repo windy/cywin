@@ -1,1 +1,5 @@
-= link_to current_user.name, '', class: 'user-link', 'ng-init' => 'dropdown_open = false ', 'ng-click'=> ' dropdown_open = ! dropdown_open '
+= link_to '', class: 'user-link', 'ng-init' => 'dropdown_open = false ', 'ng-click'=> ' dropdown_open = ! dropdown_open ' do
+  - if current_user.has_role?(:admin)
+    - current_user.name
+  - else
+    - image_tag current_user.avatar_url

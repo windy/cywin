@@ -1,5 +1,8 @@
 @app.controller 'ProjectSearchController', [ '$scope', '$http', '$window', ($scope, $http, $window)->
 
+  $scope.hi = ()->
+    alert('ok')
+
   $scope.search = ()->
     $window.location.href = '/explore/search/?q=' + $scope.q + '&head_id=' + $scope.head_id + '&city_id=' + $scope.city_id
 

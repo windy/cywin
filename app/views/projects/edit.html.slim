@@ -14,8 +14,8 @@
           li 
             | 或者发布 
             = link_to '招人需求', admin_project_person_requires_path(project_id: @project.id)
-  .row.head.ng-cloak ng-hide='head_edited'
-    .small-6.large-2.columns
+  .row.head-edit.ng-cloak ng-hide='head_edited'
+    .small-6.large-2.columns.logo
       img ng-src='{{ project.logo_url }}'
     .small-6.large-10.columns
       .name-area
@@ -24,13 +24,19 @@
             | {{ project.name }}
         p.sub-name
           | {{ project.oneword}}
-        p.info
-          i.fi-home
-          span.city
-            | {{ project.city }}
-          i.fi-list-thumbnails
-          span.category
-            | {{ industries_link(project.industries) }}
+        .info
+          .link ng-show='project.link'
+            i.fa.fa-link
+            span
+              a ng-href=" http://{{ project.link }}" target='_blank' {{ project.link }}
+          .address
+            i.fa.fa-map-marker
+            span
+              | {{ project.city }}
+          .category
+            i.fa.fa-tags
+            span.category
+              | {{ industries_link(project.industries) }}
       .edit
         a ng-click='open_head_edit()' 编辑
   .row.ng-cloak ng-show='head_edited'
@@ -43,11 +49,11 @@
             small.error.ng-cloak ng-show=' head_edit.errors.name ' {{ head_edit.errors.name }}
         .row
           .small-4.medium-2.columns
-            .image-wrapper
+            .logo
               img ng-src=' {{ head_edit.logo_url }} '
         .row
           .small-8.medium-6.end.columns
-            label for='logo' Logo
+            label for='logo' Logo( 建议 200x200 大小 )
             input id='logo' type='file' ng-file-select='upload_logo($files)'
             small.error.ng-cloak ng-show=' head_edit.logo_error ' {{ head_edit.logo_error }}
             input type='hidden' id='logo_id' ng-model=' head_edit.logo_id '
@@ -57,7 +63,16 @@
             input id='oneword' type='text' placeholder='一句话说明, 将显示在项目副标题' ng-model='head_edit.oneword' ng-class= '{ error: head_edit.errors.oneword }'
             small.error.ng-cloak ng-show=' head_edit.errors.oneword' {{ head_edit.errors.oneword }}
         .row
-          .small-10.medium-4.columns
+          .small-12.medium-8.columns
+            label for='link' 链接( 可选 )
+            .row.collapse
+              .small-3.medium-2.columns
+                span.prefix http://
+              .small-9.medium-10.columns
+                input id='link' type='text' placeholder='项目网站链接' ng-model='head_edit.link' ng-class= '{ error: head_edit.errors.link }'
+                small.error.ng-cloak ng-show=' errors.link' {{ head_edit.errors.link }}
+        .row
+          .small-12.medium-8.columns
             label for='industry' 所属行业
             a.select-industry-link ng-click='select_industry()' 点击选择
             ul.inline-list.select-industries

@@ -1,14 +1,60 @@
+@import 'variables';
 .explore-all {
-  padding-top: 1.5rem;
-  background-color: white;
+  background-color: $my-body-bg;
 
   .no-content {
     margin-top: 1rem;
     color: #666;
   }
 
+  #search {
+    border-radius: 0;
+    @media #{$medium-up} {
+      margin-left: 1rem;
+    }
+  }
+
+  #search-wrapper {
+    @media #{$medium-up} {
+      margin-top: 1rem;
+    }
+  }
+
+  .search-form {
+    background-color: white;
+    padding: 3rem 1rem 2rem;
+    margin-bottom: 2rem;
+
+    .industry, .city {
+      @media #{$small-only} {
+        display: none;
+      }
+      .tag {
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 1rem;
+        padding: 0.25rem 1rem 1rem 0;
+        color: #999;
+        font-size: 95%;
+      }
+
+      .sub-nav {
+        display: inline-block;
+        width: 90%;
+      }
+    }
+
+    .industry-for-small, .city-for-small {
+      display: none;
+      @media #{$small-only} {
+        display: block;
+      }
+    }
+  }
+
+
   .projects {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #fcfcfc;
 
     .paginate {
       margin-top: 2rem;

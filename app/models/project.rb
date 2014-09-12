@@ -143,9 +143,9 @@ class Project < ActiveRecord::Base
     self.published
   end
 
-  def star_users
+  def star_users(t = 9)
     user_ids = self.stars.collect { |m| m.user_id }
-    User.where(id: user_ids)
+    User.where(id: user_ids).default_order.limit(t)
   end
 
   def fullname

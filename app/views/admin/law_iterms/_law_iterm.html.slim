@@ -2,5 +2,9 @@ tr
   td #{law_iterm.title}
   td #{law_iterm.description}
   td #{human_boolean(law_iterm.public)}
-  td #{law_iterm.project.presence || '-'}
+  td
+    - if law_iterm.project.present?
+      = link_to law_iterm.project.name, law_iterm.project, target: '_blank'
+    - else
+      | -
   td #{format_time(law_iterm.created_at)}

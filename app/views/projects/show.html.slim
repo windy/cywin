@@ -1,68 +1,151 @@
 - content_for(:title) do 
   | #{@project.name}
 .project-show.top-blank
-  = render 'head'
-  /! JiaThis Button BEGIN
   .row
-    .small-12.columns
-      .jiathis_style_24x24.right
-        a.jiathis_button_tsina
-        a.jiathis_button_weixin
-        a.jiathis_button_douban
-        /! a.jiathis_button_tqq
-        /! a href="http://www.jiathis.com/share?uid=1938659" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"
+    .small-12.medium-4.large-3.columns
+      = render 'head'
+      hr.show-for-medium-up
+      = render 'fun'
+      hr
+      /! JiaThis Button BEGIN
+      .row
+        .small-12.columns
+          .jiathis_style_24x24.share-link
+            span.text 分享到
+            a.jiathis_button_tsina
+              span.fa.fa-weibo
+            a.jiathis_button_weixin
+              span.fa.fa-wechat
+            /*a.jiathis_button_douban*/
+              /*span.fa.fa-wechat*/
+            /! a.jiathis_button_tqq
+            /! a href="http://www.jiathis.com/share?uid=1938659" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"
 
-  /!-- JiaThis Button END 
-  = render 'star'
-  = render partial: 'show_tab', locals: { type: 'basic' }
-  .row.content
-    .small-12.columns
-      .basic-content
-        - if @project.screenshots.present?
-          h3.title 产品截图
-          ul.image.clearing-thumbs.small-block-grid-4 data-clearing=""
-            - @project.screenshots.each do |s|
-              li
-                = link_to s.image.url do
-                  - image_tag s.image.small.url
-        h3.title 基本介绍
-        p.description #{@project.description}
+      /!-- JiaThis Button END 
+    .small-12.medium-8.large-9.columns
+      .row.content
+        .small-12.columns
+          .box.status-wrapper
+            .status-link
+              .status #{format_status(@project.vstatus)}
+            h5.title 项目简介
+            p.description #{@project.description}
 
-        .invest-content ng-controller='MoneyRequireController' ng-init='init(#{@project.id}, {})'
-          h3.title 投资情况
-          moneyrequire require='opened' title='"当前轮次"'
-          .more-info
-            = link_to '更多投资信息...', invest_project_path(@project)
-          investbutton require='opened'
-          .history ng-repeat='history in histories'
-            moneyrequire require='history' title='"历史投资"'
+          .box
+            - if @project.screenshots.present?
+              h5.title 产品介绍
+              .content
+                ul.image.clearing-thumbs.small-block-grid-1.medium-block-grid-3 data-clearing=""
+                  - @project.screenshots.each do |s|
+                    li
+                      = link_to s.image.url do
+                        - image_tag s.image.small.url
 
+          .box-wrapper ng-controller='MoneyRequireController' ng-init='init(#{@project.id}, {})'
+            .box
+              .invest-content
+                moneyrequire require='opened' title='"融资情况"'
+                .detail.ng-cloak ng-show='detail_flag'
+                  .leader-info ng-show='opened.leader'
+                    ul.no-bullet
+                      li
+                        .type
+                          | 领投人
+                        .item
+                          img ng-src='{{ opened.leader.avatar }}'
+                          a ng-href='/users/{{ opened.leader.id}}'
+                            | {{ opened.leader.name }}
+                      li
+                        .type
+                          | 领投Carry
+                        .item
+                          | {{ opened.carry }}%
+                      li
+                        .type
+                          | 投资条款
+                        .item
+                          .no-content ng-show='is_law_iterms_empty()'
+                            | 暂无条款
+                          ul.no-bullet.law-iterms.ng-cloak ng-init = 'law_iterm_show = []' ng-hide='is_law_iterms_empty()'
+                            li ng-repeat='law_iterm in opened.law_iterms'
+                              a.law-title ng-class="{ 'expand': law_iterm_show[law_iterm.id] }" ng-click='law_iterm_show[law_iterm.id] = ! law_iterm_show[law_iterm.id]'
+                                span
+                                  | {{ law_iterm.title }}
+                                i.fa.fa-chevron-circle-right ng-hide='law_iterm_show[law_iterm.id]'
+                                i.fa.fa-chevron-circle-down ng-show='law_iterm_show[law_iterm.id]'
+                              p.description.law-description ng-show='law_iterm_show[law_iterm.id]'
+                                | {{ law_iterm.description }}
+                      li ng-show=' opened.leader_word '
+                        .type
+                          | 领投人的话
+                        .item
+                          .leader-word
+                            .pre-i
+                              i.fa.fa-quote-left
+                            .description
+                              | {{ opened.leader_word }}
+                            .post-i
+                              i.fa.fa-quote-right
+                            .created-at
+                              | {{ opened.opened_at }}
 
-        .team
-          h3.title 团队情况
-          .row
-            .small-12.columns
+                  .followers
+                    .type
+                      | 跟投人
+                    .item
+                      - opened = @project.opened_money_require
+                      - investments = opened && opened.investments.default_order.limit(6)
+                      - if investments.blank?
+                        | 暂无投资
+                      - else
+                        ul.small-block-grid-3.medium-block-grid-6
+                          - investments.each do |investment|
+                            - user = investment.user
+                            li
+                              a href="#{user_path(user)}" title="#{user.name}"
+                                = image_tag user.avatar_url
+                                .money
+                                  | ¥ #{number_with_delimiter(investment.money)}
+
+                investbutton require='opened'
+                .more-info.ng-cloak
+                  a ng-hide='detail_flag' ng-click='detail_flag=true'
+                    | 查看详情
+                    i.fa.fa-angle-double-down
+                  a ng-show='detail_flag' ng-click='detail_flag=false'
+                    | 收起详情
+                    i.fa.fa-angle-double-up
+            .box.history ng-repeat='history in histories'
+              moneyrequire require='history' title='"历史投资"'
+          .box.team
+            h5.title 团队情况
+            .content
               ul.small-block-grid-1.medium-block-grid-2
                 - @project.members.each do |m|
                   li
                     .person
                       .row
-                        .small-4.medium-3.columns
+                        .small-4.medium-4.columns
                           = image_tag m.user.avatar_url
-                        .small-8.medium-9.columns
+                        .small-8.medium-8.columns
                           .name 
                             = link_to m.user.name, user_path(m.user)
                           .job-title #{m.title}
                           .description #{m.description || m.user.description}
-              .more-info
-                = link_to '查看更多团队故事...', team_project_path(@project)
-        = render 'job'
-javascript:
-  var jiathis_config={
-    data_track_clickback:true,
-    summary:"#{@project.description}",
-    title: "#{@project.fullname} 这个创业赢上的项目非常不错",
-    shortUrl:false,
-    hideMore:false
-  }
-script type='text/javascript' src="http://v3.jiathis.com/code/jia.js?uid=1938659" charset="utf-8"
+            - if @project.team_story.present?
+              hr
+                .content
+                  .description
+                    | #{@project.team_story}
+
+          .box
+            = render 'job'
+    javascript:
+      var jiathis_config={
+        data_track_clickback:true,
+        summary:"#{@project.description}",
+        title: "#{@project.fullname} 这个创业赢上的项目非常不错",
+        shortUrl:false,
+        hideMore:false
+      }
+    script type='text/javascript' src="http://v3.jiathis.com/code/jia.js?uid=1938659" charset="utf-8"

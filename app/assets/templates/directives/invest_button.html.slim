@@ -1,20 +1,20 @@
 .invest-button.ng-cloak
   .ready ng-show='opened.syndicate.behave == "ready"'
     button ng-controller='TalksController' ng-init='init(false)' ng-click='open_talk("project_talk", opened.project_id)' 投资约谈
-  .need-login-button ng-show='opened.syndicate.behave == "need_login"'
-    button disabled=true 需要登录才能投资和领投
+  .need-login-button.invest-tips ng-show='opened.syndicate.behave == "need_login"'
+    span 需要登录才能投资和领投,
     a.button href='/users/sign_in' 马上登录
 
-  .need-be-investor ng-show='opened.syndicate.behave == "need_be_investor"'
-    button disabled=true 申请投资人后才能投资
+  .need-be-investor.invest-tips ng-show='opened.syndicate.behave == "need_be_investor"'
+    span 申请投资人后才能投资,
     a.button href='/investors/basic' 申请投资人资格
 
   button ng-show='opened.syndicate.behave == "need_leader"' ng-controller='TalksController' ng-init='init(false)' ng-click='open_talk("lead_talk", opened.id)' 领投约谈
   button ng-show='opened.syndicate.behave == "leader_confirming"' disabled=true 领投确认中
   button ng-show='opened.syndicate.behave == "leader_confirm"' ng-click='open_syndicate()' 我是领投人, 马上确认
   button ng-show='opened.syndicate.behave == "invest"' ng-click='open_syndicate()' 我要投资
-  .add-button ng-show='opened.syndicate.behave =="add"' 
-    button disabled=true
+  .add-button.invest-tips ng-show='opened.syndicate.behave =="add"' 
+    span
       | 我已投资了: 
       | {{ opened.syndicate.already_money | nfcurrency }}
     button ng-click='open_syndicate()' 追加投资

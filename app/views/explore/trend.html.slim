@@ -39,7 +39,7 @@
                     td #{i}
                     td
                       = render partial: 'project_td', locals: { project: project }
-                    td ¥ #{number_with_delimiter(money_require.money)}
+                    td.data ¥ #{number_with_delimiter(money_require.money)}
             - elsif @cond == :by_stars
               table
                 thead
@@ -56,7 +56,7 @@
                     td #{i}
                     td
                       = render partial: 'project_td', locals: { project: project }
-                    td #{count}
+                    td.data #{count}
             - elsif @cond == :by_talks
               table
                 thead
@@ -73,7 +73,7 @@
                     td #{i}
                     td
                       = render partial: 'project_td', locals: { project: project }
-                    td #{count}
+                    td.data #{count}
             - elsif @cond == :by_times
               table
                 thead
@@ -89,4 +89,4 @@
                     td #{i}
                     td
                       = render partial: 'project_td', locals: { project: project }
-                    td #{time_ago_in_words(project.created_at)}
+                    td.data #{time_ago_in_words(project.created_at)}

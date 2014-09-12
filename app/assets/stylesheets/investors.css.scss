@@ -1,4 +1,6 @@
+@import 'variables';
 .investors {
+  background-color: $my-body-bg;
 
   .head {
     background-color: #28545E;
@@ -9,13 +11,44 @@
       a {
         font-size: 1.2rem;
         margin-left: 1rem;
+        color: #bbb;
       }
     }
   }
 
+  .sub-nav {
+    @media #{$small-only} {
+      display: none;
+    }
+  }
+  .search-form {
+    background-color: white;
+    padding: 3rem 2rem 2rem 2rem;
+    margin-bottom: 2rem;
+    @media #{$small-only} {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  .investors-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .pagination {
+    margin-top: 2rem;
+  }
+
   .investor {
-    margin: 1rem 0;
-    padding: 1rem 0;
+    background-color: white;
+    padding: 1rem;
+    padding-bottom: 0;
+    margin: 0;
+    border: 1px solid #fcfcfc;
+    
+    img {
+      border-radius: 50%;
+    }
 
     .name-area {
       line-height: 1.5rem;
@@ -34,6 +67,11 @@
         a {
           color: #333;
         }
+      }
+
+      .type {
+        color: #999;
+        font-size: 0.875rem;
       }
     }
 

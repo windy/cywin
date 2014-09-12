@@ -1,18 +1,20 @@
 .footer
   .row
-    .logo.small-12.large-2.columns
-      | 创业赢 CYwin
-    .small-12.large-2.columns
-      = link_to "关于我们", about_index_path
-    .small-12.large-2.columns
-      = link_to "合作伙伴", partner_about_index_path
-    .small-12.large-2.columns
-      = link_to "服务条款", service_about_index_path
-    .small-12.large-2.columns
-      = link_to "法律法规", law_about_index_path
-    .small-12.large-2.columns
-      = link_to "人才招聘", job_about_index_path
+    .small-12.columns
+      ul.inline-list
+        li
+          = link_to "关于我们", about_index_path
+        li
+          = link_to "合作伙伴", partner_about_index_path
+        li
+          = link_to "服务条款", service_about_index_path
+        li
+          = link_to "法律法规", law_about_index_path
+        li
+          = link_to "人才招聘", job_about_index_path
+        li
+          = link_to "风险提示", venture_about_index_path
   .row
     .small-12.columns.checkin
-      | ©2014 创业赢科技 
+      | © 2014 cywin.cn 
       | 粤ICP备14044624号

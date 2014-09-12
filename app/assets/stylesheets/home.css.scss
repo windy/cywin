@@ -1,10 +1,29 @@
+@import 'variables';
+.start-page {
+  background-color: $my-body-bg;
+}
 .start-content {
-  background-color: #202021;
+  padding-top: 5.325rem;
+  padding-bottom: 5.325rem;
+  background-color: #356480;
+  background-image: image-url('banner.jpg');
+  background-size: cover;
   color: #eee;
-  padding-bottom: 1.875rem;
   
   .heading, .sub-heading {
     color: #eee;
+  }
+
+  .button {
+    margin-top: 1rem;
+    background-color: #eee;
+    border-color: #356480;
+    color: $primary-color;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    &:hover {
+      color: darken($primary-color, 10);
+    }
   }
 }
 
@@ -40,15 +59,19 @@
 .start-projects-content, .start-investors-content, .start-jobs-content{
   h2 {
     text-align: center;
-    margin: 2rem;
+    margin: 1.5rem 0 1rem 0;
+    font-size: 1.2rem;
   }
 
-  .project img, .job img {
-    border-radius: 10rem;
+  .investor img{
+    border-radius: 50%;
   }
 
   .head {
     min-height: 6.5rem;
+    h5 {
+      font-size: 1.025rem;
+    }
   }
 
   .investor .content {
@@ -64,9 +87,9 @@
   }
 
   .box {
-    margin: 1rem;
-    padding: 1rem 2rem;
+    padding: 2rem 2rem;
     border: 1px solid #ddd;
+    background-color: white;
 
     .head {
       margin-bottom: 1rem;
@@ -88,9 +111,15 @@
       font-size: 95%;
       line-height: 2;
       height: 5rem;
+
       .type {
+        width: 100%;
         color: #999;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
+
       .item {
         color: #666;
         white-space: nowrap;

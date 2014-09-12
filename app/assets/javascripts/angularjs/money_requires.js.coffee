@@ -33,6 +33,9 @@
   $scope.is_histories_empty = ()->
     Utils.is_empty($scope.histories)
 
+  $scope.is_law_iterms_empty = ()->
+    Utils.is_empty($scope.opened && $scope.opened.law_iterms)
+
   $scope.open_syndicate = ()->
     modal = $modal.open
       templateUrl: 'syndicate.html'

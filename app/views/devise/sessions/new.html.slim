@@ -2,17 +2,19 @@
   | 登录
 .user-new.top-blank
   .row
-    .small-12.large-10.large-centered.columns
+    .small-12.medium-7.large-5.medium-centered.columns
       form
       = form_for @user, url: user_session_path do |f|
-        h1 欢迎回来#{Setting.site_name}
-        p 真正的互联网式的创业服务
+        h4.title 登录
+        p.sub-title 登录#{Setting.site_name}, 创想精彩!
         .row
-          .small-12.medium-8.large-7.columns
+          .small-12.columns
             = f.text_field 'email', placeholder: '邮箱地址'
             = f.password_field 'password', placeholder: '密码'
-            = f.submit '登录', class: 'button'
-            = link_to '没有账号, 注册?', new_user_registration_path, class: 'login-link'
+            = f.submit '登录', class: 'button expand'
 
-            p.forgot-password
-              = link_to '忘记密码?', new_user_password_path
+            .forgot-password
+              p
+                = link_to '没有账号, 注册?', new_user_registration_path, class: 'login-link'
+              div
+                = link_to '忘记密码?', new_user_password_path

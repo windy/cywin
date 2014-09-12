@@ -1,7 +1,8 @@
 class InvestorsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :search]
 
   def index
+    @investor_types = Investor::INVESTOR_TYPES
     @investors = Investor.passed.default_order.page(params[:page])
   end
 
@@ -22,9 +23,11 @@ class InvestorsController < ApplicationController
   end
 
   def search
+    @investor_types = Investor::INVESTOR_TYPES
     @investors = Investor.search do
       fulltext "*#{params[:q]}*"
       paginate page: params[:page], per_page: PersonRequire::PER_PAGE
+      with(:status, params[:investor_type]) if params[:investor_type].present?
       with(:status, 'passed')
     end.results
     render :index
