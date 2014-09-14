@@ -1,3 +1,5 @@
+- content_for(:title) do
+  | 投资指南
 .about.row.top-blank
   .small-12.columns
     h4.title 投资指南 
@@ -39,3 +41,11 @@
 
       li 
         p 如果有疑问，请不要投资。 
+
+    hr
+    p 
+      | 这是如何思考创业投资的概述。 
+      br
+      | 了解更多有关创业投资所面临的风险请参考 
+      = link_to '风险提示', venture_about_index_path, target: '_blank'
+      | 。
