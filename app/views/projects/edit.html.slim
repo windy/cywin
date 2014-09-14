@@ -100,7 +100,7 @@
     .small-12.columns
       .basic-content
         h3.title 产品介绍
-        p
+        p.description ng-hide='description_edited'
           | {{ project.description }}
         .edit
           a ng-click='open_description_edit()' 编辑
