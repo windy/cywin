@@ -23,6 +23,10 @@
 
     .name {
       text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
       a {
         color: #444;
         font-weight: 500;
