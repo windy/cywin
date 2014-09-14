@@ -1,7 +1,7 @@
 - content_for(:title) do
   | 身份验证 - 申请投资人
 
-.row.top-blank ng-controller='InvestorProveController'
+.row.top-blank ng-controller='InvestorProveController' ng-init=' accept = #{ @investor.status == "passed" or "applied" } '
   .small-12.columns
     = render partial: "header", locals: { stage: :prove }
     h3 身份验证
@@ -23,14 +23,17 @@
       input type='file' id='bank_statement_upload' ng-file-select='upload_bank_statement($files)'
       small.error.ng-cloak ng-show='bank_statement_error' {{ bank_statement_error }}
 
+      hr
       p.investor-info-query
         | 当前申请表状态:
         em
           | #{human_investor_status(@investor)}
       p.term-tips
-        | 我已接受并阅读此
-        em
-          = link_to '投资指南', guide_about_index_path, target: '_blank'
+        input type='checkbox' id='accept' ng-model='accept'
+        label for='accept'
+          | 我已接受并阅读此
+          em
+            = link_to '投资指南', guide_about_index_path, target: '_blank'
 
       .row
         .small-12.medium-6.columns.ng-cloak
