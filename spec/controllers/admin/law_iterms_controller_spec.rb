@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Admin::LawItermsController do
 
+  login_admin
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
