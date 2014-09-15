@@ -2,11 +2,10 @@
   .start-content
     .row
       .small-12.columns
-        /*form ng-submit='submit()' ng-controller='HomeController'*/
         .row
           .small-12.large-8.columns
-            h2.heading  中国首个免费创业众筹平台
-            h4.sub-heading 这里不光筹钱，还能筹人！
+            h2.heading  #{ Setting.heading }
+            h4.sub-heading #{ Setting.sub_heading }
             = link_to '发布项目', new_project_path, class: 'button'
   .start-projects-content
     .row
