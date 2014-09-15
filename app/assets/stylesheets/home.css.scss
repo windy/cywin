@@ -87,17 +87,22 @@
   }
 
   .box {
-    padding: 2rem 2rem;
-    border: 1px solid #ddd;
+    border: 1px solid $my-project-border-color;
     background-color: white;
+    padding: 2rem 0;
 
     .head {
-      margin-bottom: 1rem;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 1rem;
+      padding: 0rem 2rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px dashed #ddd;
+      padding-bottom: 2rem;
+
+      img {
+        border: 1px solid $my-project-border-color;
+      }
 
       .subtitle {
-        margin: 1rem 0;
+        margin: 1rem 0 0;
         color: #999;
         font-size: 95%;
         white-space: nowrap;
@@ -108,6 +113,7 @@
     }
 
     .content {
+      padding: 0rem 2rem;
       font-size: 95%;
       line-height: 2;
       height: 5rem;
