@@ -2,7 +2,11 @@ class Admin::InvestorsController < Admin::ApplicationController
   before_action :set_investor, only: [ :accept, :reject ]
 
   def index
-    @investors = Investor.where(status: 'applied')
+    if params[:q] == 'applied'
+      @investors = Investor.where(status: 'applied').default_order
+    else
+      @investors = Investor.where.not(status: 'drafted').default_order
+    end
   end
 
   # POST: /admin/investor/1/accept
