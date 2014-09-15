@@ -2,6 +2,7 @@
 
 .explore {
   background-color: $my-body-bg;
+  padding-top: 2rem;
 
   .explore-head {
     background-color: #fff;
@@ -22,7 +23,7 @@
         background-color: #fff;
       }
     }
-    margin-bottom: 3rem;
+    margin-bottom: 1.4285rem;
     border-bottom: 1px solid #ddd;
     width: 100%;
   }
@@ -30,7 +31,6 @@
 
 .by-tabs {
   margin-left: 0;
-  border: 1px solid #ddd;
   background-color: white;
 
   .tab-title {
@@ -41,7 +41,7 @@
       display: block;
       padding: 1rem 2rem;
       color: #666;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid $my-project-border-color;
       &:hover {
         background-color: #F2F3F4;
       } 
@@ -56,7 +56,6 @@
 
 .by-tabs-2 {
   margin-left: 0;
-  border: 1px solid #ddd;
   background-color: white;
 
   .tab-title {
@@ -68,7 +67,6 @@
       display: block;
       padding: 0.5rem 1rem;
       color: #666;
-      border-bottom: 1px solid #eee;
       &:hover {
         color: #333;
       } 
