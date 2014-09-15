@@ -1,11 +1,19 @@
 .row
   .small-12.columns.top-blank
+    dl.sub-nav
+      dt 条件:
+      dd class="#{active_for(params[:q].to_s, '')}"
+        = link_to '全部', admin_investors_path
+      dd class="#{active_for(params[:q].to_s, 'applied')}"
+        = link_to '待审批', admin_investors_path(q: 'applied')
+      
     table
       thead
         tr
           th 用户名
           th 投资信息
           th 时间
+          th 当前状态
           th 备注信息
           th 操作
       tbody

@@ -72,6 +72,10 @@ class Investor < ActiveRecord::Base
   has_one :investidea
   has_many :investor_audits
 
+  def investor_audit_note
+    self.investor_audits.last.try(:note)
+  end
+
   # 领投人信息
   has_many :money_require, through: :leader_id
 
