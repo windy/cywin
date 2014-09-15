@@ -1,31 +1,27 @@
+@import 'variables';
 .project-list-item {
   border-bottom: 1px solid #eee;
   border-right: 1px solid #fcfcfc;
   border-left: 1px solid #fcfcfc;
-  padding: 1rem 0;
+  padding: 2rem 1rem;
   background-color: white;
-  //img {
-    //border-radius: 10rem;
-  //}
+  
+  img {
+    border: 1px solid $my-project-border-color;
+  }
+
   .name {
-    display: inline;
-    margin-right: 1rem;
     font-size: 1rem;
+    margin-bottom: 0.325rem;
     a {
       color: #666;
       font-weight: 600;
     }
   }
 
-  .sub-name {
-    display: inline;
-    color: #666;
-    font-size: 95%;
-  }
-
   .info {
     color: #666;
-    font-size: 95%;
+    font-size: 90%;
 
     .fa {
       margin-right: 0.5rem;
