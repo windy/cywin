@@ -3,7 +3,7 @@
 //
 
 // This is the default html and body font-size for the base rem value.
-// $rem-base: 16px;
+$rem-base: 14px;
 
 // Allows the use of rem-calc() or lower-bound() in your settings
 @import "foundation/functions";
@@ -137,12 +137,12 @@ $secondary-color: #00C4A4;
 // $header-text-rendering: optimizeLegibility;
 
 // We use these to control header font sizes
-// $h1-font-size: rem-calc(44);
-// $h2-font-size: rem-calc(37);
-// $h3-font-size: rem-calc(27);
-// $h4-font-size: rem-calc(23);
-// $h5-font-size: rem-calc(18);
-// $h6-font-size: 1rem;
+$h1-font-size: rem-calc(37);
+$h2-font-size: rem-calc(27);
+$h3-font-size: rem-calc(23);
+$h4-font-size: rem-calc(18);
+$h5-font-size: rem-calc(16);
+$h6-font-size: 1rem;
 
 // We use these to control header size reduction on small screens
 // $h1-font-reduction: rem-calc(10) !default;
@@ -1096,9 +1096,9 @@ $sub-nav-active-color: #eee;
 $table-even-row-bg: #fcfcfc;
 
 // These control the table cell border style
-// $table-border-style: solid;
-// $table-border-size: 1px;
-// $table-border-color: #ddd;
+$table-border-style: solid;
+$table-border-size: 1px;
+$table-border-color: #fcfcfc;
 
 // These control the table head styles
 $table-head-bg: #fcfcfc;
@@ -1123,13 +1123,13 @@ $table-head-bg: #fcfcfc;
 
 // $include-html-tabs-classes: $include-html-classes;
 
-// $tabs-navigation-padding: rem-calc(16);
+$tabs-navigation-padding: rem-calc(12);
 $tabs-navigation-bg-color: #fff;
 $tabs-navigation-active-bg-color: #fcfcfc;
 $tabs-navigation-hover-bg-color: scale-color($tabs-navigation-bg-color, $lightness: -1%);
 // $tabs-navigation-font-color: #222;
 // $tabs-navigation-active-font-color: $tabs-navigation-font-color;
-// $tabs-navigation-font-size: rem-calc(16);
+$tabs-navigation-font-size: rem-calc(14);
 // $tabs-navigation-font-family: $body-font-family;
 
 // $tabs-content-margin-bottom: rem-calc(24);
