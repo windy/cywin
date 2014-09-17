@@ -45,7 +45,7 @@
                           .item.right.margin-link-wrapper
                             = link_to project.members.size, project_path(project)
                             | 人
-                    - if (leader = project.opened_money_require.leader).present?
+                    - if (leader = project.try(:opened_money_require).try(:leader)).present?
                       .tag
                         .row
                           .small-5.columns
