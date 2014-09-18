@@ -41,6 +41,8 @@ zh-CN:
     sessions:
       signed_in: 登录成功.
       signed_out: 退出成功.
+      user:
+        already_signed_out: 已经退出成功.
     unlocks:
       send_instructions: 几分钟后，您将收到一封解锁帐号的邮件.
       send_paranoid_instructions: 如果您的邮箱存在于我们的数据库中，您将收到一封解锁账号的邮件.
