@@ -28,5 +28,5 @@
           li
             = link_to '后台管理',  admin_root_path
         li
-          = link_to '注销', destroy_user_session_path, method: 'DELETE'
+          = link_to '退出', destroy_user_session_path, method: 'DELETE'
 .user-dropdown-exit-link ng-show= 'dropdown_open' ng-click=' dropdown_open = false'
