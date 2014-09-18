@@ -1,7 +1,7 @@
 @app.controller 'InvestorProveController', ['$scope', '$http', '$upload', '$window', ($scope, $http, $upload, $window)->
 
   $scope.can_submit = ()->
-    $scope.accept && $scope.card_url && $scope.bank_statement_url
+    $scope.accept && $scope.card_url
 
   $http
     url: '/cards'

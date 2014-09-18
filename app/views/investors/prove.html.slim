@@ -19,7 +19,7 @@
         .small-12.medium-8.columns
           .image-wrapper
             img ng-src='{{ bank_statement_url }}'
-      label for='bank_statement_upload' 上传你的银行流水
+      label for='bank_statement_upload' 上传你的名片( 可选 )
       input type='file' id='bank_statement_upload' ng-file-select='upload_bank_statement($files)'
       small.error.ng-cloak ng-show='bank_statement_error' {{ bank_statement_error }}
 
