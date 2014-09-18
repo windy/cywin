@@ -111,9 +111,11 @@ a.user-link {
   top: 4.2rem;
   z-index: 9999;
   right: 1.875rem;
+  max-width: 25rem;
 
   @media #{$small-only} {
     right: 0.5rem;
+    max-width: 15rem;
   }
 
   padding: 0 1rem;
@@ -142,6 +144,13 @@ a.user-link {
     ul {
       margin: 0;
       padding: 1rem 2rem;
+      
+      li {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 100%;
+        white-space: nowrap;
+      }
     }
   }
 
