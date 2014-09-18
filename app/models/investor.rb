@@ -1,7 +1,7 @@
 class Investor < ActiveRecord::Base
   paginates_per 10
 
-  searchable if: proc { |investor| investor.applied? } do
+  searchable do
     text :name do
       user.name
     end

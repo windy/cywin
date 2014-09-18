@@ -25,9 +25,9 @@ class InvestorsController < ApplicationController
   def search
     @investor_types = Investor::INVESTOR_TYPES
     @investors = Investor.search do
-      fulltext "*#{params[:q]}*"
+      fulltext "#{params[:q]}"
       paginate page: params[:page], per_page: PersonRequire::PER_PAGE
-      with(:status, params[:investor_type]) if params[:investor_type].present?
+      with(:investor_type, params[:investor_type]) if params[:investor_type].present?
       with(:status, 'passed')
     end.results
     render :index
