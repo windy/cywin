@@ -20,16 +20,17 @@
                 | #{investor.investidea.industry}
       .small-12.medium-4.large-3.columns
         .op ng-controller='DeliverProjectController'
-          .star-button-wrapper.ng-cloak ng-controller='FunsController' ng-init='init(#{investor.user.id}, #{current_user.fun?(investor.user)})'
-            .star-button ng-hide='loading || is_fun' ng-click='add_fun()'
-              i.fa.fa-plus
-              a 关注
-            .star-button ng-show='!loading && is_fun' ng-click='remove_fun()'
-              i.fa.fa-plus
-              a 取消关注
-            .star-button ng-show='loading'
-              i.fa.fa-plus
-              a 加载中
+          - if current_user && current_user != investor.user
+            .star-button-wrapper.ng-cloak ng-controller='FunsController' ng-init='init(#{investor.user.id}, #{current_user.fun?(investor.user)})'
+              .star-button ng-hide='loading || is_fun' ng-click='add_fun()'
+                i.fa.fa-plus
+                a 关注
+              .star-button ng-show='!loading && is_fun' ng-click='remove_fun()'
+                i.fa.fa-plus
+                a 取消关注
+              .star-button ng-show='loading'
+                i.fa.fa-plus
+                a 加载中
           .deliver-button ng-click='open_deliver_project_modal(#{investor.user_id})' 
             i.fa.fa-send
             a 投递项目
