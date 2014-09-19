@@ -3,9 +3,11 @@
   background-color: $my-body-bg;
 
   .head {
-    background-color: #28545E;
+    background-color: #235E78;
+    background-image: image-url('investor_banner.jpg');
+    padding-bottom: 3rem;
     color: white;
-    h1 {
+    h2 {
       color: white;
 
       a {
@@ -41,8 +43,7 @@
 
   .investor {
     background-color: white;
-    padding: 1rem;
-    padding-bottom: 0;
+    padding: 2rem 1rem;
     margin: 0;
     border: 1px solid #fcfcfc;
     
@@ -52,43 +53,75 @@
 
     .name-area {
       line-height: 1.5rem;
+      margin-bottom: 1rem;
 
       .name {
         display: inline;
         a {
-          color: #333;
+          color: $primary-color;
         }
       }
 
       .title {
         margin-left: 1rem;
-        color: #333;
+        color: $primary-color;
         display: inline;
+        vertical-align: text-bottom;
         a {
-          color: #333;
+          color: $primary-color;
         }
       }
 
       .type {
-        color: #999;
+        margin-left: 1rem;
+        display: inline;
+        vertical-align: text-bottom;
+        color: #eee;
         font-size: 0.875rem;
+        padding: 0.325rem 0.5rem;
+        border-radius: 5px;
+        background-color: $primary-color;
       }
     }
 
     .content {
       color: #999;
+      margin-top: 1rem;
 
       .industry-area {
-        margin-top: 1rem;
+        margin-top: 1.5rem;
       }
 
-      .industry {
+      .industry-label {
+        color: $primary-color;
+        opacity: 0.8;
+      }
+
+      .industry-content {
         margin-left: 0.5rem;
       }
     }
 
     .op {
-      margin-top: 1rem;
+      .star-button, .deliver-button  {
+        padding: 1rem 2rem;
+        background-color: #f9f9f9;
+        margin-bottom: 1rem;
+        text-align: center;
+        color: #333;
+        a {
+          color: #333;
+        }
+        max-width: 10rem;
+        i {
+          margin-right: 0.5rem;
+        }
+
+        &:hover {
+          cursor: pointer;
+          background-color: #eee;
+        }
+      }
     }
   }
 }
