@@ -49,6 +49,9 @@
     
     img {
       border-radius: 50%;
+      @media #{$large-up} {
+        width: 85%;
+      }
     }
 
     .name-area {
@@ -88,8 +91,12 @@
       color: #999;
       margin-top: 1rem;
 
+      .description {
+        margin-bottom: 1.5rem;
+      }
+
       .industry-area {
-        margin-top: 1.5rem;
+        margin-top: 0.5rem;
       }
 
       .industry-label {
