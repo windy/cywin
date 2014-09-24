@@ -30,10 +30,10 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.mailgun.org",
-    port: 587,
+    address: ENV["MAIL_ADDRESS"] || "smtp.mailgun.org",
+    port: ENV["MAIL_PORT"] || 587,
     domain: ENV["DOMAIN_NAME"],
-    authentication: "plain",
+    authentication: ENV["MAIL_AUTH"] || "plain",
     user_name: ENV["MAIL_USERNAME"],
     password: ENV["MAIL_PASSWORD"]
   }
