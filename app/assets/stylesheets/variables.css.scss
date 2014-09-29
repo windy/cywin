@@ -3,13 +3,10 @@
 //
 
 // This is the default html and body font-size for the base rem value.
-$rem-base: 14px;
+//$rem-base: 14px;
 
 // Allows the use of rem-calc() or lower-bound() in your settings
 @import "foundation/functions";
-
-@include exports("global") {}
-@import "foundation/components/global";
 
 // $body-bg: #F3F8F9;
 // $body-font-family: "Helvetica Neue", "Helvetica", Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", sans-serif;
@@ -24,7 +21,8 @@ $my-project-border-color: #f4f4f4;
 // Since the typical default browser font-size is 16px, that makes the calculation for grid size.
 // If you want your base font-size to be different and not have it affect the grid breakpoints,
 // set $rem-base to $base-font-size and make sure $base-font-size is a px value.
-// $base-font-size: 100%;
+$base-font-size: 14px;
+$rem-base: $base-font-size;
 
 // The $base-font-size is 100% while $base-line-height is 150%
 // $base-line-height: 150%;
@@ -1249,8 +1247,8 @@ $topbar-menu-icon-color: #666;
 // $topbar-transition-speed: 300ms;
 // Using rem-calc for the below breakpoint causes issues with top bar
 // $topbar-breakpoint: #{lower-bound($medium-range)}; // Change to 9999px for always mobile layout
-$topbar-breakpoint: 9999px; // Change to 9999px for always mobile layout
-$topbar-media-query: $medium-up;
+//$topbar-breakpoint: 9999px; // Change to 9999px for always mobile layout
+//$topbar-media-query: $medium-up;
 
 // Divider Styles
 // $topbar-divider-border-bottom: solid 1px  scale-color($topbar-bg-color, $lightness: 13%);
@@ -1301,3 +1299,4 @@ $topbar-media-query: $medium-up;
 // $range-slider-handle-round: $global-rounded;
 // $range-slider-handle-bg-hover-color: scale-color($primary-color, $lightness: -12%);
 // $range-slider-handle-cursor: pointer;
+@import 'foundation';
