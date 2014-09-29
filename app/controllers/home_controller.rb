@@ -1,16 +1,10 @@
 class HomeController < ApplicationController
 
   def index
-    if current_user
-      @events = Event.default_order.limit(Event::PER_PAGE).related(current_user.id)
-      @start_with = @events[-1].try(:created_at).to_i
-      render 'login'
-    else
-      @recommends = Recommend.all.default_order.includes(:project).limit(3)
-      @investors = Investor.default_order.passed.limit(3)
-      @person_requires = PersonRequire.all.limit(3)
-      render 'nologin'
-    end
+    @recommends = Recommend.all.default_order.includes(:project).limit(3)
+    @investors = Investor.default_order.passed.limit(3)
+    @person_requires = PersonRequire.all.limit(3)
+    render 'nologin'
   end
 
   def welcome

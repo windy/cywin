@@ -18,6 +18,11 @@
     }
   }
 
+  .no-content {
+    padding-left: 2rem;
+    color: #666;
+  }
+
   .sub-nav {
     @media #{$small-only} {
       display: none;

@@ -1,0 +1,23 @@
+- content_for(:title) do
+  | 时间线
+
+.timeline.top-blank ng-controller='TimelineController' ng-init='init(#{@start_with})'
+  .row
+    .small-12.medium-10.medium-centered.columns
+      - if @events.blank?
+        #TODO 
+        p 时间线为空, 你可以
+        ul
+          li
+            = link_to '浏览并关注项目', explore_index_path
+          li
+            = link_to '创建项目', new_project_path
+          li
+            = link_to '关注你喜欢的投资人', investors_path
+      - else
+        = render partial: 'event', collection: @events
+        .event.ng-cloak ng-repeat= 'event in events' ng-bind-html='event'
+        .no-content ng-show='no_content_flag' 没有更多内容
+        .load-more
+          button ng-hide='loading' ng-click='load_more()' 加载更多
+          button ng-show='loading' 加载中...
