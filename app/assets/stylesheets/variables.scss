@@ -37,7 +37,7 @@ $rem-base: $base-font-size;
 // $include-html-block-grid-classes: $include-html-classes; 
 // $include-xl-html-grid-classes: false;
 
-// $row-width: rem-calc(1000);
+$row-width: rem-calc(1140);
 // $total-columns: 12;
 
 // Global
@@ -820,17 +820,17 @@ $select-bg-color: #fff;
 // $include-html-panel-classes: $include-html-classes;
 
 // We use these to control the background and border styles
-// $panel-bg: scale-color(#fff, $lightness: -5%);
-// $panel-border-style: solid;
-// $panel-border-size: 1px;
+$panel-bg: #fff;
+$panel-border-style: solid;
+$panel-border-size: 0px;
 
 // We use this % to control how much we darken things on hover
 // $panel-function-factor: -11%;
-// $panel-border-color: scale-color($panel-bg, $lightness: $panel-function-factor);
+$panel-border-color: #fff;
 
 // We use these to set default inner padding and bottom margin
-// $panel-margin-bottom: rem-calc(20);
-// $panel-padding: rem-calc(20);
+$panel-margin-bottom: 1.5rem;
+$panel-padding: 2rem;
 
 // We use these to set default font colors
 // $panel-font-color: #333;
