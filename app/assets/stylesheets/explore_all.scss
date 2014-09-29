@@ -1,9 +1,9 @@
-@import 'variables';
 .explore-all {
   background-color: $my-body-bg;
 
   .no-content {
     margin-top: 1rem;
+    padding-left: 1rem;
     color: #666;
   }
 

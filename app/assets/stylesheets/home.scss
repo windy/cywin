@@ -1,7 +1,7 @@
-@import 'variables';
 .start-page {
   background-color: $my-body-bg;
 }
+
 .start-content {
   padding-top: 5.325rem;
   padding-bottom: 5.325rem;
@@ -78,7 +78,6 @@
     text-align: center;
     .tag {
       color: #999;
-      font-size: 95%;
     }
 
     .investments * {
@@ -104,7 +103,6 @@
       .subtitle {
         margin: 1rem 0 0;
         color: #999;
-        font-size: 95%;
         white-space: nowrap;
         width: 100%;
         overflow: hidden;
@@ -114,7 +112,6 @@
 
     .content {
       padding: 0rem 2rem;
-      font-size: 95%;
       line-height: 2;
       height: 5rem;
 

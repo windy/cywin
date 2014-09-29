@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :timeline, only: [:index]
+
   namespace :settings do
     resource :profile, only: [:show, :update]
     resource :password, only: [:show, :update]

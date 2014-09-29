@@ -2,14 +2,14 @@
   | 登录
 .user-new.top-blank
   .row
-    .small-12.medium-7.large-5.medium-centered.columns
+    .small-12.medium-7.large-4.medium-centered.columns
       form
       = form_for @user, url: user_session_path do |f|
         h4.title 登录
         p.sub-title 登录#{Setting.site_name}, 创想精彩!
         .row
           .small-12.columns
-            = f.text_field 'email', placeholder: '邮箱地址'
+            = f.text_field 'email', placeholder: '邮箱地址', autofocus: true
             = f.password_field 'password', placeholder: '密码'
             = f.submit '登录', class: 'button expand'
 

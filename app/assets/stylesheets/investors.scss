@@ -1,4 +1,3 @@
-@import 'variables';
 .investors {
   background-color: $my-body-bg;
 
@@ -18,12 +17,18 @@
     }
   }
 
+  .no-content {
+    padding-left: 2rem;
+    color: #666;
+  }
+
   .sub-nav {
     @media #{$small-only} {
       display: none;
     }
   }
   .search-form {
+    margin-top: 2rem;
     background-color: white;
     padding: 2rem 2rem 1rem 2rem;
     margin-bottom: 2rem;

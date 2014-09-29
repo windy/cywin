@@ -8,7 +8,7 @@
         p.sub-title 注册账号, 进入精彩的创业服务!
         .row
           .small-12.columns
-            = text_field_tag 'name', nil, placeholder: '真实姓名', 'ng-model'=> 'name', 'ng-class'=> '{ error: errors.name }', 'ng-keyup'=> ' delete_error_on("name") '
+            = text_field_tag 'name', nil, placeholder: '真实姓名', 'ng-model'=> 'name', 'ng-class'=> '{ error: errors.name }', 'ng-keyup'=> ' delete_error_on("name") ', 'autofocus'=> true
             small.error.ng-cloak ng-show="errors.name" {{ errors.name }}
         .row
           .small-12.columns
