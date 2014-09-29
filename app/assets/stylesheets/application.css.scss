@@ -1,11 +1,34 @@
-/*
- *= require_self
- *= require font-awesome
- *= require foundation_and_overrides
- *= require jquery-ui-1.10.4.custom
- *= require jquery.pnotify.default
- *= require_tree .
- */
+@import 'font-awesome';
+
+@import "variables";
+
+@import 'components/*';
+@import 'admin/*';
+
+@import 'about';
+@import 'categories';
+@import 'explore';
+@import 'explore_all';
+@import 'home';
+@import 'investor_info_query';
+@import 'investors';
+@import 'jobs';
+@import 'message';
+@import 'profile';
+@import 'profile_edit';
+@import 'project_edit';
+@import 'project_new';
+@import 'project_show';
+@import 'refine';
+@import 'search';
+@import 'simple_timeline';
+@import 'square';
+@import 'talk';
+@import 'team';
+@import 'timeline';
+@import 'trend';
+@import 'user_register';
+@import 'welcome';
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;

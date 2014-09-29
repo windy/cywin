@@ -22,7 +22,7 @@
         'code': $scope.code
     .success (res)->
       if res.success
-        $window.location.href = '/home/welcome'
+        $window.location.href = '/'
       else
         $scope.errors = res.errors
     .error (res, status)->

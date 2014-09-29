@@ -1,9 +1,10 @@
 li
   = link_to explore_index_path do
     | 发现项目
-li
-  = link_to timeline_index_path do
-    | 动态
+- if current_user.present?
+  li
+    = link_to timeline_index_path do
+      | 动态
 li
   = link_to investors_path do
     | 投资人
