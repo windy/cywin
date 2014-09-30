@@ -7,6 +7,9 @@
   
   img {
     border: 1px solid $my-project-border-color;
+    @media #{$large-up} {
+      width: 85%;
+    }
   }
 
   .name {
