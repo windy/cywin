@@ -1,5 +1,19 @@
 
 .timeline {
+  background-color: $my-body-bg;
+  min-height: 30rem;
+
+  .panel {
+    .title {
+      margin-bottom: 1.5rem;
+    }
+
+    .no-content {
+      text-align: left;
+      color: #999;
+      margin-bottom: 0;
+    }
+  }
 
   .no-content {
     text-align: center;
@@ -61,13 +75,12 @@
     }
 
     .head2 {
-      font-size: 90%;
-      color: #444;
-      margin-bottom: 1.5rem;
-      margin-top: -1rem;
+      font-size: 95%;
+      color: #999;
     }
 
     .content {
+      margin-top: 1rem;
       padding-bottom: 1rem;
       margin-bottom: 1rem;
 
