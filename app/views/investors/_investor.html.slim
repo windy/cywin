@@ -55,7 +55,7 @@
                           .project-img
                             img ng-src=' {{ project.logo_url }}'
                           .project-title
-                            span.fi-check ng-show=' is_selected_project(project) '
+                            span.fa.fa-check ng-show=' is_selected_project(project) '
                             | {{ project.name }}
                   p.no-content ng-show=' is_delivering_projects_empty() '
                     | 你还没有项目, 不能投递, 点击
