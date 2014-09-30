@@ -1,10 +1,8 @@
 - if event.action == Event::PROJECT_STAR
   /! project star
   .box
-    .row.collapse
-      .small-0.medium-1.columns.type
-        span.fi-star
-      .small-12.medium-11.columns.content-wrapper
+    .row
+      .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, user_path(event.user)
           | 关注了项目
@@ -14,10 +12,8 @@
 - if event.action == Event::USER_FUN
   /! user fun
   .box
-    .row.collapse
-      .small-0.medium-1.columns.type
-        span.fi-eye
-      .small-12.medium-11.columns.content-wrapper
+    .row
+      .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, user_path(event.user)
           | 关注了用户
@@ -26,10 +22,8 @@
 - if event.action == Event::PROJECT_CREATE
   /! project create
   .box
-    .row.collapse
-      .small-0.medium-1.columns.type
-        span.fi-plus
-      .small-12.medium-11.columns.content-wrapper
+    .row
+      .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, user_path(event.user)
           | 创建了新项目
@@ -39,10 +33,8 @@
 - if event.action == Event::PROJECT_JOIN
   /! project join
   .box
-    .row.collapse
-      .small-0.medium-1.columns.type
-        span.fi-torsos
-      .small-12.medium-11.columns.content-wrapper
+    .row
+      .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, user_path(event.user)
           | 加入了项目
@@ -52,10 +44,8 @@
 - if event.action == Event::PROJECT_INVEST
   /! project invest
   .box
-    .row.collapse
-      .small-0.medium-1.columns.type
-        span.fi-dollar
-      .small-12.medium-11.columns.content-wrapper
+    .row
+      .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, user_path(event.user)
           | 投资了
@@ -66,10 +56,8 @@
 - if event.action == Event::PROJECT_INVEST_ADD
   /! project invest add
   .box
-    .row.collapse
-      .small-0.medium-1.columns.type
-        span.fi-dollar
-      .small-12.medium-11.columns.content-wrapper
+    .row
+      .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, user_path(event.user)
           | 追加投资给项目
@@ -80,10 +68,8 @@
 - if event.action == Event::MONEY_REQUIRE_CREATE
   /! money require create
   .box
-    .row.collapse
-      .small-0.medium-1.columns.type
-        span.fi-dollar
-      .small-12.medium-11.columns.content-wrapper
+    .row
+      .small-12.columns.content-wrapper
         .head
           span
             | 项目
@@ -99,10 +85,8 @@
 - if event.action == Event::MONEY_REQUIRE_LEADER
   /! leader
   .box
-    .row.collapse
-      .small-0.medium-1.columns.type
-        span.fi-dollar
-      .small-12.medium-11.columns.content-wrapper
+    .row
+      .small-12.columns.content-wrapper
         .head
           span
             | 项目
@@ -114,10 +98,8 @@
 - if event.action == Event::MONEY_REQUIRE_OPENED
   /! money require opened
   .box
-    .row.collapse
-      .small-0.medium-1.columns.type
-        span.fi-dollar
-      .small-12.medium-11.columns.content-wrapper
+    .row
+      .small-12.columns.content-wrapper
         .head
           span
             | 项目
@@ -134,10 +116,8 @@
 - if event.action == Event::PERSON_REQUIRE_CREATE
   /! person_require create  
   .box
-    .row.collapse
-      .small-0.medium-1.columns.type
-        span.fi-torso-business
-      .small-12.medium-11.columns.content-wrapper
+    .row
+      .small-12.columns.content-wrapper
         .head
           span
             | 项目
@@ -152,10 +132,8 @@
 - if event.action == Event::INTEREST_WORK
   /! interest work
   .box
-    .row.collapse
-      .small-0.medium-1.columns.type
-        span.fi-torso-business
-      .small-12.medium-11.columns.content-wrapper
+    .row
+      .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, event.user
           span
