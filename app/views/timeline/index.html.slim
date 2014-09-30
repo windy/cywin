@@ -25,10 +25,10 @@
         - else
           = render partial: 'event', collection: @events
           .event.ng-cloak ng-repeat= 'event in events' ng-bind-html='event'
-          .no-content ng-show='no_content_flag' 没有更多内容
+          .event-no-content ng-show='no_content_flag' 没有更多内容
           .load-more
-            button ng-hide='loading' ng-click='load_more()' 加载更多
-            button ng-show='loading' 加载中...
+            button.expand ng-hide='loading' ng-click='load_more()' 加载更多
+            button.expand ng-show='loading' 加载中...
     .small-12.medium-4.columns
       .panel
         h5.title 我的项目

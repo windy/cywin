@@ -7,6 +7,7 @@
   }
 
   .tab-content {
+    margin: 0;
     margin-top: 2rem;
     padding-top: 2rem;
     border-top: 1px solid #ddd;
@@ -14,6 +15,7 @@
     .list {
       text-align: center;
       padding-bottom: 0;
+      padding: 0;
       a {
         color: #333;
         font-size: 1.2rem;
