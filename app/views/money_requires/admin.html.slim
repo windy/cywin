@@ -249,7 +249,7 @@
         h4.title 融资事件
       .timeline.simple
         - @project.events.default_order.each do |event|
-          = render partial: 'home/event', locals: { event: event }
+          = render partial: 'timeline/event', locals: { event: event }
   .row.ng-cloak ng-show='money_require.status == "closed"'
     .small-12.large-10.large-centered.columns
       moneyrequire require='money_require' title='"融资已完成"'

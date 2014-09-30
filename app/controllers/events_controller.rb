@@ -17,7 +17,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.json do
         render :json => {
-          data: render_to_string("/home/events.html", :layout => false),
+          data: render_to_string("/timeline/events.html", :layout => false),
           start_with: start_with
         }
       end
