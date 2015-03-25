@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta charset="utf-8"
-    meta name="viewport" content="width=device-width, initial-scale=1.0" 
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
     title
       - if content_for?(:title)
         = yield(:title) + " | " + Setting.site_name
@@ -25,3 +25,4 @@ html
         = render 'layouts/email_tip'
         = yield
       = render 'layouts/foot'
+      = render 'layouts/google'
