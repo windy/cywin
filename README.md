@@ -66,7 +66,8 @@ Cywin
 0. `gem install bundler`
 1. `bundle install`
 2. 复制 config/xx.example.yml 到 config/xx.yml, 并根据需要调整配置.
-3. `rails s`
+3. `rake db:setup`
+4. `rails s`
 
 可选配置 sunspot.
 
