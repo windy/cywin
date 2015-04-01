@@ -5,7 +5,7 @@ else
   source 'https://rubygems.org'
 end
 gem 'rails', '4.1.9'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'jquery-rails'

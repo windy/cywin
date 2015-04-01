@@ -92,7 +92,7 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
-    faraday (0.9.0)
+    faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     fattr (2.2.1)
     ffi (1.9.3)
@@ -122,7 +122,7 @@ GEM
     guard-rspec (4.2.8)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
-    hashie (2.1.1)
+    hashie (3.4.1)
     highline (1.6.21)
     hike (1.2.3)
     http_parser.rb (0.5.3)
@@ -164,8 +164,8 @@ GEM
       faraday (~> 0.7)
       multi_json (~> 1.0)
     oauth_china (0.5.0)
-    omniauth (1.2.1)
-      hashie (>= 1.2, < 3)
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
       rack (~> 1.0)
     omniauth-oauth2 (1.0.0)
       oauth2 (~> 0.5.0)
@@ -251,11 +251,12 @@ GEM
       rspec (>= 2.0.0)
       sidekiq (>= 2.4.0)
     sass (3.2.19)
-    sass-rails (4.0.3)
+    sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
-      sass (~> 3.2.0)
-      sprockets (~> 2.8, <= 2.11.0)
-      sprockets-rails (~> 2.0)
+      sass (~> 3.1)
+      sprockets (>= 2.8, < 4.0)
+      sprockets-rails (>= 2.0, < 4.0)
+      tilt (~> 1.1)
     settingslogic (2.0.9)
     sidekiq (2.17.7)
       celluloid (>= 0.15.2)
@@ -369,7 +370,7 @@ DEPENDENCIES
   rolify
   rspec-rails (= 2.14.2)
   rspec-sidekiq
-  sass-rails (~> 4.0.3)
+  sass-rails
   settingslogic
   sidekiq
   simple_form
