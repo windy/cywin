@@ -71,6 +71,8 @@ Cywin
 
 可选配置 sunspot.
 
+根据你 config/application.yml 的配置的 ADMIN_EMAIL 和 ADMIN_PASSWORD 登录 Cywin.
+
 ## 发布历史记录
 
 ### 2014.10.20
