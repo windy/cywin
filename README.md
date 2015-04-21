@@ -61,7 +61,6 @@ Fell free to submit your issue when you find something wrong. I will help you in
 
 * Message design ( template support, email push )
 * Login system( customize Devise with ajax registration, invite code support )
-* 登录功能( 定制 Devise / 邀请注册 / 注册码 )
 * Role Management( rolify & cancancan )
 * Hybrid AngularJS & Rails best practice development mode
 * AngularJS Directives
@@ -69,7 +68,7 @@ Fell free to submit your issue when you find something wrong. I will help you in
 * SCSS organization
 * RESTful Design
 * Multi enviornments & deployment automation ( staging / demo / production with mina )
-* Sunspot search( especially Chinese tokenized word )
+* Sunspot search( especially Chinese tokenized system )
 * TDD business logic
 * best practice configuration for Ruby on Rails ( figaro )
 
@@ -88,7 +87,7 @@ Fell free to submit your issue when you find something wrong. I will help you in
 4. `rake db:setup`
 5. `rails s`
 
-Visit http://localhost:3000/users/sign_in, and input ADMIN_EMAIL and ADMIN_PASSWORD( application.yml ) to login it.
+Visit http://localhost:3000/users/sign_in, and input ADMIN_EMAIL and ADMIN_PASSWORD( configurated in application.yml ) to login it.
 
 ## Histories of Cywin
 
