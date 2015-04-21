@@ -1,116 +1,135 @@
 Cywin
 ========
 
-这是创业赢的源代码: <http://cywin.cn>
+[中文版说明](/README.zh-cn.md)
 
-专门用于体验的环境( 随便折腾 ): <http://staging.cywin.cn>, 用户名: admin@cywin.cn, 密码: admin
+The source code of Cywin: <http://cywin.cn>
 
-创业赢是一个股权众筹平台, 通过集合优秀的天使投资人领投, 联合普通投资人来帮助初创企业完成天使轮融资的全流程线上平台. 其国外的对手如: [angellist](https://angel.co), 国内的对手如: [天使汇](http://angelcrunch.com), [创投圈](http://vc.cn/) 等.
+A testing environment for you( do anything here you want ): <http://staging.cywin.cn>, username: admin@cywin.cn, password: admin
 
-其核心流程如下:
+Cywin is a stock crowdfunding platform, just like [angellist](https://angel.co) but in China.
 
-1. 创业者
+Cywin can build the connection between startups and talented investors with stock investment.
 
-    创建项目 -> 发布项目 -> 发布融资预热 -> 邀请领投人 -> 领投人确认 -> 投资人投资 -> 成功融资
+Cywin is a full-flow platform for the process.
 
-2. 普通投资人
+in China, its competitors are [AngelCruch, as: 天使汇](http://angelcrunch.com), [VC club, as: 创投圈](http://vc.cn) and etc.
 
-    申请为认证投资人 / 跟投项目
+Core process like this:
 
-3. 认证投资人
+1. Startup
 
-    领投项目 / 制定投资规则
+    Create Project -> Publish it -> Start financing -> Invite Investor leader -> Investor leader confirm -> Normal Investors follow -> Success
 
+2. Normal investor
 
-## 为什么把创业赢开源?
+    * Apply Investor leader
+    * Follow an investment by investor leader
 
-在花费 6 个月的时间打磨这个产品后, 我才意识到, 我与合伙人根本无法单凭线上渠道运作起来这个平台, 线下渠道极为有限, 我觉得在中国这个市场, 无法继续存活下去, 它已经耗费了我所有的精力.
+3. Investor leader
 
-与合伙人在下一步产品理念上的冲突, 迟迟未获取的正反馈, 使得我最终决定退出该项目.
+    * Lead an investment of project
+    * Make rule for the investment of project
 
-几个月之后, 在我得知项目源码已经不再继续开发时, 我决定将其开源. 希望它还能够帮助一些对其感兴趣的朋友.
+Cywin now is open source.
 
-## 这个项目还会继续维护吗?
+## Why makes Cywin open-source?
 
-我不再打算在毫无前景的情况下继续开发, 虽然项目是一个人开发, 并且一直压力很大, 但这个项目拥有非常良好的架构与可持续开发能力, 它的测试仍然非常完整( 120+ ), UI 非常漂亮( 花费上万的设计费 ), 并且还支持响应式, 更加给力的是, 前端没有丑陋的 jQuery 代码, 而是利用 AngularJS 组织的非常清晰.
+After spending six month to make this project, I realized, I can not ship this platform with my parnter. With lack of resources below the line, I think, it's a fault for me to build it. It costed all my energy.
 
-整体而言, 这是我目前最为满意的一个作品, 可持续开发能力非常强, 当然对维护者的能力要求也比较高.
+Besides, the confict of fundamental production principle with parnter was more and more serious. With never positive feedback for Cywin, I finally decided to quit the project.
 
-## 我能得到你的帮助吗?
+A few month later, I made Cywin open source when the source code of Cywin would not be used. I hope it will be useful for other friends like you.
 
-如果你在学习甚至打算基于此系统二次开发, 我都非常乐意. 你的问题可以提交到 github 的 issues 中, 我在业余时间可以尝试帮助你解决.
+## Will it be maintained?
 
-## 最值得参考的点
+Exactly not. Since I have realized this road is wrong.
 
-* 消息机制( 模板与邮件推送 )
+But Cywin is a pretty project. It is made by clean and neat code, its architecture is awful flexible, with lots of test cases( 120+ ).
+
+Besides, it has beautiful UI, supports responsive page, good scss and clean AngularJS code.
+
+In the whole, it's one of my most proud works alone.
+
+## Can I get your help for it?
+
+Yes, I am pleasure if you want to study AngularJS and Ruby on Rails on the strength of Cywin. If you want to continue developing, I'm glad too.
+
+Fell free to submit your issue when you find something wrong. I will help you in my leisure time ASAP.
+
+## Good parts you maybe get inspiration
+
+* Message design ( template support, email push )
+* Login system( customize Devise with ajax registration, invite code support )
 * 登录功能( 定制 Devise / 邀请注册 / 注册码 )
-* 角色管理( 权限管理 )
-* AngularJS 与 Rails 的混合模式最佳实践
-* AngularJS 组件化开发
-* 响应式开发
-* SCSS 代码组织结构
-* RESTful Controller 设计
-* 分离环境的自动发布系统( staging / demo / production )
-* 搜索功能
-* 业务逻辑的 TDD 测试开发
-* 配置文件的组织结构
+* Role Management( rolify & cancancan )
+* Hybrid AngularJS & Rails best practice development mode
+* AngularJS Directives
+* Responsive Design
+* SCSS organization
+* RESTful Design
+* Multi enviornments & deployment automation ( staging / demo / production with mina )
+* Sunspot search( especially Chinese tokenized word )
+* TDD business logic
+* best practice configuration for Ruby on Rails ( figaro )
 
-## 核心技术栈
+## Core tech stack
 
 * Ruby on Rails( 4.1 )
-* AngularJS( 混合模式 )
+* AngularJS( Hybrid mode )
 * Foundation 5
 
-## 安装配置
+## Setup
 
 0. `gem install bundler`
 1. `bundle install`
-2. 复制 config/xx.example.yml 到 config/xx.yml, 并根据需要调整配置.
-3. `rake db:setup`
-4. `rails s`
+2. copy config/xx.example.yml to config/xx.yml, xx contains application, database, then adjust it as you need.
+3. `rake sunspot:solr:start`
+4. `rake db:setup`
+5. `rails s`
 
-可选配置 sunspot.
+Visit http://localhost:3000/users/sign_in, and input ADMIN_EMAIL and ADMIN_PASSWORD( application.yml ) to login it.
 
-根据你 config/application.yml 的配置的 ADMIN_EMAIL 和 ADMIN_PASSWORD 登录 Cywin.
-
-## 发布历史记录
+## Histories of Cywin
 
 ### 2014.10.20
 
-项目宣布退出
+Quit the project
 
 ### 2014.9.15
 
-发布新 UI
+New UI
 
-完善功能
+improvement of features
 
 ### 2014.8.16
 
-重构了分类
+refactor category feature
 
-完善功能
+improvement of features
 
 ### 2014.8.6
 
-重构了首页
+refactor home page
 
-完善调整功能
+improvement of features
 
 ### 2014.4.15
 
-重构了所有页面, 适应于手机
+Resigned responsive page, mobile first
 
-基本功能已完成
+Fundamental featctures complete
 
 ### 2014.3.26
 
-项目选型
+Database design and tech choosen
 
 -----------------
 
-## 授权
+## License
 
-本系统遵守 [MIT](http://www.opensource.org/licenses/mit-license.php) 和 [GPL](http://www.gnu.org/licenses/gpl.html) 双重授权.
+It's be licensed under both [MIT](http://www.opensource.org/licenses/mit-license.php) and [GPL](http://www.gnu.org/licenses/gpl.html).
 
-额外地, 系统中 Logo 等图片资源不得用于商业目的.
+Additionally, The logos and other pictures are not allowed by commercial purpose.
+
+If you have any question, just leave an issue for it.
