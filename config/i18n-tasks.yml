@@ -1,0 +1,61 @@
+base_locale: en
+locales: [en, zh-CN]
+
+data:
+  read:
+    - config/locales/%{locale}.yml
+  write:
+    - config/locales/%{locale}.yml
+  yaml:
+    write:
+      line_width: -1
+  json:
+    write:
+      # pretty print JSON
+      indent: '  '
+      space: ' '
+      object_nl: "\n"
+      array_nl: "\n"
+
+search:
+  paths:
+    - app/
+
+  ## Root for resolving relative keys (default)
+  # relative_roots:
+  #   - app/views
+
+  ## File.fnmatch patterns to exclude from search (default)
+  # exclude: ["*.jpg", "*.png", "*.gif", "*.svg", "*.ico", "*.eot", "*.ttf", "*.woff", "*.pdf"]
+
+  ## Or, File.fnmatch patterns to include
+  # include: ["*.rb", "*.html.slim"]
+
+## Google Translate
+# translation:
+#   # Get an API key and set billing info at https://code.google.com/apis/console to use Google Translate
+#   api_key: "AbC-dEf5"
+
+## Consider these keys not missing
+# ignore_missing:
+# - 'errors.messages.{accepted,blank,invalid,too_short,too_long}'
+# - '{devise,simple_form}.*'
+
+## Consider these keys used
+# ignore_unused:
+# - 'activerecord.attributes.*'
+# - '{devise,kaminari,will_paginate}.*'
+# - 'simple_form.{yes,no}'
+# - 'simple_form.{placeholders,hints,labels}.*'
+# - 'simple_form.{error_notification,required}.:'
+
+## Exclude these keys from `i18n-tasks eq-base' report
+# ignore_eq_base:
+#   all:
+#     - common.ok
+#   fr,es:
+#     - common.brand
+
+## Exclude these keys from all of the reports
+# ignore:
+#  - kaminari.*
