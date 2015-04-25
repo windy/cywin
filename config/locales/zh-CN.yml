@@ -1,6 +1,45 @@
 'zh-CN':
   ago: 前
   since: 来自
+  menu:
+    projects: 发现项目
+    activities: 动态
+    investors: 投资人
+    jobs: 创业职位
+    login: 登录
+    register: 注册
+    search: 搜索
+  dropmenu:
+    project: 项目
+    new_project: 创建新项目
+    me: 我
+    apply_investor: 申请投资人
+    already_investor: 已经是认证投资人
+    info_investor: 查看投资人进度
+    home: 我的主页
+    setting: 设置
+    admin: 后台管理
+    logout: 退出
+  start-page:
+    new_project: Publish Your Project
+    hot_project: Hot Projects
+    all_project: See All Projects
+    hot_investor: Hot Investors
+    all_investor: See All Investors
+    none: 'None'
+    vacancy: Vacancy
+    project:
+      owner: 'Founder'
+      team: 'Team'
+      member: 'members'
+      leader: 'Invest Leader'
+    investment_case: 'Investment Cases'
+    startup_job: Startup Jobs
+    all_job: See All Jobs
+    job:
+      salary: 'Salary'
+      title: 'Title'
+      option: 'Option'
   project:
     stages:
       idea: '概念中'

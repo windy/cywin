@@ -1,15 +1,15 @@
 li
   = link_to explore_index_path do
-    | 发现项目
+    | #{t('menu.projects')}
 - if current_user.present?
   li
     = link_to timeline_index_path do
-      | 动态
+      | #{t('menu.activities')}
 li
   = link_to investors_path do
-    | 投资人
+    | #{t('menu.investors')}
 li
   = link_to jobs_path do
-    | 创业职位
+    | #{t('menu.jobs')}
 li.has-form
   = render 'layouts/search_input'

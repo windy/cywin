@@ -10,6 +10,9 @@ ROLES: [admin, investor, leader]
 GA_ID: ''
 GA_URL: ''
 
+# set system locale en or zh-CN, default is zh-CN
+LOCALE: zh-CN
+
 # SECRET_KEY_BASE
 SECRET_KEY_BASE: ''
 # sidekiq namespace

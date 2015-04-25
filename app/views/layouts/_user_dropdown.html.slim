@@ -2,31 +2,31 @@
   ul.small-block-grid-1.medium-block-grid-2
     li
       ul.project
-        h6.title 项目
+        h6.title #{t('dropmenu.project')}
         - current_user.projects.each do |project|
           li
             = link_to project.name, edit_project_path(project)
         li
-          = link_to '创建新项目', new_project_path + "#/project/basic"
+          = link_to t('dropmenu.new_project'), new_project_path + "#/project/basic"
     li
       ul.about-me
-        h6.title 我
+        h6.title #{t('dropmenu.me')}
         - if ! current_user.investor.present?
           li
-            = link_to '申请投资人', basic_investors_path
+            = link_to t('dropmenu.apply_investor'), basic_investors_path
         - elsif current_user.has_role?(:investor)
-          li 
-            = link_to '已经是认证投资人', info_investors_path
+          li
+            = link_to t('dropmenu.already_investor'), info_investors_path
         - else
           li
-            = link_to '查看投资人进度', info_investors_path
+            = link_to t('dropmenu.info_investor'), info_investors_path
         li
-          = link_to '我的主页', user_path(current_user)
+          = link_to t('dropmenu.home'), user_path(current_user)
         li
-          = link_to '设置',  settings_profile_path
+          = link_to t('dropmenu.setting'),  settings_profile_path
         - if current_user.has_role?(:admin)
           li
-            = link_to '后台管理',  admin_root_path
+            = link_to t('dropmenu.admin'),  admin_root_path
         li
-          = link_to '退出', destroy_user_session_path, method: 'DELETE'
+          = link_to t('dropmenu.logout'), destroy_user_session_path, method: 'DELETE'
 .user-dropdown-exit-link ng-show= 'dropdown_open' ng-click=' dropdown_open = false'

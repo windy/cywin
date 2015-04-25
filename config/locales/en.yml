@@ -1,23 +1,70 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  ago: Ago
+  since: 来自
+  menu:
+    projects: Find Projects
+    activities: Activities
+    investors: Find Investors
+    jobs: Startup Jobs
+    login: Login
+    register: Register
+    search: Search
+  dropmenu:
+    project: Project
+    new_project: New Project
+    me: Me
+    apply_investor: Apply Investor
+    already_investor: Already Investor
+    info_investor: Investor Progress
+    home: My Home
+    setting: My Setting
+    admin: Admin Dashboard
+    logout: Logout
+  start-page:
+    new_project: Publish Your Project
+    hot_project: Hot Projects
+    all_project: See All Projects
+    hot_investor: Hot Investors
+    all_investor: See All Investors
+    none: 'None'
+    vacancy: Vacancy
+    project:
+      owner: 'Founder'
+      team: 'Team'
+      member: 'members'
+      leader: 'Invest Leader'
+    investment_case: 'Investment Cases'
+    startup_job: Startup Jobs
+    all_job: See All Jobs
+    job:
+      salary: 'Salary'
+      title: 'Title'
+      option: 'Option'
+  project:
+    stages:
+      idea: '概念中'
+      developing: '开发中'
+      online: '已上线'
+      gained: '已盈利'
+  member:
+    roles:
+      founder: '创始人'
+      member: '团队成员'
+      partner: '合作者'
+  investor:
+    investor_types:
+      person: '个人'
+      organization: '机构'
+  investidea:
+    coin_types:
+      cny: '人民币'
+      usd: '外币'
+      cny_and_usd: '人民币+外币'
+  errors:
+    messages:
+      #carrierwave 翻译信息
+      carrierwave_processing_error: "不能调整大小"
+      carrierwave_integrity_error: "不是一张图片"
+      carrierwave_download_error: "无法下载图片"
+      extension_white_list_error: "扩展格式不正确: %{extension},  只允许以下格式: %{allowed_types}"
+      extension_black_list_error: "不允许上传此格式: %{extension}, 禁止的格式如下: %{prohibited_types}"

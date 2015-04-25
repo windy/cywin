@@ -3,7 +3,7 @@
     nav.top-bar#cywin-topbar data-topbar=""
       ul.title-area
         li.toggle-topbar.menu-icon
-          a 
+          a
             span
         li.name
           h1
@@ -30,11 +30,11 @@
         - else
           ul.right.nologin
             li
-              = link_to '登录', new_user_session_path
+              = link_to t('menu.login'), new_user_session_path
             li.separation
               a
                 | |
             li
-              = link_to '注册', new_user_registration_path
+              = link_to t('menu.register'), new_user_registration_path
     = render 'layouts/user_dropdown' if current_user
 hr.topbar-hr
