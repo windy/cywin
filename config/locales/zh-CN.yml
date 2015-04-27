@@ -52,6 +52,7 @@
     all:
       all: 所有 - 发现
       industry: '行业:'
+      city: '城市:'
       all_industries: '所有'
       all_industries_for_small: '所有行业'
       all_cities: '所有'

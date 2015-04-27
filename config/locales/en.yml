@@ -52,6 +52,7 @@ en:
     all:
       all: All - Find
       industry: 'Category:'
+      city: 'City:'
       all_industries: 'All'
       all_industries_for_small: 'All Categories'
       all_cities: 'All'
