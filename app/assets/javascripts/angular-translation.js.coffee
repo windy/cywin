@@ -11,6 +11,9 @@
     'add' : 'Add',
     'back' : 'Back',
     'remove': 'Remove',
+    'true': 'Yes',
+    'false': 'No',
+    'complete': 'Complete'
     'project_info': 'Project Info'
     'project_name': 'Project Name'
     'project_name_placeholder': 'e.g. Google'
@@ -53,6 +56,20 @@
     'project_team_member_invite_name': 'Real Full Name'
     'project_team_member_invite_button': 'Send'
     'project_team_member_add_button': 'Add New Member'
+    # Project create invest
+    'project_invest_purpose': 'What purpose when you come here'
+    'project_invest_title': 'I am looking for investments'
+    'project_invest_money': 'How much fund for investment'
+    'project_invest_stock': 'How much stock for investment'
+    'project_invest_job_title': 'I am looking for talented wokers'
+    'project_invest_job_title_name': 'Position'
+    'project_invest_job_description': 'Description'
+    'project_invest_job_pay': 'Salary'
+    'project_invest_job_option': 'Option'
+    'project_invest_job_stock': 'Stock'
+    'project_invest_job_remote': 'Remote-work'
+    'project_invest_job_part': 'Part-time'
+    'project_invest_job_new': 'New Job'
 
   $translateProvider.translations 'zh-CN',
     'basic': '基本信息'
@@ -65,6 +82,9 @@
     'add' : '添加',
     'remove': '移除',
     'back' : '返回上一步',
+    'true': '是',
+    'false': '否',
+    'complete': '确认完成'
     'project_info': '项目信息'
     'project_name': '项目名称'
     'project_name_placeholder': '如: 百度'
@@ -106,7 +126,20 @@
     'project_team_member_invite_name': '真实姓名'
     'project_team_member_invite_button': '发送'
     'project_team_member_add_button': '添加新的成员'
+    # Project create invest
+    'project_invest_purpose': '在这里的目的'
+    'project_invest_title': '我要融资'
+    'project_invest_money': '计划融资'
+    'project_invest_stock': '出让股份'
+    'project_invest_job_title': '我要招人'
+    'project_invest_job_title_name': '职位'
+    'project_invest_job_description': '负责内容'
+    'project_invest_job_pay': '报酬'
+    'project_invest_job_option': '期权'
+    'project_invest_job_stock': '股权'
+    'project_invest_job_remote': '远程办公'
+    'project_invest_job_part': '可兼职'
+    'project_invest_job_new': '添加新的招聘'
 
   $translateProvider.preferredLanguage('en')
 ]
-
