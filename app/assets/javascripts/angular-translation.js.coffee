@@ -1,9 +1,12 @@
 @app.config ['$translateProvider', ($translateProvider)->
   $translateProvider.translations 'en',
+    # Project Create Page
     'basic': 'Basic Info',
     'team': 'Team Info',
     'invest': 'Invest Plan',
     'next': 'Next',
+    'confirm': 'Confirm',
+    'cancel': 'Cancel',
     'project_info': 'Project Info'
     'project_name': 'Project Name'
     'project_name_placeholder': 'e.g. Google'
@@ -20,12 +23,19 @@
     'project_industry_tip': 'Your selection will be showed here'
     'project_city': 'City'
     'project_city_placeholder': 'Input the complete city name'
+    # select industries
+    'select_industry_title': 'What industry(s) your project belongs to'
+    'select_industry_no_content': 'No selected'
+    'select_industry_header': 'Header'
+    'select_industry_subheader': 'Sub Header'
 
   $translateProvider.translations 'zh-CN',
     'basic': '基本信息'
     'team': '团队信息'
     'invest': '融资计划'
     'next': '下一步'
+    'confirm': '确认',
+    'cancel': '取消',
     'project_info': '项目信息'
     'project_name': '项目名称'
     'project_name_placeholder': '如: 百度'
@@ -42,7 +52,10 @@
     'project_industry_tip': '选择的行业将会显示在这里'
     'project_city': '城市'
     'project_city_placeholder': '请用中文输入, 如深圳'
-
+    'select_industry_title': '选择一个或多个行业'
+    'select_industry_no_content': '选择的行业将会显示在这里'
+    'select_industry_header': '一级分类'
+    'select_industry_subheader': '二级分类'
 
   $translateProvider.preferredLanguage('en')
 ]
