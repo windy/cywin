@@ -7,6 +7,10 @@
     'next': 'Next',
     'confirm': 'Confirm',
     'cancel': 'Cancel',
+    'edit': 'Edit',
+    'add' : 'Add',
+    'back' : 'Back',
+    'remove': 'Remove',
     'project_info': 'Project Info'
     'project_name': 'Project Name'
     'project_name_placeholder': 'e.g. Google'
@@ -28,6 +32,27 @@
     'select_industry_no_content': 'No selected'
     'select_industry_header': 'Header'
     'select_industry_subheader': 'Sub Header'
+    # project create team
+    'project_team_owner_title': 'Edit Founder Info'
+    'project_team_owner_name_label': 'Real Full Name'
+    'project_team_owner_name_placeholder': 'Full Name'
+    'project_team_owner_title_label': 'Title'
+    'project_team_owner_title_placeholder': 'Your title at team'
+    'project_team_owner_description_label': 'Detail Info'
+    'project_team_our_story': 'Our Team Story'
+    'project_team_our_story_placeholder': 'Our Team Story Here'
+    'project_team_member': 'Our Team Members'
+    'project_team_member_edit_title': 'Edit Member Info'
+    'project_team_member_edit_title_placeholder': 'Title'
+    'project_team_member_edit_title_description': 'Detail Info'
+    'project_team_member_joined': 'Joined'
+    'project_team_member_unconfirmed': 'Email unconfirmed'
+    'project_team_member_invite_label': 'Invite new member'
+    'project_team_member_invite_placeholder': 'Username or Email'
+    'project_team_member_invite_tip': 'This member has not register account, we will send an email to him(her).'
+    'project_team_member_invite_name': 'Real Full Name'
+    'project_team_member_invite_button': 'Send'
+    'project_team_member_add_button': 'Add New Member'
 
   $translateProvider.translations 'zh-CN',
     'basic': '基本信息'
@@ -36,6 +61,10 @@
     'next': '下一步'
     'confirm': '确认',
     'cancel': '取消',
+    'edit': '编辑',
+    'add' : '添加',
+    'remove': '移除',
+    'back' : '返回上一步',
     'project_info': '项目信息'
     'project_name': '项目名称'
     'project_name_placeholder': '如: 百度'
@@ -56,6 +85,27 @@
     'select_industry_no_content': '选择的行业将会显示在这里'
     'select_industry_header': '一级分类'
     'select_industry_subheader': '二级分类'
+    # project create team
+    'project_team_owner_title': '编辑个人信息'
+    'project_team_owner_name_label': '真实姓名'
+    'project_team_owner_name_placeholder': '真实姓名'
+    'project_team_owner_title_label': '职位'
+    'project_team_owner_title_placeholder': '你在团队的职位'
+    'project_team_owner_description_label': '更多详细信息'
+    'project_team_our_story': '我们的团队故事'
+    'project_team_our_story_placeholder': '我们的团队故事'
+    'project_team_member': '我们的成员'
+    'project_team_member_edit_title': '编辑成员信息'
+    'project_team_member_edit_title_placeholder': '职位'
+    'project_team_member_edit_title_description': '详细描述'
+    'project_team_member_joined': '已加入'
+    'project_team_member_unconfirmed': '邮件未确认'
+    'project_team_member_invite_label': '邀请新成员'
+    'project_team_member_invite_placeholder': '用户名或者邮箱'
+    'project_team_member_invite_tip': '这个用户尚未注册, 你可以邀请加入团队, 我们会自动发送邀请邮件, 一旦注册, 将自动加入团队'
+    'project_team_member_invite_name': '真实姓名'
+    'project_team_member_invite_button': '发送'
+    'project_team_member_add_button': '添加新的成员'
 
   $translateProvider.preferredLanguage('en')
 ]
