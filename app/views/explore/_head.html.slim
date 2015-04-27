@@ -3,8 +3,8 @@
     .small-12.columns
       ul.tabs
         li.tab-title class="#{active_for(type, 'square')}"
-          = link_to '推荐', explore_index_path
+          = link_to t('.recommend'), explore_index_path
         li.tab-title class="#{active_for(type, 'trend')}"
-          = link_to '趋势', trend_explore_index_path
+          = link_to t('.trend'), trend_explore_index_path
         li.tab-title class="#{active_for(type, 'all')}"
-          = link_to '所有', all_explore_index_path
+          = link_to t('.all'), all_explore_index_path

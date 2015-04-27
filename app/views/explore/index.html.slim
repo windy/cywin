@@ -1,5 +1,5 @@
 - content_for(:title) do
-  | 发现
+  | #{t('.find')}
 .explore
   .row
     .small-12.columns
@@ -7,7 +7,7 @@
       / 广场
       .square
         - if @recommends.blank?
-          p.no-content 暂无编辑推荐
+          p.no-content #{t('.no_content')}
         - else
           ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.start-projects-content
             - @recommends.each do |recommend|
@@ -15,4 +15,4 @@
               = render partial: 'common/project_block_item', locals: { project: project }
         .row
           .small-12.columns.all-projects
-            = link_to '查看所有项目', all_explore_index_path
+            = link_to t('.all_project'), all_explore_index_path

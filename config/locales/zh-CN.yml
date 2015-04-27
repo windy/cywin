@@ -40,6 +40,31 @@
       salary: 'Salary'
       title: 'Title'
       option: 'Option'
+  explore:
+    index:
+      find: 发现
+      no_content: 暂无编辑推荐项目
+      all_project: 查看所有项目
+    _head:
+      recommend: '推荐'
+      trend    : '趋势'
+      all      : '所有'
+    all:
+      all: 所有 - 发现
+      industry: '行业:'
+      all_industries: '所有'
+      all_industries_for_small: '所有行业'
+      all_cities: '所有'
+      all_cities_for_small: '所有城市'
+      search_placeholder: 项目名称
+      search: 搜索
+      no_content: '没有搜索结果'
+  common:
+    _project_block_item:
+      owner: Founder
+      team: Team
+      member: members
+      leader: Invest leader
   project:
     stages:
       idea: '概念中'

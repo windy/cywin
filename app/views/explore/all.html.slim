@@ -1,5 +1,5 @@
 - content_for(:title) do
-  | 所有 - 发现
+  | #{t('.all')}
 
 .explore.explore-all
   .row
@@ -10,16 +10,16 @@
           .small-12.columns
             .industry
               .tag
-                | 行业:
+                | #{t('.industry')}
               dl.sub-nav
                 dd class="#{active_for('', params[:head_id].to_s)}" ng-class="{ active: is_selected_head('') }"
-                  a ng-click='select_head("")' 全部
+                  a ng-click='select_head("")' #{t('.all_industries')}
                 - @heads.each do |head|
                   dd class="#{active_for(head.id.to_s, params[:head_id].to_s)}" ng-class="{ active: is_selected_head(#{head.id}) }"
                     a ng-click='select_head(#{head.id})' #{head.name}
             .industry-for-small
               select ng-model='head_id' ng-change='select_head(head_id)'
-                option value='' 全部行业
+                option value='' #{t('.all_industries_for_small')}
                 - @heads.each do |head|
                   option value='#{head.id}' #{head.name}
             .city
@@ -27,24 +27,24 @@
                 | 城市:
               dl.sub-nav ng-init='city_id ="#{params[:city_id]}"'
                 dd class="#{active_for('', params[:city_id].to_s)}" ng-class="{ active: is_selected_city('') }"
-                  a ng-click='select_city("")' 全部
+                  a ng-click='select_city("")' #{t('.all_cities')}
                 - @cities.each do |city|
                   dd class="#{active_for(city.id.to_s, params[:city_id].to_s)}" ng-class="{ active: is_selected_city(#{city.id}) }"
                     a ng-click='select_city(#{city.id})' #{city.name}
             .city-for-small
               select ng-model='city_id' ng-change='select_city(city_id)'
-                option value='' 全部城市
+                option value='' #{t('all_cities_for_small')}
                 - @cities.each do |city|
                   option value='#{city.id}' #{city.name}
         .row#search-wrapper.collapse
           .small-9.medium-6.large-4.columns
-            input type='text' id='search' placeholder='项目名称' ng-model='q' ng-init='q="#{params[:q]}"'
+            input type='text' id='search' placeholder=t('.search_placeholder') ng-model='q' ng-init='q="#{params[:q]}"'
           .small-3.medium-1.large-1.end.columns
-            a.button.postfix ng-click='search()' 搜索
+            a.button.postfix ng-click='search()' #{t('.search')}
 
       .small-12.columns.projects
         - if @projects.blank?
-          p.no-content 没有搜索结果
+          p.no-content #{t('.no_content')}
         - else
           = render partial: 'common/project_list_item', collection: @projects, as: :project
           .paginate

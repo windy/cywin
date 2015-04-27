@@ -40,6 +40,32 @@ en:
       salary: 'Salary'
       title: 'Title'
       option: 'Option'
+  explore:
+    index:
+      find: Find
+      no_content: No recommend project now
+      all_project: See All Projects
+    _head:
+      recommend: 'Recommend'
+      trend    : '  Trend  '
+      all      : '   All   '
+    all:
+      all: All - Find
+      industry: 'Category:'
+      all_industries: 'All'
+      all_industries_for_small: 'All Categories'
+      all_cities: 'All'
+      all_cities_for_small: 'All Cities'
+      search_placeholder: Project Name
+      search: Search
+      no_content: 'No search result'
+  common:
+    _project_block_item:
+      owner: Founder
+      team: Team
+      member: members
+      leader: Invest leader
+
   project:
     stages:
       idea: '概念中'
