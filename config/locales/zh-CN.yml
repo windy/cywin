@@ -60,6 +60,19 @@
       search_placeholder: 项目名称
       search: 搜索
       no_content: '没有搜索结果'
+    trend:
+      trend: 趋势 - 发现
+      by_investments: '按投资额'
+      by_stars: '按关注量'
+      by_talks: '按约谈量'
+      by_times: '按最近时间'
+      a_week: '按周'
+      a_month: '按月'
+      project: '项目'
+      amount: '投资额'
+      star: '新增关注'
+      talk: '新增约谈'
+      time: '创建时间'
   common:
     _project_block_item:
       owner: Founder

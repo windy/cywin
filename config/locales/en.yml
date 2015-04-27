@@ -60,6 +60,19 @@ en:
       search_placeholder: Project Name
       search: Search
       no_content: 'No search result'
+    trend:
+      trend: Trend - Find
+      by_investments: 'By Investments'
+      by_stars: 'By Stars'
+      by_talks: 'By Talks'
+      by_times: 'By Recent Time'
+      a_week: 'Weekly'
+      a_month: 'Monthly'
+      project: 'Project Name'
+      amount: 'Amount'
+      star: 'New Stars'
+      talk: 'New Talks'
+      time: 'Create At'
   common:
     _project_block_item:
       owner: Founder
