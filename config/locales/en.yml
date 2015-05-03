@@ -1,6 +1,7 @@
 en:
   ago: ago
   since: Since
+  cancel: Cancel
   menu:
     projects: Find Projects
     activities: Activities
@@ -122,6 +123,31 @@ en:
       hiring:
         one: 'other %{count} position is hiring'
         other: 'other %{count} positions are hiring'
+  investors:
+    index:
+      title: 'Investors'
+      head:
+        title: Certification Investor
+        apply: Apply Now
+        description: Follow excellent investors, invest as them, study investment principle
+      type: 'Category:'
+      type_all: All
+      type_small_all: All
+      search_placeholder: 'Search Investor'
+      no_content: No search result here
+    investor:
+      deliver_button: 'Deliver'
+      industry: 'Investment Fields'
+      company: 'Company'
+      star: Star
+      cancel_star: 'Cancel Star'
+      loading: 'Loading'
+      deliver_title: Delivering project to
+      select_project_tip: Select one or more projects to deliver
+      no_content:
+        title: 'No project for you, click the '
+        link: ' Link '
+        create: 'to create one'
 
   common:
     _project_block_item:
@@ -143,18 +169,10 @@ en:
       partner: '合作者'
   investor:
     investor_types:
-      person: '个人'
-      organization: '机构'
+      person: 'Personal'
+      organization: 'Organization'
   investidea:
     coin_types:
       cny: '人民币'
       usd: '外币'
       cny_and_usd: '人民币+外币'
-  errors:
-    messages:
-      #carrierwave 翻译信息
-      carrierwave_processing_error: "不能调整大小"
-      carrierwave_integrity_error: "不是一张图片"
-      carrierwave_download_error: "无法下载图片"
-      extension_white_list_error: "扩展格式不正确: %{extension},  只允许以下格式: %{allowed_types}"
-      extension_black_list_error: "不允许上传此格式: %{extension}, 禁止的格式如下: %{prohibited_types}"

@@ -1,6 +1,7 @@
 'zh-CN':
   ago: 前
   since: 来自
+  cancel: 取消
   menu:
     projects: 发现项目
     activities: 动态
@@ -120,6 +121,32 @@
     _event_person_require_foot:
       more: '更多...'
       hiring: '有 %{count} 个职位正在招聘'
+  investors:
+    index:
+      title: '投资人'
+      head:
+        title: 认证投资人
+        apply: 立刻申请
+        description: 关注优秀的投资人, 跟投项目, 学习投资理念
+      type: '类别:'
+      type_all: 全部
+      type_small_all: 全部类别
+      search_placeholder: '输入投资人信息, 如: 张三'
+      no_content: 没有搜索结果
+    investor:
+      deliver_button: '投递项目'
+      industry: '投资领域'
+      company: '所在公司'
+      star: 关注
+      cancel_star: '取消关注'
+      loading: '加载中'
+      deliver_title: 投递项目给
+      select_project_tip: 请选择投递项目
+      no_content:
+        title: '你还没有项目, 不能投递, 点击 '
+        link: ' 这里 '
+        create: '创建'
+
   common:
     _project_block_item:
       owner: Founder

@@ -1,36 +1,38 @@
+- content_for(:title) do
+  | #{t('.title')}
 .investors
   .head.top-blank
     .row
       .small-12.columns
         h2
-          | 认证投资人
+          | #{t('.head.title')}
           - unless current_user && current_user.has_role?(:investor)
-            = link_to '立刻申请', basic_investors_path
-        p 关注优秀的投资人, 跟投项目, 学习投资理念
+            = link_to t('.head.apply'), basic_investors_path
+        p #{t('.head.description')}
   .row
     .small-12.columns
       form.search-form ng-submit='search()' ng-controller='InvestorSearchController' ng-init='investor_type="#{params[:investor_type]}"'
         .row
           .small-12.columns
             dl.sub-nav
-              dt 类别:
+              dt #{t('.type')}
               dd class="#{active_for('', params[:investor_type].to_s)}" ng-class="{ active: is_selected_investor_type('') }"
-                a ng-click='select_investor_type("")' 全部
+                a ng-click='select_investor_type("")' #{t('.type_all')}
               - @investor_types.each do |investor_type|
                 dd class="#{active_for(investor_type.to_s, params[:investor_type].to_s)}" ng-class="{ active: is_selected_investor_type('#{investor_type}') }"
                   a ng-click='select_investor_type("#{investor_type}")' #{t('investor.investor_types.'+ investor_type)}
             .show-for-small-only
               select ng-model='investor_type' ng-change='select_investor_type(investor_type)'
-                option value='' 全部类别
+                option value='' #{t('.type_small_all')}
                 - @investor_types.each do |investor_type|
                   option value="#{investor_type}" #{t('investor.investor_types.'+ investor_type)}
         .row.search.collapse
           .small-9.medium-6.large-4.columns
-            input type='text' ng-model='q' ng-init='q="#{params[:q]}"' placeholder='输入投资人信息, 如: 张三'
+            input type='text' ng-model='q' ng-init='q="#{params[:q]}"' placeholder=t('.search_placeholder')
           .small-3.medium-1.large-1.end.columns
-            a.button.postfix ng-click='search()' 搜索
+            a.button.postfix ng-click='search()' #{t('.search')}
       - if @investors.blank?
-        p.no-content 没有搜索结果
+        p.no-content #{t('.no_content')}
       - else
         .investors-wrapper
           = render partial: 'investor', collection: @investors

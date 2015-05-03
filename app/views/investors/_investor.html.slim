@@ -15,11 +15,11 @@
               .description
                 | #{investor.description}
             .industry-area
-              span.industry-label 投资领域
+              span.industry-label #{t('.industry')}
               span.industry-content
                 | #{investor.investidea.industry}
             .industry-area
-              span.industry-label 所在公司
+              span.industry-label #{t('.company')}
               span.industry-content
                 | #{investor.company}
       .small-12.medium-4.large-3.columns
@@ -28,27 +28,27 @@
             .star-button-wrapper.ng-cloak ng-controller='FunsController' ng-init='init(#{investor.user.id}, #{current_user.fun?(investor.user)})'
               .star-button ng-hide='loading || is_fun' ng-click='add_fun()'
                 i.fa.fa-plus
-                a 关注
+                a #{t('.star')}
               .star-button ng-show='!loading && is_fun' ng-click='remove_fun()'
                 i.fa.fa-plus
-                a 取消关注
+                a #{t('.cancel_star')}
               .star-button ng-show='loading'
                 i.fa.fa-plus
-                a 加载中
-          .deliver-button ng-click='open_deliver_project_modal(#{investor.user_id})' 
+                a #{t('.loading')}
+          .deliver-button ng-click='open_deliver_project_modal(#{investor.user_id})'
             i.fa.fa-send
-            a 投递项目
+            a #{t('.deliver_button')}
             script type='text/ng-template' id='deliver_project_modal.html'
               .row.deliver-project-modal.ng-cloak
                 a.close-reveal-modal ng-click="cancel()" ×
                 .small-12.columns
                   h3
-                    | 投递项目给 
+                    | #{t('.deliver_title')}
                     span.ng-cloak
                       | {{ delivered_user_info.name }}
                   hr
                   .wrapper ng-hide=' is_delivering_projects_empty() '
-                    p 请选择投递项目
+                    p #{t('.select_project_tip')}
                     ul.small-block-grid-3.medium-block-grid-5
                       li ng-repeat=' project in delivering_projects '
                         .delivering-project ng-class= '{ select: is_selected_project(project) }' ng-click='toggle_project(project)'
@@ -58,11 +58,11 @@
                             span.fa.fa-check ng-show=' is_selected_project(project) '
                             | {{ project.name }}
                   p.no-content ng-show=' is_delivering_projects_empty() '
-                    | 你还没有项目, 不能投递, 点击
-                    = link_to ' 这里 ', new_project_path
-                    | 创建.
+                    | #{t('.no_content.title')}
+                    = link_to t('.no_content.link'), new_project_path
+                    | #{t('.no_content.create')}.
                   hr
                   p.ng-cloak.alert
                     | {{ deliver_error }}
-                  button ng-click='deliver()' 开始投递
-                  a.back ng-click='cancel()' 取消
+                  button ng-click='deliver()' #{t('.deliver_button')}
+                  a.back ng-click='cancel()' #{t('cancel')}
