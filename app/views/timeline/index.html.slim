@@ -1,59 +1,45 @@
 - content_for(:title) do
-  | 时间线
+  | #{t('.title')}
 
 .timeline.top-blank ng-controller='TimelineController' ng-init='init(#{@start_with})'
-  /*.row.recommend-projects*/
-    /*.small-12.medium-6.columns*/
-      /*.panel*/
-        /*div hello*/
-    /*.small-12.medium-6.columns*/
-      /*.panel*/
-        /*div hello*/
   .row.content
     .small-12.medium-8.columns
       .panel
         - if @events.blank?
-          #TODO 
-          p 时间线为空, 你可以
+          p #{t('.no_content.p')}
           ul
             li
-              = link_to '浏览并关注项目', explore_index_path
+              = link_to t('.no_content.explore_link'), explore_index_path
             li
-              = link_to '创建项目', new_project_path
+              = link_to t('.no_content.new_project'), new_project_path
             li
-              = link_to '关注你喜欢的投资人', investors_path
+              = link_to t('.no_content.investor_link'), investors_path
         - else
           = render partial: 'event', collection: @events
           .event.ng-cloak ng-repeat= 'event in events' ng-bind-html='event'
-          .event-no-content ng-show='no_content_flag' 没有更多内容
+          .event-no-content ng-show='no_content_flag' #{t('.no_content_flag')}
           .load-more
-            button.expand ng-hide='loading' ng-click='load_more()' 加载更多
-            button.expand ng-show='loading' 加载中...
+            button.expand ng-hide='loading' ng-click='load_more()' #{t('.load_more')}
+            button.expand ng-show='loading' #{t('.loading')}
     .small-12.medium-4.columns
       .panel
-        h5.title 我的项目
+        h5.title #{t('.my_project.title')}
         - if @my_projects.blank?
           p.no-content
-            | 暂无项目
+            | #{t('.my_project.no_content')}
         - else
           ul
             - @my_projects.each do |project|
               li
                 = link_to project.name, project
       .panel
-        h5.title 关注的项目
+        h5.title #{t('.star_project.title')}
         - if @my_projects.blank?
           p.no-content
-            | 暂无项目
+            | #{t('.star_project.no_content')}
         - else
           ul
             - @star_projects.each do |star|
               - project = star.project
               li
                 = link_to project.name, project
-      /*.panel*/
-        /*h5.title 我的项目*/
-        /*ul*/
-          /*li helo*/
-          /*li helo*/
-          /*li helo*/

@@ -73,6 +73,53 @@
       star: '新增关注'
       talk: '新增约谈'
       time: '创建时间'
+  timeline:
+    index:
+      title: Timeline
+      no_content:
+        p: '时间线为空, 你可以:'
+        explore_link: 浏览并关注项目
+        new_project: 创建新项目
+        investor_link: 关注你喜欢的投资人
+      no_content_flag: 没有更多内容
+      load_more: '加载更多'
+      loading: '加载中...'
+      my_project:
+        title: 我的项目
+        no_content: 暂无项目
+      star_project:
+        title: 我关注的项目
+        no_content: 暂无项目
+    event:
+      project: 项目
+      more: '更多...'
+      project_star_action: 关注了项目
+      user_fun_action: 关注了用户
+      project_create_action: 创建了新项目
+      project_join_action: 加入了项目
+      project_invest_action: 投资了
+      project_invest2_action: 给项目
+      project_invest_add_action: 追加投资给项目
+      project_invest_add2_action: 目前他的投资
+      money_require_create_action: 发起了融资需求
+      money_require_create_total: 计划融资
+      leader_action: 找到了领投人
+      leader: 领投人
+      money_require_open_action: 正式开始融资
+      person_require_create_action: 开始招聘
+      person_require:
+        salary: 月薪
+        option: 期权
+        stock: 股票
+        remote: '- 可远程 '
+        part: '- 可兼职'
+      interset_work:
+        to: '对项目'
+        work: '的工作'
+        interest: '感兴趣'
+    _event_person_require_foot:
+      more: '更多...'
+      hiring: '有 %{count} 个职位正在招聘'
   common:
     _project_block_item:
       owner: Founder

@@ -1,6 +1,6 @@
 en:
-  ago: Ago
-  since: 来自
+  ago: ago
+  since: Since
   menu:
     projects: Find Projects
     activities: Activities
@@ -73,6 +73,56 @@ en:
       star: 'New Stars'
       talk: 'New Talks'
       time: 'Create At'
+  timeline:
+    index:
+      title: Timeline
+      no_content:
+        p: 'No events here, you can:'
+        explore_link: 'Explore and star projects'
+        new_project: 'Create your own project'
+        investor_link: 'Explore and follow other investors'
+      no_content_flag: 'No More Content'
+      load_more: 'Load More'
+      loading: 'Loading...'
+      my_project:
+        title: My Projects
+        no_content: No Project Now
+      star_project:
+        title: My Starred Projects
+        no_content: No Starred Project Now
+    event:
+      project: project
+      more: 'more...'
+      project_star_action: starred project
+      user_fun_action: starred user
+      project_create_action: created project
+      project_join_action: joined project
+      project_invest_action: invested
+      project_invest2_action: to project
+      project_invest_add_action: add new investment to project
+      project_invest_add2_action: now his total investment is
+      money_require_create_action: create investment
+      money_require_create_total: plan invest
+      leader_action: got invest leader
+      leader: invest leader
+      money_require_open_action: began investing
+      person_require_create_action: began hiring
+      person_require:
+        salary: salary
+        option: option
+        stock: stock
+        remote: '- remote work '
+        part: '- part-time'
+      interset_work:
+        to: 'is interested to'
+        work: ''
+        interest: ''
+    _event_person_require_foot:
+      more: 'more...'
+      hiring:
+        one: 'other %{count} position is hiring'
+        other: 'other %{count} positions are hiring'
+
   common:
     _project_block_item:
       owner: Founder
