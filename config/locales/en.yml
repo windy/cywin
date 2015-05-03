@@ -15,12 +15,12 @@ en:
     new_project: New Project
     me: Me
     apply_investor: Apply Investor
-    already_investor: Already Investor
+    already_investor: Investor Info
     info_investor: Investor Progress
-    home: My Home
-    setting: My Setting
-    admin: Admin Dashboard
-    logout: Logout
+    home: Home
+    setting: Setting
+    admin: Dashboard
+    logout: Log out
   start-page:
     new_project: Publish Your Project
     hot_project: Hot Projects
