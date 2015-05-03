@@ -134,6 +134,7 @@ en:
       type_all: All
       type_small_all: All
       search_placeholder: 'Search Investor'
+      search: 'Search'
       no_content: No search result here
     investor:
       deliver_button: 'Deliver'
