@@ -11,7 +11,7 @@
           p.sub-name
             | #{project.oneword}
         .job-content
-          p 我们正在招聘 #{ person_require.title }
+          p #{t('.job_content', title: person_require.title)}
         .job-info
           i.fa.fa-map-marker
           span.city
@@ -20,9 +20,9 @@
           span.category
             = raw project_categories_link(project)
           - if person_require.remote
-            span.info.remote 
+            span.info.remote
               span.fa.fa-cloud
-              | 可远程
-          span.info.interest 
+              | #{t('.remote')}
+          span.info.interest
             span.fa.fa-heart
-            | #{person_require.users.size} 个感兴趣
+            | #{t('.interests', count: person_require.users.size)}

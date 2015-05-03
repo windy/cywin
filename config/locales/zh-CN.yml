@@ -146,6 +146,19 @@
         title: '你还没有项目, 不能投递, 点击 '
         link: ' 这里 '
         create: '创建'
+  jobs:
+    index:
+      title: '创业职位'
+      head:
+        title: '创业工作'
+        description: '远程办公, 自由时间, 激情工作'
+      search_placeholder: '输入工作职位: 如 Ruby on Rails 开发'
+      search: '工作搜索'
+      no_content: '未查询到相关工作需求, 请尝试更换关键字'
+    person_requires:
+      remote: '可远程'
+      job_content: '我们正在招聘 %{title}'
+      interests: "%{count} 个感兴趣"
 
   common:
     _project_block_item:

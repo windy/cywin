@@ -7,7 +7,7 @@ en:
     activities: Activities
     investors: Find Investors
     jobs: Startup Jobs
-    login: Login
+    login: Log in
     register: Register
     search: Search
   dropmenu:
@@ -148,6 +148,22 @@ en:
         title: 'No project for you, click the '
         link: ' Link '
         create: 'to create one'
+  jobs:
+    index:
+      title: 'Startup Jobs'
+      head:
+        title: 'Startup Jobs'
+        description: 'Remotely, Freely, Exciting startup works'
+      search_placeholder: 'Search job title'
+      search: 'Job Search'
+      no_content: 'No job information about this keyword, please try another keyword'
+    person_requires:
+      remote: 'remotely'
+      job_content: 'Hiring %{title}'
+      interests:
+        zero: '0 guy is interested'
+        one: "1 guy is interested"
+        other: "%{count} guys are interested"
 
   common:
     _project_block_item:
