@@ -1,17 +1,19 @@
 .nav-head
   ul.small-block-grid-1.medium-block-grid-3.list
     li
-      a.active href='javascript:void(0)' 1. 基本信息
+      a.active href='javascript:void(0)' 1. {{ 'basic' | translate }}
     li
-      a href='javascript:void(0)' 2. 团队信息
+      a href='javascript:void(0)' 2. {{ 'team' | translate }}
     li
-      a href='javascript:void(0)' 3. 创业需求
+      a href='javascript:void(0)' 3. {{ 'invest' | translate }}
 form.stage0.ng-cloak ng-submit='submit()'
-  h3.title 项目信息
+  h3.title
+    | {{ 'project_info' | translate }}
   .row
     .small-12.medium-6.columns
-      label for='name' 项目名称
-      input id='name' type='text' placeholder='如: 百度' ng-model="project.name" ng-class= '{ error: errors.name }'
+      label for='name'
+        | {{ 'project_name' | translate }}
+      input id='name' type='text' placeholder='{{ "project_name_placeholder" | translate }}' ng-model="project.name" ng-class= '{ error: errors.name }'
       small.error.ng-cloak ng-show=' errors.name ' {{ errors.name }}
   .row
     .small-4.medium-2.columns
@@ -19,7 +21,8 @@ form.stage0.ng-cloak ng-submit='submit()'
         img ng-src=' {{ project.logo_url }} '
   .row
     .small-8.medium-6.end.columns
-      label for='logo' Logo( 建议使用 200x200 尺寸大小 )
+      label for='logo'
+        | {{ 'project_logo' | translate }}
       input id='logo' type='file' ng-file-select='upload_logo($files)'
       small.error.ng-cloak ng-show=' logo_error ' {{ logo_error }}
       input type='hidden' id='logo_id' ng-model=' project.logo_id '
@@ -29,36 +32,41 @@ form.stage0.ng-cloak ng-submit='submit()'
         img ng-src=' {{ project.screenshot_url }} '
   .row
     .small-8.medium-6.end.columns
-      label for='screenshot' 产品截图
+      label for='screenshot'
+        | {{ 'project_screenshot' | translate }}
       input id='screenshot' type='file' ng-file-select='upload_screenshot($files)'
       small.error.ng-cloak ng-show=' screenshot_error ' {{ screenshot_error}}
       input type='hidden' id='logo_id' ng-model=' project.screenshot_id '
   .row
     .small-12.medium-8.columns
-      label for='oneword' 一句话
-      input id='oneword' type='text' placeholder='一句话说明, 将显示在项目副标题' ng-model='project.oneword' ng-class= '{ error: errors.oneword }'
+      label for='oneword'
+        | {{ 'project_oneword' | translate }}
+      input id='oneword' type='text' placeholder='{{ "project_oneword_placeholder" | translate }}' ng-model='project.oneword' ng-class= '{ error: errors.oneword }'
       small.error.ng-cloak ng-show=' errors.oneword' {{ errors.oneword }}
   .row
     .small-12.medium-8.columns
-      label for='link' 链接( 可选 )
+      label for='link'
+        | {{ 'project_link' | translate }}
       .row.collapse
         .small-3.medium-2.columns
           span.prefix http://
         .small-9.medium-10.columns
-          input id='link' type='text' placeholder='项目网站链接' ng-model='project.link' ng-class= '{ error: errors.link }'
+          input id='link' type='text' placeholder='{{ "project_link_placeholder" | translate }}' ng-model='project.link' ng-class= '{ error: errors.link }'
           small.error.ng-cloak ng-show=' errors.link' {{ errors.link }}
   .row
     .small-12.medium-8.columns
-      label for='description' 产品介绍
-      textarea id='description' placeholder='完整描述你的产品' ng-model='project.description' ng-class= '{ error: errors.description }'
+      label for='description'
+        | {{ 'project_description' | translate }}
+      textarea id='description' placeholder='{{ "project_description_placeholder" | translate }}' ng-model='project.description' ng-class= '{ error: errors.description }'
       small.error.ng-cloak ng-show=' errors.description' {{ errors.description }}
   .row
     .small-12.medium-8.columns
-      label for='industry' 所属行业
-      a.select-industry-link ng-click='select_industry()' 点击选择
+      label for='industry'
+        | {{ "project_industry" | translate }}
+      a.select-industry-link ng-click='select_industry()' {{ "project_industry_select" | translate }}
       ul.inline-list.select-industries
         .no-content ng-show='is_empty_industries()'
-          | 选择的行业将会显示在这里
+          | {{ "project_industry_tip" | translate }}
         li ng-repeat=' industry in project.industries '
           .content
             span
@@ -69,8 +77,9 @@ form.stage0.ng-cloak ng-submit='submit()'
 
   .row
     .small-10.medium-4.columns
-      label for='city' 城市
-      input id='city' type='text' ng-model='project.city' ng-class= '{ error: errors.city}' typeahead="city.name for city in autocomplete_city($viewValue)" typeahead-loading="loadingCity" placeholder="请用中文输入"
+      label for='city'
+        | {{ "project_city" | translate }}
+      input id='city' type='text' ng-model='project.city' ng-class= '{ error: errors.city}' typeahead="city.name for city in autocomplete_city($viewValue)" typeahead-loading="loadingCity" placeholder='{{ "project_city_placeholder" | translate }}'
       i ng-show="loadingCity" class="glyphicon glyphicon-refresh"
       small.error.ng-cloak ng-show=' errors.city ' {{ errors.city }}
   .row
@@ -79,4 +88,5 @@ form.stage0.ng-cloak ng-submit='submit()'
         |{{ error_message }}
       hr
       .control-actions
-        button 下一步
+        button
+          | {{ "next" | translate }}

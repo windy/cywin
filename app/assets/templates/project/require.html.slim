@@ -1,27 +1,31 @@
-.head
+.nav-head
   ul.small-block-grid-1.medium-block-grid-3.list
     li
-      a href='javascript:void(0)' 1. 基本信息
+      a.active href='javascript:void(0)' 1. {{ 'basic' | translate }}
     li
-      a href='javascript:void(0)' 2. 团队信息
+      a href='javascript:void(0)' 2. {{ 'team' | translate }}
     li
-      a.active href='javascript:void(0)' 3. 创业需求
+      a href='javascript:void(0)' 3. {{ 'invest' | translate }}
 .row.stage2
   .small-12.columns
     form
-      h3.purpose 在这里的目的
+      h3.purpose
+        | {{ 'project_invest_purpose' | translate }}
       .title-wrapper
         input type='checkbox' id='money_require_flag' ng-model='money_require_flag'
         label for="money_require_flag"
-          h4.title 我要融资
+          h4.title
+            | {{ 'project_invest_title' | translate }}
       .money-require-wrapper ng-show='money_require_flag'
-        label for="money" 计划融资
+        label for="money"
+          | {{ 'project_invest_money' | translate }}
         .row.collapse
           .small-1.columns
             span.prefix ¥
           .small-11.medium-8.large-6.end.columns
             input type='text' id='money' ng-model='money'
-        label for="share" 出让股份
+        label for="share"
+          | {{ 'project_invest_stock' | translate }}
         .row.collapse
           .small-11.medium-3.columns
             input type='text' id='share' ng-model='share'
@@ -32,81 +36,94 @@
       div.title-wrapper
         input type='checkbox' id='person_require_flag' ng-model='person_require_flag'
         label for="person_require_flag"
-          h4.title 我要招人 
+          h4.title
+            | {{ 'project_invest_job_title' | translate }}
       .person-require-wrapper ng-show='person_require_flag'
         ul.small-block-grid-1.medium-block-grid-2
           li ng-repeat= 'person_require in person_requires'
             .job-box
               table
                 tr
-                  td 职位
+                  td
+                    | {{ 'project_invest_job_title_name' | translate }}
                   td
                     |{{ person_require.title }}
                 tr
-                  td 负责内容
+                  td
+                    | {{ 'project_invest_job_description' | translate }}
                   td.description
                     |{{ person_require.description }}
                 tr
-                  td 报酬
+                  td
+                    | {{ 'project_invest_job_pay' | translate }}
                   td
                     |{{ person_require.pay | nfcurrency }}
                 tr
-                  td 期权
+                  td
+                    | {{ 'project_invest_job_option' | translate }}
                   td
                     |{{ person_require.option }}
                     |  %
                 tr
-                  td 股权
+                  td
+                    | {{ 'project_invest_job_stock' | translate }}
                   td
                     |{{ person_require.stock }}
                     |  %
                 tr
-                  td 可远程
                   td
-                    |{{ boolean2human(person_require.remote) }}
+                    | {{ 'project_invest_job_remote' | translate }}
+                  td
+                    |{{ boolean2human(person_require.remote) | translate }}
                 tr
-                  td 可兼职
                   td
-                    |{{ boolean2human(person_require.part) }}
+                    | {{ 'project_invest_job_part' | translate }}
+                  td
+                    |{{ boolean2human(person_require.part) | translate }}
         .control-actions ng-hide='person_require_edited'
-          button.small ng-click='person_require_edited = true' 添加新的招聘
+          button.small ng-click='person_require_edited = true' {{ 'project_invest_job_new' | translate }}
         .person-require-edit ng-show='person_require_edited'
-          label for='title' 职位
+          label for='title' {{ 'project_invest_job_title_name' | translate }}
           .row
             .small-12.medium-6.columns
               input type='text' id='title' ng-model='add_person_require_data.title' ng-class=' { error: add_person_require_data.errors.title }'
               small.error ng-show='add_person_require_data.errors.title' {{ add_person_require_data.errors.title }}
-          label for="description" 工作内容
+          label for="description" {{ 'project_invest_job_description' | translate }}
           .row
             .small-12.medium-6.columns
               textarea id='description' ng-model='add_person_require_data.description' ng-class=' { error: add_person_require_data.errors.description }'
               small.error ng-show='add_person_require_data.errors.description' {{ add_person_require_data.errors.description}}
-          label 月薪
+          label
+            | {{ 'project_invest_job_pay' | translate }}
           .row.collapse
             .small-1.columns
               span.prefix ¥
             .small-10.medium-4.end.columns
               input type='text' id='pay' ng-model='add_person_require_data.pay' ng-class=' { error: add_person_require_data.errors.pay }'
               small.error ng-show='add_person_require_data.errors.pay' {{ add_person_require_data.errors.pay}}
-          label 期权
+          label
+            | {{ 'project_invest_job_option' | translate }}
           .row.collapse
             .small-11.medium-4.columns
               input type='text' ng-class= '{ error: add_person_require_data.errors.option }' id='option' ng-model='add_person_require_data.option'
               small.error ng-show='add_person_require_data.errors.option' {{ add_person_require_data.errors.option }}
             .small-1.end.columns
               span.postfix %
-          label 股权
+          label
+            | {{ 'project_invest_job_stock' | translate }}
           .row.collapse
             .small-11.medium-4.columns
               input type='text' id='stock' ng-model='add_person_require_data.stock' ng-class= '{ error: add_person_require_data.errors.stock }'
               small.error ng-show='add_person_require_data.errors.stock' {{ add_person_require_data.errors.stock }}
             .small-1.end.columns
               span.postfix %
-          label for='remote' 可远程
+          label for='remote'
+            | {{ 'project_invest_job_remote' | translate }}
           .row
             .small-12.large-6.columns
               input type='checkbox' id='remote' ng-true-value='true' ng-model='add_person_require_data.remote'
-          label for='part' 可兼职
+          label for='part'
+            | {{ 'project_invest_job_part' | translate }}
           .row
             .small-12.large-6.columns
               input type='checkbox' id='part' ng-model='add_person_require_data.part'
@@ -115,10 +132,10 @@
           .row
             .small-12.large-6.columns
               .control-actions
-                button ng-click='add_person_require()' 添加
-                a.cancel ng-click='person_require_edited = false' 取消
+                button ng-click='add_person_require()' {{ 'add' | translate }}
+                a.cancel ng-click='person_require_edited = false' {{ 'cancel' | translate }}
 
       hr
       .control-actions
-        button ng-click='complete()' 确认完成
-        a.back ng-click='back()' 上一步
+        button ng-click='complete()' {{ 'complete' | translate }}
+        a.back ng-click='back()' {{ 'back' | translate }}

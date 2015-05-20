@@ -1,12 +1,13 @@
 .row.select-industry-modal
   a.close-reveal-modal ng-click="cancel()" ×
   .small-12.columns
-    h3 选择一个或多个行业
+    h3
+      | {{ 'select_industry_title' | translate }}
     .row.ng-cloak
       .small-12.columns
         ul.inline-list.select-industries
           .no-content ng-show='is_empty_industries(hash.industries)'
-            | 选择的行业将会显示在这里
+            | {{ 'select_industry_no_content' | translate }}
           li ng-repeat=' industry in hash.industries '
             .content
               span
@@ -15,14 +16,16 @@
                 i.fa.fa-times
     .row
       .small-6.columns
-        h4 一级分类
+        h4
+          | {{ 'select_industry_header' | translate }}
         ul.head.no-bullet.ng-cloak
           li ng-repeat=' head in hash.categories '
             a ng-click='select_head(head)' ng-class='{ cur: hash.head == head }'
               | {{ head.k.name }}
       .small-6.columns
-        h4 二级分类
-        ul.categories.no-bullet.ng-cloak 
+        h4
+          | {{ 'select_industry_subheader' | translate }}
+        ul.categories.no-bullet.ng-cloak
           li ng-repeat=' industry in hash.head.v '
             a ng-click='toggleIndustry(industry, $event)'
               span
@@ -32,6 +35,6 @@
     .row
       .small-12.columns
         .control-actions
-          button ng-click='submit_industry()' 确定
-          a.back ng-click='cancel()' 取消
+          button ng-click='submit_industry()' {{ 'confirm' | translate }}
+          a.back ng-click='cancel()' {{ 'cancel' | translate }}
 

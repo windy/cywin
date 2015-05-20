@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require angularjs
+//= require angular-translate
 //= require foundation/foundation
 //= require foundation/foundation.topbar
 //= require foundation/foundation.clearing

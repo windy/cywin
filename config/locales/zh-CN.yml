@@ -1,6 +1,172 @@
 'zh-CN':
   ago: 前
   since: 来自
+  cancel: 取消
+  menu:
+    projects: 发现项目
+    activities: 动态
+    investors: 投资人
+    jobs: 创业职位
+    login: 登录
+    register: 注册
+    search: 搜索
+  dropmenu:
+    project: 项目
+    new_project: 创建新项目
+    me: 我
+    apply_investor: 申请投资人
+    already_investor: 已经是认证投资人
+    info_investor: 查看投资人进度
+    home: 我的主页
+    setting: 设置
+    admin: 后台管理
+    logout: 退出
+  start-page:
+    new_project: 发布你的项目
+    hot_project: 热门项目
+    all_project: 查看所有项目
+    hot_investor: 热门投资人
+    all_investor: 查看所有投资人
+    none: '无'
+    vacancy: 空缺中
+    project:
+      owner: '创始人'
+      team: '团队'
+      member: '成员'
+      leader: '领投人'
+    investment_case: '投资案例'
+    startup_job: 创业工作
+    all_job: 查看所有工作
+    job:
+      salary: '月薪'
+      title: '职位'
+      option: '期权'
+  explore:
+    index:
+      find: 发现
+      no_content: 暂无编辑推荐项目
+      all_project: 查看所有项目
+    head:
+      recommend: '推荐'
+      trend    : '趋势'
+      all      : '所有'
+    all:
+      all: 所有 - 发现
+      industry: '行业:'
+      city: '城市:'
+      all_industries: '所有'
+      all_industries_for_small: '所有行业'
+      all_cities: '所有'
+      all_cities_for_small: '所有城市'
+      search_placeholder: 项目名称
+      search: 搜索
+      no_content: '没有搜索结果'
+    trend:
+      trend: 趋势 - 发现
+      by_investments: '按投资额'
+      by_stars: '按关注量'
+      by_talks: '按约谈量'
+      by_times: '按最近时间'
+      a_week: '按周'
+      a_month: '按月'
+      project: '项目'
+      amount: '投资额'
+      star: '新增关注'
+      talk: '新增约谈'
+      time: '创建时间'
+  timeline:
+    index:
+      title: Timeline
+      no_content:
+        p: '时间线为空, 你可以:'
+        explore_link: 浏览并关注项目
+        new_project: 创建新项目
+        investor_link: 关注你喜欢的投资人
+      no_content_flag: 没有更多内容
+      load_more: '加载更多'
+      loading: '加载中...'
+      my_project:
+        title: 我的项目
+        no_content: 暂无项目
+      star_project:
+        title: 我关注的项目
+        no_content: 暂无项目
+    event:
+      project: 项目
+      more: '更多...'
+      project_star_action: 关注了项目
+      user_fun_action: 关注了用户
+      project_create_action: 创建了新项目
+      project_join_action: 加入了项目
+      project_invest_action: 投资了
+      project_invest2_action: 给项目
+      project_invest_add_action: 追加投资给项目
+      project_invest_add2_action: 目前他的投资
+      money_require_create_action: 发起了融资需求
+      money_require_create_total: 计划融资
+      leader_action: 找到了领投人
+      leader: 领投人
+      money_require_open_action: 正式开始融资
+      person_require_create_action: 开始招聘
+      person_require:
+        salary: 月薪
+        option: 期权
+        stock: 股票
+        remote: '- 可远程 '
+        part: '- 可兼职'
+      interset_work:
+        to: '对项目'
+        work: '的工作'
+        interest: '感兴趣'
+    _event_person_require_foot:
+      more: '更多...'
+      hiring: '有 %{count} 个职位正在招聘'
+  investors:
+    index:
+      title: '投资人'
+      head:
+        title: 认证投资人
+        apply: 立刻申请
+        description: 关注优秀的投资人, 跟投项目, 学习投资理念
+      type: '类别:'
+      type_all: 全部
+      type_small_all: 全部类别
+      search_placeholder: '输入投资人信息, 如: 张三'
+      search: '投资人搜索'
+      no_content: 没有搜索结果
+    investor:
+      deliver_button: '投递项目'
+      industry: '投资领域'
+      company: '所在公司'
+      star: 关注
+      cancel_star: '取消关注'
+      loading: '加载中'
+      deliver_title: 投递项目给
+      select_project_tip: 请选择投递项目
+      no_content:
+        title: '你还没有项目, 不能投递, 点击 '
+        link: ' 这里 '
+        create: '创建'
+  jobs:
+    index:
+      title: '创业职位'
+      head:
+        title: '创业工作'
+        description: '远程办公, 自由时间, 激情工作'
+      search_placeholder: '输入工作职位: 如 Ruby on Rails 开发'
+      search: '工作搜索'
+      no_content: '未查询到相关工作需求, 请尝试更换关键字'
+    person_requires:
+      remote: '可远程'
+      job_content: '我们正在招聘 %{title}'
+      interests: "%{count} 个感兴趣"
+
+  common:
+    _project_block_item:
+      owner: 创始人
+      team: 团队
+      member: 成员
+      leader: 领投人
   project:
     stages:
       idea: '概念中'

@@ -1,4 +1,4 @@
 .foot
   span
-    | 有 #{person_requires.opened.size} 个职位正在招聘
-  = link_to '更多...', project_path(project)
+    | #{t('timeline._event_person_require_foot.hiring', count: person_requires.opened.size)}
+  = link_to t('timeline._event_person_require_foot.more'), project_path(project)

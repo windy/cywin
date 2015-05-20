@@ -19,11 +19,11 @@ module Cywin
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.enforce_available_locales = false
-    config.i18n.default_locale = 'zh-CN'.to_sym
+    config.i18n.default_locale = (ENV['LOCALE'] || 'zh-CN').to_sym
     config.action_controller.action_on_unpermitted_parameters = :log
 
     config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
-    
+
     # generators
     config.generators.assets = false
     config.generators.helper = false

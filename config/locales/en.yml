@@ -1,23 +1,195 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  ago: ago
+  since: Since
+  cancel: Cancel
+  menu:
+    projects: Find Projects
+    activities: Activities
+    investors: Find Investors
+    jobs: Startup Jobs
+    login: Log in
+    register: Register
+    search: Search
+  dropmenu:
+    project: Project
+    new_project: New Project
+    me: Me
+    apply_investor: Apply Investor
+    already_investor: Investor Info
+    info_investor: Investor Progress
+    home: Home
+    setting: Setting
+    admin: Dashboard
+    logout: Log out
+  start-page:
+    new_project: Publish Your Project
+    hot_project: Hot Projects
+    all_project: See All Projects
+    hot_investor: Hot Investors
+    all_investor: See All Investors
+    none: 'None'
+    vacancy: Vacancy
+    project:
+      owner: 'Founder'
+      team: 'Team'
+      member: 'members'
+      leader: 'Invest Leader'
+    investment_case: 'Investment Cases'
+    startup_job: Startup Jobs
+    all_job: See All Jobs
+    job:
+      salary: 'Salary'
+      title: 'Title'
+      option: 'Option'
+  explore:
+    index:
+      find: Find
+      no_content: No recommend project now
+      all_project: See All Projects
+    _head:
+      recommend: 'Recommend'
+      trend    : '  Trend  '
+      all      : '   All   '
+    all:
+      all: All - Find
+      industry: 'Category:'
+      city: 'City:'
+      all_industries: 'All'
+      all_industries_for_small: 'All Categories'
+      all_cities: 'All'
+      all_cities_for_small: 'All Cities'
+      search_placeholder: Project Name
+      search: Search
+      no_content: 'No search result'
+    trend:
+      trend: Trend - Find
+      by_investments: 'By Investments'
+      by_stars: 'By Stars'
+      by_talks: 'By Talks'
+      by_times: 'By Recent Time'
+      a_week: 'Weekly'
+      a_month: 'Monthly'
+      project: 'Project Name'
+      amount: 'Amount'
+      star: 'New Stars'
+      talk: 'New Talks'
+      time: 'Create At'
+  timeline:
+    index:
+      title: Timeline
+      no_content:
+        p: 'No events here, you can:'
+        explore_link: 'Explore and star projects'
+        new_project: 'Create your own project'
+        investor_link: 'Explore and follow other investors'
+      no_content_flag: 'No More Content'
+      load_more: 'Load More'
+      loading: 'Loading...'
+      my_project:
+        title: My Projects
+        no_content: No Project Now
+      star_project:
+        title: My Starred Projects
+        no_content: No Starred Project Now
+    event:
+      project: project
+      more: 'more...'
+      project_star_action: starred project
+      user_fun_action: starred user
+      project_create_action: created project
+      project_join_action: joined project
+      project_invest_action: invested
+      project_invest2_action: to project
+      project_invest_add_action: add new investment to project
+      project_invest_add2_action: now his total investment is
+      money_require_create_action: create investment
+      money_require_create_total: plan invest
+      leader_action: got invest leader
+      leader: invest leader
+      money_require_open_action: began investing
+      person_require_create_action: began hiring
+      person_require:
+        salary: salary
+        option: option
+        stock: stock
+        remote: '- remote work '
+        part: '- part-time'
+      interset_work:
+        to: 'is interested to'
+        work: ''
+        interest: ''
+    _event_person_require_foot:
+      more: 'more...'
+      hiring:
+        one: 'other %{count} position is hiring'
+        other: 'other %{count} positions are hiring'
+  investors:
+    index:
+      title: 'Investors'
+      head:
+        title: Certification Investor
+        apply: Apply Now
+        description: Follow excellent investors, invest as them, study investment principle
+      type: 'Category:'
+      type_all: All
+      type_small_all: All
+      search_placeholder: 'Search Investor'
+      search: 'Search'
+      no_content: No search result here
+    investor:
+      deliver_button: 'Deliver'
+      industry: 'Investment Fields'
+      company: 'Company'
+      star: Star
+      cancel_star: 'Cancel Star'
+      loading: 'Loading'
+      deliver_title: Delivering project to
+      select_project_tip: Select one or more projects to deliver
+      no_content:
+        title: 'No project for you, click the '
+        link: ' Link '
+        create: 'to create one'
+  jobs:
+    index:
+      title: 'Startup Jobs'
+      head:
+        title: 'Startup Jobs'
+        description: 'Remotely, Freely, Exciting startup works'
+      search_placeholder: 'Search job title'
+      search: 'Job Search'
+      no_content: 'No job information about this keyword, please try another keyword'
+    person_requires:
+      remote: 'remotely'
+      job_content: 'Hiring %{title}'
+      interests:
+        zero: '0 guy is interested'
+        one: "1 guy is interested"
+        other: "%{count} guys are interested"
+
+  common:
+    _project_block_item:
+      owner: Founder
+      team: Team
+      member: members
+      leader: Invest leader
+
+  project:
+    stages:
+      idea: '概念中'
+      developing: '开发中'
+      online: '已上线'
+      gained: '已盈利'
+  member:
+    roles:
+      founder: '创始人'
+      member: '团队成员'
+      partner: '合作者'
+  investor:
+    investor_types:
+      person: 'Personal'
+      organization: 'Organization'
+  investidea:
+    coin_types:
+      cny: '人民币'
+      usd: '外币'
+      cny_and_usd: '人民币+外币'

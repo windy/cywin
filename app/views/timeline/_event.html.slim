@@ -5,9 +5,9 @@
       .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, user_path(event.user)
-          | 关注了项目
+          | #{t('.project_star_action')}
           = link_to event.project.name, project_path(event.project)
-          span.created-at #{time_ago_in_words(event.created_at)}前
+          span.created-at #{time_ago_in_words(event.created_at)} #{t('ago')}
         = render partial: 'timeline/event_project_content', locals: { event: event }
 - if event.action == Event::USER_FUN
   /! user fun
@@ -16,9 +16,9 @@
       .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, user_path(event.user)
-          | 关注了用户
+          | #{t('.project_star_action')}
           = link_to event.target.name, user_path(event.target)
-          span.created-at #{time_ago_in_words(event.created_at)}前
+          span.created-at #{time_ago_in_words(event.created_at)} #{t('ago')}
 - if event.action == Event::PROJECT_CREATE
   /! project create
   .box
@@ -26,9 +26,9 @@
       .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, user_path(event.user)
-          | 创建了新项目
+          | #{t('.project_create_action')}
           = link_to event.project.name, project_path(event.project)
-          span.created-at #{time_ago_in_words(event.created_at)}前
+          span.created-at #{time_ago_in_words(event.created_at)} #{t('ago')}
         = render partial: 'timeline/event_project_content', locals: { event: event }
 - if event.action == Event::PROJECT_JOIN
   /! project join
@@ -37,9 +37,9 @@
       .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, user_path(event.user)
-          | 加入了项目
+          | #{t('.project_join_action')}
           = link_to event.project.name, project_path(event.project)
-          span.created-at #{time_ago_in_words(event.created_at)}前
+          span.created-at #{time_ago_in_words(event.created_at)} #{t('ago')}
         = render partial: 'timeline/event_project_content', locals: { event: event }
 - if event.action == Event::PROJECT_INVEST
   /! project invest
@@ -48,11 +48,11 @@
       .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, user_path(event.user)
-          | 投资了
+          | #{t('.project_invest_action')}
           = link_to "¥ #{number_with_delimiter(event.data[:money])}", project_path(event.project)
-          | 给项目
+          | #{t('.project_invest2_action')}
           = link_to event.project.name, project_path(event.project)
-          span.created-at #{time_ago_in_words(event.created_at)}前
+          span.created-at #{time_ago_in_words(event.created_at)} #{t('ago')}
 - if event.action == Event::PROJECT_INVEST_ADD
   /! project invest add
   .box
@@ -60,11 +60,11 @@
       .small-12.columns.content-wrapper
         .head
           = link_to event.user.name, user_path(event.user)
-          | 追加投资给项目
+          | #{t('.project_invest_add_action')}
           = link_to event.project.name, project_path(event.project)
-          | , 目前他的投资:
+          | , #{t('.project_invest_add2_action')}:
           = link_to "¥ #{number_with_delimiter(event.data[:money])}", project_path(event.project)
-          span.created-at #{time_ago_in_words(event.created_at)}前
+          span.created-at #{time_ago_in_words(event.created_at)} #{t('ago')}
 - if event.action == Event::MONEY_REQUIRE_CREATE
   /! money require create
   .box
@@ -72,16 +72,16 @@
       .small-12.columns.content-wrapper
         .head
           span
-            | 项目
+            | #{t('.project')}
           = link_to event.project.name, project_path(event.project)
-          | 发起了融资需求
-          span.created-at #{time_ago_in_words(event.created_at)}前
+          | #{t('.money_require_create_action')}
+          span.created-at #{time_ago_in_words(event.created_at)} #{t('ago')}
         = render partial: 'timeline/event_project_content', locals: { event: event }
         .foot
-          p 
-            | 计划融资 ¥ #{number_with_delimiter(event.target.money)}
+          p
+            | #{t('.money_require_create_total')} ¥ #{number_with_delimiter(event.target.money)}
             span.detail
-              = link_to '更多...', project_path(event.project)
+              = link_to t('.more'), project_path(event.project)
 - if event.action == Event::MONEY_REQUIRE_LEADER
   /! leader
   .box
@@ -89,11 +89,11 @@
       .small-12.columns.content-wrapper
         .head
           span
-            | 项目
+            | #{t('.project')}
           = link_to event.project.name, project_path(event.project)
-          | 找到了领投人
+          | #{t('.leader_action')}
           = link_to event.target.leader.name, user_path(event.target.leader)
-          span.created-at #{time_ago_in_words(event.created_at)}前
+          span.created-at #{time_ago_in_words(event.created_at)} #{t('ago')}
         = render partial: 'timeline/event_project_content', locals: { event: event }
 - if event.action == Event::MONEY_REQUIRE_OPENED
   /! money require opened
@@ -102,31 +102,31 @@
       .small-12.columns.content-wrapper
         .head
           span
-            | 项目
+            | #{t('.project')}
           = link_to event.project.name, project_path(event.project)
-          | 正式开始融资
-          span.created-at #{time_ago_in_words(event.created_at)}前
+          | #{t('.money_require_open_action')}
+          span.created-at #{time_ago_in_words(event.created_at)} #{t('ago')}
         = render partial: 'timeline/event_project_content', locals: { event: event }
         .foot
           span
-            | 计划融资 ¥ #{number_with_delimiter(event.target.money)}, 
-            | 领投人
+            | #{t('.money_require_create_total')} ¥ #{number_with_delimiter(event.target.money)},
+            | #{t('.leader')}
           = link_to event.target.leader.name, user_path(event.target.leader)
-          = link_to '更多...', project_path(event.project)
+          = link_to t('.more'), project_path(event.project)
 - if event.action == Event::PERSON_REQUIRE_CREATE
-  /! person_require create  
+  /! person_require create
   .box
     .row
       .small-12.columns.content-wrapper
         .head
           span
-            | 项目
+            | #{t('.project')}
           = link_to event.project.name, project_path(event.project)
-          | 开始招聘
+          | #{t('.person_require_create_action')}
           = link_to event.target.title, project_path(event.project)
-          span.created-at #{time_ago_in_words(event.created_at)}前
+          span.created-at #{time_ago_in_words(event.created_at)} #{t('ago')}
         .head2
-          | 月薪 #{number_to_currency(event.target.pay)} - 期权 #{event.target.option}% - 股票 #{event.target.stock}% #{ ' - 可远程' if event.target.remote }#{ ' - 可兼职' if event.target.part }
+          | #{t('.person_require.salary')} #{number_to_currency(event.target.pay)} - #{t('.person_require.option')} #{event.target.option}% - #{t('.person_require.stock')} #{event.target.stock}% #{ t('.person_require.remote') if event.target.remote }#{ t('.person_require.part') if event.target.part }
         = render partial: 'timeline/event_project_content', locals: { event: event }
         = render partial: 'timeline/event_person_require_foot', locals: { project: event.project, person_requires: event.project.person_requires }
 - if event.action == Event::INTEREST_WORK
@@ -137,9 +137,9 @@
         .head
           = link_to event.user.name, event.user
           span
-            | 对项目
+            | #{t('.interset_work.to')}
           = link_to event.project.name, event.project
-          | 的工作
+          | #{t('.interset_work.work')}
           = link_to event.target.person_require.title, event.project
-          | 感兴趣
-          span.created-at #{time_ago_in_words(event.created_at)}前
+          | #{t('.interset_work.interest')}
+          span.created-at #{time_ago_in_words(event.created_at)} #{t('ago')}

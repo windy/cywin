@@ -1,4 +1,4 @@
-@app.controller 'ProjectCreateRequireController', [ '$scope', '$http', '$routeParams', '$location', '$window', ($scope, $http, $routeParams, $location, $window)->
+@app.controller 'ProjectCreateRequireController', [ '$scope', '$http', '$routeParams', '$location', '$window', '$translate', ($scope, $http, $routeParams, $location, $window, $translate)->
 
   $scope.project_id = $routeParams.id
   $scope.money_require_flag = true
@@ -79,9 +79,9 @@
 
   $scope.boolean2human = (bool)->
     if bool
-      '是'
+      'true'
     else
-      '否'
+      'false'
 
   $scope.back = ()->
     $location.url('/project/team' + '?id=' + $scope.project_id)

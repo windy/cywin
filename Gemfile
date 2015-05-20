@@ -52,6 +52,8 @@ gem 'angularjs-rails'
 
 # i18n
 gem 'rails-i18n', '~> 4.0.0'
+gem 'i18n-tasks', '~> 0.8.3'
+gem 'angular-translate-rails'
 
 # web server
 gem 'unicorn'

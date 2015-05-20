@@ -1,4 +1,4 @@
-li 
+li
   .box.project
     .head
       .row
@@ -14,7 +14,7 @@ li
         .row
           .small-5.columns
             .type
-              | 创始人
+              | #{t('.owner')}
           .small-7.columns
             .item.right
               = link_to project.owner.name, project.owner
@@ -22,17 +22,17 @@ li
         .row
           .small-5.columns
             .type
-              | 团队
+              | #{t('.team')}
           .small-7.columns
             .item.right.margin-link-wrapper
               = link_to project.members.size, project_path(project)
-              | 人
+              | #{t('.member')}
       - if (leader = project.try(:opened_money_require).try(:leader) ).present?
         .tag
           .row
             .small-4.columns
               .type
-                | 领投人
+                | #{t('.leader')}
             .small-8.columns
               .item.right
                 = link_to leader.name, leader
