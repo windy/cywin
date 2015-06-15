@@ -1,10 +1,10 @@
 staging:
-  domain: 115.29.109.216
+  domain: yafeilee.me
   deploy_to: /home/ruby/cywin_staging
   repository: git@github.com:windy/cywin.git
   branch: staging
 demo:
-  domain: 115.29.109.216
+  domain: yafeilee.me
   deploy_to: /home/ruby/cywin_demo
   repository: git@github.com:windy/cywin.git
   branch: master

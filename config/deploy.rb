@@ -1,7 +1,7 @@
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
-require 'mina/rbenv'
+require 'mina/rvm'
 require 'yaml'
 require 'mina_sidekiq/tasks'
 
@@ -34,10 +34,8 @@ set :user, 'ruby'    # Username in the server to SSH to.
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
 task :environment do
-  # If you're using rbenv, use this to load the rbenv environment.
-  # Be sure to commit your .rbenv-version to your repository.
-  invoke :'rbenv:load'
-  queue! 'export RUBYTAOBAO=1'
+  queue! %[source /usr/local/rvm/scripts/rvm]
+  queue! %[rvm use 2.0.0]
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
