@@ -1,9 +1,9 @@
 Cywin
 ========
 
-这是创业赢的源代码: <http://cywin.cn>
+这是创业赢的源代码: <http://cywin.yafeilee.me>
 
-专门用于体验的环境( 随便折腾 ): <http://staging.cywin.cn>, 用户名: admin@cywin.cn, 密码: admin
+专门用于体验的环境( 随便折腾 ): <http://cywin.yafeilee.me>, 用户名: admin@cywin.cn, 密码: admin
 
 创业赢是一个股权众筹平台, 通过集合优秀的天使投资人领投, 联合普通投资人来帮助初创企业完成天使轮融资的全流程线上平台. 其国外的对手如: [angellist](https://angel.co), 国内的对手如: [天使汇](http://angelcrunch.com), [创投圈](http://vc.cn/) 等.
 

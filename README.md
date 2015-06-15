@@ -3,15 +3,15 @@ Cywin
 
 [中文版说明](/README.zh-cn.md)
 
-The source code of Cywin: <http://cywin.cn>
+The source code of Cywin: <http://cywin.yafeilee.me>
 
-A testing environment for you( do anything here you want ): <http://staging.cywin.cn>, username: admin@cywin.cn, password: admin
+A testing environment for you( do anything here if you want ): <http://cywin.yafeilee.me>, username: admin@cywin.cn, password: admin
 
 Cywin is a stock crowdfunding platform, just like [angellist](https://angel.co) but in China.
 
 Cywin can build the connection between startups and talented investors with stock investment.
 
-Cywin is a full-flow platform for the process.
+Cywin is a full-flow platform for the investment process.
 
 in China, its competitors are [AngelCruch, as: 天使汇](http://angelcrunch.com), [VC club, as: 创投圈](http://vc.cn) and etc.
 
