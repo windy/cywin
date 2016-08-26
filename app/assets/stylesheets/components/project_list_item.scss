@@ -1,12 +1,12 @@
 .project-list-item {
-  border-bottom: 1px solid #eee;
-  border-right: 1px solid #fcfcfc;
-  border-left: 1px solid #fcfcfc;
+  //border-bottom: 1px solid #eee;
+  //border-right: 1px solid #fcfcfc;
+  //border-left: 1px solid #fcfcfc;
   padding: 2rem 1rem;
   background-color: white;
   
   img {
-    border: 1px solid $my-project-border-color;
+    //border: 1px solid $my-project-border-color;
     @media #{$large-up} {
       width: 85%;
     }

@@ -5,7 +5,7 @@
 #cywin-topbar {
   a.title {
     padding-left: 0;
-    padding-right: 30px;
+    //padding-right: 30px;
   }
 
   .logo-wrapper {
@@ -22,8 +22,8 @@
     .bit {
       font-size: 0.5rem;
       position: absolute;
-      top: -17px;
-      right: -17px;
+      //top: -17px;
+      //right: -17px;
     }
   }
 
@@ -33,7 +33,7 @@
 
   .search {
     border-radius: 10rem;
-    @media only screen and (min-width: #{lower-bound($medium-range)}) and (max-width: 780px)  {
+    //@media only screen and (min-width: #{lower-bound($medium-range)}) and (max-width: 780px)  {
       display: none;
     }
   }
@@ -54,7 +54,7 @@
     }
 
     .toggle-topbar a {
-      padding: 0 20px;
+      //padding: 0 20px;
     }
 
     .title-area {
@@ -73,12 +73,12 @@
       ul li {
         float: left;
         a {
-          padding-top: 27px;
+          //padding-top: 27px;
         }
       }
     }
   }
-}
+
 .main-container {
   background-color: #fff;
 }
@@ -103,7 +103,7 @@ a.user-link {
 }
 .user-dropdown {
   background-color: #FAFAFA;
-  border: 1px solid #ccc;
+  //border: 1px solid #ccc;
   color: #333;
   position: absolute;
   top: 4.2rem;
@@ -154,14 +154,14 @@ a.user-link {
 
   li:first-child:before {
     left: 100%;
-    margin-left: -21px;
+    //margin-left: -21px;
     content: "";
     position: absolute;
-    width: 1px;
-    height: 1px;
-    border: 5px solid transparent;
+    //width: 1px;
+    //height: 1px;
+    //border: 5px solid transparent;
     border-bottom-color: #d2d3d5;
-    top: -10px;
+    //top: -10px;
   }
 }
 .user-dropdown-exit-link {

@@ -8,7 +8,7 @@
 
   .message-content {
     @media #{$small-only}{
-      border-top: 1px solid #eee;
+      //border-top: 1px solid #eee;
       padding-top: 1rem;
     }
     a {

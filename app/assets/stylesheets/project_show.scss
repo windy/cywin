@@ -22,27 +22,27 @@
   }
   .status-link {
     position: absolute;
-    right: -26px;
-    top: -6px;
+    //right: -26px;
+    //top: -6px;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
     width: 0;
     height: 0;
     z-index: 1;
-    border-left: 40px solid transparent;
-    border-right: 40px solid transparent;
-    border-bottom: 40px solid #00C4A4;
+    //border-left: 40px solid transparent;
+    //border-right: 40px solid transparent;
+    //border-bottom: 40px solid #00C4A4;
 
     .status {
       position: absolute;
-      left: -38px;
-      bottom: -33px;
-      width: 78px;
+      //left: -38px;
+      //bottom: -33px;
+      //width: 78px;
       text-transform: uppercase;
       color: #fff;
-      text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
-      font-size: 10px;
+      //text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+      //font-size: 10px;
       text-align: center;
       font-weight: bold;
     }
@@ -51,8 +51,8 @@
   .tab-content {
     margin-top: 2rem;
     padding-top: 2rem;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    //border-top: 1px solid #ddd;
+    //border-bottom: 1px solid #ddd;
     margin-left: 0;
     margin-right: 0;
     .list {
@@ -66,7 +66,7 @@
         padding-bottom: 1.875rem;
       }
       .active {
-        border-bottom: 2px solid #d26911;
+        //border-bottom: 2px solid #d26911;
       }
     }
   }
@@ -76,7 +76,7 @@
     .job {
 
       .job-box {
-        border: 1px solid #ddd;
+        //border: 1px solid #ddd;
         padding: 1rem 0;
         margin: 1rem;
         table {
