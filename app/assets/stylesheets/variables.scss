@@ -21,8 +21,8 @@ $my-project-border-color: #f4f4f4;
 // Since the typical default browser font-size is 16px, that makes the calculation for grid size.
 // If you want your base font-size to be different and not have it affect the grid breakpoints,
 // set $rem-base to $base-font-size and make sure $base-font-size is a px value.
-$base-font-size: 14px;
-$rem-base: $base-font-size;
+//$base-font-size: 14px;
+//$rem-base: $base-font-size;
 
 // The $base-font-size is 100% while $base-line-height is 150%
 // $base-line-height: 150%;
@@ -822,7 +822,7 @@ $select-bg-color: #fff;
 // We use these to control the background and border styles
 $panel-bg: #fff;
 $panel-border-style: solid;
-$panel-border-size: 0px;
+//$panel-border-size: 0px;
 
 // We use this % to control how much we darken things on hover
 // $panel-function-factor: -11%;
@@ -1031,7 +1031,7 @@ $progress-bar-pad: rem-calc(0);
 // $sub-nav-font-weight: $font-weight-normal;
 // $sub-nav-text-decoration: none;
 $sub-nav-padding: rem-calc(8 16 8);
-$sub-nav-border-radius: 0px;
+//$sub-nav-border-radius: 0px;
 // $sub-nav-font-color-hover: scale-color($sub-nav-font-color, $lightness: -25%);
 
 
@@ -1096,7 +1096,7 @@ $table-even-row-bg: #fcfcfc;
 
 // These control the table cell border style
 $table-border-style: solid;
-$table-border-size: 1px;
+//$table-border-size: 1px;
 $table-border-color: #fcfcfc;
 
 // These control the table head styles
@@ -1192,7 +1192,7 @@ $topbar-bg-color: #fff;
 $topbar-bg: $topbar-bg-color;
 
 // Height and margin
-$topbar-height: 75px;
+//$topbar-height: 75px;
 // $topbar-margin-bottom: 0;
 
 // Controlling the styles for the title in the top bar
@@ -1223,10 +1223,10 @@ $topbar-link-bg-active: $topbar-bg;
 $topbar-link-bg-active-hover: $topbar-bg;
 // $topbar-link-font-family: $body-font-family;
 // $topbar-link-text-transform: none;
-$topbar-link-padding: $topbar-height / 5;
+//$topbar-link-padding: $topbar-height / 5;
 
 // $topbar-button-font-size: 0.75rem;
-$topbar-button-top: 21px;
+//$topbar-button-top: 21px;
 
 // $topbar-dropdown-label-color: #777;
 // $topbar-dropdown-label-text-transform: uppercase;

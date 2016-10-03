@@ -12,6 +12,8 @@ GA_URL: ''
 
 # set system locale en or zh-CN, default is zh-CN
 LOCALE: zh-CN
+# show demo tip on the top, comment it if no need
+# DEMO_TIP: 1
 
 # SECRET_KEY_BASE
 SECRET_KEY_BASE: ''

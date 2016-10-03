@@ -5,7 +5,7 @@ else
   source 'https://rubygems.org'
 end
 gem 'rails', '4.1.9'
-gem 'sass-rails'
+gem 'sass-rails', '~> 5.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'jquery-rails'
@@ -19,7 +19,7 @@ gem 'figaro'
 gem 'rolify'
 gem 'simple_form'
 gem 'slim-rails'
-gem "foundation-rails", ">= 5.0"
+gem "foundation-rails", '~> 5.0'
 gem 'settingslogic'
 gem 'foundation-icons-sass-rails'
 gem "font-awesome-rails"

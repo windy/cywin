@@ -12,7 +12,7 @@
       .tab-title.active a {
         color: $primary-color;
         background-color: #fff;
-        border-bottom: 3px solid $primary-color;
+        //border-bottom: 3px solid $primary-color;
       }
 
       .tab-title a:hover {
@@ -22,7 +22,7 @@
       }
     }
     margin-bottom: 1.4285rem;
-    border-bottom: 1px solid #ddd;
+    //border-bottom: 1px solid #ddd;
     width: 100%;
   }
 }
@@ -39,7 +39,7 @@
       display: block;
       padding: 1rem 2rem;
       color: #666;
-      border-bottom: 1px solid $my-project-border-color;
+      //border-bottom: 1px solid $my-project-border-color;
       &:hover {
         background-color: #F2F3F4;
       } 

@@ -2,7 +2,7 @@
   position: relative;
 
   .title {
-    border-bottom: 1px solid #eee;
+    //border-bottom: 1px solid #eee;
     padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
   }
@@ -11,7 +11,7 @@
     padding: 1rem 1.5rem;
     margin-bottom: 0;
     border-style: solid;
-    border-width: 1px;
+    //border-width: 1px;
     border-color: #f3f3f3;
 
     .sub-title {
@@ -42,11 +42,11 @@
   }
 
   .detail {
-    border-top: 1px solid #eee;
+    //border-top: 1px solid #eee;
 
     .followers {
       padding: 1rem 2.225rem 0;
-      border-top: 1px solid #eee;
+      //border-top: 1px solid #eee;
 
       .type {
         display: inline-block;
@@ -125,7 +125,7 @@
             display: block;
             padding-bottom: 0.625rem;
             margin-bottom: 1rem;
-            border-bottom: 1px dashed #eee;
+            //border-bottom: 1px dashed #eee;
             &:hover {
               .fa {
                 color: $secondary-color;
@@ -170,7 +170,7 @@
     text-align: center;
 
     a {
-      border-top: 1px solid #eee;
+      //border-top: 1px solid #eee;
       padding: 1rem 0;
       color: #999;
       display: block;
@@ -194,7 +194,7 @@
   .invest-button {
     line-height: 3;
     padding: 2rem 0;
-    border-top: 1px solid #eee;
+    //border-top: 1px solid #eee;
     text-align: center;
 
     .invest-tips {
@@ -232,7 +232,7 @@
 .syndicate-info {
 
   .title {
-    border-bottom: 1px solid #eee;
+    //border-bottom: 1px solid #eee;
     padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
   }
