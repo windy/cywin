@@ -7,7 +7,7 @@ GIT
       activesupport (>= 3.0.0)
 
 GEM
-  remote: http://ruby.taobao.org/
+  remote: https://rubygems.org/
   specs:
     actionmailer (4.1.9)
       actionpack (= 4.1.9)
@@ -408,3 +408,6 @@ DEPENDENCIES
   underscore-rails
   unicorn
   weibo2
+
+BUNDLED WITH
+   1.14.6

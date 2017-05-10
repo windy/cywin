@@ -1,9 +1,4 @@
-if ENV['RUBYTAOBAO']
-  #puts "use taobao source"
-  source 'http://ruby.taobao.org'
-else
-  source 'https://rubygems.org'
-end
+source 'https://rubygems.org'
 gem 'rails', '4.1.9'
 gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
