@@ -3,9 +3,7 @@ Cywin
 
 [中文版说明](/README.zh-cn.md)
 
-The source code of Cywin: <http://cywin.yafeilee.me>
-
-A testing environment for you( do anything here if you want ): <http://cywin.yafeilee.me>, username: admin@cywin.cn, password: admin
+The source code of Cywin: <https://github.com/windy/cywin>
 
 Cywin is a stock crowdfunding platform, just like [angellist](https://angel.co) but in China.
 
