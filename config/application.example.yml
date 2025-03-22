@@ -17,5 +17,10 @@ LOCALE: zh-CN
 SECRET_KEY_BASE: ''
 # sidekiq namespace
 SIDEKIQ_NAMESPACE: cywin
+# Redis configuration
+REDIS_URL: ''
+REDIS_PASSWORD: ''
+REDIS_HOST: 'localhost'
+REDIS_PORT: '6379'
 # built-in test enable 1 / disable 0
 BIT: 0

@@ -9,7 +9,7 @@
     $http
       url: '/stars'
       method: 'POST'
-      data:
+      params:
         id: $scope.project_id
     .success (res)->
       $scope.loading = false

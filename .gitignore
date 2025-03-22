@@ -87,3 +87,9 @@ pickle-email-*.html
 **.sqlite3-journal
 /solr
 .ackrc
+/sunspot_solr_mmseg4j
+
+# Clacky-related configuration
+.1024*
+!.1024
+.breakpoints

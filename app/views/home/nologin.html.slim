@@ -22,7 +22,10 @@
                     .row
                       .small-5.columns
                         = link_to project do
-                          - image_tag project.logo.image_url
+                          - if project.logo.present?
+                            = image_tag project.logo.image_url
+                          - else
+                            = image_tag 'default-project.jpg'
                       .small-7.columns
                         = link_to project do
                           h5 #{project.name}
@@ -160,7 +163,10 @@
                     .row
                       .small-5.columns
                         = link_to project do
-                          - image_tag project.logo.image_url
+                          - if project.logo.present?
+                            = image_tag project.logo.image_url
+                          - else
+                            = image_tag 'default-project.jpg'
                       .small-7.columns
                         = link_to project do
                           h5 #{project.name}

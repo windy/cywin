@@ -47,7 +47,7 @@
     $http
       url: '/talks'
       method: 'POST'
-      data:
+      params:
         type: $scope.hash.type.id
         target_id: $scope.target_id
     .success (res)->

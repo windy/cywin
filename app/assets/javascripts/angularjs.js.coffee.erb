@@ -18,6 +18,19 @@
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
+    # 添加请求拦截器，将数据转换为表单格式以兼容Rails默认参数解析方式
+    $httpProvider.defaults.transformRequest = [(data, headersGetter) ->
+      headers = headersGetter()
+      if data && !(data instanceof File || (data && data.constructor && data.constructor.name == 'File')) && headers['Content-Type'] != 'multipart/form-data'
+        headers['Content-Type'] = 'application/x-www-form-urlencoded'
+        serialized = []
+        for k, v of data
+          if v != null
+            serialized.push(encodeURIComponent(k) + "=" + encodeURIComponent(v))
+        return serialized.join('&')
+      data
+    ]
+
     # 配置路由
     $routeProvider.when '/project/basic',
       templateUrl: '<%= asset_path('project/basic.html') %>'

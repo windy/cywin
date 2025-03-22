@@ -4,7 +4,10 @@ li
       .row
         .small-4.medium-5.columns
           = link_to project do
-            - image_tag project.logo.image_url
+            - if project.logo.present?
+              = image_tag project.logo.image_url
+            - else
+              = image_tag 'default-project.jpg'
         .small-8.medium-7.columns
           = link_to project do
             h5 #{project.name}
