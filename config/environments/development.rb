@@ -48,4 +48,10 @@ Rails.application.configure do
 
   config.middleware.use Rack::LiveReload, host: 'localhost', port: 33333
 
+  # Allow any host to access the application in development mode for Clacky environment
+  # config.hosts << /.*/ 
+  
+  # Add CORS support for development environment
+  config.action_dispatch.default_headers.merge!('Access-Control-Allow-Origin' => '*')
+  config.action_dispatch.default_headers.merge!('Access-Control-Request-Method' => '*')
 end

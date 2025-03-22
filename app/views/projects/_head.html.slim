@@ -1,6 +1,9 @@
 .head
   .logo
-    = image_tag @project.logo.image_url
+    - if @project.logo.present?
+      = image_tag @project.logo.image_url
+    - else
+      = image_tag 'default-project.jpg'
   .name-area
     h5.name
       = link_to @project.name, @project

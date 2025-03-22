@@ -3,7 +3,10 @@
     - project = person_require.project
     .row.job-project
       .small-4.medium-3.large-2.columns
-        = image_tag(project.logo.image_url)
+        - if project.logo.present?
+          = image_tag(project.logo.image_url)
+        - else
+          = image_tag('default-project.jpg')
       .small-8.medium-9.large-10.columns
         .name-area
           h4.name

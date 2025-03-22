@@ -1,7 +1,10 @@
 .row.project-td
   .small-4.medium-2.columns
     = link_to project do
-      - image_tag project.logo.image_url
+      - if project.logo.present?
+        = image_tag project.logo.image_url
+      - else
+        = image_tag 'default-project.jpg'
   .small-8.medium-10.columns
     h6.title
       = link_to project.name, project

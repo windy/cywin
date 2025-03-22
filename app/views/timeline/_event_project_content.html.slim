@@ -1,7 +1,10 @@
 .content
   .row
     .small-3.large-2.columns
-      = image_tag event.project.logo.image_url
+      - if event.project.logo.present?
+        = image_tag event.project.logo.image_url
+      - else
+        = image_tag 'default-project.jpg'
     .small-9.large-10.columns
       .title-wrapper
         h6.title #{event.project.name}
