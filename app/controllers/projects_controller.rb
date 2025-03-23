@@ -21,7 +21,8 @@ class ProjectsController < ApplicationController
       render_fail('创建失败', @project)
       return
     else
-      params[:industries].to_a.each do |industry|
+      industries = parse_industries(params[:industries])
+      industries.each do |industry|
         category = Category.find(industry[:id])
         @project.categories << category
       end
@@ -39,15 +40,15 @@ class ProjectsController < ApplicationController
     if params[:logo_id].present?
       @project.logo = Logo.find( params[:logo_id] )
     else
-      render_fail('创建失败', logo_error: '必须上传 Logo') 
-      return
+      # render_fail('创建失败', logo_error: '必须上传 Logo') 
+      # return
     end
 
     if params[:screenshot_id].present?
       @project.screenshots << Screenshot.find( params[:screenshot_id] )
     else
-      render_fail('创建失败', screenshot_error: '必须上传截图') 
-      return
+      # render_fail('创建失败', screenshot_error: '必须上传截图') 
+      # return
     end
 
     @project.add_owner( current_user )
@@ -96,7 +97,8 @@ class ProjectsController < ApplicationController
       return
     else
       @project.categories.delete_all
-      params[:industries].to_a.each do |industry|
+      industries = parse_industries(params[:industries])
+      industries.each do |industry|
         category = Category.find(industry[:id])
         @project.categories << category
       end
@@ -114,9 +116,9 @@ class ProjectsController < ApplicationController
 
     if params[:screenshot_id].present?
       @project.screenshots << Screenshot.find( params[:screenshot_id] )
-    else
-      render_fail('创建失败', screenshot_error: '必须上传截图') 
-      return
+    # else
+    #   render_fail('创建失败', screenshot_error: '必须上传截图') 
+    #   return
     end
 
     if @project.update( project_params )
@@ -156,4 +158,30 @@ class ProjectsController < ApplicationController
     params.permit(:logo_id)
   end
 
+  # 解析industries参数，处理JSON字符串或对象数组
+  def parse_industries(industries_param)
+    return [] if industries_param.blank?
+    
+    # 如果已经是数组，直接返回
+    if industries_param.is_a?(Array)
+      return industries_param.map do |hash|
+        hash.symbolize_keys
+      end
+    end
+    
+    # 尝试解析JSON字符串
+    if industries_param.is_a?(String)
+      begin
+        parsed = JSON.parse(industries_param)
+        parsed = parsed.is_a?(Array) ? parsed : [parsed]
+        return parsed.map { |h| h.symbolize_keys }
+      rescue JSON::ParserError => e
+        Rails.logger.error("Industries参数解析错误: #{e.message}")
+        return []
+      end
+    end
+    
+    # 如果是其他类型，尝试转换为数组
+    industries_param.to_a.map { |h| h.symbolize_keys }
+  end
 end

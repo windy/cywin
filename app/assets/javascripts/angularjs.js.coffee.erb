@@ -18,18 +18,53 @@
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
+
     # 添加请求拦截器，将数据转换为表单格式以兼容Rails默认参数解析方式
-    $httpProvider.defaults.transformRequest = [(data, headersGetter) ->
-      headers = headersGetter()
-      if data && !(data instanceof File || (data && data.constructor && data.constructor.name == 'File')) && headers['Content-Type'] != 'multipart/form-data'
-        headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        serialized = []
-        for k, v of data
-          if v != null
-            serialized.push(encodeURIComponent(k) + "=" + encodeURIComponent(v))
-        return serialized.join('&')
-      data
-    ]
+    # 保存原始的 transformRequest 函数数组
+    # originalTransformRequest = $httpProvider.defaults.transformRequest
+    
+    # 重写默认的 transformRequest
+    # $httpProvider.defaults.transformRequest = [(data, headersGetter) ->
+    #  headers = headersGetter()
+      
+      # 如果没有数据，或者已经是字符串，或者不是 POST/PUT/PATCH 请求，则使用原始转换
+      # if !data || angular.isString(data) || headers['Content-Type'] == 'application/x-www-form-urlencoded'
+      #  return data
+      
+      # 设置 Content-Type 为表单格式
+      # headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'
+      # debugger
+      # 将对象序列化为 Rails 兼容的表单格式
+      # serializeData = (obj, prefix) ->
+      #  str = []
+      #  for p of obj
+      #    if obj.hasOwnProperty(p)
+      #      k = if prefix then prefix + "[" + p + "]" else p
+      #      v = obj[p]
+      #      
+      #      if v != null && typeof v == 'object' && !Array.isArray(v)
+      #        # 递归处理嵌套对象
+      #        str.push(serializeData(v, k))
+      #      else if Array.isArray(v)
+      #        # 处理数组
+      #        for i in [0...v.length]
+      #          if typeof v[i] == 'object'
+      #            str.push(serializeData(v[i], k + "[]"))
+      #          else
+      #            str.push(encodeURIComponent(k + "[]") + "=" + encodeURIComponent(v[i]))
+      #      else
+      #        # 处理基本类型
+      #        str.push(encodeURIComponent(k) + "=" + encodeURIComponent(v))
+      #  return str.join("&")
+      
+      # return serializeData(data)
+    # ]
+    
+    # 将原始的 transformRequest 函数数组添加到新的数组中
+    # if angular.isArray(originalTransformRequest)
+    #  Array.prototype.push.apply($httpProvider.defaults.transformRequest, originalTransformRequest)
+    # else if originalTransformRequest
+    #  $httpProvider.defaults.transformRequest.push(originalTransformRequest)
 
     # 配置路由
     $routeProvider.when '/project/basic',

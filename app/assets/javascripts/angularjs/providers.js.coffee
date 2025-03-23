@@ -12,7 +12,7 @@
     $timeout ()->
       get_message_count()
       loop_get_message_count()
-    , 10000
+    , 60000
 
   get_message_count()
   loop_get_message_count()
