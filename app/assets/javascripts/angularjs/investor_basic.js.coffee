@@ -14,7 +14,7 @@
     $http
       url: '/investors'
       method: 'POST'
-      data:
+      params:
         $scope.investor
     .success (res)->
       if res.success
@@ -26,7 +26,7 @@
     $http
       url: '/investments'
       method: 'POST'
-      data:
+      params:
         $scope.investment
     .success (res)->
       if res.success

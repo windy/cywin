@@ -19,7 +19,7 @@
     $http
       url: '/projects/' + $scope.project_id
       method: 'PATCH'
-      data:
+      params:
         $scope.head_edit
     .success (res)->
       if res.success
@@ -35,7 +35,7 @@
       $upload.upload
         url: '/logos'
         method: 'POST'
-        file: file
+        params: file
       .success (res)->
         if res.success
           $scope.head_edit.logo_url = res.url
@@ -74,7 +74,7 @@
     $http
       url: '/projects/' + $scope.project_id + '/dirty_update'
       method: 'PATCH'
-      data:
+      params:
         description: $scope.description_edit
     .success (res)->
       if res.success
@@ -110,7 +110,7 @@
     $http
       url: '/projects/' + $scope.project_id + '/screenshots_update'
       method: 'PATCH'
-      data:
+      params:
          ids: $.map($scope.screenshots_edit, (v)->
            v.id
          )

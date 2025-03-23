@@ -16,7 +16,7 @@
     $http
       url: '/projects'
       method: 'POST'
-      data:
+      params:
         $scope.project
     .success (res)->
       if res.success
@@ -36,7 +36,7 @@
     $http
       url: '/projects/' + $scope.project_id
       method: 'PATCH'
-      data:
+      params:
         $scope.project
     .success (res)->
       if res.success
@@ -57,14 +57,24 @@
         url: '/logos'
         method: 'POST'
         file: file
+        headers: 
+          'Content-Type': 'multipart/form-data'  # Add explicit Content-Type header
       .success (res)->
         if res.success
           $scope.project.logo_url = res.url
           $scope.project.logo_id = res.id
         else
           $scope.logo_error = res.message
-      .error ()->
-        console.log '上传失败'
+      .error (response, status, headers, config)->
+        # Handle 413 Payload Too Large error
+        if status == 413
+          $scope.logo_error = '文件大小超过服务器限制'
+        else
+          $scope.logo_error = '上传失败: ' + (response.message || '未知错误')
+        # Log detailed error info
+        console.log 'Logo上传错误状态:', status
+        console.log '错误响应:', response
+        console.log '请求配置:', config
 
   $scope.upload_screenshot = ($files)->
     $scope.screenshot_error = null
