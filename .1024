@@ -4,6 +4,8 @@
 
 # Command to run when "Run" button clicked
 # bundle exec rake sunspot:solr:restart
-run_command: rails server -b 0.0.0.0 -p 3000
+run_commands: 
+  - rails server -b 0.0.0.0 -p 3000
+  - bundle exec rake sunspot:solr:start
 # Command to install or update dependencies, will execute each time a new thread created to ensure dependencies up-to-date
 dependency_command: bundle install && rake db:migrate
